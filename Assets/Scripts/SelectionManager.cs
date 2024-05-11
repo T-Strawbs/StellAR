@@ -11,6 +11,7 @@ public class SelectionManager : Singleton<SelectionManager>
 {
 	
     public static Explodable currentSelection;
+    private List<Subscriber> subscribers = new List<Subscriber>();
 
     /// <summary>
     /// Sets the current selection.
@@ -26,6 +27,11 @@ public class SelectionManager : Singleton<SelectionManager>
 
         currentSelection = interactable;
         Debug.Log($"Current selection is {interactable.name}");
+
+        foreach(Subscriber subscriber in subscribers)
+        {
+            subscriber.UpdateSubscriber(currentSelection);
+        }
     }
 
     /// <summary>
@@ -42,6 +48,11 @@ public class SelectionManager : Singleton<SelectionManager>
         Debug.Log($"Deselected {currentSelection.transform.gameObject.name}");
         currentSelection = null;
         
+    }
+
+    public void addSubscriber(Subscriber newSubscriber)
+    {
+        subscribers.Add(newSubscriber);
     }
     
 }

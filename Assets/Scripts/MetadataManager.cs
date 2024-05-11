@@ -2,18 +2,26 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class MetadataManager : MonoBehaviour
+public class MetadataManager : MonoBehaviour, Subscriber
 {
     // Object housing all the models loaded in the application
     public GameObject allModelObjects;
 
+    public GameObject metadataNearMenu;
+
+    public GameObject selectionManager;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        selectionManager.GetComponent<SelectionManager>().addSubscriber(this);
+
         List<ModelComponent> allModels = new List<ModelComponent>();
 
         // Loop over all models
@@ -119,5 +127,25 @@ public class MetadataManager : MonoBehaviour
             createModelJson(leftoverSubcomponent, subcomponent);
         }
 
+    }
+
+    public void UpdateSubscriber(Explodable newSelection)
+    {
+        TextMeshProUGUI text = metadataNearMenu.GetComponentInChildren<TextMeshProUGUI>();
+        string newMetadata = newSelection.GetComponent<Metadata>().metadata;
+
+        if(newMetadata != null && newMetadata != "")
+        {
+            text.text = newMetadata;
+        }
+        else
+        {
+            text.text = "No available metadata.";
+        }
+    }
+
+    public void ToggleNearMenu()
+    {
+        metadataNearMenu.SetActive(!metadataNearMenu.activeInHierarchy);
     }
 }
