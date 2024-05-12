@@ -1,59 +1,73 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class ExplosiveInitialiser : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
         //initialise explosive GOs
-        initialise(transform);
-    }
-    
-    /// <summary>
-    /// Recursively initialises each child GO starting from the parent
-    /// </summary>
-    private void initialise(Transform hostTransform)
-    {
-        initialise(transform,hostTransform);
+        initialiseExplodable(transform);
+        //initialise selectable manipulators
+        initialiseManipulators(transform,transform);
     }
 
     /// <summary>
     /// Recursive Method for initialising the GOs
     /// </summary>
-    /// <param name="parent"></param>
-    private void initialise(Transform parent,Transform hostTransform)
+    /// <param name="currentObject"></param>
+    private void initialiseExplodable(Transform currentObject)
     {
         //add explodable component
-        Explodable parentExplodable = parent.AddComponent<Explodable>();
-        //if the parent has a mesh renderer
-        MeshRenderer parentRenderer = parent.GetComponent<MeshRenderer>();
+        Explodable parentExplodable = currentObject.AddComponent<Explodable>();
+        //if the current object has a mesh renderer
+        MeshRenderer parentRenderer = currentObject.GetComponent<MeshRenderer>();
+        
         Debug.Log($" parent renderer of {transform.name} is {parentRenderer == null}");
         if (parentRenderer)
         {
             //add mesh collider
-            parent.transform.AddComponent<MeshCollider>();
-            //add selectable manipulator
-            SelectableManipulator selectableManipulator = parent.transform.AddComponent<SelectableManipulator>();
-            //set the selectableManipulator's explodable to the parent explodable
-            selectableManipulator.setExplodable(parentExplodable);
-            //set the selectableManipulators hostTransformt he the root transform
-            selectableManipulator.HostTransform = hostTransform;
-            //set the explodables selectableManipulator
-            parentExplodable.setSelectableManipulator(selectableManipulator);
+            currentObject.transform.AddComponent<MeshCollider>();
         }
         //for each child
-        for (int i = 0; i < parent.childCount;i++)
+        for (int i = 0; i < currentObject.childCount;i++)
         {
             //recursively initialise children
-            Transform child = parent.GetChild(i);
+            Transform child = currentObject.GetChild(i);
             //if null
             if (!child)
                 return;
-            initialise(child,hostTransform);
+            initialiseExplodable(child);
         }
+    }
 
+    private void initialiseManipulators(Transform currentObject,Transform rootTransform)
+    {
+        //for each child of the current object
+        for(int i = 0; i < currentObject.childCount; i++)
+        {
+            //get a ref of the child
+            Transform child = currentObject.GetChild(i);
+            //recursively call initialise manipulators
+            initialiseManipulators(child, rootTransform);
+        }
+        //get the current objects explodable component
+        Explodable explodable = currentObject.GetComponent<Explodable>();
+        if(!explodable)
+            Debug.Log($"Something has gone horribly wrong because {currentObject.name} does not have an explodable");
+        //add selectable manipulator
+        SelectableManipulator selectableManipulator = currentObject.AddComponent<SelectableManipulator>();
+        if (explodable)
+        {
+            //set the current object's manipulator's explodable ref to the current objects explodable
+            selectableManipulator.setExplodable(explodable);
+            // do the same in reverse
+            explodable.setSelectableManipulator(selectableManipulator);
+        }
+        //disable the selectable manipulator if the current object is not the root object
+        if (currentObject != rootTransform)
+            selectableManipulator.enabled = false;
+            
     }
 }

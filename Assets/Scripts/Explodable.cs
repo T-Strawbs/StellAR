@@ -111,10 +111,20 @@ public class Explodable : MonoBehaviour
         }
         //we're exploding
         explosionStatus = ExplosionStatus.EXPLODED;
+
+        //check if this object is MT
+        if(isEmptyObject())
+        {
+            selectableManipulator.enabled = false;
+        }
+
+        /*
         //we want to manipulate the parent after they exploded so set its host transform to its own transform
         SelectableManipulator selectableManipulator = GetComponent<SelectableManipulator>();
         if (selectableManipulator)
-            selectableManipulator.HostTransform = transform;
+            //selectableManipulator.HostTransform = transform;
+        */
+            
         //for each child
         foreach(Transform child in children)
         {
@@ -125,19 +135,26 @@ public class Explodable : MonoBehaviour
                 Debug.Log($"child '{child.name}' is not an explodable.");
                 return;
             }
+                //activate child selectable manipulator
+            SelectableManipulator childSelectableManipulator = child.GetComponent<SelectableManipulator>();
+                if (childSelectableManipulator)
+                    childSelectableManipulator.enabled = true;
+            
             //if child has children
-            if(child.childCount > 0)
+            if (child.childCount > 0)
             {
                 //set childs explosion status to explodable as it is now explodable
                 childExplodable.explosionStatus = ExplosionStatus.EXPLODABLE;
+                    /*
                 //check if the child has its own selectable manipulator
                 SelectableManipulator childSelectableManipulator = child.GetComponent<SelectableManipulator>();
                 if (childSelectableManipulator)
                     //set its host transform to its own transform
                     childSelectableManipulator.HostTransform = child;
+                    */
             }
             //set the host transform of all the childs decendants to the child
-            setDecendantHostTransform(childExplodable, child);
+            //setDecendantHostTransform(childExplodable, child);
             //get the angle between the parent and child
             Vector3 moveTrajectory = calculateTrajectory(childExplodable);
             //move the child in that direction
@@ -178,7 +195,7 @@ public class Explodable : MonoBehaviour
             parentCentre = parentBounds.center;
         }
         //debug lines that last t
-        Debug.DrawLine(transform.TransformPoint(parentCentre), transform.TransformPoint(childCentre), Color.red,120f); 
+        //Debug.DrawLine(transform.TransformPoint(parentCentre), transform.TransformPoint(childCentre), Color.red,120f); 
         //calculate trajectory
         Vector3 trajectory = childCentre - parentCentre;
 
@@ -271,9 +288,15 @@ public class Explodable : MonoBehaviour
         //collapse children
         collapseChildren(currentExplodable);
         //recursively set the decendants host transform to the root parents
-        setDecendantHostTransform(currentExplodable, currentExplodable.transform);
+        //setDecendantHostTransform(currentExplodable, currentExplodable.transform);
         //set current explosives explosive status to explodable
         currentExplodable.explosionStatus = ExplosionStatus.EXPLODABLE;
+        //check if the current explodable is an empty object
+        if(currentExplodable.isEmptyObject())
+        {
+            //enable its manipulator
+            currentExplodable.selectableManipulator.enabled = true;
+        }
     }
     /// <summary>
     /// Collapses this explodables branch 
@@ -290,9 +313,15 @@ public class Explodable : MonoBehaviour
         //recursively collapse children
         collapseChildren(predParent);
         //recursive set the host transform of predecessors children to the predecessor
-        setDecendantHostTransform(predParent,predParent.transform);
+        //setDecendantHostTransform(predParent, predParent.transform);
         //set parents explosion status to explodable
         parent.explosionStatus = ExplosionStatus.EXPLODABLE;
+        //check if the current explodable is an empty object
+        if (predParent.isEmptyObject())
+        {
+            //enable its manipulator
+            predParent.selectableManipulator.enabled = true;
+        }
     }
     /// <summary>
     /// Recursive method for collapsing all children of a parent.
@@ -314,6 +343,10 @@ public class Explodable : MonoBehaviour
                 collapseChildren(child);
             //set the child's explosion status to Innactive
             child.explosionStatus = ExplosionStatus.INACTIVE;
+            //disable the childs selectable manipulator 
+            SelectableManipulator childSelectableManipulator = child.GetComponent<SelectableManipulator>();
+            if (childSelectableManipulator)
+                childSelectableManipulator.enabled = false;
             //move child back to parent
             child.onCollapse();
         }
@@ -424,6 +457,15 @@ public class Explodable : MonoBehaviour
             //call recursively
             setDecendantHostTransform(child, hostTransform);
         }
+    }
+
+    private bool isEmptyObject()
+    {
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        SkinnedMeshRenderer skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        if(!meshRenderer && !skinnedMeshRenderer)
+            return true;
+        return false;
     }
 
 }
