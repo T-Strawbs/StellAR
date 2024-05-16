@@ -11,7 +11,9 @@ public class SelectionManager : Singleton<SelectionManager>
 {
 	
     public static Explodable currentSelection;
+
     private List<Subscriber> subscribers = new List<Subscriber>();
+    [SerializeField] private UIManager uiManager;
 
     /// <summary>
     /// Sets the current selection.
@@ -27,11 +29,13 @@ public class SelectionManager : Singleton<SelectionManager>
 
         currentSelection = interactable;
         Debug.Log($"Current selection is {interactable.name}");
-
+        //update subscribers
         foreach(Subscriber subscriber in subscribers)
         {
             subscriber.UpdateSubscriber(currentSelection);
         }
+        //update UI
+        uiManager.updateCurrentSelection(currentSelection.transform);
     }
 
     /// <summary>
