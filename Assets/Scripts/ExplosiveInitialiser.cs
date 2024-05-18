@@ -24,7 +24,7 @@ public class ExplosiveInitialiser : MonoBehaviour
         //if the current object has a mesh renderer
         MeshRenderer parentRenderer = currentObject.GetComponent<MeshRenderer>();
         
-        Debug.Log($" parent renderer of {transform.name} is {parentRenderer == null}");
+        //Debug.Log($" parent renderer of {transform.name} is {parentRenderer == null}");
         if (parentRenderer)
         {
             //add mesh collider

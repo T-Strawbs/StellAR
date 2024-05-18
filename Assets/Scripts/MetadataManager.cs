@@ -82,7 +82,8 @@ public class MetadataManager : MonoBehaviour, Subscriber
         // add metadata to parent first
         parentTransform.GetComponent<Metadata>().metadata = parentComponent.metadata;
 
-        // get list of subcomponent transforms, items will be deleted as they are linked to their JSON counterparts and any remaining in the list will need to be added to the JSON
+        // get list of subcomponent transforms, items will be deleted as they are linked to
+        // their JSON counterparts and any remaining in the list will need to be added to the JSON
         List<Transform> subcomponentTransforms = new List<Transform>();
         foreach (Transform transform in parentTransform)
         {

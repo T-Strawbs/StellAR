@@ -498,6 +498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953355468498230485}
   - component: {fileID: 7489899141787512207}
+  - component: {fileID: 6619434746314540739}
   m_Layer: 0
   m_Name: AnnotationText
   m_TagString: Untagged
@@ -552,6 +553,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6619434746314540739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4179403377621226077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ada3d26f8b8d45aee8abfe59ba3a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  author: {fileID: 1092686481721121052}
+  timestamp: {fileID: 2928533691652734125}
+  content: {fileID: 1945856083203101405}
 --- !u!1 &5702313042646218565
 GameObject:
   m_ObjectHideFlags: 0
