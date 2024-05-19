@@ -3657,8 +3657,9 @@ GameObject:
   - component: {fileID: 8601290644274855417}
   - component: {fileID: 231337855627441622}
   - component: {fileID: 5467893478828194774}
-  - component: {fileID: 1745393733463860907}
-  - component: {fileID: 8284643988545714872}
+  - component: {fileID: 4967657844702498551}
+  - component: {fileID: 5647366012581042813}
+  - component: {fileID: 2361854128578828637}
   m_Layer: 0
   m_Name: AnnotationAudio
   m_TagString: Untagged
@@ -3733,7 +3734,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1745393733463860907
+--- !u!114 &4967657844702498551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3742,19 +3743,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7350442680705724107}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b13faa04948a44548b309258b16671f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ac2d02606da7c549ac5633f4d442052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   author: {fileID: 7592768812317748698}
   timestamp: {fileID: 7608338508362991455}
-  audioPath: 
-  audioSource: {fileID: 0}
-  playButton: {fileID: 1288553128221940042}
-  seekSlider: {fileID: 4211778927220209361}
-  isPlaying: 0
-  currentAudioTime: {fileID: 992505865879014401}
-  maxAudioTime: {fileID: 7574981135026710471}
---- !u!82 &8284643988545714872
+  audioPlayerUI: {fileID: 2361854128578828637}
+--- !u!82 &5647366012581042813
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3850,6 +3845,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2361854128578828637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7350442680705724107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13faa04948a44548b309258b16671f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPath: 
+  audioSource: {fileID: 5647366012581042813}
+  playButton: {fileID: 1288553128221940042}
+  seekSlider: {fileID: 4211778927220209361}
+  isPlaying: 0
+  currentAudioTime: {fileID: 992505865879014401}
+  maxAudioTime: {fileID: 7574981135026710471}
 --- !u!1 &7972648087936244667
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,8 +10,6 @@ public class AnnotationManager : MonoBehaviour
 {
 
     [SerializeField] private List<Transform> models;
-    [SerializeField] private AnnotationGenerator generator;
-
     [SerializeField] string jsonDirPath;
     private void Awake()
     {
