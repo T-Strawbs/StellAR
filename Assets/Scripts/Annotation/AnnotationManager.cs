@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class AnnotationManager : MonoBehaviour
+public class AnnotationManager : Singleton<AnnotationManager>
 {
 
     [SerializeField] private List<Transform> models;
@@ -31,7 +31,7 @@ public class AnnotationManager : MonoBehaviour
             //model.AddComponent<AnnotationComponent>();
 
             //Create the Serialised Annotation
-            AnnotationJson parentAnnotationJson = new AnnotationJson(modelRoot.name);
+            ModelAnnotationJson parentAnnotationJson = new ModelAnnotationJson(modelRoot.name);
 
             //check if the modelname_Annotation.json exists
             string jsonPath = $"{jsonDirPath}{modelRoot.name}_Annotation.json";
@@ -40,7 +40,7 @@ public class AnnotationManager : MonoBehaviour
                 //json exists so we load annotation data from the json file
                 string annotationJson = File.ReadAllText(jsonPath);
                 //deserialise the data from json into usable objects
-                parentAnnotationJson = JsonConvert.DeserializeObject<AnnotationJson>(annotationJson);
+                parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson);
                 //Populate The models GO with the Json Data
                 populateAnnotationDataFromJson(modelRoot, parentAnnotationJson);
                 //write to json to update the content incase the model has changed
@@ -57,7 +57,7 @@ public class AnnotationManager : MonoBehaviour
         }
     }
 
-    private void populateAnnotationDataFromJson(Transform parentTransform,AnnotationJson parentComponent)
+    private void populateAnnotationDataFromJson(Transform parentTransform,ModelAnnotationJson parentComponent)
     {
         //create a new annotation component for the parent
         AnnotationComponent annotationComponent = new AnnotationComponent();
@@ -76,9 +76,9 @@ public class AnnotationManager : MonoBehaviour
         //-- removing dead json links
 
         //get a list of the parentComponent's subcomponents
-        List<AnnotationJson> subcomponents = new List<AnnotationJson>(parentComponent.Subcomponents);
+        List<ModelAnnotationJson> subcomponents = new List<ModelAnnotationJson>(parentComponent.Subcomponents);
         //for each subcompnent in the parents subcomponents
-        foreach(AnnotationJson subcomponent in subcomponents)
+        foreach(ModelAnnotationJson subcomponent in subcomponents)
         {
             //find the c
             GameObject foundChild = parentTransform.gameObject.GetNamedChild(subcomponent.Name);
@@ -110,7 +110,7 @@ public class AnnotationManager : MonoBehaviour
         {
             // initialise components with metadata and by adding as child to parent Component
             leftoverSubcomponent.gameObject.AddComponent<AnnotationComponent>();
-            AnnotationJson subcomponent = new AnnotationJson(leftoverSubcomponent.name);
+            ModelAnnotationJson subcomponent = new ModelAnnotationJson(leftoverSubcomponent.name);
             parentComponent.Subcomponents.Add(subcomponent);
 
             // check and add children of this component
@@ -119,7 +119,7 @@ public class AnnotationManager : MonoBehaviour
 
     }
 
-    private void createAnnotationJson(Transform parentTransform,AnnotationJson parentComponent)
+    private void createAnnotationJson(Transform parentTransform,ModelAnnotationJson parentComponent)
     {
         //add a Annotation component to the parent
         parentTransform.AddComponent<AnnotationComponent>();
@@ -127,7 +127,7 @@ public class AnnotationManager : MonoBehaviour
         foreach (Transform childTransform in parentTransform)
         {
             //create an empty Serialised Annotation object
-            AnnotationJson childAnnotationJson = new AnnotationJson(childTransform.name);
+            ModelAnnotationJson childAnnotationJson = new ModelAnnotationJson(childTransform.name);
             //add the Serialised annotation as a subcomponent of the parent
             parentComponent.Subcomponents.Add(childAnnotationJson);
             //recursively call for this childs decendants 
@@ -135,10 +135,40 @@ public class AnnotationManager : MonoBehaviour
         }
     }
 
-    private void writeJson(AnnotationJson serialisedAnnotation, string jsonPath)
+    private void writeJson(ModelAnnotationJson serialisedAnnotation, string jsonPath)
     {
         //write out annotation data to json
         File.WriteAllText(jsonPath, JsonConvert.SerializeObject(serialisedAnnotation,Formatting.Indented));
+    }
+
+    public void createAnnotationJson(string componentName,string messageType,string author, string dateTime,string content)
+    {
+        if(messageType == "Text")
+        {
+            //create a new serialisble and populate it with the params
+            TextAnnotationJson textAnnotationJson = new TextAnnotationJson();
+            textAnnotationJson.ComponentName = componentName;
+            textAnnotationJson.Author = author;
+            textAnnotationJson.Timestamp = dateTime;
+            textAnnotationJson.Content = content;
+            //write to json and add annotation to the AnnotationComponent
+
+        }
+        else if(messageType == "Voice")
+        {
+            //create a new serialisble and populate it with the params
+            VoiceAnnotationJson voiceAnnotationJson = new VoiceAnnotationJson();
+            voiceAnnotationJson.ComponentName = componentName;
+            voiceAnnotationJson.Author = author;
+            voiceAnnotationJson.Timestamp = dateTime;
+            voiceAnnotationJson.AudioPath = content;
+            //write to json and add annotation to the AnnotationComponent
+
+        }
+        else
+        {
+
+        }
     }
 
     // Update is called once per frame

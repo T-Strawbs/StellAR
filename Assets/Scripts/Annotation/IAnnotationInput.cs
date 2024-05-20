@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Metadata : MonoBehaviour
+public  interface IAnnotationInput 
 {
-    public string metadata;
-
+    public void postAnnotation();
 }

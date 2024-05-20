@@ -13,7 +13,6 @@ public class SelectionManager : Singleton<SelectionManager>
     public static Explodable currentSelection;
 
     private List<Subscriber> subscribers = new List<Subscriber>();
-    [SerializeField] private UIManager uiManager;
 
     /// <summary>
     /// Sets the current selection.
@@ -35,7 +34,7 @@ public class SelectionManager : Singleton<SelectionManager>
             subscriber.UpdateSubscriber(currentSelection);
         }
         //update UI
-        uiManager.updateCurrentSelection(currentSelection.transform);
+        UIManager.Instance.updateCurrentSelection(currentSelection.transform);
     }
 
     /// <summary>

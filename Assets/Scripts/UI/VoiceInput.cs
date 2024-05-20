@@ -10,7 +10,7 @@ public enum ButtonState
     STOP,
     DELETE
 }
-public class VoiceInput : MonoBehaviour
+public class VoiceInput : MonoBehaviour, IAnnotationInput
 {
     /// <summary>
     /// The record btn
@@ -35,14 +35,19 @@ public class VoiceInput : MonoBehaviour
 
     [SerializeField] private float recordingStartTime = 0f;
 
+    [SerializeField] private string audioPath;
+
     private void Start()
     {
+        //set audio path
+        audioPath = $"{Application.persistentDataPath}/";
+
         isRecording = false;
         recordBtnState = ButtonState.START;
         //setup event listener callback for the recordbutton
         recordBtn.OnClicked.AddListener(OnRecordButtonClicked);
         //setup event call back for clicking the post button
-        postBtn.OnClicked.AddListener(postVoiceAnnotation);
+        postBtn.OnClicked.AddListener(postAnnotation);
     }
 
     private void OnRecordButtonClicked()
@@ -119,31 +124,50 @@ public class VoiceInput : MonoBehaviour
         currentRecording = trimmedClip;
     }
 
-    private void postVoiceAnnotation()
+    public void postAnnotation()
     {
+        //check if theres a currently selected object
+        if (!SelectionManager.currentSelection)
+        {
+            Debug.Log("We cant post when we have no currently selected object");
+            return;
+        }
+        //quickly assert that the current selection has an annotation component
+        AnnotationComponent annotationComponent = SelectionManager.currentSelection.GetComponent<AnnotationComponent>();
+        if(!annotationComponent)
+        {
+            Debug.Log("We cant post as the currently selected object has no annotation component");
+            return;
+        }
         //check if we're recording
-        if(isRecording)
+        if (isRecording)
         {
             Debug.Log("We cant post while we are recording");
             return;
         }
         //check if we have a clip to post
-        if(currentRecording == null)
+        if (currentRecording == null)
         {
             Debug.Log("We cant post as there is no current recording");
             return;
         }
-        //post to UI manager to create annotation
-
-        //post to annotation manager to create a AnnotationComponent to add to the
-        //currently selected component
-
-        //write new annotation to JSON 
-
+        //get the current date and time
+        string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        //create filename from the componet name + datetime
+        string fileName = $"{SelectionManager.currentSelection.name}_{currentDateTime}";
+        //save audio to file
+        SavWav.Save(fileName,currentRecording);
+        //tell Annotation manager to create annotation Json
+        AnnotationManager.Instance.createAnnotationJson(
+            SelectionManager.currentSelection.name,
+            "Voice",
+            "Default Author",// we need to replace this once we have multiple active users
+            currentDateTime,
+            $"{Application.persistentDataPath}/{fileName}.wav"
+            );
+        //tell the UI manager to update its annotations 
+        UIManager.Instance.updateAnnotations(annotationComponent);
+        Debug.Log("we wouldve \"created\" a voice annotation");
     }
-
-
-
-
 
 }

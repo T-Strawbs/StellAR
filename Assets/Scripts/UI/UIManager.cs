@@ -17,7 +17,7 @@ public class UIManager : Singleton<UIManager>
     public void updateCurrentSelection(Transform selection)
     {
         //grab the metadata component
-        Metadata metadata = selection.GetComponent<Metadata>();
+        MetadataComponent metadata = selection.GetComponent<MetadataComponent>();
         if(!metadata)
         {
             Debug.Log($"Cant grab metadata from {selection.name}");
@@ -37,24 +37,27 @@ public class UIManager : Singleton<UIManager>
         //currentSelectionText.text = $"Current Selection: {selection.name}";
     }
 
-    private void updateMetadata(Metadata metadata)
+    private void updateMetadata(MetadataComponent metadata)
     {
         metadataPane.updateMetadataContent(metadata.metadata);
     }
 
-    private void updateAnnotations(AnnotationComponent annotationData)
+    public void updateAnnotations(AnnotationComponent annotationData)
     {
+        Debug.Log("We are updating annotations");
         //for each active UI element in the annotation pane
         foreach(AnnotationUI activeUI in annotationPane.ActiveAnnotationUI)
         {
+            Debug.Log($"Returning {activeUI.transform.name}");
             AnnotationUIGenerator.Instance.returnAnnotationUI(activeUI);
         }
+        Debug.Log("Clearing the annotation panes active content");
         //clear the annotation pane's active UI list
         annotationPane.ActiveAnnotationUI.Clear();
 
         //populate the annotation pane's content
         //foreach annotation data from the selected GO's annotation component
-        foreach(AnnotationJsonData annotationjsonData in annotationData.Annotations)
+        foreach(AnnotationJson annotationjsonData in annotationData.Annotations)
         {
             //get a Annotation UI element from the AnnotationGenerator
             AnnotationUI annotationUI = AnnotationUIGenerator.Instance.GetAnnotationUI(annotationjsonData);
@@ -71,4 +74,5 @@ public class UIManager : Singleton<UIManager>
             annotationPane.ActiveAnnotationUI.Add(annotationUI);
         }
     }
+
 }

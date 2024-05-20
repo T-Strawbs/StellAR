@@ -22,15 +22,15 @@ public class MetadataManager : MonoBehaviour, Subscriber
 
         selectionManager.GetComponent<SelectionManager>().addSubscriber(this);
 
-        List<ModelComponent> allModels = new List<ModelComponent>();
+        List<MetadataJson> allModels = new List<MetadataJson>();
 
         // Loop over all models
         foreach(Transform modelTransform in allModelObjects.transform)
         {
-            modelTransform.gameObject.AddComponent<Metadata>();
+            modelTransform.gameObject.AddComponent<MetadataComponent>();
 
             // Create a Component object for the model
-            ModelComponent parentModel = new ModelComponent(modelTransform.name);
+            MetadataJson parentModel = new MetadataJson(modelTransform.name);
 
             /* 
              * Check if JSON representation already exists, if not create a blank template
@@ -42,7 +42,7 @@ public class MetadataManager : MonoBehaviour, Subscriber
             {
                 // if JSON already exists add data from JSON, which also updated the JSON to any changed in the model if there are any
                 string modelJson = File.ReadAllText(jsonFilePath);
-                parentModel = JsonConvert.DeserializeObject<ModelComponent>(modelJson);
+                parentModel = JsonConvert.DeserializeObject<MetadataJson>(modelJson);
                 addMetadataFromJson(modelTransform, parentModel);
                 writeJSON(parentModel);
             }
@@ -56,20 +56,20 @@ public class MetadataManager : MonoBehaviour, Subscriber
         }
     }
 
-    void writeJSON(ModelComponent model)
+    void writeJSON(MetadataJson model)
     {
         string jsonFilePath = Application.persistentDataPath + "/" + model.name + ".json";
         File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(model, Formatting.Indented));
     }
 
     // Use recursion to create a correctly nested representation of an input model using Component objects
-    void createModelJson(Transform parentTransform, ModelComponent parentComponent)
+    void createModelJson(Transform parentTransform, MetadataJson parentComponent)
     {
         // For each subcomponent in the input parent, create a new Component object and add it as a child of the parent
         foreach (Transform subcomponentTransform in parentTransform)
         {
-            subcomponentTransform.gameObject.AddComponent<Metadata>();
-            ModelComponent subcomponent = new ModelComponent(subcomponentTransform.name);
+            subcomponentTransform.gameObject.AddComponent<MetadataComponent>();
+            MetadataJson subcomponent = new MetadataJson(subcomponentTransform.name);
             parentComponent.subcomponents.Add(subcomponent);
 
             // Repeat recursion using newly created child as the new parent
@@ -77,10 +77,10 @@ public class MetadataManager : MonoBehaviour, Subscriber
         }
     }
 
-    void addMetadataFromJson(Transform parentTransform, ModelComponent parentComponent)
+    void addMetadataFromJson(Transform parentTransform, MetadataJson parentComponent)
     {
         // add metadata to parent first
-        parentTransform.GetComponent<Metadata>().metadata = parentComponent.metadata;
+        parentTransform.GetComponent<MetadataComponent>().metadata = parentComponent.metadata;
 
         // get list of subcomponent transforms, items will be deleted as they are linked to
         // their JSON counterparts and any remaining in the list will need to be added to the JSON
@@ -90,9 +90,9 @@ public class MetadataManager : MonoBehaviour, Subscriber
             subcomponentTransforms.Add(transform);
         }
 
-        List<ModelComponent> subcomponents = new List<ModelComponent>(parentComponent.subcomponents);
+        List<MetadataJson> subcomponents = new List<MetadataJson>(parentComponent.subcomponents);
 
-        foreach(ModelComponent subcomponent in subcomponents)
+        foreach(MetadataJson subcomponent in subcomponents)
         {
             GameObject foundChild = parentTransform.gameObject.GetNamedChild(subcomponent.name);
 
@@ -105,7 +105,7 @@ public class MetadataManager : MonoBehaviour, Subscriber
             // else populate the subcomponent with the metadata from the JSON
             else
             {
-                Metadata subcomponentMetadata = foundChild.AddComponent<Metadata>();
+                MetadataComponent subcomponentMetadata = foundChild.AddComponent<MetadataComponent>();
                 subcomponentMetadata.metadata = subcomponent.metadata;
 
                 // remove JSON linked subcomponent from list
@@ -120,8 +120,8 @@ public class MetadataManager : MonoBehaviour, Subscriber
         foreach (Transform leftoverSubcomponent in subcomponentTransforms)
         {
             // initialise components with metadata and by adding as child to parent Component
-            leftoverSubcomponent.gameObject.AddComponent<Metadata>();
-            ModelComponent subcomponent = new ModelComponent(leftoverSubcomponent.name);
+            leftoverSubcomponent.gameObject.AddComponent<MetadataComponent>();
+            MetadataJson subcomponent = new MetadataJson(leftoverSubcomponent.name);
             parentComponent.subcomponents.Add(subcomponent);
             
             // check and add children of this component
@@ -133,7 +133,7 @@ public class MetadataManager : MonoBehaviour, Subscriber
     public void UpdateSubscriber(Explodable newSelection)
     {
         TextMeshProUGUI text = metadataNearMenu.GetComponentInChildren<TextMeshProUGUI>();
-        string newMetadata = newSelection.GetComponent<Metadata>().metadata;
+        string newMetadata = newSelection.GetComponent<MetadataComponent>().metadata;
 
         if(newMetadata != null && newMetadata != "")
         {

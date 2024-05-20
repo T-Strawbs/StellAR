@@ -7,7 +7,7 @@ public class AnnotationComponent : MonoBehaviour
 {
     public int annotationCount = 0;
 
-    public List<AnnotationJsonData> Annotations
+    public List<AnnotationJson> Annotations
     {
         get;
         set;
@@ -15,7 +15,7 @@ public class AnnotationComponent : MonoBehaviour
 
     private void Start()
     {
-        Annotations = new List<AnnotationJsonData>();
+        Annotations = new List<AnnotationJson>();
     }
 
     private void FixedUpdate()

@@ -43,7 +43,7 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
         }
     }
 
-    public AnnotationUI GetAnnotationUI(AnnotationJsonData annotationData)
+    public AnnotationUI GetAnnotationUI(AnnotationJson annotationData)
     {
         //check the type of the annotationData
         if(annotationData.MessageType == "Text")

@@ -7,10 +7,10 @@ public class TextAnnotationUI : AnnotationUI
 {
     [SerializeField] private TMP_Text content;
 
-    public override void initialise(AnnotationJsonData annotationData)
+    public override void initialise(AnnotationJson annotationData)
     {
         base.initialise(annotationData);
-        if(annotationData is TextAnnotationJsonData textMessage)
+        if(annotationData is TextAnnotationJson textMessage)
         {
             content.text = textMessage.Content;
         }

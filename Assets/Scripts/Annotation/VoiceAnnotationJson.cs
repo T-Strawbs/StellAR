@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 [Serializable]
-public class VoiceAnnotationJsonData : AnnotationJsonData
+public class VoiceAnnotationJson : AnnotationJson
 {
     public string AudioPath{ get; set; }
     public override string MessageType => "Voice";

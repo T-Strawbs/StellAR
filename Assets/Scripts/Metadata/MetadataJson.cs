@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class ModelComponent
+public class MetadataJson
 {
     public string name;
     public string metadata;
-    public List<ModelComponent> subcomponents;
+    public List<MetadataJson> subcomponents;
 
-    public ModelComponent(string nameIn)
+    public MetadataJson(string nameIn)
     {
         name = nameIn;
         metadata = "";
-        subcomponents = new List<ModelComponent>();
+        subcomponents = new List<MetadataJson>();
     }
 }
