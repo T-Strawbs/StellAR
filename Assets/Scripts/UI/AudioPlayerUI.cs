@@ -24,7 +24,6 @@ public class AudioPlayerUI : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
     }
-
     private void Start()
     {
         seekSlider.Value = 0;
@@ -32,29 +31,6 @@ public class AudioPlayerUI : MonoBehaviour
         playButton.OnClicked.AddListener(togglePlayback);
         //add on value changed callback
         seekSlider.OnValueUpdated.AddListener(onSeekSliderValueChanged);
-    }
-    public IEnumerator loadAudio(string path)
-    {
-        string audioFilePath = $"file://{path}";
-
-        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(audioFilePath, AudioType.UNKNOWN))
-        {
-            yield return www.SendWebRequest();
-
-            if(www.result == UnityWebRequest.Result.Success)
-            {
-                //get the audio clip from the handler
-                AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
-                //set the audio source clip
-                audioSource.clip = clip;
-                //initialise audio player
-                initialiseAudioControls();
-            }
-            else
-            {
-                Debug.LogError($"Failed to load audio clip using path {audioFilePath}\nerror: {www.error}");
-            }
-        }
     }
 
     public void setAudioSource(AudioClip clip)
@@ -87,6 +63,16 @@ public class AudioPlayerUI : MonoBehaviour
         {
             audioSource.Play();
             audioSource.Pause();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if(audioSource.isPlaying)
+        {
+            audioSource.Stop();
+            audioSource.time = 0f;
+            seekSlider.Value = 0f;
         }
     }
 

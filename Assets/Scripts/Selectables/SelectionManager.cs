@@ -57,5 +57,26 @@ public class SelectionManager : Singleton<SelectionManager>
     {
         subscribers.Add(newSubscriber);
     }
+
+    public Transform getCurrentSelectionParent()
+    {
+        if(!currentSelection)
+        {
+            Debug.Log($"there is not current selection so we cant get its parent");
+            return null;
+        }
+        Explodable currentExplosive = currentSelection.GetComponent<Explodable>();
+        if(!currentExplosive)
+        {
+            Debug.Log($"Something has gone terribly wrong cause our current selection " +
+                $"({currentSelection.name}) doesnt have an Explodable script so we cant get its parent");
+        }
+        while(currentExplosive.getParent() != null) 
+        { 
+            currentExplosive = currentExplosive.getParent();
+        }
+        return currentExplosive.transform;
+
+    }
     
 }

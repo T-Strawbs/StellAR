@@ -49,6 +49,7 @@ public class UIManager : Singleton<UIManager>
         foreach(AnnotationUI activeUI in annotationPane.ActiveAnnotationUI)
         {
             Debug.Log($"Returning {activeUI.transform.name}");
+            //return element to the generator
             AnnotationUIGenerator.Instance.returnAnnotationUI(activeUI);
         }
         Debug.Log("Clearing the annotation panes active content");
@@ -57,6 +58,8 @@ public class UIManager : Singleton<UIManager>
 
         //populate the annotation pane's content
         //foreach annotation data from the selected GO's annotation component
+        Debug.Log($"The count of annotation data of {SelectionManager.currentSelection} is {annotationData.Annotations.Count}");
+
         foreach(AnnotationJson annotationjsonData in annotationData.Annotations)
         {
             //get a Annotation UI element from the AnnotationGenerator
@@ -68,7 +71,11 @@ public class UIManager : Singleton<UIManager>
             }
             //set the parent to the annotation pane's content holder
             annotationUI.transform.SetParent(annotationPane.ContentHolder);
-            //active the UI element
+            //reset the annotation UI's local transforoms
+            annotationUI.transform.localPosition = Vector3.zero;
+            annotationUI.transform.localRotation = Quaternion.identity;
+            annotationUI.transform.localScale = Vector3.one;
+            //activate the UI element
             annotationUI.gameObject.SetActive(true);
             //add to the annotation panes active elements
             annotationPane.ActiveAnnotationUI.Add(annotationUI);

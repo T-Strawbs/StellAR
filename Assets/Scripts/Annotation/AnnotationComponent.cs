@@ -12,15 +12,4 @@ public class AnnotationComponent : MonoBehaviour
         get;
         set;
     }
-
-    private void Start()
-    {
-        Annotations = new List<AnnotationJson>();
-    }
-
-    private void FixedUpdate()
-    {
-        annotationCount = Annotations.Count;
-    }
-
 }

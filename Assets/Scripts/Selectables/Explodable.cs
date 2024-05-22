@@ -43,7 +43,7 @@ public class Explodable : MonoBehaviour
 
     [SerializeField] private ExplosionStatus explosionStatus;
 
-    [SerializeField] private Vector3 preexplosionPosition;
+    [SerializeField] private Transform preexplosionTransform;
 
     public void Start()
     {
@@ -52,7 +52,7 @@ public class Explodable : MonoBehaviour
         //initialise Explodability 
         initialiseExplodability();
         //set OG transform
-        preexplosionPosition = transform.localPosition;
+        preexplosionTransform = transform;
     }
     /// <summary>
     /// sets the parent of this explodable
@@ -69,6 +69,12 @@ public class Explodable : MonoBehaviour
         if(!parent)
             Debug.Log($"The parent of \"{transform.name}\" is not an explodable.");
     }
+
+    public Explodable getParent()
+    {
+        return parent;
+    }
+
     /// <summary>
     /// initialises the explodable
     /// </summary>
@@ -368,20 +374,32 @@ public class Explodable : MonoBehaviour
         switchManipuation(this, false);
         //set the starting position of the movement
         Vector3 initalPosition = transform.localPosition;
+        //set the starting rotation
+        Quaternion initialRotation = transform.localRotation;
+        //set the starting scale
+        Vector3 initalScale = transform.localScale;
         float time = 0f;
         float duration = 1f / COLLAPSE_SPEED;
         //while we arent at the preexplostion position
         while(time < duration)
         {
-            //move us
-            transform.localPosition = Vector3.Lerp(initalPosition, preexplosionPosition, time / duration);
+            //move the component back to its preeplosion position
+            transform.localPosition = Vector3.Lerp(initalPosition, preexplosionTransform.localPosition, time / duration);
+            //rotate back into the pre explosion rotation
+            transform.localRotation = Quaternion.Lerp(initialRotation, preexplosionTransform.localRotation, time / duration);
+            //scale back into the preexplosion scale
+            transform.localScale = Vector3.Lerp(initalScale, preexplosionTransform.localScale, time / duration);
             //clamp the postion to valid bounds so models are less likely to freak out
             transform.localPosition = Vector3.ClampMagnitude(transform.localPosition, CLAMPING_DISTANCE);
             time += Time.deltaTime;
             yield return null;
         }
         //snap us to the exact pre-explosion position
-        transform.localPosition = Vector3.ClampMagnitude(preexplosionPosition, CLAMPING_DISTANCE);
+        transform.localPosition = Vector3.ClampMagnitude(preexplosionTransform.localPosition, CLAMPING_DISTANCE);
+        //same with the rotation
+        transform.localRotation = preexplosionTransform.localRotation;
+        //and scale 
+        transform.localScale = preexplosionTransform.localScale;
         //reactivate manipulation
         switchManipuation(this, true);
     }

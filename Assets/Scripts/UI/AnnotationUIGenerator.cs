@@ -21,6 +21,11 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
     [SerializeField] TextAnnotationUI textAnnotationUIPrefab;
     [SerializeField] VoiceAnnotationUI voiceAnnotationUIPrefab;
 
+    private void Start()
+    {
+        pooledTextUI = new List<TextAnnotationUI>();
+        pooledVoiceUI = new List<VoiceAnnotationUI>();
+    }
 
     public void returnAnnotationUI(AnnotationUI annotationUI)
     {
