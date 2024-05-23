@@ -768,16 +768,16 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: HoloLens Satellite Project
-  metroPackageVersion: 
-  metroCertificatePath: 
+  metroPackageName: HoloLensSatelliteProject
+  metroPackageVersion: 1.0.0.0
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 801fc97b2bccdb01
   metroApplicationDescription: HoloLens Satellite Project
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: HoloLens Satellite Project
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

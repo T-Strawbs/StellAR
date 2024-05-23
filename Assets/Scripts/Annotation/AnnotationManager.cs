@@ -10,14 +10,11 @@ using UnityEngine;
 public class AnnotationManager : Singleton<AnnotationManager>
 {
     [SerializeField] private List<Transform> models;
-    [SerializeField] string jsonDirPath;
 
     //this allows us to ensure that the annotation json subtypes are accepted
     private JsonSerializerSettings settings;
     private void Awake()
-    {
-        jsonDirPath = $"{Application.persistentDataPath}/";
-
+    { 
         //ensure that the annotation json concretions are accepted
         settings = new JsonSerializerSettings
         { 
@@ -25,7 +22,6 @@ public class AnnotationManager : Singleton<AnnotationManager>
             Formatting = Formatting.Indented,
             TypeNameHandling = TypeNameHandling.Auto,
         };
-
     }
 
     // Start is called before the first frame update
@@ -39,14 +35,11 @@ public class AnnotationManager : Singleton<AnnotationManager>
         //for each model in our model list
         foreach (Transform modelRoot in models)
         {
-            //add annotation component to the root of the model
-            //model.AddComponent<AnnotationComponent>();
-
             //Create the Serialised Annotation
             ModelAnnotationJson parentAnnotationJson = new ModelAnnotationJson(modelRoot.name);
 
             //check if the modelname_Annotation.json exists
-            string jsonPath = $"{jsonDirPath}{modelRoot.name}_Annotation.json";
+            string jsonPath = Config.resourcePath + $"{modelRoot.name}_Annotation.json";
             if (File.Exists(jsonPath))
             {
                 //json exists so we load annotation data from the json file
@@ -147,13 +140,13 @@ public class AnnotationManager : Singleton<AnnotationManager>
 
     public void createAnnotationJson(string componentName,string messageType,string author, string dateTime,string content)
     {
-        Debug.Log($"Creating annotation for {componentName}");
+        DebugConsole.Instance.LogDebug($"Creating annotation for {componentName}");
         //Create null annotaion reference
         AnnotationJson annotationJson = null;
         //check the message type
         if (messageType == "Text")
         {
-            Debug.Log($"created TextAnnotation");
+            DebugConsole.Instance.LogDebug($"created TextAnnotation");
             //create a new serialisble text annotation object and populate it with the params
             annotationJson = new TextAnnotationJson
             {
@@ -165,7 +158,7 @@ public class AnnotationManager : Singleton<AnnotationManager>
         }
         else if(messageType == "Voice")
         {
-            Debug.Log($"created VoiceAnnotation");
+            DebugConsole.Instance.LogDebug($"created VoiceAnnotation");
             //create a new serialisble voice annotation object and populate it with the params
             annotationJson = new VoiceAnnotationJson
             {
@@ -178,7 +171,8 @@ public class AnnotationManager : Singleton<AnnotationManager>
         }
         else
         {
-            Debug.Log($"Cant create annotation for {componentName} as the message type {messageType} is invalid");
+            DebugConsole.Instance.LogError($"Cant create annotation for {componentName} " +
+                $"as the message type {messageType} is invalid");
             return;
         }
         //write to json and add annotation to the AnnotationComponent
@@ -187,20 +181,21 @@ public class AnnotationManager : Singleton<AnnotationManager>
 
     private void addAnnotationToJson(AnnotationJson annotation)
     {
-        Debug.Log($"Adding annoation to json for {annotation.ComponentName}");
+        DebugConsole.Instance.LogDebug($"Adding annoation to json for {annotation.ComponentName}");
         //grab the current selectable objects transform
         Transform currentSelection = SelectionManager.currentSelection.transform;
         //
         if(!currentSelection)
         {
-            Debug.Log("cannot add annotation to json as there is no current selectable");
+            DebugConsole.Instance.LogError("cannot add annotation to json as there is no current selectable");
             return;
         }
         //add the annotation to the current selections annotation component's list
         AnnotationComponent annotationComponent = currentSelection.GetComponent<AnnotationComponent>();
         if(!annotationComponent)
         {
-            Debug.Log("cannot add annotation to json as there is no annotation component on the current selectable");
+            DebugConsole.Instance.LogError("cannot add annotation to json as there is no annotation " +
+                "component on the current selectable");
             return;
         }
         //add annotation 
@@ -209,41 +204,42 @@ public class AnnotationManager : Singleton<AnnotationManager>
         Transform currentSelectionParent = SelectionManager.Instance.getCurrentSelectionParent();
         if(!currentSelectionParent)
         {
-            Debug.Log($"Cannot add annotation as the theres no parent of the current selection ({currentSelection.name}) somehow?");
+            DebugConsole.Instance.LogError($"Cannot add annotation as the theres no parent of the current" +
+                $" selection ({currentSelection.name}) somehow?");
             return;
         }
-        string fileName = $"{Application.persistentDataPath}/{currentSelectionParent.name}_Annotation.json";
+        string fileName = Config.resourcePath + $"{currentSelectionParent.name}_Annotation.json";
         if(!File.Exists(fileName))
         {
-            Debug.Log($"Cannot add annotation data as file:{fileName} cannot be found");
+            DebugConsole.Instance.LogError($"Cannot add annotation data as file:{fileName} cannot be found");
             return;
         }
-        Debug.Log($"file exists:{fileName}");
+        DebugConsole.Instance.LogDebug($"file exists:{fileName}");
         //get the json content
         string annotationJson = File.ReadAllText(fileName);
-        Debug.Log($"loading file content:{fileName}");
+        DebugConsole.Instance.LogDebug($"loading file content:{fileName}");
         //get the deserialised json object from the content
         ModelAnnotationJson parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson);
         //update the json object to now include the new annotation
         updateAnnotationJson(currentSelectionParent, parentAnnotationJson, currentSelection.name, annotation);
-        Debug.Log($"Attempting to write to json");
+        DebugConsole.Instance.LogDebug($"Attempting to write to json");
         //write to the json file
         writeJson(parentAnnotationJson, fileName);
     }
 
     private void updateAnnotationJson(Transform parent, ModelAnnotationJson parentJson,string targetName, AnnotationJson annotation)
     {
-        Debug.Log($"updateing json attempting to find the targetname:{targetName} inside {parent.name}");
+        DebugConsole.Instance.LogDebug($"updateing json attempting to find the targetname:{targetName}" +
+            $" inside {parent.name}");
 
         //check if the parents name matches the target name
         if (parentJson.Name == targetName)
         {
-            Debug.Log($"found {targetName} so we are adding the annotation");
+            DebugConsole.Instance.LogDebug($"found {targetName} so we are adding the annotation");
             //add the annotation to the subcomponent's annotations
             parentJson.Annotations.Add(annotation);
             return;
         }
-
         // for each subcomponent in the parent object
         foreach (ModelAnnotationJson subcomponent in parentJson.Subcomponents)
         {
@@ -252,12 +248,13 @@ public class AnnotationManager : Singleton<AnnotationManager>
             // if we found a child that matches the corresponding subcomponent name
             if(foundChild)
             {
-                Debug.Log($"found the next child to search from parent:{parent.name} to child {foundChild.name}");
+                DebugConsole.Instance.LogDebug($"found the next child to search from parent:" +
+                    $"{parent.name} to child {foundChild.name}");
                 //recursively call this method to find where to put the annotation
                 updateAnnotationJson(foundChild.transform, subcomponent, targetName, annotation);
             }
         }
-        Debug.Log($"couldnt find found {targetName}");
+        DebugConsole.Instance.LogError($"couldnt find found {targetName}");
     }
 
     private void findComponent(Transform currentComponent, string targetName, Transform target)

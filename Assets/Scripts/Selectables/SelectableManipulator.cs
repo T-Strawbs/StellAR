@@ -24,14 +24,6 @@ public class SelectableManipulator : ObjectManipulator
     {
         base.OnSelectEntering(args);
 
-        //we want to get the highest in the tree predecessing explodable that is able to explode
-        //so that we can set it as our current selection. If the direct parent has exploded then
-        //this is a leaf child and we set this as the current selection
-        //Explodable explodablePredecessor = explodable.findExplodablePredecessor();
-
-        //set selection to highest explodable
-        //SelectionManager.Instance.setSelection(explodablePredecessor);
-
         //set selection to this explodable
         SelectionManager.Instance.setSelection(explodable);
     }

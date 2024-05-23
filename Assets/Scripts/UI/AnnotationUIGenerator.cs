@@ -31,7 +31,7 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
     {
         if(!annotationUI)
         {
-            Debug.LogError("the annotation was null so we couldnt return it");
+            DebugConsole.Instance.LogError("the annotation was null so we couldnt return it");
             return;
         }
         if(annotationUI is TextAnnotationUI textUI)
@@ -93,7 +93,7 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
             //return the voiceAnnotation
             return voiceAnnotationUI;
         }
-        Debug.LogError($"Cannot create annotation with type {annotationData.MessageType} " +
+        DebugConsole.Instance.LogError($"Cannot create annotation with type {annotationData.MessageType} " +
             $"by author {annotationData.Author} at timestamp");
         return null;// **** we should be returning a default object to correctly error handle potentially.
     }

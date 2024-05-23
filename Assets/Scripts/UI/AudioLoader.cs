@@ -27,7 +27,7 @@ public class AudioLoader : Singleton<AudioLoader>
             }
             else
             {
-                Debug.LogError($"Failed to load audio clip using path {audioFilePath}\nerror: {www.error}");
+                DebugConsole.Instance.LogError($"Failed to load audio clip using path {audioFilePath}\nerror: {www.error}");
             }
         }
     }

@@ -54,8 +54,9 @@ public class ExplosiveInitialiser : MonoBehaviour
         }
         //get the current objects explodable component
         Explodable explodable = currentObject.GetComponent<Explodable>();
-        if(!explodable)
-            Debug.Log($"Something has gone horribly wrong because {currentObject.name} does not have an explodable!");
+        if (!explodable)
+            DebugConsole.Instance.LogError($"Something has gone horribly wrong because" +
+                $" {currentObject.name} does not have an explodable!");
         //add selectable manipulator
         SelectableManipulator selectableManipulator = currentObject.AddComponent<SelectableManipulator>();
         if (explodable)

@@ -39,6 +39,11 @@ public class UIManager : Singleton<UIManager>
 
     private void updateMetadata(MetadataComponent metadata)
     {
+        if(metadata.metadata == "")
+        {
+            metadataPane.updateMetadataContent($"No Available Metadata for {metadata.name}");
+            return;
+        }
         metadataPane.updateMetadataContent(metadata.metadata);
     }
 

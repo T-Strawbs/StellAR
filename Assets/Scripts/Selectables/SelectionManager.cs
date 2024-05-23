@@ -9,9 +9,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 /// </summary>
 public class SelectionManager : Singleton<SelectionManager>
 {
-	
     public static Explodable currentSelection;
-
     private List<Subscriber> subscribers = new List<Subscriber>();
 
     /// <summary>
@@ -22,12 +20,13 @@ public class SelectionManager : Singleton<SelectionManager>
     {
         if(interactable == null)
         {
-            Debug.Log("Cannot make selection as the iteractable is null");
+            DebugConsole.Instance.LogError("Cannot make selection as the iteractable is null");
             return;
         }    
 
         currentSelection = interactable;
-        Debug.Log($"Current selection is {interactable.name}");
+        DebugConsole.Instance.LogDebug($"Current selection is {interactable.name}");
+        
         //update subscribers
         foreach(Subscriber subscriber in subscribers)
         {
@@ -45,12 +44,11 @@ public class SelectionManager : Singleton<SelectionManager>
     {
         if(currentSelection == null) 
         {
-            Debug.Log("Cannot make deselect as the current selection is already null");
+            DebugConsole.Instance.LogError("Cannot make deselect as the current selection is already null");
             return;
         }
-        Debug.Log($"Deselected {currentSelection.transform.gameObject.name}");
+        DebugConsole.Instance.LogDebug($"Deselected {currentSelection.transform.gameObject.name}");
         currentSelection = null;
-        
     }
 
     public void addSubscriber(Subscriber newSubscriber)
@@ -62,13 +60,13 @@ public class SelectionManager : Singleton<SelectionManager>
     {
         if(!currentSelection)
         {
-            Debug.Log($"there is not current selection so we cant get its parent");
+            DebugConsole.Instance.LogError($"there is not current selection so we cant get its parent");
             return null;
         }
         Explodable currentExplosive = currentSelection.GetComponent<Explodable>();
         if(!currentExplosive)
         {
-            Debug.Log($"Something has gone terribly wrong cause our current selection " +
+            DebugConsole.Instance.LogError($"Something has gone terribly wrong cause our current selection " +
                 $"({currentSelection.name}) doesnt have an Explodable script so we cant get its parent");
         }
         while(currentExplosive.getParent() != null) 
@@ -77,6 +75,36 @@ public class SelectionManager : Singleton<SelectionManager>
         }
         return currentExplosive.transform;
 
+    }
+
+    public void explodeSelection()
+    {
+        if (!currentSelection)
+        {
+            DebugConsole.Instance.LogError("Cannot explode as there is no current selection");
+        }
+        DebugConsole.Instance.LogDebug($"Exploding {currentSelection.name}.");
+        currentSelection.explode();
+    }
+
+    public void collaspseSelection()
+    {
+        if (!currentSelection)
+        {
+            DebugConsole.Instance.LogError("Cannot collapse as there is no current selection");
+        }
+        DebugConsole.Instance.LogDebug($"collapsing {currentSelection.name} one level.");
+        currentSelection.collapse();
+    }
+
+    public void collapseSelectionAll()
+    {
+        if (!currentSelection)
+        {
+            DebugConsole.Instance.LogError("Cannot collapse all as there is no current selection");
+        }
+        DebugConsole.Instance.LogDebug($"collapsing {currentSelection.name} on all levels");
+        currentSelection.collapseAll();
     }
     
 }

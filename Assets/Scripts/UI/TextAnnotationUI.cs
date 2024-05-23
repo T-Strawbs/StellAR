@@ -16,7 +16,7 @@ public class TextAnnotationUI : AnnotationUI
         }
         else
         {
-            Debug.LogError($"Invalid message type parsed to {transform.name}");
+            DebugConsole.Instance.LogError($"Invalid message type parsed to {transform.name}");
         }
     }
 }

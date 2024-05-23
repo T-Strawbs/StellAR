@@ -24,6 +24,7 @@
 //  derived from Gregorio Zanon's script
 //  http://forum.unity3d.com/threads/119295-Writing-AudioListener.GetOutputData-to-wav-problem?p=806734&viewfull=1#post806734
 
+
 using System;
 using System.IO;
 using UnityEngine;
@@ -40,8 +41,8 @@ public static class SavWav
         {
             filename += ".wav";
         }
-
-        var filepath = Path.Combine(Application.persistentDataPath, filename);
+        //Travis --: I edited this so that it saves in our config resource path
+        var filepath = Path.Combine(Config.resourcePath, filename);
 
         Debug.Log(filepath);
 

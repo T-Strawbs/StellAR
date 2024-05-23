@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class MetadataManager : MonoBehaviour, Subscriber
+public class MetadataManager : MonoBehaviour
 {
     // Object housing all the models loaded in the application
     public GameObject allModelObjects;
@@ -20,7 +20,7 @@ public class MetadataManager : MonoBehaviour, Subscriber
     void Start()
     {
 
-        selectionManager.GetComponent<SelectionManager>().addSubscriber(this);
+        //selectionManager.GetComponent<SelectionManager>().addSubscriber(this);
 
         List<MetadataJson> allModels = new List<MetadataJson>();
 
@@ -37,7 +37,7 @@ public class MetadataManager : MonoBehaviour, Subscriber
              * NOTE: If the model architecture changes, the existing JSON will need to be deleted to create
              *          an accurate representation of the new architecture.
              */
-            string jsonFilePath = Application.persistentDataPath + "/" + modelTransform.name + ".json";
+            string jsonFilePath = Config.resourcePath + modelTransform.name + "_Metadata.json";
             if (File.Exists(jsonFilePath))
             {
                 // if JSON already exists add data from JSON, which also updated the JSON to any changed in the model if there are any
@@ -58,7 +58,7 @@ public class MetadataManager : MonoBehaviour, Subscriber
 
     void writeJSON(MetadataJson model)
     {
-        string jsonFilePath = Application.persistentDataPath + "/" + model.name + ".json";
+        string jsonFilePath = Config.resourcePath + model.name + "_Metadata.json";
         File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(model, Formatting.Indented));
     }
 
@@ -130,20 +130,6 @@ public class MetadataManager : MonoBehaviour, Subscriber
 
     }
 
-    public void UpdateSubscriber(Explodable newSelection)
-    {
-        TextMeshProUGUI text = metadataNearMenu.GetComponentInChildren<TextMeshProUGUI>();
-        string newMetadata = newSelection.GetComponent<MetadataComponent>().metadata;
-
-        if(newMetadata != null && newMetadata != "")
-        {
-            text.text = newMetadata;
-        }
-        else
-        {
-            text.text = "No available metadata.";
-        }
-    }
 
     public void ToggleNearMenu()
     {

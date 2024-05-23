@@ -42,8 +42,10 @@ public class Explodable : MonoBehaviour
     [SerializeField] private SelectableManipulator selectableManipulator;
 
     [SerializeField] private ExplosionStatus explosionStatus;
-
-    [SerializeField] private Transform preexplosionTransform;
+    
+    [SerializeField] private Vector3 preexplosionPosition;
+    [SerializeField] private Quaternion preexplosionRotation;
+    [SerializeField] private Vector3 preexplosionScale;
 
     public void Start()
     {
@@ -52,7 +54,9 @@ public class Explodable : MonoBehaviour
         //initialise Explodability 
         initialiseExplodability();
         //set OG transform
-        preexplosionTransform = transform;
+        preexplosionPosition = transform.localPosition;
+        preexplosionRotation = transform.localRotation;
+        preexplosionScale = transform.localScale;
     }
     /// <summary>
     /// sets the parent of this explodable
@@ -62,12 +66,14 @@ public class Explodable : MonoBehaviour
         if(!transform.parent)
         {
             parent = null;
-            Debug.Log($"The parent of \"{transform.name}\" doesnt exist.");
+            //Debug.Log($"The parent of \"{transform.name}\" doesnt exist.");
             return;
         }
         parent = transform.parent.GetComponent<Explodable>();
+        /*
         if(!parent)
             Debug.Log($"The parent of \"{transform.name}\" is not an explodable.");
+        */
     }
 
     public Explodable getParent()
@@ -112,7 +118,7 @@ public class Explodable : MonoBehaviour
         //if this explodable is unable to explode
         if (explosionStatus == ExplosionStatus.EXPLODED || explosionStatus == ExplosionStatus.INACTIVE)
         {
-            Debug.Log($"attempted to explode {transform.name} but it isnt explodable.");
+            DebugConsole.Instance.LogWarning($"attempted to explode {transform.name} but it isnt explodable.");
             return;
         }
         //we're exploding
@@ -123,14 +129,6 @@ public class Explodable : MonoBehaviour
         {
             selectableManipulator.enabled = false;
         }
-
-        /*
-        //we want to manipulate the parent after they exploded so set its host transform to its own transform
-        SelectableManipulator selectableManipulator = GetComponent<SelectableManipulator>();
-        if (selectableManipulator)
-            //selectableManipulator.HostTransform = transform;
-        */
-            
         //for each child
         foreach(Transform child in children)
         {
@@ -141,26 +139,16 @@ public class Explodable : MonoBehaviour
                 Debug.Log($"child '{child.name}' is not an explodable.");
                 return;
             }
-                //activate child selectable manipulator
+            //activate child selectable manipulator
             SelectableManipulator childSelectableManipulator = child.GetComponent<SelectableManipulator>();
                 if (childSelectableManipulator)
                     childSelectableManipulator.enabled = true;
-            
             //if child has children
             if (child.childCount > 0)
             {
                 //set childs explosion status to explodable as it is now explodable
                 childExplodable.explosionStatus = ExplosionStatus.EXPLODABLE;
-                    /*
-                //check if the child has its own selectable manipulator
-                SelectableManipulator childSelectableManipulator = child.GetComponent<SelectableManipulator>();
-                if (childSelectableManipulator)
-                    //set its host transform to its own transform
-                    childSelectableManipulator.HostTransform = child;
-                    */
             }
-            //set the host transform of all the childs decendants to the child
-            //setDecendantHostTransform(childExplodable, child);
             //get the angle between the parent and child
             Vector3 moveTrajectory = calculateTrajectory(childExplodable);
             //move the child in that direction
@@ -200,8 +188,6 @@ public class Explodable : MonoBehaviour
             Bounds parentBounds = parentRenderer.bounds;
             parentCentre = parentBounds.center;
         }
-        //debug lines that last t
-        //Debug.DrawLine(transform.TransformPoint(parentCentre), transform.TransformPoint(childCentre), Color.red,120f); 
         //calculate trajectory
         Vector3 trajectory = childCentre - parentCentre;
 
@@ -293,8 +279,6 @@ public class Explodable : MonoBehaviour
         }
         //collapse children
         collapseChildren(currentExplodable);
-        //recursively set the decendants host transform to the root parents
-        //setDecendantHostTransform(currentExplodable, currentExplodable.transform);
         //set current explosives explosive status to explodable
         currentExplodable.explosionStatus = ExplosionStatus.EXPLODABLE;
         //check if the current explodable is an empty object
@@ -318,8 +302,6 @@ public class Explodable : MonoBehaviour
             return;
         //recursively collapse children
         collapseChildren(predParent);
-        //recursive set the host transform of predecessors children to the predecessor
-        //setDecendantHostTransform(predParent, predParent.transform);
         //set parents explosion status to explodable
         parent.explosionStatus = ExplosionStatus.EXPLODABLE;
         //check if the current explodable is an empty object
@@ -384,22 +366,22 @@ public class Explodable : MonoBehaviour
         while(time < duration)
         {
             //move the component back to its preeplosion position
-            transform.localPosition = Vector3.Lerp(initalPosition, preexplosionTransform.localPosition, time / duration);
+            transform.localPosition = Vector3.Lerp(initalPosition, preexplosionPosition, time / duration);
             //rotate back into the pre explosion rotation
-            transform.localRotation = Quaternion.Lerp(initialRotation, preexplosionTransform.localRotation, time / duration);
+            transform.localRotation = Quaternion.Lerp(initialRotation, preexplosionRotation, time / duration);
             //scale back into the preexplosion scale
-            transform.localScale = Vector3.Lerp(initalScale, preexplosionTransform.localScale, time / duration);
+            transform.localScale = Vector3.Lerp(initalScale, preexplosionScale, time / duration);
             //clamp the postion to valid bounds so models are less likely to freak out
             transform.localPosition = Vector3.ClampMagnitude(transform.localPosition, CLAMPING_DISTANCE);
             time += Time.deltaTime;
             yield return null;
         }
         //snap us to the exact pre-explosion position
-        transform.localPosition = Vector3.ClampMagnitude(preexplosionTransform.localPosition, CLAMPING_DISTANCE);
+        transform.localPosition = Vector3.ClampMagnitude(preexplosionPosition, CLAMPING_DISTANCE);
         //same with the rotation
-        transform.localRotation = preexplosionTransform.localRotation;
+        transform.localRotation = preexplosionRotation;
         //and scale 
-        transform.localScale = preexplosionTransform.localScale;
+        transform.localScale = preexplosionScale;
         //reactivate manipulation
         switchManipuation(this, true);
     }
@@ -442,39 +424,6 @@ public class Explodable : MonoBehaviour
         }
         //the parent is explodable so return parent
         return currentExplodable.parent;
-    }
-    /// <summary>
-    /// Recursive method for setting the host transforms of an explodables decendants.
-    /// </summary>
-    /// <param name="currentExplodable">
-    /// The current explodable;
-    /// </param>
-    /// <param name="hostTransform">
-    /// the host transform that we want to reference.
-    /// </param>
-    private void setDecendantHostTransform(Explodable currentExplodable,Transform hostTransform)
-    {
-        //check if the current explodable is a leaf
-        if(currentExplodable.transform.childCount < 1)
-        {
-            SelectableManipulator selectableManipulator = currentExplodable.GetComponent<SelectableManipulator>();
-            if (selectableManipulator)
-                selectableManipulator.HostTransform = hostTransform;
-            return;
-        }
-        //for each child in the current explodable
-        for(int i = 0; i < currentExplodable.transform.childCount; i++)
-        {
-            //get the current child
-            Explodable child = currentExplodable.transform.GetChild(i).GetComponent<Explodable>();
-            //get the childs selectableManip
-            SelectableManipulator selectableManipulator = child.GetComponent<SelectableManipulator>();
-            //if it exists then set the host transform
-            if (selectableManipulator)
-                selectableManipulator.HostTransform = hostTransform;
-            //call recursively
-            setDecendantHostTransform(child, hostTransform);
-        }
     }
 
     private bool isEmptyObject()

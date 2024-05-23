@@ -53,7 +53,7 @@ public class AudioPlayerUI : MonoBehaviour
     {
         if(!audioSource.clip)
         {
-            Debug.LogError($"Cannot adjust seek of {transform.name} slider");
+            DebugConsole.Instance.LogError($"Cannot adjust seek of {transform.name} slider");
             return;
         }
         //seek the audio time to the sliders current value
@@ -81,7 +81,7 @@ public class AudioPlayerUI : MonoBehaviour
         //check if we have an audio clip
         if(audioSource.clip == null)
         {
-            Debug.Log("Cant play audio as there is no clip.");
+            DebugConsole.Instance.LogError("Cant play audio as there is no clip.");
             return;
         }
         if(!isPlaying)

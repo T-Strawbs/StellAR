@@ -21,7 +21,7 @@ public class VoiceAnnotationUI : AnnotationUI
         //if the clip is null
         if(!clip)
         {
-            Debug.Log($"Couldnt load audio from file:{audioPath}");
+            DebugConsole.Instance.LogError($"Couldnt load audio from file:{audioPath}");
             return;
         }
         //its not null so we'll load the clip into our audio player

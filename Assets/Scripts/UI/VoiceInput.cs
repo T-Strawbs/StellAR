@@ -35,13 +35,8 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
 
     [SerializeField] private float recordingStartTime = 0f;
 
-    [SerializeField] private string audioPath;
-
     private void Start()
     {
-        //set audio path
-        audioPath = $"{Application.persistentDataPath}/";
-
         isRecording = false;
         recordBtnState = ButtonState.START;
         //setup event listener callback for the recordbutton
@@ -74,7 +69,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         string defaultDeviceName = Microphone.devices[0];
         if (defaultDeviceName == "")
         {
-            Debug.LogError($"we cant start or stop recording because we couldnt find a mic");
+            DebugConsole.Instance.LogError($"we cant start or stop recording because we couldnt find a mic");
             return;
         }
         if (!isRecording)
@@ -129,26 +124,26 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //check if theres a currently selected object
         if (!SelectionManager.currentSelection)
         {
-            Debug.Log("We cant post when we have no currently selected object");
+            DebugConsole.Instance.LogError("We cant post when we have no currently selected object");
             return;
         }
         //quickly assert that the current selection has an annotation component
         AnnotationComponent annotationComponent = SelectionManager.currentSelection.GetComponent<AnnotationComponent>();
         if(!annotationComponent)
         {
-            Debug.Log("We cant post as the currently selected object has no annotation component");
+            DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");
             return;
         }
         //check if we're recording
         if (isRecording)
         {
-            Debug.Log("We cant post while we are recording");
+            DebugConsole.Instance.LogError("We cant post while we are recording");
             return;
         }
         //check if we have a clip to post
         if (currentRecording == null)
         {
-            Debug.Log("We cant post as there is no current recording");
+            DebugConsole.Instance.LogError("We cant post as there is no current recording");
             return;
         }
         //get the current date and time
@@ -163,11 +158,11 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             "Voice",
             "Default Author",// we need to replace this once we have multiple active users
             currentDateTime,
-            $"{Application.persistentDataPath}/{fileName}.wav"
+            $"{Config.resourcePath}/{fileName}.wav"
             );
         //tell the UI manager to update its annotations 
         UIManager.Instance.updateAnnotations(annotationComponent);
-        Debug.Log("we wouldve \"created\" a voice annotation");
+        DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
     }
 
 }
