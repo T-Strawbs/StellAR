@@ -2,6 +2,7 @@ using MixedReality.Toolkit.UX;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum ButtonState
@@ -16,6 +17,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
     /// The record btn
     /// </summary>
     [SerializeField] private PressableButton recordBtn;
+    [SerializeField] private TMP_Text recordBtnText;
     /// <summary>
     /// The current state of the record button (START,STOP,DELETE)
     /// </summary>
@@ -50,23 +52,30 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         if(recordBtnState == ButtonState.START)
         {
             recordAudio();
+            recordBtnText.text = "S";
         }
         else if(recordBtnState == ButtonState.STOP)
         {
             recordAudio();
+            recordBtnText.text = "D";
         }
         else
         {
             //remove the current recording
             currentRecording = null;
+            //clear the audio player
+            audioPlayerUI.clear();
             //set the button state to Delete so the next tap will delete the curent recording
             recordBtnState = ButtonState.START;
+            recordBtnText.text = "R";
         }
     }
 
     private void recordAudio()
     {
-        string defaultDeviceName = Microphone.devices[0];
+        string defaultDeviceName = Config.micName;
+        DebugConsole.Instance.LogDebug($"Recording from mic {defaultDeviceName}");
+
         if (defaultDeviceName == "")
         {
             DebugConsole.Instance.LogError($"we cant start or stop recording because we couldnt find a mic");
@@ -86,18 +95,30 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         isRecording = false;
         //stop the recording 
         Microphone.End(defaultDeviceName);
+        //set the button state to Delete so the next tap will delete the curent recording
+        recordBtnState = ButtonState.DELETE;
+        //check if we actually recorded somthing
+        if (!currentRecording)
+        {
+            DebugConsole.Instance.LogError("We didnt record anything just a heads up");
+            return;
+        }
         //calc the recording duration
         float recordingDuration = Time.time - recordingStartTime;
         //trim the audio so that audio is only as long as the recording was
         trimAudioClip(recordingDuration);
         //set the audioplayers clip to the current recording
         audioPlayerUI.setAudioSource(currentRecording);
-        //set the button state to Delete so the next tap will delete the curent recording
-        recordBtnState = ButtonState.STOP;
+        
     }
 
     private void trimAudioClip(float recordingDuration)
     {
+        if (!currentRecording)
+        {
+            DebugConsole.Instance.LogError("current recording is null so we cant trim it");
+        }
+
         //create a float array to hold the samples
         float[] currentSamples = new float[currentRecording.samples];
         //populate the array with samples from the current recording

@@ -9,23 +9,13 @@ using UnityEngine;
 
 public class MetadataManager : MonoBehaviour
 {
-    // Object housing all the models loaded in the application
-    public GameObject allModelObjects;
-
-    public GameObject metadataNearMenu;
-
-    public GameObject selectionManager;
-
     // Start is called before the first frame update
     void Start()
-    {
-
-        //selectionManager.GetComponent<SelectionManager>().addSubscriber(this);
-
+    { 
         List<MetadataJson> allModels = new List<MetadataJson>();
 
         // Loop over all models
-        foreach(Transform modelTransform in allModelObjects.transform)
+        foreach(Transform modelTransform in Config.Instance.AllModels)
         {
             modelTransform.gameObject.AddComponent<MetadataComponent>();
 
@@ -128,11 +118,5 @@ public class MetadataManager : MonoBehaviour
             createModelJson(leftoverSubcomponent, subcomponent);
         }
 
-    }
-
-
-    public void ToggleNearMenu()
-    {
-        metadataNearMenu.SetActive(!metadataNearMenu.activeInHierarchy);
     }
 }

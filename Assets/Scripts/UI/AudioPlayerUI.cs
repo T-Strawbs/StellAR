@@ -111,4 +111,21 @@ public class AudioPlayerUI : MonoBehaviour
         textUI.text = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
     }
 
+    public void clear()
+    {
+        //check if we're playing
+        if(audioSource.isPlaying)
+        {
+            //stop audio
+            audioSource.Pause();
+        }
+        //remove clip from audio source
+        audioSource.clip = null;
+        //reset seek slider
+        seekSlider.Value = 0;
+        //reset time texts
+        currentAudioTime.text = "0:00";
+        maxAudioTime.text = "0:00";
+    }
+
 }

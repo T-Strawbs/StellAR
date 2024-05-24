@@ -1,5 +1,6 @@
-using JsonSubTypes;
+
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,8 +10,6 @@ using UnityEngine;
 
 public class AnnotationManager : Singleton<AnnotationManager>
 {
-    [SerializeField] private List<Transform> models;
-
     //this allows us to ensure that the annotation json subtypes are accepted
     private JsonSerializerSettings settings;
     private void Awake()
@@ -33,7 +32,7 @@ public class AnnotationManager : Singleton<AnnotationManager>
     private void initialiseAnnotations()
     {
         //for each model in our model list
-        foreach (Transform modelRoot in models)
+        foreach (Transform modelRoot in Config.Instance.AllModels)
         {
             //Create the Serialised Annotation
             ModelAnnotationJson parentAnnotationJson = new ModelAnnotationJson(modelRoot.name);
@@ -134,8 +133,17 @@ public class AnnotationManager : Singleton<AnnotationManager>
 
     private void writeJson(ModelAnnotationJson serialisedAnnotation, string jsonPath)
     {
-        //write out annotation data to json
-        File.WriteAllText(jsonPath, JsonConvert.SerializeObject(serialisedAnnotation,settings));
+        try
+        {
+            //write out annotation data to json
+            File.WriteAllText(jsonPath, JsonConvert.SerializeObject(serialisedAnnotation, settings));
+            DebugConsole.Instance.LogDebug($"created file: {jsonPath}");
+        }
+        catch (Exception e)
+        {
+            DebugConsole.Instance.LogError($"Cannot create file: {jsonPath}\n{e.ToString()}\n{e.StackTrace}\n{e.Message}");
+        }
+        
     }
 
     public void createAnnotationJson(string componentName,string messageType,string author, string dateTime,string content)

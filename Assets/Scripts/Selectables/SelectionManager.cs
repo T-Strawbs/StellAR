@@ -10,7 +10,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class SelectionManager : Singleton<SelectionManager>
 {
     public static Explodable currentSelection;
-    private List<Subscriber> subscribers = new List<Subscriber>();
+    private List<SelectionSubcriber> subscribers = new List<SelectionSubcriber>();
 
     /// <summary>
     /// Sets the current selection.
@@ -28,12 +28,10 @@ public class SelectionManager : Singleton<SelectionManager>
         DebugConsole.Instance.LogDebug($"Current selection is {interactable.name}");
         
         //update subscribers
-        foreach(Subscriber subscriber in subscribers)
+        foreach(SelectionSubcriber subscriber in subscribers)
         {
-            subscriber.UpdateSubscriber(currentSelection);
+            subscriber.updateSelection(currentSelection.transform);
         }
-        //update UI
-        UIManager.Instance.updateCurrentSelection(currentSelection.transform);
     }
 
     /// <summary>
@@ -51,7 +49,7 @@ public class SelectionManager : Singleton<SelectionManager>
         currentSelection = null;
     }
 
-    public void addSubscriber(Subscriber newSubscriber)
+    public void addSubscriber(SelectionSubcriber newSubscriber)
     {
         subscribers.Add(newSubscriber);
     }

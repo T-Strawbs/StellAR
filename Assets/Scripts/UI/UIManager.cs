@@ -3,40 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : Singleton<UIManager>,SelectionSubcriber
 {
-    [SerializeField] private TMP_Text currentSelectionText;
     [SerializeField] private MetadataPane metadataPane;
     [SerializeField] private AnnotationPane annotationPane;
 
-
-    /// <summary>
-    /// updates all relevant ui to the currently selected GO
-    /// </summary>
-    /// <param name="name"></param>
-    public void updateCurrentSelection(Transform selection)
+    public void Awake()
     {
-        //grab the metadata component
-        MetadataComponent metadata = selection.GetComponent<MetadataComponent>();
-        if(!metadata)
-        {
-            Debug.Log($"Cant grab metadata from {selection.name}");
-            return;
-        }
-        AnnotationComponent annotationData = selection.GetComponent<AnnotationComponent>();
-        if (!annotationData)
-        {
-            Debug.Log($"Cant grab annotation data from {selection.name}");
-            return;
-        }
-        //populate metadata UI
-        updateMetadata(metadata);
-        //populate annotation UI
-        updateAnnotations(annotationData);
-        //update current selection text
-        //currentSelectionText.text = $"Current Selection: {selection.name}";
+        subscribe();
     }
-
     private void updateMetadata(MetadataComponent metadata)
     {
         if(metadata.metadata == "")
@@ -63,9 +38,16 @@ public class UIManager : Singleton<UIManager>
 
         //populate the annotation pane's content
         //foreach annotation data from the selected GO's annotation component
-        Debug.Log($"The count of annotation data of {SelectionManager.currentSelection} is {annotationData.Annotations.Count}");
+        //Debug.Log($"The count of annotation data of {SelectionManager.currentSelection} is {annotationData.Annotations.Count}");
 
-        foreach(AnnotationJson annotationjsonData in annotationData.Annotations)
+        //check if the annotations list is null
+        if (annotationData.Annotations == null)
+        {
+            DebugConsole.Instance.LogDebug("the annotations of this component is null");
+            return;
+        }
+
+        foreach (AnnotationJson annotationjsonData in annotationData.Annotations)
         {
             //get a Annotation UI element from the AnnotationGenerator
             AnnotationUI annotationUI = AnnotationUIGenerator.Instance.GetAnnotationUI(annotationjsonData);
@@ -87,4 +69,29 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    public void subscribe()
+    {
+        SelectionManager.Instance.addSubscriber(this);
+    }
+
+    public void updateSelection(Transform selection)
+    {
+        //grab the metadata component
+        MetadataComponent metadata = selection.GetComponent<MetadataComponent>();
+        if (!metadata)
+        {
+            Debug.Log($"Cant grab metadata from {selection.name}");
+            return;
+        }
+        AnnotationComponent annotationData = selection.GetComponent<AnnotationComponent>();
+        if (!annotationData)
+        {
+            Debug.Log($"Cant grab annotation data from {selection.name}");
+            return;
+        }
+        //populate metadata UI
+        updateMetadata(metadata);
+        //populate annotation UI
+        updateAnnotations(annotationData);
+    }
 }
