@@ -7,6 +7,7 @@ using System.IO;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using static Unity.VisualScripting.AnnotationUtility;
 
 public class AnnotationManager : Singleton<AnnotationManager>
 {
@@ -263,6 +264,92 @@ public class AnnotationManager : Singleton<AnnotationManager>
             }
         }
         DebugConsole.Instance.LogError($"couldnt find found {targetName}");
+    }
+
+    public void deleteAnnotation(AnnotationJson annotationData)
+    {
+        //check if we have a currentSelection
+        if(!SelectionManager.currentSelection)
+        {
+            DebugConsole.Instance.LogError($"Cannot Delete Annotation ({annotationData.Author}:{annotationData.Timestamp}) " +
+                $"as theres no current selection");
+            return;
+        }
+        //find the name of the components root predecessor
+        string rootName = SelectionManager.Instance.getCurrentSelectionParent().name;
+        if (rootName == "")
+        {
+            DebugConsole.Instance.LogError($"Cannot find root predecessor of {SelectionManager.currentSelection.name}");
+            return;
+        }
+        //load in the model json
+        string jsonPath = Config.resourcePath + $"{rootName}_Annotation.json";
+        if(!File.Exists(jsonPath))
+        {
+            DebugConsole.Instance.LogError($"couldnt find file:{jsonPath}");
+            return;
+        }
+        //deserialise the json into the ModelAnnotation object
+        ModelAnnotationJson rootJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(File.ReadAllText(jsonPath), settings);
+        //search the root json for the currently selected component
+        ModelAnnotationJson targetJson = findComponent(rootJson,SelectionManager.currentSelection.name);
+        if(targetJson == null)
+        {
+            DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.currentSelection.name} in {rootJson.Name}");
+            return;
+        }
+        //find the target annotation in the target jsons annotations
+        for (int i = 0; i < targetJson.Annotations.Count; i++)
+        {
+            if (targetJson.Annotations[i].Equals(annotationData))
+            {
+                DebugConsole.Instance.LogDebug("The annotations match in current selection");
+                targetJson.Annotations.RemoveAt(i);
+                break;
+            }
+        }
+        //remove the annotation from the current selections annotation component
+        AnnotationComponent currentSelection = SelectionManager.currentSelection.GetComponent<AnnotationComponent>();
+        if (!currentSelection)
+        {
+            DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.currentSelection.name} annotation component");
+            return;
+        }
+        for(int i = 0; i < currentSelection.Annotations.Count; i++)
+        {
+            if (currentSelection.Annotations[i].Equals(annotationData))
+            {
+                DebugConsole.Instance.LogDebug("The annotations match in current selection");
+                currentSelection.Annotations.RemoveAt(i);
+                break;
+            }
+        }
+        DebugConsole.Instance.LogDebug($"printing annotation authors of current selection");
+        //debug
+        foreach (AnnotationJson annotation in currentSelection.Annotations)
+        {
+            DebugConsole.Instance.LogDebug($"{annotation.Author}");
+        }
+        DebugConsole.Instance.LogDebug($"finished printing annotation authors of current selection");
+        //update json
+        writeJson(rootJson, jsonPath);
+        //update UIManager
+        UIManager.Instance.updateAnnotations(currentSelection);
+    }
+
+    private ModelAnnotationJson findComponent(ModelAnnotationJson currentModelJson,string targetName)
+    {
+        if(currentModelJson.Name == targetName)
+        {
+            return currentModelJson;
+        }
+        foreach(ModelAnnotationJson subcomponent in currentModelJson.Subcomponents)
+        {
+            ModelAnnotationJson result =  findComponent(subcomponent, targetName);
+            if(result != null)
+                return result;
+        }
+        return null;
     }
 
     private void findComponent(Transform currentComponent, string targetName, Transform target)

@@ -36,15 +36,15 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
         }
         if(annotationUI is TextAnnotationUI textUI)
         {
-            textUI.gameObject.SetActive(false);
             textUI.transform.SetParent(transform);
             pooledTextUI.Add(textUI);
+            textUI.gameObject.SetActive(false);
         }
         else if(annotationUI is VoiceAnnotationUI voiceUI)
         {
-            voiceUI.gameObject.SetActive(false);
             voiceUI.transform.SetParent(transform);
             pooledVoiceUI.Add(voiceUI);
+            voiceUI.gameObject.SetActive(false);
         }
     }
 

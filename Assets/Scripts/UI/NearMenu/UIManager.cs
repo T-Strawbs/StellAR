@@ -36,10 +36,6 @@ public class UIManager : Singleton<UIManager>,SelectionSubcriber
         //clear the annotation pane's active UI list
         annotationPane.ActiveAnnotationUI.Clear();
 
-        //populate the annotation pane's content
-        //foreach annotation data from the selected GO's annotation component
-        //Debug.Log($"The count of annotation data of {SelectionManager.currentSelection} is {annotationData.Annotations.Count}");
-
         //check if the annotations list is null
         if (annotationData.Annotations == null)
         {

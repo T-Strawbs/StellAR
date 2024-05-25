@@ -15,4 +15,18 @@ public abstract class AnnotationJson
     public string Author { get; set; }
     public string Timestamp { get; set; }
     public abstract string MessageType { get; }
+
+    public override bool Equals(object obj)
+    {
+        var other = obj as AnnotationJson;
+        if (other == null)
+            return false;
+        return this.ComponentName == other.ComponentName &&
+               this.Author == other.Author &&
+               this.Timestamp == other.Timestamp;
+    }
+    public override int GetHashCode()
+    {
+        return (ComponentName, Author, Timestamp).GetHashCode();
+    }
 }

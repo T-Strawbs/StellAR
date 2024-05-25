@@ -11,8 +11,6 @@ public class SelectableManipulator : ObjectManipulator
     private void Start()
     {
         selectMode = InteractableSelectMode.Multiple;
-
-        
     }
 
     [SerializeField] private Explodable explodable;
