@@ -67,7 +67,7 @@ public class AnnotationManager : Singleton<AnnotationManager>
         AnnotationComponent annotationComponent = parentTransform.AddComponent<AnnotationComponent>();
         //add the annotation data to the annotation component
         annotationComponent.Annotations = parentComponent.Annotations;
-
+        annotationComponent.setHighlight(parentComponent.HighlightColour);
         //get list of subcomponent transforms
         List<Transform> subcomponentTransforms = new List<Transform>();
         foreach(Transform subcomponent in parentTransform)
@@ -234,6 +234,78 @@ public class AnnotationManager : Singleton<AnnotationManager>
         DebugConsole.Instance.LogDebug($"Attempting to write to json");
         //write to the json file
         writeJson(parentAnnotationJson, fileName);
+    }
+
+    // call whenever a component's highlight colour is updated. Updates the Json file accordingly
+    public void updateAnnotationHighlightJson(string highlightColour)
+    {
+        // highlighted object will be currently selected
+        string parentJsonFileName = Config.resourcePath + SelectionManager.Instance.getCurrentSelectionParent().name + "_Annotation.json";
+        string targetName = SelectionManager.currentSelection.name;
+        string parentJsonFile = File.ReadAllText(parentJsonFileName);
+
+        // recreate Json object structure in memory
+        ModelAnnotationJson parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(parentJsonFile, settings);
+        ModelAnnotationJson targetJson;
+
+        //check if the parent is the highlighted component
+        if (parentAnnotationJson.Name == targetName)
+        {
+            targetJson = parentAnnotationJson;
+        }
+        else
+        {
+            // else find the corresponding subcomponent in the Json structure
+            targetJson = findSubcomponentInJson(parentAnnotationJson, targetName);
+
+        }
+
+        // if we found a corresponding subcomponent update its colour value and all children too, then write out changes
+        if (targetJson != null)
+        {
+            // loop through and update highlight value of children too
+            updateHighlightOfChildren(targetJson, highlightColour);
+            writeJson(parentAnnotationJson, parentJsonFileName);
+        }
+        else
+        {
+            DebugConsole.Instance.LogError($"couldnt find found {targetName}");
+        }
+    }
+
+    // used to update the highlight colour value of all subcomponents of a component
+    private void updateHighlightOfChildren(ModelAnnotationJson parentAnnotationJson, string highlightColour)
+    {
+        // update the highlight colour of current component
+        parentAnnotationJson.HighlightColour = highlightColour;
+
+        // do the same to all subcomponents recursively
+        foreach (ModelAnnotationJson childAnnotationJson in parentAnnotationJson.Subcomponents)
+        {
+            updateHighlightOfChildren(childAnnotationJson, highlightColour);
+        }
+    }
+
+    private ModelAnnotationJson findSubcomponentInJson(ModelAnnotationJson parentAnnotationJson, string targetName)
+    {
+        ModelAnnotationJson returnValue = null;
+
+        if (parentAnnotationJson.Name == targetName)
+        {
+            return parentAnnotationJson;
+        }
+        else
+        {
+            foreach (ModelAnnotationJson subcomponent in parentAnnotationJson.Subcomponents)
+            {
+                returnValue = findSubcomponentInJson(subcomponent, targetName);
+                if (returnValue != null)
+                {
+                    return returnValue;
+                }
+            }
+        }
+        return returnValue;
     }
 
     private void updateAnnotationJson(Transform parent, ModelAnnotationJson parentJson,string targetName, AnnotationJson annotation)
