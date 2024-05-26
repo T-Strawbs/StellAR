@@ -10,7 +10,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class SelectionManager : Singleton<SelectionManager>
 {
     public static Explodable currentSelection;
-    private List<SelectionSubcriber> subscribers = new List<SelectionSubcriber>();
+    [SerializeField] private List<SelectionSubcriber> subscribers = new List<SelectionSubcriber>();
 
     /// <summary>
     /// Sets the current selection.
@@ -80,6 +80,7 @@ public class SelectionManager : Singleton<SelectionManager>
         if (!currentSelection)
         {
             DebugConsole.Instance.LogError("Cannot explode as there is no current selection");
+            return;
         }
         DebugConsole.Instance.LogDebug($"Exploding {currentSelection.name}.");
         currentSelection.explode();
@@ -90,6 +91,7 @@ public class SelectionManager : Singleton<SelectionManager>
         if (!currentSelection)
         {
             DebugConsole.Instance.LogError("Cannot collapse as there is no current selection");
+            return;
         }
         DebugConsole.Instance.LogDebug($"collapsing {currentSelection.name} one level.");
         currentSelection.collapse();
@@ -100,6 +102,7 @@ public class SelectionManager : Singleton<SelectionManager>
         if (!currentSelection)
         {
             DebugConsole.Instance.LogError("Cannot collapse all as there is no current selection");
+            return;
         }
         DebugConsole.Instance.LogDebug($"collapsing {currentSelection.name} on all levels");
         currentSelection.collapseAll();

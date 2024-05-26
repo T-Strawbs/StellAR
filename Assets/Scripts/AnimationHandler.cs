@@ -3,16 +3,27 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AnimationHandler : MonoBehaviour
+public class AnimationHandler : MonoBehaviour, SelectionSubcriber
 {
+    /*
     public List<AnimationClip> animations;
     private Animation anim;
     public GameObject buttonGrid;
     public GameObject button;
+    */
+
+    [SerializeField] private AnimationClip starlinkAnim;
+
+
+    [SerializeField] private AnimationPane animationPane;
 
     // Start is called before the first frame update
     void Start()
     {
+        subscribe();
+        initialise();
+
+        /*
         // instantiate and add Animation component to this object in order to store and play animation clips
         anim = this.AddComponent<Animation>();
 
@@ -33,11 +44,81 @@ public class AnimationHandler : MonoBehaviour
             newButton.GetComponent<PressableButton>().OnClicked.AddListener(() => { anim.Play(clipName); });
             i++;
         }
+        */
     }
 
-    // Update is called once per frame
-    void Update()
+    private void initialise()
     {
-        
+        //for each model in all models
+        for(int i = 0; i < Config.Instance.AllModels.childCount; i++)
+        {
+            //get ref of model
+            Transform model = Config.Instance.AllModels.GetChild(i);
+
+            //get the animation component of the model or create one
+            Animation modelAnimationComponent = model.gameObject.GetComponent<Animation>();
+            if (modelAnimationComponent == null)
+            {
+                modelAnimationComponent = model.gameObject.AddComponent<Animation>();
+            }
+
+            //*** this is garbage so we'll have to replace this code later *** <<<<<<<<<<<<<<< OI!
+            if (model.name == "Starlink_v1")
+            {
+                {
+                    DebugConsole.Instance.LogDebug($"We have found {model.name}");
+                    //add the anim clip to animation component
+                    starlinkAnim.legacy = true;
+                    modelAnimationComponent.AddClip(starlinkAnim, starlinkAnim.name);
+                }
+                //get the animations from the model
+
+                //add them to the models dict entry list
+            }
+        }
+    }
+
+    public void subscribe()
+    {
+        SelectionManager.Instance.addSubscriber(this);
+    }
+
+    public void updateSelection(Transform selection)
+    {
+        string parentName = SelectionManager.Instance.getCurrentSelectionParent().name;
+        if(string.IsNullOrEmpty(parentName))
+        {
+            DebugConsole.Instance.LogWarning($"couldnt find parent name for component:{selection.name}");
+            //set the animation pane's current animations as an empty list
+            animationPane.CurrentAnimation = null;
+            //populate the animation pane
+            animationPane.populateScrollPane();
+            return;
+        }
+        //grab the current selections animation component
+        Animation animationComponent = selection.GetComponent<Animation>();
+        if(animationComponent == null)
+        {
+            DebugConsole.Instance.LogWarning($"couldnt find animation for model:{parentName}");
+            //set the animation pane's current animations as an empty list
+            animationPane.CurrentAnimation = null;
+            //populate the animation pane
+            animationPane.populateScrollPane();
+            return;
+        }
+        //set the animation panes current animations as animations list
+        animationPane.CurrentAnimation = animationComponent;
+        //populate the animation pane
+        animationPane.populateScrollPane();
+    }
+
+    public static List<AnimationClip> getAllAnimationClips(Animation animation)
+    {
+        List<AnimationClip> animationClips = new List<AnimationClip>();
+        foreach(AnimationState state in animation)
+        {
+            animationClips.Add(state.clip);
+        }
+        return animationClips;
     }
 }

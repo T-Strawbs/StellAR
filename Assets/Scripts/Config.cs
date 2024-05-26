@@ -15,11 +15,25 @@ public class Config : Singleton<Config>
     [SerializeField] private PressableButton btnPrefab;
     [SerializeField] private Transform btnPlate;
 
+    [SerializeField] private Transform debugConsole;
+    [SerializeField] private bool consoleIsActive;
+
     private void Awake()
     {
         resourcePath = $"{Application.persistentDataPath}/";
 
-        micNames = Microphone.devices;
+        if (!consoleIsActive)
+        {
+            debugConsole.gameObject.SetActive(false);
+            micName = Microphone.devices[0];
+        }
+        else
+        {
+            micNames = Microphone.devices;
+        }
+        
+
+        
     }
 
     private void Start()

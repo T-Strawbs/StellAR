@@ -6,12 +6,18 @@ public class ModelPane : ScrollPane
 {
     [SerializeField] protected ModelUI contentPrefab;
     [SerializeField] private List<ModelUI> uiElements = new List<ModelUI>();
+    [SerializeField] private RectTransform defaultElement;
 
     public override void populateScrollPane()
     {
-        DebugConsole.Instance.LogDebug("creating model ui stuff");
+        if(Config.Instance.AllModels.childCount < 1)
+        {
+            defaultElement.gameObject.SetActive(true);
+            return;
+        }
+        defaultElement.gameObject.SetActive(false);
         //for each model in the _/test_objects transform
-        for(int i = 0; i < Config.Instance.AllModels.childCount; i++)
+        for (int i = 0; i < Config.Instance.AllModels.childCount; i++)
         {
             //get a ref of the model
             Transform model = Config.Instance.AllModels.GetChild(i);
@@ -28,7 +34,6 @@ public class ModelPane : ScrollPane
             content.initialise(model,thumbnail);
             uiElements.Add(content);
         }
-        DebugConsole.Instance.LogDebug($"ui elements");
     }
 
 }

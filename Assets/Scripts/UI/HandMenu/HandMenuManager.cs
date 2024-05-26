@@ -8,7 +8,7 @@ public class HandMenuManager : MonoBehaviour
     [SerializeField] private ModelPane modelPane;
     [SerializeField] private AnimationPane animPane;
 
-    private void start()
+    private void Start()
     {
         initialisePanes();
     }
@@ -19,8 +19,6 @@ public class HandMenuManager : MonoBehaviour
         modelPane.populateScrollPane();
         //deactivate it
         modelPane.enabled = false;
-        //populate anim pane
-        animPane.populateScrollPane();
         //deactivate it
         animPane.enabled = false;
     }
@@ -42,7 +40,14 @@ public class HandMenuManager : MonoBehaviour
 
     public void activeateHomePane()
     {
-        homePane.gameObject.SetActive(true);
+        if(homePane.gameObject.activeInHierarchy)
+        {
+            homePane.gameObject.SetActive(false);
+        }
+        else
+        {
+            homePane.gameObject.SetActive(true);
+        }
         modelPane.gameObject.SetActive(false);
         animPane.gameObject.SetActive(false);
     }

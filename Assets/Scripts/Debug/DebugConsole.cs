@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DebugConsole : Singleton<DebugConsole>
+public class DebugConsole : Singleton<DebugConsole>,SelectionSubcriber
 {
     [SerializeField] private TMP_Text currentSelectionText;
     [SerializeField] private TMP_Text previousSelectionText;
@@ -12,6 +12,7 @@ public class DebugConsole : Singleton<DebugConsole>
     [SerializeField] private RectTransform contentHolder;
     [SerializeField] private LogUI prefab;
     [SerializeField] private List<LogUI> logs;
+    [SerializeField] private GameObject debugConsole;
 
     private void Start()
     {
@@ -24,58 +25,75 @@ public class DebugConsole : Singleton<DebugConsole>
         currentSelectionText.text = $"Current Selection:{currentSelectionName}";
         //make sure that we can post native unity logs into the debug console
         Application.logMessageReceived += handleUnityLog;
+
+        subscribe();
     }
 
     public void LogDebug(string log)
     {
-        //instanitate the log prefab
-        LogUI logUI = Instantiate<LogUI>(prefab);
-        //initialise the log 
-        logUI.initialise(logs.Count + 1, log, Color.white);
-        //setup the parent and local transforms
-        setParent(logUI);
-        //add the log to the list
-        logs.Add(logUI);
+        if(debugConsole.gameObject.activeInHierarchy)
+        {
+            //instanitate the log prefab
+            LogUI logUI = Instantiate<LogUI>(prefab);
+            //initialise the log 
+            logUI.initialise(logs.Count + 1, log, Color.white);
+            //setup the parent and local transforms
+            setParent(logUI);
+            //add the log to the list
+            logs.Add(logUI);
+        }
         //run a unity debug call
         Debug.Log(log);
     }
 
     public void LogError(string log)
     {
-        //instanitate the log prefab
-        LogUI logUI = Instantiate<LogUI>(prefab);
-        //initialise the log 
-        logUI.initialise(logs.Count + 1, log, Color.red);
-        //setup the parent and local transforms
-        setParent(logUI);
-        //add the log to the list
-        logs.Add(logUI);
+        if (debugConsole.gameObject.activeInHierarchy)
+        {
+            //instanitate the log prefab
+            LogUI logUI = Instantiate<LogUI>(prefab);
+            //initialise the log 
+            logUI.initialise(logs.Count + 1, log, Color.red);
+            //setup the parent and local transforms
+            setParent(logUI);
+            //add the log to the list
+            logs.Add(logUI);
+        }
         //run a unity debug call
         Debug.LogError(log);
+            
     }
 
     public void LogWarning(string log)
     {
-        //instanitate the log prefab
-        LogUI logUI = Instantiate<LogUI>(prefab);
-        //initialise the log 
-        logUI.initialise(logs.Count + 1, log, Color.yellow);
-        //setup the parent and local transforms
-        setParent(logUI);
-        //add the log to the list
-        logs.Add(logUI);
+        if (debugConsole.gameObject.activeInHierarchy)
+        {
+            //instanitate the log prefab
+            LogUI logUI = Instantiate<LogUI>(prefab);
+            //initialise the log 
+            logUI.initialise(logs.Count + 1, log, Color.yellow);
+            //setup the parent and local transforms
+            setParent(logUI);
+            //add the log to the list
+            logs.Add(logUI);
+        }
         //run a unity debug call
         Debug.LogWarning(log);
     }
 
     public void updateSelection(string selectionName)
     {
-        //set the previous selection name as the current selection name
-        previousSelectionName = currentSelectionName;
-        previousSelectionText.text = $"Previous Selection:{previousSelectionName}";
-        //set the current text to the selection name
-        currentSelectionName = selectionName;
-        currentSelectionText.text = $"Current Selection: {currentSelectionName}";
+        DebugConsole.Instance.LogDebug("Were updating");
+        if (debugConsole.gameObject.activeInHierarchy)
+        {
+            DebugConsole.Instance.LogDebug("We should be updating");
+            //set the previous selection name as the current selection name
+            previousSelectionName = currentSelectionName;
+            previousSelectionText.text = $"Previous Selection:{previousSelectionName}";
+            //set the current text to the selection name
+            currentSelectionName = selectionName;
+            currentSelectionText.text = $"Current Selection: {currentSelectionName}";
+        }
     }
 
     private void setParent(LogUI logUI)
@@ -96,5 +114,16 @@ public class DebugConsole : Singleton<DebugConsole>
         //print the exception to the debug console
         LogError($"{logString}\n{exceptionMsg}");
 
+    }
+
+    public void subscribe()
+    {
+        SelectionManager.Instance.addSubscriber(this);
+    }
+
+    public void updateSelection(Transform selection)
+    {
+        DebugConsole.Instance.LogDebug("We should be updating from master");
+        updateSelection(selection.name);
     }
 }
