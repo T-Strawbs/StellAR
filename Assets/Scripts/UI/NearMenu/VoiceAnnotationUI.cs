@@ -2,10 +2,13 @@ using MixedReality.Toolkit.UX;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VoiceAnnotationUI : AnnotationUI
 {
     [SerializeField] private AudioPlayerUI audioPlayerUI;
+
+    [SerializeField] private RectTransform voiceUIRect;
     
     public override void initialise(AnnotationJson annotationData)
     {
@@ -15,6 +18,8 @@ public class VoiceAnnotationUI : AnnotationUI
             //attempt to load audio via our load audio delegate
             AudioLoader.Instance.loadAudio(onAudioLoaded, voiceMessage.AudioPath);
         }
+        //rebuild the ui
+        LayoutRebuilder.ForceRebuildLayoutImmediate(voiceUIRect);
     }
 
     private void onAudioLoaded(AudioClip clip,string audioPath)

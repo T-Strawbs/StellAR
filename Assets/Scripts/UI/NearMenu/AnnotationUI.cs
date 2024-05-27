@@ -8,7 +8,7 @@ public abstract class AnnotationUI : MonoBehaviour
 {
     [SerializeField] protected TMP_Text author;
     [SerializeField] protected TMP_Text timestamp;
-    [SerializeField] private PressableButton deleteBtn;
+    [SerializeField] protected PressableButton deleteBtn;
     private AnnotationJson annotationData;
     private void Awake()
     {
