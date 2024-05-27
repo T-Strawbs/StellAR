@@ -5,7 +5,7 @@ public class ExplosiveInitialiser : MonoBehaviour
 {
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //initialise explosive GOs
         initialiseExplodable(transform);

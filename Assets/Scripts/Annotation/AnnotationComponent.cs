@@ -20,8 +20,7 @@ public class AnnotationComponent : MonoBehaviour
     */
 
     // set when created by script
-    public Color originalColour;
-
+    public string originalColourString { get; private set; }
 
     public List<AnnotationJson> Annotations
     {
@@ -29,22 +28,34 @@ public class AnnotationComponent : MonoBehaviour
         set { annotations = value; }
     }
 
-    // when this compojnent is added to a GameObject set the original colour value
-    private void Awake()
+    private void Start()
     {
-        Renderer renderer = this.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            this.originalColour = renderer.material.color;
-            setHighlight(this.highlightColour);
-        }
+        setHighlight(highlightColour);
     }
+
+    // called when new AnnotationComponent is added to object, sets originalColourString and renderer material colour
+    public string getOriginalolourString()
+    {
+        // if original colour code has already been set don't set it
+        if (originalColourString == null)
+        {
+            Renderer renderer = this.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                this.originalColourString = "#" + ColorUtility.ToHtmlStringRGBA(renderer.material.color);
+            }
+        }
+        return originalColourString;
+    }
+
 
     // modify renderer material colour and the private highlightColour identifier string
     public void setHighlight(string newHighlight)
     {
         if (this.GetComponent<Renderer>() != null)
         {
+            Color originalColour;
+            ColorUtility.TryParseHtmlString(originalColourString, out originalColour);
             switch (newHighlight)
             {
                 case "Green":

@@ -15,6 +15,12 @@ public class ModelAnnotationJson
     /// Component highlight value
     /// </summary>
     public string HighlightColour { get; set; }
+
+    /// <summary>
+    /// Component highlight value
+    /// </summary>
+    public string OriginalColourCode { get; set; }
+
     /// <summary>
     /// List of annotations
     /// </summary>

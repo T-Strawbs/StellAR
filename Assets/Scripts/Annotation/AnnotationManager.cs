@@ -64,9 +64,11 @@ public class AnnotationManager : Singleton<AnnotationManager>
     {
         //create a new annotation component for the parent
         AnnotationComponent annotationComponent = parentTransform.AddComponent<AnnotationComponent>();
+        parentComponent.OriginalColourCode = annotationComponent.getOriginalolourString();
+        annotationComponent.highlightColour = parentComponent.HighlightColour;
         //add the annotation data to the annotation component
         annotationComponent.Annotations = parentComponent.Annotations;
-        annotationComponent.setHighlight(parentComponent.HighlightColour);
+
         //get list of subcomponent transforms
         List<Transform> subcomponentTransforms = new List<Transform>();
         foreach(Transform subcomponent in parentTransform)
@@ -118,7 +120,9 @@ public class AnnotationManager : Singleton<AnnotationManager>
     {
         
         //add a Annotation component to the parent
-        parentTransform.AddComponent<AnnotationComponent>();
+       AnnotationComponent annotationComponent = parentTransform.AddComponent<AnnotationComponent>();
+       parentComponent.OriginalColourCode = annotationComponent.getOriginalolourString();
+
         //for each child of the parent
         foreach (Transform childTransform in parentTransform)
         {

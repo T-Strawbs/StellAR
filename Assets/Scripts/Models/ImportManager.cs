@@ -30,5 +30,6 @@ public class ImportManager : Singleton<ImportManager>
 
         //active the model
         model.gameObject.SetActive(true);
+        SelectionManager.Instance.setSelection(model.GetComponent<Explodable>());
     }
 }
