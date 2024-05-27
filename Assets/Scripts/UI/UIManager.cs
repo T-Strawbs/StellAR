@@ -14,7 +14,7 @@ public class UIManager : Singleton<UIManager>,SelectionSubcriber
     }
     private void updateMetadata(MetadataComponent metadata)
     {
-        if(metadata.metadata == "")
+        if(string.IsNullOrEmpty(metadata.metadata))
         {
             metadataPane.updateMetadataContent($"No Available Metadata for {metadata.name}");
             return;
