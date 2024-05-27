@@ -17,6 +17,7 @@ public class Config : Singleton<Config>
 
     [SerializeField] private Transform debugConsole;
     [SerializeField] private bool consoleIsActive;
+    public static string timeFormat = "HH:mm:ss dd/MM/yyyy";
 
     private void Awake()
     {

@@ -52,25 +52,19 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         if(recordBtnState == ButtonState.START)
         {
             recordAudio();
-            //recordBtnIcon.CurrentIconName = "Icon 135";
+            recordBtnIcon.CurrentIconName = "Icon 135";
             //icon 135 = audio stop buttno
         }
         else if(recordBtnState == ButtonState.STOP)
         {
             recordAudio();
-            //recordBtnIcon.CurrentIconName = "Icon 80";
+            recordBtnIcon.CurrentIconName = "Icon 80";
             //icon 80 is remove icon
         }
         else
         {
-            //remove the current recording
-            currentRecording = null;
-            //clear the audio player
-            audioPlayerUI.clear();
-            //set the button state to Delete so the next tap will delete the curent recording
-            recordBtnState = ButtonState.START;
-            //recordBtnIcon.CurrentIconName = "Icon 128";
-            //icon128 is record btn
+            //reset the input 
+            resetVoiceInput();
         }
     }
 
@@ -170,10 +164,12 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             DebugConsole.Instance.LogError("We cant post as there is no current recording");
             return;
         }
-        //get the current date and time
-        string currentDateTime = DateTime.Now.ToString("HH:mm:ss_dd-MM-yyyy");
+        //get the current date and time to store in the annotation data
+        string currentDateTime = DateTime.Now.ToString(Config.timeFormat);
+        //format the current datetime so that we can save a file without IO pointing a gun at us
+        string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ','-').Replace('/','-');
         //create filename from the componet name + datetime
-        string fileName = $"{SelectionManager.currentSelection.name}_{currentDateTime}";
+        string fileName = $"{SelectionManager.currentSelection.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
         //save audio to file
         SavWav.Save(fileName,currentRecording);
         //tell Annotation manager to create annotation Json
@@ -187,6 +183,17 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //tell the UI manager to update its annotations 
         UIManager.Instance.updateAnnotations(annotationComponent);
         DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
+        //reset content
+        resetVoiceInput();
     }
-
+    public void resetVoiceInput()
+    {
+        //remove the current recording
+        currentRecording = null;
+        //clear the audio player
+        audioPlayerUI.clear();
+        //set the button state to Delete so the next tap will delete the curent recording
+        recordBtnState = ButtonState.START;
+        recordBtnIcon.CurrentIconName = "Icon 128";
+    }
 }

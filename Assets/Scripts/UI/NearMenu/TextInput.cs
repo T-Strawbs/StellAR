@@ -27,6 +27,11 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             DebugConsole.Instance.LogError("We cant post when we have no currently selected object");
             return;
         }
+        if(string.IsNullOrEmpty(inputText.text))
+        {
+            DebugConsole.Instance.LogError("Cannot post as input field is empty or null");
+            return;
+        } 
         //quickly assert that the current selection has an annotation component
         AnnotationComponent annotationComponent = SelectionManager.currentSelection.GetComponent<AnnotationComponent>();
         if (!annotationComponent)
@@ -35,7 +40,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //get the current date and time
-        string currentDateTime = DateTime.Now.ToString("HH:mm:ss_dd-MM-yyyy");
+        string currentDateTime = DateTime.Now.ToString(Config.timeFormat);
         //tell Annotation manager to create annotation Json
         AnnotationManager.Instance.createAnnotationJson(
             SelectionManager.currentSelection.name,
@@ -47,6 +52,8 @@ public class TextInput : MonoBehaviour, IAnnotationInput
         //tell the UI manager to update its annotations 
         UIManager.Instance.updateAnnotations(annotationComponent);
         DebugConsole.Instance.LogDebug("we wouldve \"created\" a text annotation");
+        //reset text input field
+        inputText.text = "";
     }
 
 
