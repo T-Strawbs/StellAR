@@ -26,8 +26,9 @@ public class UIManager : Singleton<UIManager>,SelectionSubcriber
     {
         Debug.Log("We are updating annotations");
         //for each active UI element in the annotation pane
-        foreach(AnnotationUI activeUI in annotationPane.ActiveAnnotationUI)
+        for (int i = 0; i < annotationPane.ActiveAnnotationUI.Count; i++)
         {
+            AnnotationUI activeUI = annotationPane.ActiveAnnotationUI[i];
             Debug.Log($"Returning {activeUI.transform.name}");
             //return element to the generator
             AnnotationUIGenerator.Instance.returnAnnotationUI(activeUI);

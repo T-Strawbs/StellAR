@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HandMenuManager : MonoBehaviour
@@ -48,6 +49,13 @@ public class HandMenuManager : MonoBehaviour
         {
             homePane.gameObject.SetActive(true);
         }
+        modelPane.gameObject.SetActive(false);
+        animPane.gameObject.SetActive(false);
+    }
+
+    public void resetHandMenu()
+    {
+        homePane.gameObject.SetActive(false);
         modelPane.gameObject.SetActive(false);
         animPane.gameObject.SetActive(false);
     }

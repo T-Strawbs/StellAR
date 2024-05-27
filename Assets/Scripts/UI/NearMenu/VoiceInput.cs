@@ -17,7 +17,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
     /// The record btn
     /// </summary>
     [SerializeField] private PressableButton recordBtn;
-    [SerializeField] private TMP_Text recordBtnText;
+    [SerializeField] private FontIconSelector recordBtnIcon;
     /// <summary>
     /// The current state of the record button (START,STOP,DELETE)
     /// </summary>
@@ -52,12 +52,14 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         if(recordBtnState == ButtonState.START)
         {
             recordAudio();
-            recordBtnText.text = "S";
+            //recordBtnIcon.CurrentIconName = "Icon 135";
+            //icon 135 = audio stop buttno
         }
         else if(recordBtnState == ButtonState.STOP)
         {
             recordAudio();
-            recordBtnText.text = "D";
+            //recordBtnIcon.CurrentIconName = "Icon 80";
+            //icon 80 is remove icon
         }
         else
         {
@@ -67,7 +69,8 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             audioPlayerUI.clear();
             //set the button state to Delete so the next tap will delete the curent recording
             recordBtnState = ButtonState.START;
-            recordBtnText.text = "R";
+            //recordBtnIcon.CurrentIconName = "Icon 128";
+            //icon128 is record btn
         }
     }
 
@@ -168,7 +171,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //get the current date and time
-        string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        string currentDateTime = DateTime.Now.ToString("HH:mm:ss_dd-MM-yyyy");
         //create filename from the componet name + datetime
         string fileName = $"{SelectionManager.currentSelection.name}_{currentDateTime}";
         //save audio to file

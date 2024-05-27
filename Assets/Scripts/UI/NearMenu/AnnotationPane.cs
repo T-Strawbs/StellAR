@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnnotationPane : MonoBehaviour
 {
-    [SerializeField] private List<AnnotationUI> activeAnnotationUI;
+    [SerializeField] private List<AnnotationUI> activeAnnotationUI = new List<AnnotationUI>();
     [SerializeField] private RectTransform contentHolder;
 
     public List<AnnotationUI> ActiveAnnotationUI
@@ -20,14 +20,5 @@ public class AnnotationPane : MonoBehaviour
         {
             return contentHolder;
         }
-    }
-
-    private void Awake()
-    {
-        activeAnnotationUI = new List<AnnotationUI>();
-    }
-
-    
-
-    
+    } 
 }

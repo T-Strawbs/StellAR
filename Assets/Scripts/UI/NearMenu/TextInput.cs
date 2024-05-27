@@ -35,7 +35,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //get the current date and time
-        string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        string currentDateTime = DateTime.Now.ToString("HH:mm:ss_dd-MM-yyyy");
         //tell Annotation manager to create annotation Json
         AnnotationManager.Instance.createAnnotationJson(
             SelectionManager.currentSelection.name,

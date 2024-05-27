@@ -373,9 +373,14 @@ public class AnnotationManager : Singleton<AnnotationManager>
             DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.currentSelection.name} in {rootJson.Name}");
             return;
         }
+        DebugConsole.Instance.LogDebug($"this annotation comps anno count is{targetJson.Annotations.Count}");
         //find the target annotation in the target jsons annotations
         for (int i = 0; i < targetJson.Annotations.Count; i++)
         {
+            DebugConsole.Instance.LogDebug($"checking if (" +
+                $"{targetJson.Annotations[i].ComponentName},{targetJson.Annotations[i].Author},{targetJson.Annotations[i].Timestamp})" +
+                $" is equal to " +
+                $"({annotationData.ComponentName},{annotationData.Author},{annotationData.Timestamp})");
             if (targetJson.Annotations[i].Equals(annotationData))
             {
                 DebugConsole.Instance.LogDebug("The annotations match in current selection");

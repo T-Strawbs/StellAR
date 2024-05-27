@@ -102,4 +102,16 @@ public class AnnotationComponent : MonoBehaviour
         // update the Json
         AnnotationManager.Instance.updateAnnotationHighlightJson(newHighlightColour);
     }
+
+    public void deleteAnnotation(AnnotationJson annotationData)
+    {
+        for(int i = 0; i < annotations.Count; i++)
+        {
+            if (annotations[i].Equals(annotationData))
+            {
+                annotations.RemoveAt(i);
+                return;
+            }
+        }
+    }
 }
