@@ -33,7 +33,11 @@ public class Config : Singleton<Config>
             micNames = Microphone.devices;
         }
         
-
+        for(int i = 0; i < allModels.childCount; i++)
+        {
+            Transform model = allModels.GetChild(i).transform;
+            model.gameObject.SetActive(false);
+        }
         
     }
 
