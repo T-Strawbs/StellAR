@@ -1,13 +1,7 @@
-using MixedReality.Toolkit;
-using MixedReality.Toolkit.SpatialManipulation;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Properties;
-using Unity.VisualScripting;
-using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.HID;
+
 
 /// <summary>
 /// enum for the explosion status of an explodable.
@@ -30,22 +24,21 @@ public enum ExplosionStatus
 
 public class Explodable : MonoBehaviour
 {
-    [SerializeField] private List<Transform> children;
-
     [SerializeField] private Explodable parent = null;
+    [SerializeField] private List<Transform> children;
 
     [SerializeField] private const float EXPLOSION_SPEED = 2f;
     [SerializeField] private const float COLLAPSE_SPEED = 2f;
-    [SerializeField] private const float STOP_DISTANCE = 1.5f;
+    [SerializeField] private const float STOP_DISTANCE = .25f;
     [SerializeField] private const float CLAMPING_DISTANCE = 1000f;
 
     [SerializeField] private SelectableManipulator selectableManipulator;
 
     [SerializeField] private ExplosionStatus explosionStatus;
     
-    [SerializeField] private Vector3 preexplosionPosition;
-    [SerializeField] private Quaternion preexplosionRotation;
-    [SerializeField] private Vector3 preexplosionScale;
+    [SerializeField] private Vector3 initalLocalPosition;
+    [SerializeField] private Quaternion initalLocalRotation;
+    [SerializeField] private Vector3 intialLocalScale;
 
     public void Start()
     {
@@ -54,9 +47,9 @@ public class Explodable : MonoBehaviour
         //initialise Explodability 
         initialiseExplodability();
         //set OG transform
-        preexplosionPosition = transform.localPosition;
-        preexplosionRotation = transform.localRotation;
-        preexplosionScale = transform.localScale;
+        initalLocalPosition = transform.localPosition;
+        initalLocalRotation = transform.localRotation;
+        intialLocalScale = transform.localScale;
     }
     /// <summary>
     /// sets the parent of this explodable
@@ -111,51 +104,82 @@ public class Explodable : MonoBehaviour
         this.selectableManipulator = selectableManipulator;
     }
     /// <summary>
-    /// Explodes this GOs children
+    /// Recursive method for exploding this object
     /// </summary>
     public void explode()
     {
-        //if this explodable is unable to explode
-        if (explosionStatus == ExplosionStatus.EXPLODED || explosionStatus == ExplosionStatus.INACTIVE)
+        explode(this);
+    }
+
+    private void explode(Explodable current)
+    {
+        //check if the current explodable is explodabl
+        if(current.explosionStatus == ExplosionStatus.EXPLODED || explosionStatus == ExplosionStatus.INACTIVE)
         {
             DebugConsole.Instance.LogWarning($"attempted to explode {transform.name} but it isnt explodable.");
+            //it's not so return
             return;
         }
-        //we're exploding
-        explosionStatus = ExplosionStatus.EXPLODED;
+        //set current explosion status to exploded as its gonna explode
+        current.explosionStatus = ExplosionStatus.EXPLODED;
 
-        //check if this object is MT
-        if(isEmptyObject())
+        //turn off the current explodables selectable manipulator
+        current.selectableManipulator.enabled = false;
+
+            
+        //for each child of the current explodable
+        foreach(Transform child in current.children)
         {
-            selectableManipulator.enabled = false;
-        }
-        //for each child
-        foreach(Transform child in children)
-        {
-            //grab its explodable component
+            //grab the childs explodable component
             Explodable childExplodable = child.GetComponent<Explodable>();
-            if(!childExplodable)
+            if (!childExplodable)
             {
                 Debug.Log($"child '{child.name}' is not an explodable.");
                 return;
             }
-            //activate child selectable manipulator
+            //check to make sure the child has a selectable manipulator
             SelectableManipulator childSelectableManipulator = child.GetComponent<SelectableManipulator>();
-                if (childSelectableManipulator)
-                    childSelectableManipulator.enabled = true;
-            //if child has children
+            if (childSelectableManipulator)
+                //turn it on
+                childSelectableManipulator.enabled = true;
+
+            //decouple this child from current as parent
+            child.SetParent(null);
+
+            //check if the child has children
             if (child.childCount > 0)
-            {
                 //set childs explosion status to explodable as it is now explodable
                 childExplodable.explosionStatus = ExplosionStatus.EXPLODABLE;
+            else
+            {
+                //turn on its selectable manipulator as its a leaf
+                childSelectableManipulator.enabled = true;
             }
-            //get the angle between the parent and child
-            Vector3 moveTrajectory = calculateTrajectory(childExplodable);
-            //move the child in that direction
-            childExplodable.onExplode(moveTrajectory);
+            //check if child is not empty
+            if(!childExplodable.isEmptyObject())
+            {
+                //time to move the child
+                //get the angle between the parent and child
+                Vector3 moveTrajectory = calculateTrajectory(childExplodable);
+                //move the child in that direction
+                childExplodable.onExplode(moveTrajectory);
+                continue;
+            }
+            //as this child is empty we need to recursively explode its children
+            //so that the user doesnt have to explode the seemly same object twice.
+            //This is because the user actually grabs the mesh collider of the emtpy
+            //object's decendants as empty objects dont have meshes to grab
+            
+            //begin the recursion
+            explode(childExplodable);
         }
 
+        //check if the current explodable is a  object
+        if (!isEmptyObject())
+            //turn the current explodable selectable manipulator back on 
+            current.selectableManipulator.enabled = true;
     }
+
     /// <summary>
     /// Calculates the trajectory between the parent and the childs global positions
     /// </summary>
@@ -319,10 +343,10 @@ public class Explodable : MonoBehaviour
     private void collapseChildren(Explodable parentExplodable)
     {
         //for each child of parent
-        for(int i = 0; i < parentExplodable.transform.childCount; i++)
+        for(int i = 0; i < parentExplodable.children.Count; i++)
         {
             //get the child
-            Explodable child = parentExplodable.transform.GetChild(i).GetComponent<Explodable>();
+            Explodable child = parentExplodable.children[i].GetComponent<Explodable>();
             if (!child)
                 continue;
             //check if child has exploded
@@ -335,6 +359,9 @@ public class Explodable : MonoBehaviour
             SelectableManipulator childSelectableManipulator = child.GetComponent<SelectableManipulator>();
             if (childSelectableManipulator)
                 childSelectableManipulator.enabled = false;
+
+            //set the child's tranform parent to the parent explodable
+            child.transform.SetParent(parentExplodable.transform);
             //move child back to parent
             child.onCollapse();
         }
@@ -366,22 +393,22 @@ public class Explodable : MonoBehaviour
         while(time < duration)
         {
             //move the component back to its preeplosion position
-            transform.localPosition = Vector3.Lerp(initalPosition, preexplosionPosition, time / duration);
+            transform.localPosition = Vector3.Lerp(initalPosition, initalLocalPosition, time / duration);
             //rotate back into the pre explosion rotation
-            transform.localRotation = Quaternion.Lerp(initialRotation, preexplosionRotation, time / duration);
+            transform.localRotation = Quaternion.Lerp(initialRotation, initalLocalRotation, time / duration);
             //scale back into the preexplosion scale
-            transform.localScale = Vector3.Lerp(initalScale, preexplosionScale, time / duration);
+            transform.localScale = Vector3.Lerp(initalScale, intialLocalScale, time / duration);
             //clamp the postion to valid bounds so models are less likely to freak out
             transform.localPosition = Vector3.ClampMagnitude(transform.localPosition, CLAMPING_DISTANCE);
             time += Time.deltaTime;
             yield return null;
         }
         //snap us to the exact pre-explosion position
-        transform.localPosition = Vector3.ClampMagnitude(preexplosionPosition, CLAMPING_DISTANCE);
+        transform.localPosition = Vector3.ClampMagnitude(initalLocalPosition, CLAMPING_DISTANCE);
         //same with the rotation
-        transform.localRotation = preexplosionRotation;
+        transform.localRotation = initalLocalRotation;
         //and scale 
-        transform.localScale = preexplosionScale;
+        transform.localScale = intialLocalScale;
         //reactivate manipulation
         switchManipuation(this, true);
     }
