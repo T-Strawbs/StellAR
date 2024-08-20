@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
 
 
@@ -342,6 +343,10 @@ public class Explodable : MonoBehaviour
     /// <param name="hostTransform">the root parent's transform to set the host transfrom of the children</param>
     private void collapseChildren(Explodable parentExplodable)
     {
+        //check if parent sm is enabled
+        //turn off the parent selectable manipulator 
+        parentExplodable.selectability(false);
+        
         //for each child of parent
         for(int i = 0; i < parentExplodable.children.Count; i++)
         {
@@ -365,6 +370,8 @@ public class Explodable : MonoBehaviour
             //move child back to parent
             child.onCollapse();
         }
+        //turn it back on to recalculate
+        parentExplodable.selectability(true);
     }
     /// <summary>
     /// callback to initiate the collapse translation of explodables
@@ -460,6 +467,11 @@ public class Explodable : MonoBehaviour
         if(!meshRenderer && !skinnedMeshRenderer)
             return true;
         return false;
+    }
+
+    private bool selectability(bool selectability)
+    {
+        return selectableManipulator.enabled = selectability;
     }
 
 }
