@@ -195,7 +195,7 @@ public class AnnotationManager : Singleton<AnnotationManager>
     {
         DebugConsole.Instance.LogDebug($"Adding annoation to json for {annotation.ComponentName}");
         //grab the current selectable objects transform
-        Transform currentSelection = SelectionManager.currentSelection.transform;
+        Transform currentSelection = SelectionManager.Instance.currentSelection.transform;
         //
         if(!currentSelection)
         {
@@ -213,7 +213,7 @@ public class AnnotationManager : Singleton<AnnotationManager>
         //add annotation 
         annotationComponent.Annotations.Add(annotation);
         //get the parent of the current object
-        Transform currentSelectionParent = SelectionManager.Instance.getCurrentSelectionParent();
+        Transform currentSelectionParent = SelectionManager.Instance.getCurrentSelectionParent().transform;
         if(!currentSelectionParent)
         {
             DebugConsole.Instance.LogError($"Cannot add annotation as the theres no parent of the current" +
@@ -244,7 +244,7 @@ public class AnnotationManager : Singleton<AnnotationManager>
     {
         // highlighted object will be currently selected
         string parentJsonFileName = Config.resourcePath + SelectionManager.Instance.getCurrentSelectionParent().name + "_Annotation.json";
-        string targetName = SelectionManager.currentSelection.name;
+        string targetName = SelectionManager.Instance.currentSelection.name;
         string parentJsonFile = File.ReadAllText(parentJsonFileName);
 
         // recreate Json object structure in memory
@@ -344,7 +344,7 @@ public class AnnotationManager : Singleton<AnnotationManager>
     public void deleteAnnotation(AnnotationJson annotationData)
     {
         //check if we have a currentSelection
-        if(!SelectionManager.currentSelection)
+        if(!SelectionManager.Instance.currentSelection)
         {
             DebugConsole.Instance.LogError($"Cannot Delete Annotation ({annotationData.Author}:{annotationData.Timestamp}) " +
                 $"as theres no current selection");
@@ -354,7 +354,7 @@ public class AnnotationManager : Singleton<AnnotationManager>
         string rootName = SelectionManager.Instance.getCurrentSelectionParent().name;
         if (rootName == "")
         {
-            DebugConsole.Instance.LogError($"Cannot find root predecessor of {SelectionManager.currentSelection.name}");
+            DebugConsole.Instance.LogError($"Cannot find root predecessor of {SelectionManager.Instance.currentSelection.name}");
             return;
         }
         //load in the model json
@@ -367,10 +367,10 @@ public class AnnotationManager : Singleton<AnnotationManager>
         //deserialise the json into the ModelAnnotation object
         ModelAnnotationJson rootJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(File.ReadAllText(jsonPath), settings);
         //search the root json for the currently selected component
-        ModelAnnotationJson targetJson = findComponent(rootJson,SelectionManager.currentSelection.name);
+        ModelAnnotationJson targetJson = findComponent(rootJson,SelectionManager.Instance.currentSelection.name);
         if(targetJson == null)
         {
-            DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.currentSelection.name} in {rootJson.Name}");
+            DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.Instance.currentSelection.name} in {rootJson.Name}");
             return;
         }
         DebugConsole.Instance.LogDebug($"this annotation comps anno count is{targetJson.Annotations.Count}");
@@ -389,10 +389,10 @@ public class AnnotationManager : Singleton<AnnotationManager>
             }
         }
         //remove the annotation from the current selections annotation component
-        AnnotationComponent currentSelection = SelectionManager.currentSelection.GetComponent<AnnotationComponent>();
+        AnnotationComponent currentSelection = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
         if (!currentSelection)
         {
-            DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.currentSelection.name} annotation component");
+            DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.Instance.currentSelection.name} annotation component");
             return;
         }
         for(int i = 0; i < currentSelection.Annotations.Count; i++)

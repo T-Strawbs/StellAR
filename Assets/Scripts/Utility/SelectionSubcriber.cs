@@ -4,7 +4,5 @@ using UnityEngine;
 
 public interface SelectionSubcriber
 {
-    public void subscribe();
-
     public void updateSelection(Transform selection);
 }

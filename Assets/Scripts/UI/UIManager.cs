@@ -10,7 +10,7 @@ public class UIManager : Singleton<UIManager>,SelectionSubcriber
 
     public void Awake()
     {
-        subscribe();
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
     }
     private void updateMetadata(MetadataComponent metadata)
     {
@@ -64,11 +64,6 @@ public class UIManager : Singleton<UIManager>,SelectionSubcriber
             //add to the annotation panes active elements
             annotationPane.ActiveAnnotationUI.Add(annotationUI);
         }
-    }
-
-    public void subscribe()
-    {
-        SelectionManager.Instance.addSubscriber(this);
     }
 
     public void updateSelection(Transform selection)

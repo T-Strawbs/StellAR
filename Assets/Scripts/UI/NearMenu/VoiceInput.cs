@@ -140,13 +140,13 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
     public void postAnnotation()
     {
         //check if theres a currently selected object
-        if (!SelectionManager.currentSelection)
+        if (!SelectionManager.Instance.currentSelection)
         {
             DebugConsole.Instance.LogError("We cant post when we have no currently selected object");
             return;
         }
         //quickly assert that the current selection has an annotation component
-        AnnotationComponent annotationComponent = SelectionManager.currentSelection.GetComponent<AnnotationComponent>();
+        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
         if(!annotationComponent)
         {
             DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");
@@ -169,12 +169,12 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //format the current datetime so that we can save a file without IO pointing a gun at us
         string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ','-').Replace('/','-');
         //create filename from the componet name + datetime
-        string fileName = $"{SelectionManager.currentSelection.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
+        string fileName = $"{SelectionManager.Instance.currentSelection.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
         //save audio to file
         SavWav.Save(fileName,currentRecording);
         //tell Annotation manager to create annotation Json
         AnnotationManager.Instance.createAnnotationJson(
-            SelectionManager.currentSelection.name,
+            SelectionManager.Instance.currentSelection.name,
             "Voice",
             "Default Author",// we need to replace this once we have multiple active users
             currentDateTime,

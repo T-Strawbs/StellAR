@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationPane : ScrollPane, SelectionSubcriber
+public class AnimationPane : ScrollPane
 {
     [SerializeField] protected AnimationUI contentPrefab;
     [SerializeField] private bool isActive = false;
@@ -25,9 +25,9 @@ public class AnimationPane : ScrollPane, SelectionSubcriber
         }
     }
 
-    private void Start()
+    private void Awake()
     {
-        subscribe();
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
     }
 
     public override void populateScrollPane()
@@ -101,11 +101,6 @@ public class AnimationPane : ScrollPane, SelectionSubcriber
         }
         //clear the active ui list
         activelUI.Clear();
-    }
-
-    public void subscribe()
-    {
-        SelectionManager.Instance.addSubscriber(this);
     }
 
     public void updateSelection(Transform selection)

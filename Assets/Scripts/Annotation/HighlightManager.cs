@@ -28,12 +28,12 @@ public class HighlightManager : MonoBehaviour
 
     public void setHighlight(string colour)
     {
-        if (!SelectionManager.currentSelection)
+        if (!SelectionManager.Instance.currentSelection)
         {
             DebugConsole.Instance.LogError("Cannot set highlight as there is no current selection");
             return;
         }
-        DebugConsole.Instance.LogDebug($"setting highlight {SelectionManager.currentSelection.name} to {colour}");
-        SelectionManager.currentSelection.GetComponent<AnnotationComponent>().changeHighlightColour(colour);
+        DebugConsole.Instance.LogDebug($"setting highlight {SelectionManager.Instance.currentSelection.name} to {colour}");
+        SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>().changeHighlightColour(colour);
     }
 }

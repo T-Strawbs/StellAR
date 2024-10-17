@@ -9,12 +9,15 @@ public class OutlineManager : MonoBehaviour, SelectionSubcriber
     // keep track of current outline to disable when new outline is enabled
     private MeshOutlineHierarchy currentOutline;
 
+    private void Awake()
+    {
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
+    }
+
     // on launch assign outline to all models
     void Start()
     {
         // subscribe to SelectionManager
-        this.subscribe();
-
         foreach (Transform child in Config.Instance.AllModels)
         {
             recursivelyAddOutline(child);
@@ -34,11 +37,6 @@ public class OutlineManager : MonoBehaviour, SelectionSubcriber
         }
     }
 
-    public void subscribe()
-    {
-        SelectionManager.Instance.addSubscriber(this);
-    }
-
     // whenever new object is selected disable prev outline and enable new outline
     public void updateSelection(Transform selection)
     {
@@ -46,7 +44,7 @@ public class OutlineManager : MonoBehaviour, SelectionSubcriber
         {
             currentOutline.enabled = false;
         }
-        currentOutline = SelectionManager.currentSelection.GetComponent<MeshOutlineHierarchy>();
+        currentOutline = SelectionManager.Instance.currentSelection.GetComponent<MeshOutlineHierarchy>();
         currentOutline.enabled = true;
     }
 }

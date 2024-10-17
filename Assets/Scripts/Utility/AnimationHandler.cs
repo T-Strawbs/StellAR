@@ -17,10 +17,15 @@ public class AnimationHandler : MonoBehaviour, SelectionSubcriber
 
     [SerializeField] private AnimationPane animationPane;
 
+    private void Awake()
+    {
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        subscribe();
+        
         initialise();
 
         /*
@@ -78,10 +83,6 @@ public class AnimationHandler : MonoBehaviour, SelectionSubcriber
         }
     }
 
-    public void subscribe()
-    {
-        SelectionManager.Instance.addSubscriber(this);
-    }
 
     public void updateSelection(Transform selection)
     {

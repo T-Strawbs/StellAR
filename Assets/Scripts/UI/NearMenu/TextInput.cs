@@ -22,7 +22,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
     {
         DebugConsole.Instance.LogDebug($"POSTING ANNOTATION!");
         //check if theres a currently selected object
-        if (!SelectionManager.currentSelection)
+        if (!SelectionManager.Instance.currentSelection)
         {
             DebugConsole.Instance.LogError("We cant post when we have no currently selected object");
             return;
@@ -33,7 +33,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             return;
         } 
         //quickly assert that the current selection has an annotation component
-        AnnotationComponent annotationComponent = SelectionManager.currentSelection.GetComponent<AnnotationComponent>();
+        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
         if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");
@@ -43,7 +43,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
         string currentDateTime = DateTime.Now.ToString(Config.timeFormat);
         //tell Annotation manager to create annotation Json
         AnnotationManager.Instance.createAnnotationJson(
-            SelectionManager.currentSelection.name,
+            SelectionManager.Instance.currentSelection.name,
             "Text",
             "Default Author",// we need to replace this once we have multiple active users
             currentDateTime,
