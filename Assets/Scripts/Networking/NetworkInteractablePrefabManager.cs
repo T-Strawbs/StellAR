@@ -1,16 +1,25 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NetworkInteractablePrefabManager : Singleton<NetworkInteractablePrefabManager>
 {
     [SerializeField] private List<GameObject> prefabs;
     [SerializeField] private HashSet<int> spawnedPrefabs = new HashSet<int>();
 
+    public UnityEvent<List<GameObject>> OnImportCompleted = new UnityEvent<List<GameObject>>();
+
     private void Start()
     {
+        if (prefabs == null || prefabs.Count < 1)
+            prefabs = new List<GameObject>();
+
+        LoadPrefabs();
+
         NetworkManager.Singleton.OnServerStarted += () =>
         {
             if (NetworkManager.Singleton.IsServer)
@@ -22,6 +31,38 @@ public class NetworkInteractablePrefabManager : Singleton<NetworkInteractablePre
             if (NetworkManager.Singleton.IsClient && NetworkManager.Singleton.LocalClientId == clientID)
                 registerMessages();
         };
+    }
+
+    private void LoadPrefabs()
+    {
+        //get all the prefab paths from the prefab dir
+        string[] prefabPaths = Directory.GetFiles(GlobalConstants.PREFAB_DIR, "*.prefab");
+
+        if (prefabPaths.Length < 1)
+        {
+            DebugConsole.Instance.LogDebug($"couldnt load prefabs from {GlobalConstants.PREFAB_DIR}");
+            return;
+        }
+
+        //for each file path
+        foreach (string prefabFilePath in prefabPaths)
+        {
+            //make the path relative so that its Prefabs/PrefabName
+            string prefabPath = $"Prefabs/{Path.GetFileNameWithoutExtension(prefabFilePath)}";
+            //load the gameobject
+            GameObject prefab = Resources.Load<GameObject>(prefabPath);
+
+            //check if the prefab was loaded
+            if (!prefab)
+            {
+                Debug.Log($"We couldnt load {prefabPath} from {prefabFilePath}");
+                continue;
+            }
+            //add it to the prefabs list
+            prefabs.Add(prefab);
+        }
+
+        OnImportCompleted.Invoke(prefabs);
     }
 
     private void registerMessages()

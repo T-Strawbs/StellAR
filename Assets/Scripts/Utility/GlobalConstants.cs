@@ -43,4 +43,12 @@ public static class GlobalConstants
     public static readonly float MAX_WAIT_TIME = 5f;
 
     #endregion LockConsts
+
+    #region Model Consts
+    public static readonly string[] MODEL_FORMATS = { ".fbx",".blend" };
+
+    public static readonly string MODEL_DIR = "Assets/Resources/Models"; //these need to be relative paths
+
+    public static readonly string PREFAB_DIR = "Assets/Resources/Prefabs";
+    #endregion
 }
