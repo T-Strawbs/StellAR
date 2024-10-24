@@ -6,14 +6,19 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class NetworkInteractablePrefabManager : Singleton<NetworkInteractablePrefabManager>
+public class NetworkInteractablePrefabManager : Singleton<NetworkInteractablePrefabManager>, CustomMessageHandler
 {
     [SerializeField] private List<GameObject> prefabs;
     [SerializeField] private HashSet<int> spawnedPrefabs = new HashSet<int>();
 
     public UnityEvent<List<GameObject>> OnImportCompleted = new UnityEvent<List<GameObject>>();
 
-    private void Start()
+    private void Awake()
+    {
+        ApplicationManager.Instance.onProcessCustomMessengers.AddListener(registerNetworkEventListeners);
+    }
+
+    public void registerNetworkEventListeners()
     {
         if (prefabs == null || prefabs.Count < 1)
             prefabs = new List<GameObject>();
@@ -31,6 +36,13 @@ public class NetworkInteractablePrefabManager : Singleton<NetworkInteractablePre
             if (NetworkManager.Singleton.IsClient && NetworkManager.Singleton.LocalClientId == clientID)
                 registerMessages();
         };
+    }
+
+    public void registerMessages()
+    {
+        //intial request to spawn an interactable 
+        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("requestServerInteractableSpawn", requestServerInteractableSpawn);
+        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("broadcastClientInteractbleSpawn", broadcastClientInteractbleSpawn);
     }
 
     private void LoadPrefabs()
@@ -61,30 +73,21 @@ public class NetworkInteractablePrefabManager : Singleton<NetworkInteractablePre
             //add it to the prefabs list
             prefabs.Add(prefab);
         }
-
+        DebugConsole.Instance.LogDebug("Hello about to invoke");
         OnImportCompleted.Invoke(prefabs);
-    }
-
-    private void registerMessages()
-    {
-        #region MessageRegistering
-        //intial request to spawn an interactable 
-        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("requestServerInteractableSpawn", requestServerInteractableSpawn);
-        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("broadcastClientInteractbleSpawn", broadcastClientInteractbleSpawn);
-        #endregion MessageRegistering
     }
     /// <summary>
     /// sender method for requesting the server to spawn an interactable.
     /// </summary>
     /// <param name="prefabIndex">the index of the prefab in the prefab list</param>
-    public void requestInteractbleSpawn(int prefabIndex,Vector3 spawnPosition)
+    public void requestInteractbleSpawn(int prefabIndex)
     {
         //check if the index is within bounds 
         if (prefabIndex < 0 || prefabIndex >= prefabs.Count)
             return;
 
         //create a new spawn request object
-        SpawnRequest spawnRequest = new SpawnRequest { prefabIndex = prefabIndex,spawnPosition = spawnPosition};
+        SpawnRequest spawnRequest = new SpawnRequest { prefabIndex = prefabIndex};
 
         //create a new writer that will pack a message payload with the byte size of the spawn request
         var writer = new FastBufferWriter(FastBufferWriter.GetWriteSize(spawnRequest), Allocator.Temp);
@@ -145,7 +148,11 @@ public class NetworkInteractablePrefabManager : Singleton<NetworkInteractablePre
         DebugConsole.Instance.LogDebug($"client:{senderId} requested that an object should be spawned on client:{NetworkManager.Singleton.LocalClientId}'s device");
 
         //instantiate object
-        GameObject instance = Instantiate(prefabs[spawnRequest.prefabIndex], spawnRequest.spawnPosition, Quaternion.identity);
+        GameObject instance = Instantiate(prefabs[spawnRequest.prefabIndex], Vector3.zero, Quaternion.identity);
+
+        //Add the make interactable component
+        instance.AddComponent<MakeInteractable>();
+
         //add instance to the Interactable Instance Manager list
         NetworkInteractableInstanceManager.Instance.registerNetworkInteractable(instance.GetComponent<NetworkInteractable>());
         //attempt to register the prefab as already spawned
@@ -164,11 +171,10 @@ public class NetworkInteractablePrefabManager : Singleton<NetworkInteractablePre
 public struct SpawnRequest : INetworkSerializable
 {
     public int prefabIndex;
-    public Vector3 spawnPosition;
+    
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref prefabIndex);
-        serializer.SerializeValue(ref spawnPosition);
     }
 }

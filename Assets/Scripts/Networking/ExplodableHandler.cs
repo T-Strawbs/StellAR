@@ -6,9 +6,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class ExplodableHandler : Singleton<ExplodableHandler>
+public class ExplodableHandler : Singleton<ExplodableHandler>, CustomMessageHandler
 {
-    private void Start()
+    private void Awake()
+    {
+        ApplicationManager.Instance.onProcessCustomMessengers.AddListener(registerNetworkEventListeners);
+    }
+
+    public void registerNetworkEventListeners()
     {
         NetworkManager.Singleton.OnServerStarted += () =>
         {
@@ -23,11 +28,11 @@ public class ExplodableHandler : Singleton<ExplodableHandler>
         };
     }
 
-    private void registerMessages()
+    public void registerMessages()
     {
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler
             ("interactableExplosionServerRequest", interactableExplosionServerRequest);
-        
+
 
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler
             ("interactableExplosionClientBroadcast", interactableExplosionClientBroadcast);

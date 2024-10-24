@@ -9,7 +9,7 @@ using UnityEngine;
 /// <summary>
 /// this class manages all active instances of INetworkInteractable
 /// </summary>
-public class NetworkInteractableInstanceManager : Singleton<NetworkInteractableInstanceManager>
+public class NetworkInteractableInstanceManager : Singleton<NetworkInteractableInstanceManager>, CustomMessageHandler
 {
     public Dictionary<int, List<NetworkInteractable>> registeredInteractbleLookUp { get; private set; } = new Dictionary<int, List<NetworkInteractable>>();
 
@@ -21,14 +21,19 @@ public class NetworkInteractableInstanceManager : Singleton<NetworkInteractableI
     /// </summary>
     public Dictionary<ulong, HashSet<NetworkInteractable>> currentlyOwnedInteractablesLookUp { get; private set; } = new Dictionary<ulong, HashSet<NetworkInteractable>>();
 
-    private void Start()
+    private void Awake()
+    {
+        ApplicationManager.Instance.onProcessCustomMessengers.AddListener(registerNetworkEventListeners);
+    }
+
+    public void registerNetworkEventListeners()
     {
         NetworkManager.Singleton.OnServerStarted += () =>
         {
             //if we're not the server we leave
             if (!NetworkManager.Singleton.IsServer)
                 return;
-            
+
             registerMessages();
 
             //insert the client id of the host into the currentlyOwnedInteractablesLookUp and initialise the list
@@ -51,6 +56,17 @@ public class NetworkInteractableInstanceManager : Singleton<NetworkInteractableI
         //manipulability of any object they controlled
         NetworkManager.Singleton.OnClientDisconnectCallback += handleClientDisconnect;
     }
+
+    public void registerMessages()
+    {
+        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("networkInteractableOwnershipServerRequest", networkInteractableOwnershipServerRequest);
+        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("networkInteractableOwnershipClientBroadcast", networkInteractableOwnershipClientBroadcast);
+
+        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("updateNetworkInteractableTransformServerRequest", updateNetworkInteractableTransformServerRequest);
+        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("updateNetworkInteractableTransformClientBroadcast", updateNetworkInteractableTransformClientBroadcast);
+    }
+
+
     #region General Methods
     public void registerNetworkInteractable(NetworkInteractable networkInteractable)
     {
@@ -62,7 +78,6 @@ public class NetworkInteractableInstanceManager : Singleton<NetworkInteractableI
 
         //recursively initialise the lookupData for the networkwork interactble
         networkInteractable.initialiseLookupData(networkInteractable,ref interactableList,nextKeyValue);
-
 
         //increment the next key value
         nextKeyValue++;
@@ -113,18 +128,7 @@ public class NetworkInteractableInstanceManager : Singleton<NetworkInteractableI
 
     #endregion General Methods
 
-    #region Messaging
-
-    private void registerMessages()
-    {
-        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("networkInteractableOwnershipServerRequest", networkInteractableOwnershipServerRequest);
-        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("networkInteractableOwnershipClientBroadcast", networkInteractableOwnershipClientBroadcast);
-
-        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("updateNetworkInteractableTransformServerRequest", updateNetworkInteractableTransformServerRequest);
-        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("updateNetworkInteractableTransformClientBroadcast", updateNetworkInteractableTransformClientBroadcast);
-    }
-
-    
+    #region Messaging    
 
     public void requestOwnershipOfNetworkInteractable(NetworkInteractable networkInteractable)
     {
@@ -503,10 +507,8 @@ public class NetworkInteractableInstanceManager : Singleton<NetworkInteractableI
                 transformRequest.targetPosition,transformRequest.targetRotation,transformRequest.targetScale
             );
     }
-
-    
-
     #endregion Messaging
+
 }
 
 public struct NetworkInteractableOwnershipRequest : INetworkSerializable
