@@ -10,19 +10,25 @@ public class HandMenuManager : Singleton<HandMenuManager>, ImportListener
     [SerializeField] private AnimationPane animPane;
     [SerializeField] private ControlPane controlPane;
 
+    [SerializeField] private NetworkOptionsTab networkOptionsTab;
+
 
     private void Awake()
     {
-        NetworkInteractablePrefabManager.Instance.OnImportCompleted.AddListener(populateScrollPanes);
+        PrefabManager.Instance.OnImportCompleted.AddListener(populateScrollPanes);
 
-        //deactivate it
+        //deactivate the model pane
         modelPane.enabled = false;
-        //deactivate it
+        //deactivate animations pane
         animPane.enabled = false;
-        //deactivate it
+        //deactivate the network options pane
+        networkOptionsTab.enabled = false;
 
         //initalise the control pane
         controlPane.initialise();
+
+        //intitalise the network opt tab
+        networkOptionsTab.intialise();
     }
 
     private void populateScrollPanes(List<GameObject> importeObjects)

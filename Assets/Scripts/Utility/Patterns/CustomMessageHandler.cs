@@ -4,7 +4,7 @@ using System;
 /// This is an interface for NGO Custom message Handlers that we make and is mostly used as a way to mark
 /// the derrived class as CustomMessageHandler so that we can keep tabs on whats what.
 /// 
-/// Dont forget to subscribe to the Application Managers onProcessCustomMessengers event in the awake method.
+/// Dont forget to subscribe to the Application Managers events in the awake method:
 /// 
 ///  ApplicationManager.Instance.onProcessCustomMessengers.AddListener(registerNetworkEventListeners);
 /// 

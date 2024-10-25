@@ -31,7 +31,7 @@ public class ModelUI : MonoBehaviour
                 () => 
                 {
                     Debug.Log($"Hello from the button for {modelName.text}");
-                    NetworkInteractablePrefabManager.Instance.requestInteractbleSpawn(this.prefabIndex);
+                    PrefabManager.Instance.requestInteractbleSpawn(this.prefabIndex);
                 }
             );
     }

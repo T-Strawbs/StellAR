@@ -586,6 +586,9 @@ public class ExtendableObjectManipulator : StatefulInteractable
 
         smoothingLogic ??= Activator.CreateInstance(transformSmoothingLogicType) as ITransformSmoothingLogic;
 
+        //add this line in so that we can grab the object with two hands to scale
+        selectMode = InteractableSelectMode.Multiple;
+
         InstantiateManipulationLogic();
     }
 

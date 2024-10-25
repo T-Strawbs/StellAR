@@ -8,7 +8,7 @@ public static class GlobalConstants
     /// <summary>
     /// The magnitude of the distance the explosive translation should stop at.
     /// </summary>
-    public static readonly float EXPLOSION_STOP_DISTANCE = 0.4f;
+    public static readonly float EXPLOSION_STOP_DISTANCE = .5f;
     /// <summary>
     /// The speed of which the explodables translate during explosion and collapse
     /// </summary>

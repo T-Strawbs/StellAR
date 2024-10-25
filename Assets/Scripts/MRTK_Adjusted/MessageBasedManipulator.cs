@@ -6,13 +6,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class MessageBasedManipulator : ExtendableObjectManipulator
 {
-    public NetworkInteractable networkInteractble { get; set; }
+    public MessageBasedInteractable networkInteractble { get; set; }
 
     protected override void Awake()
     {
         base.Awake();
 
-        networkInteractble = GetComponent<NetworkInteractable>();
+        networkInteractble = GetComponent<MessageBasedInteractable>();
     }
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
