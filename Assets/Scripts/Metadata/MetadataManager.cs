@@ -2,54 +2,76 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using TMPro;
-using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class MetadataManager : MonoBehaviour
+public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
 {
-    // Start is called before the first frame update
-    void Start()
-    { 
+    private void Awake()
+    {
+        PrefabManager.Instance.OnPrefabsLoaded.AddListener(onPrefabsLoaded);
+
+        //check if the Metadata directtory exists and create it if it doesnt
+        if (!Directory.Exists(GlobalConstants.METADATA_DIR))
+        {
+            Directory.CreateDirectory(GlobalConstants.METADATA_DIR);
+        }
+    }
+
+    public void onPrefabsLoaded(List<GameObject> loadedPrefabs)
+    {
+        initialseMetadata(loadedPrefabs);
+    }
+
+    private void initialseMetadata(List<GameObject> loadedPrefabs)
+    {
         List<MetadataJson> allModels = new List<MetadataJson>();
+        DebugConsole.Instance.LogDebug($"ABOUT TO LOAD METADATA");
 
         // Loop over all models
-        foreach(Transform modelTransform in Config.Instance.AllModels)
+        foreach (GameObject model in loadedPrefabs)
         {
-            modelTransform.gameObject.AddComponent<MetadataComponent>();
+            model.gameObject.AddComponent<MetadataComponent>();
 
             // Create a Component object for the model
-            MetadataJson parentModel = new MetadataJson(modelTransform.name);
+            MetadataJson parentModel = new MetadataJson(model.name);
 
             /* 
              * Check if JSON representation already exists, if not create a blank template
              * NOTE: If the model architecture changes, the existing JSON will need to be deleted to create
              *          an accurate representation of the new architecture.
              */
-            string jsonFilePath = Config.resourcePath + modelTransform.name + "_Metadata.json";
-            if (File.Exists(jsonFilePath))
+
+            DebugConsole.Instance.LogDebug($"ATTEMPTING TO LOAD METADATA FOR {model.name}");
+
+            string jsonFilePath = GlobalConstants.METADATA_DIR + model.name + "_Metadata.json";
+            if(File.Exists(jsonFilePath))
             {
                 // if JSON already exists add data from JSON, which also updated the JSON to any changed in the model if there are any
                 string modelJson = File.ReadAllText(jsonFilePath);
                 parentModel = JsonConvert.DeserializeObject<MetadataJson>(modelJson);
-                addMetadataFromJson(modelTransform, parentModel);
+                addMetadataFromJson(model.transform, parentModel);
                 writeJSON(parentModel);
+                DebugConsole.Instance.LogDebug($"Found METADATA FOR {model.name}");
             }
             else
             {
+                DebugConsole.Instance.LogDebug($"Couldnt find METADATA for {model.name}, should be creating some");
                 // if JSON doesn't exist create fresh JSON template
-                createModelJson(modelTransform, parentModel);
+                createModelJson(model.transform, parentModel);
                 allModels.Add(parentModel);
                 writeJSON(parentModel);
             }
         }
+        DebugConsole.Instance.LogDebug($"Finished loading METADATA");
     }
 
     void writeJSON(MetadataJson model)
     {
-        string jsonFilePath = Config.resourcePath + model.name + "_Metadata.json";
+        string jsonFilePath = GlobalConstants.METADATA_DIR + model.name + "_Metadata.json";
         File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(model, Formatting.Indented));
+        DebugConsole.Instance.LogDebug($"Shouldve written metadata for {model.name}");
+
     }
 
     // Use recursion to create a correctly nested representation of an input model using Component objects
@@ -119,4 +141,6 @@ public class MetadataManager : MonoBehaviour
         }
 
     }
+
+    
 }

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEditor;
 using System.IO;
 using UnityEngine;
@@ -90,9 +88,6 @@ public class ModelPrefabGenerator : AssetPostprocessor
                 Debug.Log($"Couldn't generate Prefab created for {modelName} at {prefabPath}\n{e}");
             }
         }
-
-        //Refresh the AssetDatabase to show the new prefabs
-        AssetDatabase.Refresh();
     }
 
     /// <summary>
@@ -122,6 +117,12 @@ public class ModelPrefabGenerator : AssetPostprocessor
 
         //generate prefabs
         generatePrefabs(modelPaths);
+
+        //tell the annotation processor to initalise the annotation data for the prefabs
+        //AnnotationProcessor.initialiseAnnotationData();
+
+        //Refresh the AssetDatabase to show the new prefabs
+        AssetDatabase.Refresh();
     }
 
     private static bool isValidFormat(string assetPath)

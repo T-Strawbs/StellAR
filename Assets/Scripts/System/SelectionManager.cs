@@ -65,13 +65,22 @@ public class SelectionManager : Singleton<SelectionManager>
             MessageBasedExplodableHandler.Instance.requestInteractableCollapse((MessageBasedInteractable)currentSelection, isSingleCollapse);
         else if (currentSelection is LocalBasedInteractble)
             currentSelection.collapseInteractable(isSingleCollapse);
-
-
-
     }
 
-    public Interactable getCurrentSelectionParent() 
+    public Transform getSelectionRootTransform() 
     {
-        return currentSelection.parent; 
+        Interactable currentInteractable = currentSelection;
+        if(!currentInteractable)
+        {
+            DebugConsole.Instance.LogError($"SM_getSelectionRootTransform: we dont have a current selection to get the root transform");
+            return null;
+        }
+            
+        while(currentInteractable.parent != null)
+        {
+            currentInteractable = currentInteractable.parent;
+        }
+
+        return currentInteractable.transform;
     }
 }

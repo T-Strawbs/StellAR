@@ -3,15 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UIManager : Singleton<UIManager>,SelectionSubcriber
+public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListener
 {
     [SerializeField] private MetadataPane metadataPane;
     [SerializeField] private AnnotationPane annotationPane;
 
     public void Awake()
     {
-        SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelectionListener);
     }
+
+    public void onNewSelectionListener(Transform selection)
+    {
+        //grab the metadata component
+        MetadataComponent metadata = selection.GetComponent<MetadataComponent>();
+        if (!metadata)
+        {
+            Debug.Log($"Cant grab metadata from {selection.name}");
+            return;
+        }
+        AnnotationComponent annotationData = selection.GetComponent<AnnotationComponent>();
+        if (!annotationData)
+        {
+            Debug.Log($"Cant grab annotation data from {selection.name}");
+            return;
+        }
+        //populate metadata UI
+        updateMetadata(metadata);
+        //populate annotation UI
+        updateAnnotations(annotationData);
+    }
+
     private void updateMetadata(MetadataComponent metadata)
     {
         if(string.IsNullOrEmpty(metadata.metadata))
@@ -66,24 +88,5 @@ public class UIManager : Singleton<UIManager>,SelectionSubcriber
         }
     }
 
-    public void updateSelection(Transform selection)
-    {
-        //grab the metadata component
-        MetadataComponent metadata = selection.GetComponent<MetadataComponent>();
-        if (!metadata)
-        {
-            Debug.Log($"Cant grab metadata from {selection.name}");
-            return;
-        }
-        AnnotationComponent annotationData = selection.GetComponent<AnnotationComponent>();
-        if (!annotationData)
-        {
-            Debug.Log($"Cant grab annotation data from {selection.name}");
-            return;
-        }
-        //populate metadata UI
-        updateMetadata(metadata);
-        //populate annotation UI
-        updateAnnotations(annotationData);
-    }
+
 }

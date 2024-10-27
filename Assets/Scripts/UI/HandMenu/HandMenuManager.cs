@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HandMenuManager : Singleton<HandMenuManager>, ImportListener
+public class HandMenuManager : Singleton<HandMenuManager>, PrefabLoadListener
 {
     [SerializeField] private RectTransform homePane;
     [SerializeField] private ModelPane modelPane;
@@ -12,10 +12,9 @@ public class HandMenuManager : Singleton<HandMenuManager>, ImportListener
 
     [SerializeField] private NetworkOptionsTab networkOptionsTab;
 
-
     private void Awake()
     {
-        PrefabManager.Instance.OnImportCompleted.AddListener(populateScrollPanes);
+        PrefabManager.Instance.OnPrefabsLoaded.AddListener(onPrefabsLoaded);
 
         //deactivate the model pane
         modelPane.enabled = false;
@@ -29,11 +28,6 @@ public class HandMenuManager : Singleton<HandMenuManager>, ImportListener
 
         //intitalise the network opt tab
         networkOptionsTab.intialise();
-    }
-
-    private void populateScrollPanes(List<GameObject> importeObjects)
-    {
-        modelPane.populateScrollPane(importeObjects);
     }
 
     public void activateModelPane()
@@ -72,8 +66,8 @@ public class HandMenuManager : Singleton<HandMenuManager>, ImportListener
         animPane.gameObject.SetActive(false);
     }
 
-    public void OnImportComplete(List<GameObject> gameObjects)
+    public void onPrefabsLoaded(List<GameObject> loadedPrefabs)
     {
-        throw new System.NotImplementedException();
+        modelPane.populateScrollPane(loadedPrefabs);
     }
 }

@@ -40,7 +40,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //get the current date and time
-        string currentDateTime = DateTime.Now.ToString(Config.timeFormat);
+        string currentDateTime = DateTime.Now.ToString(GlobalConstants.timeFormat);
         //tell Annotation manager to create annotation Json
         AnnotationManager.Instance.createAnnotationJson(
             SelectionManager.Instance.currentSelection.name,
@@ -50,7 +50,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             inputText.text
             );
         //tell the UI manager to update its annotations 
-        UIManager.Instance.updateAnnotations(annotationComponent);
+        DataPanelManager.Instance.updateAnnotations(annotationComponent);
         DebugConsole.Instance.LogDebug("we wouldve \"created\" a text annotation");
         //reset text input field
         inputText.text = "";

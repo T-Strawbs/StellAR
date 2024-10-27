@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AnimationHandler : MonoBehaviour, SelectionSubcriber
+public class AnimationHandler : MonoBehaviour, NewSelectionListener
 {
     /*
     public List<AnimationClip> animations;
@@ -19,7 +19,7 @@ public class AnimationHandler : MonoBehaviour, SelectionSubcriber
 
     private void Awake()
     {
-        SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelectionListener);
     }
 
     // Start is called before the first frame update
@@ -52,8 +52,38 @@ public class AnimationHandler : MonoBehaviour, SelectionSubcriber
         */
     }
 
+    public void onNewSelectionListener(Transform selection)
+    {
+        string parentName = SelectionManager.Instance.getSelectionRootTransform().name;
+        if (string.IsNullOrEmpty(parentName))
+        {
+            DebugConsole.Instance.LogWarning($"couldnt find parent name for component:{selection.name}");
+            //set the animation pane's current animations as an empty list
+            animationPane.CurrentAnimation = null;
+            //populate the animation pane
+            animationPane.populateScrollPane();
+            return;
+        }
+        //grab the current selections animation component
+        Animation animationComponent = selection.GetComponent<Animation>();
+        if (animationComponent == null)
+        {
+            DebugConsole.Instance.LogWarning($"couldnt find animation for model:{parentName}");
+            //set the animation pane's current animations as an empty list
+            animationPane.CurrentAnimation = null;
+            //populate the animation pane
+            animationPane.populateScrollPane();
+            return;
+        }
+        //set the animation panes current animations as animations list
+        animationPane.CurrentAnimation = animationComponent;
+        //populate the animation pane
+        animationPane.populateScrollPane();
+    }
+
     private void initialise()
     {
+        /*
         //for each model in all models
         for(int i = 0; i < Config.Instance.AllModels.childCount; i++)
         {
@@ -81,36 +111,7 @@ public class AnimationHandler : MonoBehaviour, SelectionSubcriber
                 //add them to the models dict entry list
             }
         }
-    }
-
-
-    public void updateSelection(Transform selection)
-    {
-        string parentName = SelectionManager.Instance.getCurrentSelectionParent().name;
-        if(string.IsNullOrEmpty(parentName))
-        {
-            DebugConsole.Instance.LogWarning($"couldnt find parent name for component:{selection.name}");
-            //set the animation pane's current animations as an empty list
-            animationPane.CurrentAnimation = null;
-            //populate the animation pane
-            animationPane.populateScrollPane();
-            return;
-        }
-        //grab the current selections animation component
-        Animation animationComponent = selection.GetComponent<Animation>();
-        if(animationComponent == null)
-        {
-            DebugConsole.Instance.LogWarning($"couldnt find animation for model:{parentName}");
-            //set the animation pane's current animations as an empty list
-            animationPane.CurrentAnimation = null;
-            //populate the animation pane
-            animationPane.populateScrollPane();
-            return;
-        }
-        //set the animation panes current animations as animations list
-        animationPane.CurrentAnimation = animationComponent;
-        //populate the animation pane
-        animationPane.populateScrollPane();
+        */
     }
 
     public static List<AnimationClip> getAllAnimationClips(Animation animation)
@@ -122,4 +123,6 @@ public class AnimationHandler : MonoBehaviour, SelectionSubcriber
         }
         return animationClips;
     }
+
+    
 }

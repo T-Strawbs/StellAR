@@ -11,7 +11,7 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
     [SerializeField] private List<GameObject> prefabs;
     [SerializeField] private HashSet<int> spawnedPrefabs = new HashSet<int>();
 
-    [NonSerialized] public UnityEvent<List<GameObject>> OnImportCompleted = new UnityEvent<List<GameObject>>();
+    [NonSerialized] public UnityEvent<List<GameObject>> OnPrefabsLoaded = new UnityEvent<List<GameObject>>();
 
     private void Awake()
     {
@@ -75,7 +75,7 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
             }
         }
         DebugConsole.Instance.LogDebug("PFM_loadPrefabs(): finished loading prefabs");
-        OnImportCompleted.Invoke(prefabs);
+        OnPrefabsLoaded.Invoke(prefabs);
     }
 
     /// <summary>
@@ -103,7 +103,12 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
     private void localRequestInteractableSpawn(ref int prefabIndex)
     {
         //instantiate object -- need camera view transform or vuforia target
-        GameObject instance = Instantiate(prefabs[prefabIndex], Vector3.zero, Quaternion.identity);
+        GameObject instance = Instantiate
+            (
+                prefabs[prefabIndex], 
+                ApplicationManager.Instance.calculateIntantiationTransform(), 
+                Quaternion.identity
+            );
         
         if(!instance)
         {

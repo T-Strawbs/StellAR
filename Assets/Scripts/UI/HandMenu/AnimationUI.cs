@@ -12,7 +12,6 @@ enum AnimBtnState
     RESET
 }
 
-
 public class AnimationUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text content;

@@ -46,9 +46,29 @@ public static class GlobalConstants
 
     #region Model Consts
     public static readonly string[] MODEL_FORMATS = { ".fbx",".blend" };
+    #endregion
 
+    #region Utility Consts
+    public static readonly string timeFormat = "HH:mm:ss dd/MM/yyyy";
+    #endregion Utility Consts
+
+    #region Resource Paths
     public static readonly string MODEL_DIR = "Assets/Resources/Models"; //these need to be relative paths
 
-    public static readonly string PREFAB_DIR = "Assets/Resources/Prefabs";
+    public static readonly string PREFAB_DIR = "Assets/Resources/Prefabs";//these need to be relative paths
+
+    /// <summary>
+    /// The dir for storing Metadata. This needs to be on persistant data path as the we create the metadata files
+    /// at runtime and all build files and directories are read-only. 
+    /// Persistant data path eg C:\Users\USERNAME\AppData\LocalLow\DutchPizza\HLSP\Metadata
+    /// </summary>
+    public static string METADATA_DIR = $"{Application.persistentDataPath}/Metadata/";//"Assets/Resources/Metadata";
+    /// <summary>
+    /// The Dir for storing Annotation data. This needs to be on persistant data path as annotations are
+    /// read/writable and directories in the build dir are read only. 
+    /// Persistant data path eg C:\Users\USERNAME\AppData\LocalLow\DutchPizza\HLSP\Metadata
+    /// </summary>
+    public static string ANNOTATION_DIR = $"{Application.persistentDataPath}/AnnotationData/";
     #endregion
-}
+
+} 

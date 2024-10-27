@@ -7,13 +7,17 @@ using System.IO;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using static Unity.VisualScripting.AnnotationUtility;
 
-public class AnnotationManager : Singleton<AnnotationManager>
+public class AnnotationManager : Singleton<AnnotationManager>, PrefabLoadListener
 {
     //this allows us to ensure that the annotation json subtypes are accepted
     private JsonSerializerSettings settings;
     private void Awake()
-    { 
+    {
+        //subscribe to the prefab managers OnPrefabsLoaded event 
+        PrefabManager.Instance.OnPrefabsLoaded.AddListener(onPrefabsLoaded);
+
         //ensure that the annotation json concretions are accepted
         settings = new JsonSerializerSettings
         { 
@@ -23,44 +27,80 @@ public class AnnotationManager : Singleton<AnnotationManager>
         };
     }
 
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Creates the annotation directory if it doesnt exist already
+    /// </summary>
+    private void setupAnnotationDirectory()
     {
-        initialiseAnnotations();
+        //if the annotations dir doesnt exist
+        if (!Directory.Exists(GlobalConstants.ANNOTATION_DIR))
+            //create it
+            Directory.CreateDirectory(GlobalConstants.ANNOTATION_DIR);
     }
 
-    private void initialiseAnnotations()
+    /// <summary>
+    /// Creates the annotation subdirectory for the model, using the models name, if it doesnt exist already
+    /// </summary>
+    private void setupAnnotationSubdirectory(string modelName)
     {
+        //check if an annotation subdirectory exists for the prefab and if not, create one
+        if (!Directory.Exists($"{GlobalConstants.ANNOTATION_DIR}/{modelName}/"))
+            Directory.CreateDirectory($"{GlobalConstants.ANNOTATION_DIR}/{modelName}/");
+
+    }
+
+    public void onPrefabsLoaded(List<GameObject> loadedPrefabs)
+    {
+        initialiseAnnotations(ref loadedPrefabs);
+    }
+
+    /// <summary>
+    /// initialises the annotation data and components for all loaded prefabs
+    /// </summary>
+    /// <param name="loadedPrefabs"></param>
+    private void initialiseAnnotations(ref List<GameObject> loadedPrefabs)
+    {
+        //create the annotation directory if it doesnt exist
+        setupAnnotationDirectory();
+
         //for each model in our model list
-        foreach (Transform modelRoot in Config.Instance.AllModels)
+        foreach (GameObject modelRoot in loadedPrefabs)
         {
+            //create an annotation subdirectory for this prefab if it doesnt have one
+            setupAnnotationSubdirectory(modelRoot.name);
+
             //Create the Serialised Annotation
             ModelAnnotationJson parentAnnotationJson = new ModelAnnotationJson(modelRoot.name);
 
             //check if the modelname_Annotation.json exists
-            string jsonPath = Config.resourcePath + $"{modelRoot.name}_Annotation.json";
+            string jsonPath = $"{GlobalConstants.ANNOTATION_DIR}/{modelRoot.name}/{modelRoot.name}_Annotation.json";
             if (File.Exists(jsonPath))
             {
                 //json exists so we load annotation data from the json file
                 string annotationJson = File.ReadAllText(jsonPath);
                 //deserialise the data from json into usable objects
-                parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson,settings);
+                parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson, settings);
                 //Populate The models GO with the Json Data
-                populateAnnotationDataFromJson(modelRoot, parentAnnotationJson);
+                populateAnnotationDataFromJson(modelRoot.transform, parentAnnotationJson);
                 //write to json to update the content incase the model has changed
-                writeJson(parentAnnotationJson,jsonPath);
+                writeJson(parentAnnotationJson, jsonPath);
             }
             else
             {
                 //json doesnt exist so we have to create it
-                createAnnotationJson(modelRoot, parentAnnotationJson);
+                createAnnotationJsonObject(modelRoot.transform, parentAnnotationJson);
                 //write annoation data out to file
                 writeJson(parentAnnotationJson, jsonPath);
             }
         }
     }
 
-    private void populateAnnotationDataFromJson(Transform parentTransform,ModelAnnotationJson parentComponent)
+    /// <summary>
+    /// recursively populates the annotation data components of a model using its annotation json file
+    /// </summary>
+    /// <param name="parentTransform"></param>
+    /// <param name="parentComponent"></param>
+    private void populateAnnotationDataFromJson(Transform parentTransform, ModelAnnotationJson parentComponent)
     {
         //create a new annotation component for the parent
         AnnotationComponent annotationComponent = parentTransform.AddComponent<AnnotationComponent>();
@@ -71,14 +111,14 @@ public class AnnotationManager : Singleton<AnnotationManager>
 
         //get list of subcomponent transforms
         List<Transform> subcomponentTransforms = new List<Transform>();
-        foreach(Transform subcomponent in parentTransform)
+        foreach (Transform subcomponent in parentTransform)
         {
             subcomponentTransforms.Add(subcomponent);
         }
 
         //-- removing dead json links
         //for each subcompnent in the parents subcomponents
-        foreach(ModelAnnotationJson subcomponent in parentComponent.Subcomponents)
+        foreach (ModelAnnotationJson subcomponent in parentComponent.Subcomponents)
         {
             //find the child of the parent transofrm matching the subcomponent name
             GameObject foundChild = parentTransform.gameObject.GetNamedChild(subcomponent.Name);
@@ -89,11 +129,11 @@ public class AnnotationManager : Singleton<AnnotationManager>
                 parentComponent.Subcomponents.Remove(subcomponent);
                 continue;
             }
-            /*
+
             //populate the subcomponent with the Annotation data from the JSON
             AnnotationComponent subcomponentAnnotations = foundChild.AddComponent<AnnotationComponent>();
             subcomponentAnnotations.Annotations = subcomponent.Annotations;
-            */
+
             // remove JSON linked subcomponent from list
             subcomponentTransforms.Remove(foundChild.transform);
 
@@ -111,12 +151,17 @@ public class AnnotationManager : Singleton<AnnotationManager>
             parentComponent.Subcomponents.Add(subcomponent);
 
             // check and add children of this component
-            createAnnotationJson(leftoverSubcomponent, subcomponent);
+            createAnnotationJsonObject(leftoverSubcomponent, subcomponent);
         }
 
     }
 
-    private void createAnnotationJson(Transform parentTransform,ModelAnnotationJson parentComponent)
+    /// <summary>
+    /// recursively creates the serialised json object for the node of a given model
+    /// </summary>
+    /// <param name="parentTransform"></param>
+    /// <param name="parentComponent"></param>
+    private void createAnnotationJsonObject(Transform parentTransform,ModelAnnotationJson parentComponent)
     {
         
         //add a Annotation component to the parent
@@ -131,10 +176,15 @@ public class AnnotationManager : Singleton<AnnotationManager>
             //add the Serialised annotation as a subcomponent of the parent
             parentComponent.Subcomponents.Add(childAnnotationJson);
             //recursively call for this childs decendants 
-            createAnnotationJson(childTransform, childAnnotationJson);
+            createAnnotationJsonObject(childTransform, childAnnotationJson);
         }
     }
 
+    /// <summary>
+    /// deserialises the model json object tree and writes it to json
+    /// </summary>
+    /// <param name="serialisedAnnotation"></param>
+    /// <param name="jsonPath"></param>
     private void writeJson(ModelAnnotationJson serialisedAnnotation, string jsonPath)
     {
         try
@@ -150,6 +200,14 @@ public class AnnotationManager : Singleton<AnnotationManager>
         
     }
 
+    /// <summary>
+    /// creates a serialised json object for anotation messages 
+    /// </summary>
+    /// <param name="componentName"></param>
+    /// <param name="messageType"></param>
+    /// <param name="author"></param>
+    /// <param name="dateTime"></param>
+    /// <param name="content"></param>
     public void createAnnotationJson(string componentName,string messageType,string author, string dateTime,string content)
     {
         DebugConsole.Instance.LogDebug($"Creating annotation for {componentName}");
@@ -191,8 +249,13 @@ public class AnnotationManager : Singleton<AnnotationManager>
         addAnnotationToJson(annotationJson);
     }
 
+    /// <summary>
+    /// adds the serialised annotation message object to the models annotation json file
+    /// </summary>
+    /// <param name="annotation"></param>
     private void addAnnotationToJson(AnnotationJson annotation)
     {
+        
         DebugConsole.Instance.LogDebug($"Adding annoation to json for {annotation.ComponentName}");
         //grab the current selectable objects transform
         Transform currentSelection = SelectionManager.Instance.currentSelection.transform;
@@ -212,15 +275,20 @@ public class AnnotationManager : Singleton<AnnotationManager>
         }
         //add annotation 
         annotationComponent.Annotations.Add(annotation);
-        //get the parent of the current object
-        Transform currentSelectionParent = SelectionManager.Instance.getCurrentSelectionParent().transform;
-        if(!currentSelectionParent)
+        Transform currentSelectionModelRoot;
+        try 
+        {
+            currentSelectionModelRoot = SelectionManager.Instance.getSelectionRootTransform(); 
+        }
+        catch (Exception e)
         {
             DebugConsole.Instance.LogError($"Cannot add annotation as the theres no parent of the current" +
                 $" selection ({currentSelection.name}) somehow?");
             return;
         }
-        string fileName = Config.resourcePath + $"{currentSelectionParent.name}_Annotation.json";
+
+        //get the parent of the current object 
+        string fileName =  $"{GlobalConstants.ANNOTATION_DIR}/{currentSelectionModelRoot.name}/{currentSelectionModelRoot.name}_Annotation.json";
         if(!File.Exists(fileName))
         {
             DebugConsole.Instance.LogError($"Cannot add annotation data as file:{fileName} cannot be found");
@@ -233,17 +301,34 @@ public class AnnotationManager : Singleton<AnnotationManager>
         //get the deserialised json object from the content
         ModelAnnotationJson parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson);
         //update the json object to now include the new annotation
-        updateAnnotationJson(currentSelectionParent, parentAnnotationJson, currentSelection.name, annotation);
+        updateAnnotationJson(currentSelectionModelRoot, parentAnnotationJson, currentSelection.name, annotation);
         DebugConsole.Instance.LogDebug($"Attempting to write to json");
         //write to the json file
         writeJson(parentAnnotationJson, fileName);
+        
     }
 
     // call whenever a component's highlight colour is updated. Updates the Json file accordingly
+    /// <summary>
+    /// updates the model annotation json to use the new highlight colour
+    /// </summary>
+    /// <param name="highlightColour"></param>
     public void updateAnnotationHighlightJson(string highlightColour)
     {
+        Transform currentSelectionModelRoot;
+        try
+        {
+            currentSelectionModelRoot = SelectionManager.Instance.getSelectionRootTransform();
+        }
+        catch (Exception e)
+        {
+            DebugConsole.Instance.LogError($"Cannot add annotation as the theres no parent of the current" +
+                $" selection ({SelectionManager.Instance.currentSelection.name}) somehow?");
+            return;
+        }
+
         // highlighted object will be currently selected
-        string parentJsonFileName = Config.resourcePath + SelectionManager.Instance.getCurrentSelectionParent().name + "_Annotation.json";
+        string parentJsonFileName = $"{GlobalConstants.ANNOTATION_DIR}/{currentSelectionModelRoot.name}/{currentSelectionModelRoot.name}_Annotation.json";
         string targetName = SelectionManager.Instance.currentSelection.name;
         string parentJsonFile = File.ReadAllText(parentJsonFileName);
 
@@ -274,9 +359,15 @@ public class AnnotationManager : Singleton<AnnotationManager>
         {
             DebugConsole.Instance.LogError($"couldnt find found {targetName}");
         }
+        
     }
 
     // used to update the highlight colour value of all subcomponents of a component
+    /// <summary>
+    /// recursively updates the highlight colour of the give model annotation json object and children
+    /// </summary>
+    /// <param name="parentAnnotationJson"></param>
+    /// <param name="highlightColour"></param>
     private void updateHighlightOfChildren(ModelAnnotationJson parentAnnotationJson, string highlightColour)
     {
         // update the highlight colour of current component
@@ -288,7 +379,12 @@ public class AnnotationManager : Singleton<AnnotationManager>
             updateHighlightOfChildren(childAnnotationJson, highlightColour);
         }
     }
-
+    /// <summary>
+    /// finds and returns the target subcomponent in the model annotation object
+    /// </summary>
+    /// <param name="parentAnnotationJson"></param>
+    /// <param name="targetName"></param>
+    /// <returns></returns>
     private ModelAnnotationJson findSubcomponentInJson(ModelAnnotationJson parentAnnotationJson, string targetName)
     {
         ModelAnnotationJson returnValue = null;
@@ -310,7 +406,13 @@ public class AnnotationManager : Singleton<AnnotationManager>
         }
         return returnValue;
     }
-
+    /// <summary>
+    /// updates the changes made to the model annotation json object to the models annotation json file
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="parentJson"></param>
+    /// <param name="targetName"></param>
+    /// <param name="annotation"></param>
     private void updateAnnotationJson(Transform parent, ModelAnnotationJson parentJson,string targetName, AnnotationJson annotation)
     {
         DebugConsole.Instance.LogDebug($"updateing json attempting to find the targetname:{targetName}" +
@@ -340,9 +442,13 @@ public class AnnotationManager : Singleton<AnnotationManager>
         }
         DebugConsole.Instance.LogError($"couldnt find found {targetName}");
     }
-
+    /// <summary>
+    /// Deletes the target annotation message data from the models annotation json file
+    /// </summary>
+    /// <param name="annotationData"></param>
     public void deleteAnnotation(AnnotationJson annotationData)
     {
+        
         //check if we have a currentSelection
         if(!SelectionManager.Instance.currentSelection)
         {
@@ -351,14 +457,14 @@ public class AnnotationManager : Singleton<AnnotationManager>
             return;
         }
         //find the name of the components root predecessor
-        string rootName = SelectionManager.Instance.getCurrentSelectionParent().name;
+        string rootName = SelectionManager.Instance.getSelectionRootTransform().name;
         if (rootName == "")
         {
             DebugConsole.Instance.LogError($"Cannot find root predecessor of {SelectionManager.Instance.currentSelection.name}");
             return;
         }
         //load in the model json
-        string jsonPath = Config.resourcePath + $"{rootName}_Annotation.json";
+        string jsonPath = $"{GlobalConstants.ANNOTATION_DIR}/{rootName}/{rootName}_Annotation.json";
         if(!File.Exists(jsonPath))
         {
             DebugConsole.Instance.LogError($"couldnt find file:{jsonPath}");
@@ -413,10 +519,17 @@ public class AnnotationManager : Singleton<AnnotationManager>
         DebugConsole.Instance.LogDebug($"finished printing annotation authors of current selection");
         //update json
         writeJson(rootJson, jsonPath);
-        //update UIManager
-        UIManager.Instance.updateAnnotations(currentSelection);
+        //update DataPanelManager
+        DataPanelManager.Instance.updateAnnotations(currentSelection);
+       
     }
 
+    /// <summary>
+    /// finds and returns the model component matches the target name
+    /// </summary>
+    /// <param name="currentModelJson"></param>
+    /// <param name="targetName"></param>
+    /// <returns></returns>
     private ModelAnnotationJson findComponent(ModelAnnotationJson currentModelJson,string targetName)
     {
         if(currentModelJson.Name == targetName)
@@ -431,7 +544,12 @@ public class AnnotationManager : Singleton<AnnotationManager>
         }
         return null;
     }
-
+    /// <summary>
+    /// recursive search for the model component matching the target name
+    /// </summary>
+    /// <param name="currentComponent"></param>
+    /// <param name="targetName"></param>
+    /// <param name="target"></param>
     private void findComponent(Transform currentComponent, string targetName, Transform target)
     {
         //check the current components name

@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationPane : ScrollPane
+public class AnimationPane : MonoBehaviour
 {
+    [SerializeField] protected RectTransform contentHolder;
+
     [SerializeField] protected AnimationUI contentPrefab;
     [SerializeField] private bool isActive = false;
     [SerializeField] private Animation currentModelAnimation;
@@ -30,7 +32,7 @@ public class AnimationPane : ScrollPane
         SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
     }
 
-    public override void populateScrollPane()
+    public  void populateScrollPane()
     {
         DebugConsole.Instance.LogDebug("clearing anim pane");
         //clear our scroll pane

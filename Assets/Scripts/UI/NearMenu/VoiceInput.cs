@@ -11,6 +11,7 @@ public enum ButtonState
     STOP,
     DELETE
 }
+/*
 public class VoiceInput : MonoBehaviour, IAnnotationInput
 {
     /// <summary>
@@ -165,7 +166,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //get the current date and time to store in the annotation data
-        string currentDateTime = DateTime.Now.ToString(Config.timeFormat);
+        string currentDateTime = DateTime.Now.ToString(GlobalConstants.timeFormat);
         //format the current datetime so that we can save a file without IO pointing a gun at us
         string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ','-').Replace('/','-');
         //create filename from the componet name + datetime
@@ -173,15 +174,15 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //save audio to file
         SavWav.Save(fileName,currentRecording);
         //tell Annotation manager to create annotation Json
-        AnnotationManager.Instance.createAnnotationJson(
+        AnnotationManager.Instance.createAnnotationJsonObject(
             SelectionManager.Instance.currentSelection.name,
             "Voice",
             "Default Author",// we need to replace this once we have multiple active users
             currentDateTime,
-            $"{Config.resourcePath}/{fileName}.wav"
+            $"{GlobalConstants.ANNOTATION_DIR}/{fileName}.wav"
             );
         //tell the UI manager to update its annotations 
-        UIManager.Instance.updateAnnotations(annotationComponent);
+        DataPanelManager.Instance.updateAnnotations(annotationComponent);
         DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
         //reset content
         resetVoiceInput();
@@ -197,3 +198,4 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         recordBtnIcon.CurrentIconName = "Icon 128";
     }
 }
+*/

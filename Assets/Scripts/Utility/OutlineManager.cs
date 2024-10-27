@@ -4,24 +4,26 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class OutlineManager : MonoBehaviour, SelectionSubcriber
+public class OutlineManager : MonoBehaviour, NewSelectionListener
 {
     // keep track of current outline to disable when new outline is enabled
     private MeshOutlineHierarchy currentOutline;
 
     private void Awake()
     {
-        SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelectionListener);
     }
 
     // on launch assign outline to all models
     void Start()
     {
+        /*
         // subscribe to SelectionManager
         foreach (Transform child in Config.Instance.AllModels)
         {
             recursivelyAddOutline(child);
         }
+        */
     }
 
     // add outline to all components of all objects
@@ -38,9 +40,9 @@ public class OutlineManager : MonoBehaviour, SelectionSubcriber
     }
 
     // whenever new object is selected disable prev outline and enable new outline
-    public void updateSelection(Transform selection)
+    public void onNewSelectionListener(Transform selection)
     {
-        if(currentOutline)
+        if (currentOutline)
         {
             currentOutline.enabled = false;
         }
