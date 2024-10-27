@@ -8,6 +8,9 @@ using System.Net;
 using System.Security.Policy;
 public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListener
 {
+    // colours assigned to players when they join the server.
+    public Color[] playerColours = { Color.blue, Color.red, Color.green, Color.yellow, Color.magenta, Color.black, Color.white, Color.cyan, Color.grey };
+
     private void Awake()
     {
         ApplicationManager.Instance.onPostStartProcess.AddListener(onPostStartup);   
@@ -79,6 +82,10 @@ public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListene
             //set the applications NetworkStatus to online
             ApplicationManager.Instance.setNetworkStatus(NetworkStatus.ONLINE);
 
+            // set client colour, since we are hosting we can take the first colour
+            ClientManager.Instance.setClientColour(playerColours[0]);
+            DebugConsole.Instance.LogDebug($"Client colour is {ClientManager.Instance.getClientColour()}");
+
             return true;
         }
         catch (Exception e) 
@@ -115,6 +122,9 @@ public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListene
             //set the applications NetworkStatus to online
             ApplicationManager.Instance.setNetworkStatus(NetworkStatus.ONLINE);
 
+            // when joining set the client colour, modulo by the length of the array to prevent error when all colours are used
+            ClientManager.Instance.setClientColour(playerColours[(int)NetworkManager.Singleton.LocalClientId % playerColours.Length]);
+            DebugConsole.Instance.LogDebug($"Client colour is {ClientManager.Instance.getClientColour()}");
             return true;
         }
         catch (Exception e)
