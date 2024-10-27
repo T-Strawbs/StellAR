@@ -9,7 +9,7 @@ using System.Security.Policy;
 public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListener
 {
     // colours assigned to players when they join the server.
-    public Color[] playerColours = { Color.blue, Color.red, Color.green, Color.yellow, Color.magenta, Color.black, Color.white, Color.cyan, Color.grey };
+    public Color[] playerColours = { Color.cyan, Color.red, Color.green, Color.yellow, Color.magenta, Color.blue, Color.black, Color.white, Color.grey };
 
     private void Awake()
     {
@@ -82,9 +82,8 @@ public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListene
             //set the applications NetworkStatus to online
             ApplicationManager.Instance.setNetworkStatus(NetworkStatus.ONLINE);
 
-            // set client colour, since we are hosting we can take the first colour
-            ClientManager.Instance.setClientColour(playerColours[0]);
-            DebugConsole.Instance.LogDebug($"Client colour is {ClientManager.Instance.getClientColour()}");
+            // when hosting set the client id
+            ClientManager.Instance.setClientId((int)NetworkManager.Singleton.LocalClientId);
 
             return true;
         }
@@ -122,9 +121,8 @@ public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListene
             //set the applications NetworkStatus to online
             ApplicationManager.Instance.setNetworkStatus(NetworkStatus.ONLINE);
 
-            // when joining set the client colour, modulo by the length of the array to prevent error when all colours are used
-            ClientManager.Instance.setClientColour(playerColours[(int)NetworkManager.Singleton.LocalClientId % playerColours.Length]);
-            DebugConsole.Instance.LogDebug($"Client colour is {ClientManager.Instance.getClientColour()}");
+            // when joining set the client id
+            ClientManager.Instance.setClientId((int)NetworkManager.Singleton.LocalClientId);
             return true;
         }
         catch (Exception e)
