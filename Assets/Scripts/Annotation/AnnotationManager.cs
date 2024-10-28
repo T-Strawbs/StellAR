@@ -345,29 +345,30 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
         return returnValue;
     }
 
-    private void updateAnnotationJson(Transform parent, ModelAnnotationJson parentJson, string targetName, AnnotationJson annotation)
+    private void updateAnnotationJson(Transform current, ModelAnnotationJson currentJson, string targetName, AnnotationJson annotation)
     {
-        DebugConsole.Instance.LogDebug($"updateing json attempting to find the targetname:{targetName}" +
-            $" inside {parent.name}");
+        DebugConsole.Instance.LogDebug($"updating json attempting to find the targetname:{targetName}" +
+            $" inside {current.name}");
 
-        //check if the parents name matches the target name
-        if (parentJson.Name == targetName)
+        //check if the current name matches the target name
+        if (currentJson.Name == targetName)
         {
             DebugConsole.Instance.LogDebug($"found {targetName} so we are adding the annotation");
             //add the annotation to the subcomponent's annotations
-            parentJson.Annotations.Add(annotation);
+            currentJson.Annotations.Add(annotation);
             return;
         }
-        // for each subcomponent in the parent object
-        foreach (ModelAnnotationJson subcomponent in parentJson.Subcomponents)
+
+        // run the search for the target in all levels of the model 
+        foreach (ModelAnnotationJson subcomponent in currentJson.Subcomponents)
         {
-            //find the child of the parent tranform that matches the target name
-            GameObject foundChild = parent.gameObject.GetNamedChild(subcomponent.Name);
-            // if we found a child that matches the corresponding subcomponent name
+            // get the children of the current component and run the search for the target on them
+            Interactable currentInteractable = current.GetComponent<Interactable>();
+            GameObject foundChild = currentInteractable.findNamedChildDirect(subcomponent.Name);
             if (foundChild)
             {
                 DebugConsole.Instance.LogDebug($"found the next child to search from parent:" +
-                    $"{parent.name} to child {foundChild.name}");
+                    $"{current.name} to child {foundChild.name}");
                 //recursively call this method to find where to put the annotation
                 updateAnnotationJson(foundChild.transform, subcomponent, targetName, annotation);
             }

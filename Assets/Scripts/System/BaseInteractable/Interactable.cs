@@ -45,6 +45,24 @@ public abstract class Interactable : MonoBehaviour
         //we didnt find the target
         return null;
     }
+
+    /// <summary>
+    /// Finds a child object by name. Only searches direct children.
+    /// </summary>
+    /// <param name="targetName"></param>
+    /// <returns>Target GameObject if exists, else null if not found.</returns>
+    public GameObject findNamedChildDirect(string targetName)
+    {
+        foreach (Interactable child in this.children)
+        {
+            if (child.gameObject.name == targetName)
+            {
+                return child.gameObject;
+            }
+        }
+        return null;
+    }
+
 }
 
 public enum MeshType { NON_MESH, MESH }
