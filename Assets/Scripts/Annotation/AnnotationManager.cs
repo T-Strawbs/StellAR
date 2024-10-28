@@ -4,15 +4,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantationListener
+public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInstantationListener
 {
     //this allows us to ensure that the annotation json subtypes are accepted
     private JsonSerializerSettings settings;
+    private Dictionary<int, ModelAnnotationJson> modelAnnotationJsons = new Dictionary<int, ModelAnnotationJson>();
+
     private void Awake()
     {
         PrefabManager.Instance.OnPrefabInstantiation.AddListener(onPrefabInstantiation);
@@ -29,9 +32,30 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
         createAnnotationMainDirectory();
     }
 
+    /// <summary>
+    /// Called when prefabs are instantiated
+    /// </summary>
+    /// <param name="instance">Newly instantiated object</param>
     public void onPrefabInstantiation(GameObject instance)
     {
-        initialiseAnnotations(instance);
+        // if application is in offline mode initialise annotation data normally
+        if(!ApplicationManager.Instance.isOnline())
+        {
+            initialiseAnnotations(instance);
+        }
+        else
+        {
+            // if application is online and client is hosting, initialise annotation data normally then send to clients over the network
+            if(NetworkManager.Singleton.IsHost)
+            {
+                initialiseAnnotations(instance);
+            }
+            else
+            {
+                // else you are a client, and you need to request annotation data from server
+                requestAnnotationDataFromServerRpc(NetworkManager.Singleton.LocalClientId, instance.GetComponent<MessageBasedInteractable>().lookupData.parentKey);
+            }
+        }
     }
 
     private void createAnnotationMainDirectory()
@@ -69,7 +93,7 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
             string annotationJson = File.ReadAllText(jsonPath);
             //deserialise the data from json into usable objects
             parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson, settings);
-            //Populate The models GO with the Json Data
+            //Populate The model's GO with the Json Data
             populateAnnotationDataFromJson(prefabInstance.transform, parentAnnotationJson);
             //write to json to update the content incase the model has changed
             writeJson(parentAnnotationJson, jsonPath);
@@ -80,6 +104,13 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
             createAnnotationJson(prefabInstance.transform, parentAnnotationJson);
             //write annoation data out to file
             writeJson(parentAnnotationJson, jsonPath);
+        }
+
+        // if prefab is a network prefab add the created ModelAnnotationJson to dictionary for lookup when requested by clients via Rcp
+        MessageBasedInteractable messageBasedInteractable = prefabInstance.GetComponent<MessageBasedInteractable>();
+        if(messageBasedInteractable != null)
+        {
+            modelAnnotationJsons.Add(messageBasedInteractable.lookupData.parentKey, parentAnnotationJson);
         }
     }
 
@@ -118,11 +149,7 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
                 parentComponent.Subcomponents.Remove(subcomponent);
                 continue;
             }
-            /*
-            //populate the subcomponent with the Annotation data from the JSON
-            AnnotationComponent subcomponentAnnotations = foundChild.AddComponent<AnnotationComponent>();
-            subcomponentAnnotations.Annotations = subcomponent.Annotations;
-            */
+
             // remove JSON linked subcomponent from list
             subcomponentTransforms.Remove(foundChild.transform);
 
@@ -189,25 +216,13 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
         {
             DebugConsole.Instance.LogDebug($"created TextAnnotation for {componentName}");
             //create a new serialisble text annotation object and populate it with the params
-            annotationJson = new TextAnnotationJson
-            {
-                ComponentName = componentName,
-                Author = author,
-                Timestamp = dateTime,
-                Content = content
-            };
+            annotationJson = new TextAnnotationJson(componentName, author, dateTime, content);
         }
         else if (messageType == "Voice")
         {
             DebugConsole.Instance.LogDebug($"created VoiceAnnotation for {componentName}");
             //create a new serialisble voice annotation object and populate it with the params
-            annotationJson = new VoiceAnnotationJson
-            {
-                ComponentName = componentName,
-                Author = author,
-                Timestamp = dateTime,
-                AudioPath = content
-            };
+            annotationJson = new VoiceAnnotationJson(componentName, author, dateTime, content);
 
         }
         else
@@ -221,7 +236,7 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
     }
 
     /// <summary>
-    /// The ERROR IS OCCURING HERE
+    /// Add input annotation object to the root parent model's Json in memory and on disk
     /// </summary>
     /// <param name="annotation"></param>
     private void addAnnotationToJson(AnnotationJson annotation)
@@ -260,15 +275,15 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
             return;
         }
         DebugConsole.Instance.LogDebug($"file exists:{fileName} to write an annotation for {annotation.ComponentName}");
-        //get the json content
+        //load json file
         string annotationJson = File.ReadAllText(fileName);
         DebugConsole.Instance.LogDebug($"loading file content:{fileName}");
-        //get the deserialised json object from the content
+        //deserialised json into memory
         ModelAnnotationJson parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson);
-        //update the json object to now include the new annotation
+        //update the json object in memory to now include the new annotation
         updateAnnotationJson(currentSelectionParent, parentAnnotationJson, currentSelection.name, annotation);
         DebugConsole.Instance.LogDebug($"Attempting to write to json to {fileName} for component {annotation.ComponentName} under model {currentSelectionParent} ");
-        //write to the json file
+        //write json object from memory to the json file on disk
         writeJson(parentAnnotationJson, fileName);
     }
 
@@ -486,5 +501,31 @@ public class AnnotationManager : Singleton<AnnotationManager>, PrefabInstantatio
 
     }
 
-    
+    // executes on the server to return annotation data associated with the key
+    [Rpc(SendTo.Server)]
+    private void requestAnnotationDataFromServerRpc(ulong clientId, int modelParentKey)
+    {
+        NetworkModelAnnotationJson networkAnnotation = new NetworkModelAnnotationJson(modelAnnotationJsons[modelParentKey]);
+
+        // send converted network model annotation data over the network to all clients
+        sentAnnotationDataToClientRpc(modelParentKey, networkAnnotation, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+    }
+
+    /// <summary>
+    /// Called from the server/host in response to clients calling requestAnnotationDataFromServer() to send annotation data
+    /// </summary>
+    /// <param name="modelParentKey">The key used to identify which model the annotation data is for via MessageBasedInstanceManager.Instance.lookupNetworkInteractable()</param>
+    /// <param name="networkAnnotationData">The annotation data used to populate the spawned prefab</param>
+    /// <param name="rpcParams"></param>
+    [Rpc(SendTo.SpecifiedInParams)]
+    private void sentAnnotationDataToClientRpc(int modelParentKey, NetworkModelAnnotationJson networkAnnotationData, RpcParams rpcParams = default)
+    {
+        // get the model instance that the received annotation data is for, can enter 0 as object index as parent will always be index 0
+        MessageBasedInteractable modelToPopulate = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(modelParentKey, 0);
+        DebugConsole.Instance.LogError($"Found model with network lookup: {modelToPopulate.name}");
+
+        // convert network annotation data to model annotation data and populate model with data
+        ModelAnnotationJson modelAnnotation = new ModelAnnotationJson(networkAnnotationData);
+        populateAnnotationDataFromJson(modelToPopulate.transform, modelAnnotation);
+    }
 }

@@ -26,7 +26,6 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
     private void initialseMetadata(List<GameObject> loadedPrefabs)
     {
         List<MetadataJson> allModels = new List<MetadataJson>();
-        DebugConsole.Instance.LogDebug($"ABOUT TO LOAD METADATA");
 
         // Loop over all models
         foreach (GameObject prefab in loadedPrefabs)
@@ -47,9 +46,6 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
              * NOTE: If the prefab architecture changes, the existing JSON will need to be deleted to create
              *          an accurate representation of the new architecture.
              */
-
-            DebugConsole.Instance.LogDebug($"ATTEMPTING TO LOAD METADATA FOR {prefab.name}");
-
             string jsonFilePath = GlobalConstants.METADATA_DIR + prefab.name + "_Metadata.json";
             if(File.Exists(jsonFilePath))
             {
@@ -58,25 +54,22 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
                 parentModel = JsonConvert.DeserializeObject<MetadataJson>(modelJson);
                 addMetadataFromJson(prefab.transform, parentModel);
                 writeJSON(parentModel);
-                DebugConsole.Instance.LogDebug($"Found METADATA FOR {prefab.name}");
             }
             else
             {
-                DebugConsole.Instance.LogDebug($"Couldnt find METADATA for {prefab.name}, should be creating some");
                 // if JSON doesn't exist create fresh JSON template
                 createModelJson(prefab.transform, parentModel);
                 allModels.Add(parentModel);
                 writeJSON(parentModel);
             }
         }
-        DebugConsole.Instance.LogDebug($"Finished loading METADATA");
+
     }
 
     void writeJSON(MetadataJson model)
     {
         string jsonFilePath = GlobalConstants.METADATA_DIR + model.name + "_Metadata.json";
         File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(model, Formatting.Indented));
-        DebugConsole.Instance.LogDebug($"Shouldve written metadata for {model.name}");
 
     }
 

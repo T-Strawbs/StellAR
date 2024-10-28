@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3435906423903104750}
   - component: {fileID: 4766977015247274870}
   - component: {fileID: 4440714454359018403}
-  - component: {fileID: 2120715138871533241}
+  - component: {fileID: 8717563187098694226}
   m_Layer: 0
   m_Name: PanelHinge.003
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2120715138871533241
+--- !u!114 &8717563187098694226
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 221657925458391299}
   - component: {fileID: 367241967062782246}
   - component: {fileID: 1827848397204176295}
-  - component: {fileID: -8778376376967849063}
+  - component: {fileID: -5193168135039999528}
   m_Layer: 0
   m_Name: PanelHinge.001
   m_TagString: Untagged
@@ -183,7 +183,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8778376376967849063
+--- !u!114 &-5193168135039999528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 6983252113100910127}
   - component: {fileID: -2929404490965020693}
   - component: {fileID: -5238720102267731019}
-  - component: {fileID: 2390888558672585220}
+  - component: {fileID: -1876258436492806247}
   m_Layer: 0
   m_Name: SolarPanel
   m_TagString: Untagged
@@ -223,7 +223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: -8699986766376055851}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.50000644, y: -0.49999353, z: 0.49999762, w: 0.5000024}
+  m_LocalRotation: {x: 0.4990974, y: -0.5009089, z: 0.49908543, w: 0.50090504}
   m_LocalPosition: {x: -39.43611, y: -0.007314682, z: -3.2637346}
   m_LocalScale: {x: 6.1777444, y: 38.610897, z: 0.5515844}
   m_ConstrainProportionsScale: 0
@@ -281,7 +281,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2390888558672585220
+--- !u!114 &-1876258436492806247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 1549097166791216933}
   - component: {fileID: 829444553510114700}
   - component: {fileID: -6439182873674302141}
-  - component: {fileID: 5788758105108817690}
+  - component: {fileID: -1829448821019915158}
   m_Layer: 0
   m_Name: Guide.002
   m_TagString: Untagged
@@ -378,7 +378,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5788758105108817690
+--- !u!114 &-1829448821019915158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 771220006063807299}
   - component: {fileID: -2327468199986201954}
   - component: {fileID: 3285309000848402654}
-  - component: {fileID: -8577055694462574576}
+  - component: {fileID: -4140230890740221267}
   m_Layer: 0
   m_Name: SolarPanel.007
   m_TagString: Untagged
@@ -418,7 +418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: -8490972638349250545}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5000072, y: -0.49999276, z: 0.49999738, w: 0.5000026}
+  m_LocalRotation: {x: 0.49926433, y: -0.5007433, z: 0.49925086, w: 0.5007394}
   m_LocalPosition: {x: -39.43617, y: -0.007331252, z: -3.2637348}
   m_LocalScale: {x: 6.1777444, y: 38.6109, z: 0.55158436}
   m_ConstrainProportionsScale: 0
@@ -476,7 +476,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8577055694462574576
+--- !u!114 &-4140230890740221267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 5433290336160465664}
   - component: {fileID: -5003365141146975319}
   - component: {fileID: 1315698265948729579}
-  - component: {fileID: 8241051920845288080}
+  - component: {fileID: -2435702977016272692}
   m_Layer: 0
   m_Name: PanelHinge.009
   m_TagString: Untagged
@@ -574,7 +574,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8241051920845288080
+--- !u!114 &-2435702977016272692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 988295107164480253}
   - component: {fileID: 1210415451519387537}
   - component: {fileID: -7594826473408125367}
-  - component: {fileID: 4398156420342881583}
+  - component: {fileID: -2953222435212218480}
   m_Layer: 0
   m_Name: SolarPanel.001
   m_TagString: Untagged
@@ -614,7 +614,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: -7167325436594995997}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5000072, y: -0.49999276, z: 0.49999738, w: 0.5000026}
+  m_LocalRotation: {x: 0.49926433, y: -0.5007433, z: 0.49925086, w: 0.5007394}
   m_LocalPosition: {x: -39.43613, y: -0.0073240995, z: -3.2637348}
   m_LocalScale: {x: 6.1777444, y: 38.610893, z: 0.5515844}
   m_ConstrainProportionsScale: 0
@@ -672,7 +672,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4398156420342881583
+--- !u!114 &-2953222435212218480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 5065192512316902738}
   - component: {fileID: -5579059442187481080}
   - component: {fileID: 6667410372431360891}
-  - component: {fileID: 7091233359338145011}
+  - component: {fileID: 9101558207803642357}
   m_Layer: 0
   m_Name: Krypton tank
   m_TagString: Untagged
@@ -769,7 +769,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7091233359338145011
+--- !u!114 &9101558207803642357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -791,7 +791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2536504395111007615}
-  - component: {fileID: -5354984289973947244}
+  - component: {fileID: 2406748994471382296}
   m_Layer: 0
   m_Name: Bone.010
   m_TagString: Untagged
@@ -816,7 +816,7 @@ Transform:
   - {fileID: 6920323474579818601}
   m_Father: {fileID: 5419046724448274515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5354984289973947244
+--- !u!114 &2406748994471382296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -838,7 +838,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: -997665979000770847}
-  - component: {fileID: 942154022813849888}
+  - component: {fileID: -5497727034665293497}
   m_Layer: 0
   m_Name: Bone.003
   m_TagString: Untagged
@@ -863,7 +863,7 @@ Transform:
   - {fileID: 3435906423903104750}
   m_Father: {fileID: 3890257973448788102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &942154022813849888
+--- !u!114 &-5497727034665293497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -887,7 +887,7 @@ GameObject:
   - component: {fileID: 5472576998106990497}
   - component: {fileID: -6475856366940159458}
   - component: {fileID: -8061672107212213779}
-  - component: {fileID: -6521782510165302646}
+  - component: {fileID: 3540415949977356501}
   m_Layer: 0
   m_Name: AntennaHinge
   m_TagString: Untagged
@@ -962,7 +962,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-6521782510165302646
+--- !u!114 &3540415949977356501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -984,7 +984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: -7790067399059437749}
-  - component: {fileID: -5840782325430393145}
+  - component: {fileID: 2273014505076630482}
   m_Layer: 0
   m_Name: Bone.011
   m_TagString: Untagged
@@ -1009,7 +1009,7 @@ Transform:
   - {fileID: -7368538251469002637}
   m_Father: {fileID: 2536504395111007615}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5840782325430393145
+--- !u!114 &2273014505076630482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1033,7 +1033,7 @@ GameObject:
   - component: {fileID: -3309869520838662573}
   - component: {fileID: 937747091737111749}
   - component: {fileID: 4004092263488106433}
-  - component: {fileID: -1062666688647414700}
+  - component: {fileID: 5349691785610771580}
   m_Layer: 0
   m_Name: Krypton Thruster.001
   m_TagString: Untagged
@@ -1107,7 +1107,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1062666688647414700
+--- !u!114 &5349691785610771580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1131,7 +1131,7 @@ GameObject:
   - component: {fileID: -3324658199390492874}
   - component: {fileID: 8730206140362373526}
   - component: {fileID: -5727050064527946520}
-  - component: {fileID: -2388486331347273526}
+  - component: {fileID: 7577295081196226711}
   m_Layer: 0
   m_Name: Guide
   m_TagString: Untagged
@@ -1204,7 +1204,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-2388486331347273526
+--- !u!114 &7577295081196226711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1226,7 +1226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5862477954186705105}
-  - component: {fileID: 2513917123142544332}
+  - component: {fileID: -3569630978305959501}
   m_Layer: 0
   m_Name: Bone.011_end
   m_TagString: Untagged
@@ -1249,7 +1249,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: -7790067399059437749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2513917123142544332
+--- !u!114 &-3569630978305959501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1273,7 +1273,7 @@ GameObject:
   - component: {fileID: 4276302332875787514}
   - component: {fileID: 2461040058281744558}
   - component: {fileID: 3495089086290828962}
-  - component: {fileID: -8251512476011061433}
+  - component: {fileID: -3834111928298690508}
   m_Layer: 0
   m_Name: Cube.012
   m_TagString: Untagged
@@ -1346,7 +1346,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8251512476011061433
+--- !u!114 &-3834111928298690508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1368,7 +1368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: -4128383740851021839}
-  - component: {fileID: -3785582822109770166}
+  - component: {fileID: 916254443596874680}
   m_Layer: 0
   m_Name: Armature.001
   m_TagString: Untagged
@@ -1392,7 +1392,7 @@ Transform:
   - {fileID: 3164982295968437048}
   m_Father: {fileID: -8679921383154817045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3785582822109770166
+--- !u!114 &916254443596874680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1416,7 +1416,7 @@ GameObject:
   - component: {fileID: -4470790064062342450}
   - component: {fileID: 5905173164631186178}
   - component: {fileID: -7892265685925142688}
-  - component: {fileID: -5612870572382868462}
+  - component: {fileID: -8745509642983496474}
   m_Layer: 0
   m_Name: PanelHinge.005
   m_TagString: Untagged
@@ -1490,7 +1490,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-5612870572382868462
+--- !u!114 &-8745509642983496474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1512,7 +1512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8096501162788568855}
-  - component: {fileID: 3298407729877408335}
+  - component: {fileID: -9126262816486446395}
   m_Layer: 0
   m_Name: Bone.001
   m_TagString: Untagged
@@ -1537,7 +1537,7 @@ Transform:
   - {fileID: 221657925458391299}
   m_Father: {fileID: 3164982295968437048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3298407729877408335
+--- !u!114 &-9126262816486446395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1559,7 +1559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: -8647468684585124290}
-  - component: {fileID: 2647644450525028073}
+  - component: {fileID: 8477151879821849379}
   m_Layer: 0
   m_Name: Bone.007
   m_TagString: Untagged
@@ -1584,7 +1584,7 @@ Transform:
   - {fileID: -3811656383677521517}
   m_Father: {fileID: 8969259018332332023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2647644450525028073
+--- !u!114 &8477151879821849379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1608,7 +1608,7 @@ GameObject:
   - component: {fileID: -4525390669763089755}
   - component: {fileID: 4262170580428239927}
   - component: {fileID: -6894460748369598076}
-  - component: {fileID: -2742340939715133920}
+  - component: {fileID: -8909912502572140459}
   m_Layer: 0
   m_Name: SolarPanel.004
   m_TagString: Untagged
@@ -1624,7 +1624,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: -3581252038330417664}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.50000644, y: -0.49999353, z: 0.49999762, w: 0.5000024}
+  m_LocalRotation: {x: 0.4990974, y: -0.5009089, z: 0.49908543, w: 0.50090504}
   m_LocalPosition: {x: -39.436096, y: -0.007335663, z: -3.2637353}
   m_LocalScale: {x: 6.1777444, y: 38.610897, z: 0.5515844}
   m_ConstrainProportionsScale: 0
@@ -1682,7 +1682,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-2742340939715133920
+--- !u!114 &-8909912502572140459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1704,7 +1704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: -6005692700215558579}
-  - component: {fileID: -334145793192206134}
+  - component: {fileID: 8396742415349562403}
   m_Layer: 0
   m_Name: Bone.004
   m_TagString: Untagged
@@ -1729,7 +1729,7 @@ Transform:
   - {fileID: -1998745178009521233}
   m_Father: {fileID: -997665979000770847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-334145793192206134
+--- !u!114 &8396742415349562403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1753,7 +1753,7 @@ GameObject:
   - component: {fileID: 4248218677506518191}
   - component: {fileID: -9135492996919933216}
   - component: {fileID: -3933690881802706404}
-  - component: {fileID: -7440179567585896906}
+  - component: {fileID: -8172687530905180319}
   m_Layer: 0
   m_Name: X.002
   m_TagString: Untagged
@@ -1826,7 +1826,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-7440179567585896906
+--- !u!114 &-8172687530905180319
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1850,7 +1850,7 @@ GameObject:
   - component: {fileID: -3791695392858611712}
   - component: {fileID: -5849469807113719009}
   - component: {fileID: -4528739162441670258}
-  - component: {fileID: 6973448496991497596}
+  - component: {fileID: -8013804485913074318}
   m_Layer: 0
   m_Name: PanelHinge
   m_TagString: Untagged
@@ -1924,7 +1924,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6973448496991497596
+--- !u!114 &-8013804485913074318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1946,7 +1946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3244681168862865977}
-  - component: {fileID: 1596872515260894625}
+  - component: {fileID: -6563468341812044786}
   m_Layer: 0
   m_Name: Bone.005
   m_TagString: Untagged
@@ -1971,7 +1971,7 @@ Transform:
   - {fileID: -4470790064062342450}
   m_Father: {fileID: -6005692700215558579}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1596872515260894625
+--- !u!114 &-6563468341812044786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1995,7 +1995,7 @@ GameObject:
   - component: {fileID: 5096553852031839657}
   - component: {fileID: -4256271478086921827}
   - component: {fileID: -3250349602095367975}
-  - component: {fileID: 8352487568377083894}
+  - component: {fileID: 133285368531306747}
   m_Layer: 0
   m_Name: Krypton Thruster.002
   m_TagString: Untagged
@@ -2068,7 +2068,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8352487568377083894
+--- !u!114 &133285368531306747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2092,7 +2092,7 @@ GameObject:
   - component: {fileID: 6779028227623050596}
   - component: {fileID: -5970452858302281761}
   - component: {fileID: 6017040031001366953}
-  - component: {fileID: -932286597380649640}
+  - component: {fileID: -8910448152198370386}
   m_Layer: 0
   m_Name: Startracker.002
   m_TagString: Untagged
@@ -2165,7 +2165,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-932286597380649640
+--- !u!114 &-8910448152198370386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2189,7 +2189,7 @@ GameObject:
   - component: {fileID: 6092578986933405934}
   - component: {fileID: 5895153987516505184}
   - component: {fileID: 7556870713477978022}
-  - component: {fileID: 5398581374338193948}
+  - component: {fileID: -442645692687219783}
   m_Layer: 0
   m_Name: PanelHinge.002
   m_TagString: Untagged
@@ -2263,7 +2263,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5398581374338193948
+--- !u!114 &-442645692687219783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2287,7 +2287,7 @@ GameObject:
   - component: {fileID: 8613517927202812387}
   - component: {fileID: 5899304746556548763}
   - component: {fileID: -3111786203204272058}
-  - component: {fileID: -8911390210299990422}
+  - component: {fileID: 6536275269193091377}
   m_Layer: 0
   m_Name: PanelHinge.008
   m_TagString: Untagged
@@ -2361,7 +2361,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8911390210299990422
+--- !u!114 &6536275269193091377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2385,7 +2385,7 @@ GameObject:
   - component: {fileID: 5007743978852585236}
   - component: {fileID: 7381355410593416156}
   - component: {fileID: 2491365539549627277}
-  - component: {fileID: -6562309703374584642}
+  - component: {fileID: -9051807760344334383}
   m_Layer: 0
   m_Name: Communication Antenna
   m_TagString: Untagged
@@ -2458,7 +2458,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-6562309703374584642
+--- !u!114 &-9051807760344334383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2482,7 +2482,7 @@ GameObject:
   - component: {fileID: 1404423557371099187}
   - component: {fileID: 5007129481306414368}
   - component: {fileID: 9139940400065799256}
-  - component: {fileID: -8552103275051788272}
+  - component: {fileID: -3663886479706239644}
   m_Layer: 0
   m_Name: AntennaHinge.001
   m_TagString: Untagged
@@ -2557,7 +2557,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8552103275051788272
+--- !u!114 &-3663886479706239644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2581,7 +2581,7 @@ GameObject:
   - component: {fileID: -6330194155851253802}
   - component: {fileID: -3577923205354605946}
   - component: {fileID: -129888367746651850}
-  - component: {fileID: 8649609814770431953}
+  - component: {fileID: 3604876077738558954}
   m_Layer: 0
   m_Name: Startracker
   m_TagString: Untagged
@@ -2654,7 +2654,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8649609814770431953
+--- !u!114 &3604876077738558954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2678,7 +2678,7 @@ GameObject:
   - component: {fileID: -2966800031176611883}
   - component: {fileID: 2633905139037327951}
   - component: {fileID: 5889838532311395280}
-  - component: {fileID: -3316154751706184611}
+  - component: {fileID: 4653108881536607775}
   m_Layer: 0
   m_Name: Reaction Wheel.005
   m_TagString: Untagged
@@ -2751,7 +2751,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-3316154751706184611
+--- !u!114 &4653108881536607775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2773,7 +2773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: -2551826711846063250}
-  - component: {fileID: -1677190123458750318}
+  - component: {fileID: 5097354891135967337}
   m_Layer: 0
   m_Name: Bone.008
   m_TagString: Untagged
@@ -2798,7 +2798,7 @@ Transform:
   - {fileID: 8613517927202812387}
   m_Father: {fileID: -8647468684585124290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1677190123458750318
+--- !u!114 &5097354891135967337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2822,7 +2822,7 @@ GameObject:
   - component: {fileID: 5556108356276076073}
   - component: {fileID: 8634543927512630971}
   - component: {fileID: -2361287665808879237}
-  - component: {fileID: -8651653535069973819}
+  - component: {fileID: -5827153365721779285}
   m_Layer: 0
   m_Name: Communication Antenna.001
   m_TagString: Untagged
@@ -2895,7 +2895,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8651653535069973819
+--- !u!114 &-5827153365721779285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2917,7 +2917,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: -8679921383154817045}
-  - component: {fileID: -2381077419874648664}
+  - component: {fileID: -6487983485546980197}
   m_Layer: 0
   m_Name: Starlink_v1
   m_TagString: Untagged
@@ -2959,7 +2959,7 @@ Transform:
   - {fileID: 4248218677506518191}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2381077419874648664
+--- !u!114 &-6487983485546980197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2983,7 +2983,7 @@ GameObject:
   - component: {fileID: 9176171868946761650}
   - component: {fileID: -4859235496699979245}
   - component: {fileID: -4973849185324391185}
-  - component: {fileID: -2261973178514900962}
+  - component: {fileID: -9214759366775173636}
   m_Layer: 0
   m_Name: SolarPanel.008
   m_TagString: Untagged
@@ -2999,7 +2999,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137998245458320470}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.50000644, y: -0.49999356, z: 0.49999753, w: 0.5000025}
+  m_LocalRotation: {x: 0.5001881, y: -0.49981984, z: 0.5001761, w: 0.499816}
   m_LocalPosition: {x: -39.43597, y: -0.007311821, z: -3.2637348}
   m_LocalScale: {x: 6.1777444, y: 38.6109, z: 0.55158436}
   m_ConstrainProportionsScale: 0
@@ -3057,7 +3057,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-2261973178514900962
+--- !u!114 &-9214759366775173636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3081,7 +3081,7 @@ GameObject:
   - component: {fileID: 1707973725998271731}
   - component: {fileID: -2652487823660608422}
   - component: {fileID: -4228628773122593474}
-  - component: {fileID: -4887347556506102356}
+  - component: {fileID: 2944666060630970179}
   m_Layer: 0
   m_Name: SolarPanel.002
   m_TagString: Untagged
@@ -3097,7 +3097,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735347645342975281}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.50000644, y: -0.49999356, z: 0.49999753, w: 0.5000025}
+  m_LocalRotation: {x: 0.5001881, y: -0.49981984, z: 0.5001761, w: 0.499816}
   m_LocalPosition: {x: -39.43609, y: -0.007311821, z: -3.2637346}
   m_LocalScale: {x: 6.1777444, y: 38.61089, z: 0.5515844}
   m_ConstrainProportionsScale: 0
@@ -3155,7 +3155,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-4887347556506102356
+--- !u!114 &2944666060630970179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3179,7 +3179,7 @@ GameObject:
   - component: {fileID: 2512849181013477542}
   - component: {fileID: -4838430424710102055}
   - component: {fileID: -744295040134135093}
-  - component: {fileID: -5482994720267425276}
+  - component: {fileID: -5489766127019430919}
   m_Layer: 0
   m_Name: SolarPanel.011
   m_TagString: Untagged
@@ -3195,7 +3195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739826287403820499}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5000072, y: -0.49999276, z: 0.49999738, w: 0.5000026}
+  m_LocalRotation: {x: 0.49926433, y: -0.5007433, z: 0.49925086, w: 0.5007394}
   m_LocalPosition: {x: -39.436066, y: -0.007357359, z: -3.2637348}
   m_LocalScale: {x: 6.177744, y: 38.6109, z: 0.5515844}
   m_ConstrainProportionsScale: 0
@@ -3253,7 +3253,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-5482994720267425276
+--- !u!114 &-5489766127019430919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3277,7 +3277,7 @@ GameObject:
   - component: {fileID: -8398913566474944097}
   - component: {fileID: 4020161192121044023}
   - component: {fileID: -1701852469684772084}
-  - component: {fileID: -1027028421984996117}
+  - component: {fileID: -4985051563127802437}
   m_Layer: 0
   m_Name: Reaction Wheel.003
   m_TagString: Untagged
@@ -3350,7 +3350,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1027028421984996117
+--- !u!114 &-4985051563127802437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3372,7 +3372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8969259018332332023}
-  - component: {fileID: 1041315408605455460}
+  - component: {fileID: 8095978630627156213}
   m_Layer: 0
   m_Name: Bone.006
   m_TagString: Untagged
@@ -3397,7 +3397,7 @@ Transform:
   - {fileID: 6331776519827715113}
   m_Father: {fileID: 3244681168862865977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1041315408605455460
+--- !u!114 &8095978630627156213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3421,7 +3421,7 @@ GameObject:
   - component: {fileID: 5508567364518493120}
   - component: {fileID: 51667223132761661}
   - component: {fileID: 6955452337808503453}
-  - component: {fileID: 4494221290710044952}
+  - component: {fileID: 8169143398244581304}
   m_Layer: 0
   m_Name: SolarPanel.010
   m_TagString: Untagged
@@ -3437,7 +3437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2332577866528075946}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.500006, y: -0.49999398, z: 0.49999508, w: 0.50000495}
+  m_LocalRotation: {x: 0.49848208, y: -0.50152415, z: 0.49847013, w: 0.5015144}
   m_LocalPosition: {x: -39.436092, y: -0.007320404, z: -3.2637348}
   m_LocalScale: {x: 6.177744, y: 38.610897, z: 0.55158436}
   m_ConstrainProportionsScale: 0
@@ -3495,7 +3495,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4494221290710044952
+--- !u!114 &8169143398244581304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3519,7 +3519,7 @@ GameObject:
   - component: {fileID: -2438073720147042167}
   - component: {fileID: -5172692482588815634}
   - component: {fileID: -162008194100951201}
-  - component: {fileID: -1551059473249404444}
+  - component: {fileID: -4780753743402264011}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3592,7 +3592,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1551059473249404444
+--- !u!114 &-4780753743402264011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3614,7 +3614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5419046724448274515}
-  - component: {fileID: 3621909223880403094}
+  - component: {fileID: -4615166495653327550}
   m_Layer: 0
   m_Name: Bone.009
   m_TagString: Untagged
@@ -3639,7 +3639,7 @@ Transform:
   - {fileID: 5433290336160465664}
   m_Father: {fileID: -2551826711846063250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3621909223880403094
+--- !u!114 &-4615166495653327550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3661,7 +3661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3890257973448788102}
-  - component: {fileID: 8656810761325869489}
+  - component: {fileID: -8615086768480819582}
   m_Layer: 0
   m_Name: Bone.002
   m_TagString: Untagged
@@ -3686,7 +3686,7 @@ Transform:
   - {fileID: 6092578986933405934}
   m_Father: {fileID: 8096501162788568855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8656810761325869489
+--- !u!114 &-8615086768480819582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3710,7 +3710,7 @@ GameObject:
   - component: {fileID: 3636368654377725604}
   - component: {fileID: 6259459568954752715}
   - component: {fileID: -1665458619022461162}
-  - component: {fileID: -8443685865757782865}
+  - component: {fileID: -4338594538998202086}
   m_Layer: 0
   m_Name: SolarPanel.003
   m_TagString: Untagged
@@ -3726,7 +3726,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4596712520879469649}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5000072, y: -0.49999276, z: 0.49999738, w: 0.5000026}
+  m_LocalRotation: {x: 0.49926433, y: -0.5007433, z: 0.49925086, w: 0.5007394}
   m_LocalPosition: {x: -39.436115, y: -0.0073355436, z: -3.2637353}
   m_LocalScale: {x: 6.1777444, y: 38.610905, z: 0.5515844}
   m_ConstrainProportionsScale: 0
@@ -3784,7 +3784,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8443685865757782865
+--- !u!114 &-4338594538998202086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3808,7 +3808,7 @@ GameObject:
   - component: {fileID: -6156556831095194174}
   - component: {fileID: -1429454905864738483}
   - component: {fileID: 331758154669911070}
-  - component: {fileID: 3584593232038085572}
+  - component: {fileID: 8892209124424606033}
   m_Layer: 0
   m_Name: SolarPanel.009
   m_TagString: Untagged
@@ -3824,7 +3824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5407479216185011511}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5000073, y: -0.49999273, z: 0.49999735, w: 0.5000027}
+  m_LocalRotation: {x: 0.49941754, y: -0.50059044, z: 0.49940407, w: 0.50058657}
   m_LocalPosition: {x: -39.43607, y: -0.0073280334, z: -3.2637348}
   m_LocalScale: {x: 6.177745, y: 38.6109, z: 0.5515845}
   m_ConstrainProportionsScale: 0
@@ -3882,7 +3882,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3584593232038085572
+--- !u!114 &8892209124424606033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3906,7 +3906,7 @@ GameObject:
   - component: {fileID: 4951313197634599001}
   - component: {fileID: -901298625649044404}
   - component: {fileID: -6103613198449448589}
-  - component: {fileID: -7619606072633996270}
+  - component: {fileID: 5834564909563400239}
   m_Layer: 0
   m_Name: Bus
   m_TagString: Untagged
@@ -3979,7 +3979,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-7619606072633996270
+--- !u!114 &5834564909563400239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4003,7 +4003,7 @@ GameObject:
   - component: {fileID: 854675470277640528}
   - component: {fileID: 2019852325065075550}
   - component: {fileID: -3973377668496807967}
-  - component: {fileID: -1040668343569653260}
+  - component: {fileID: 8526351602392773189}
   m_Layer: 0
   m_Name: Krypton Thruster
   m_TagString: Untagged
@@ -4076,7 +4076,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1040668343569653260
+--- !u!114 &8526351602392773189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4100,7 +4100,7 @@ GameObject:
   - component: {fileID: -386447896401691170}
   - component: {fileID: -2382422403117806408}
   - component: {fileID: 3579694116840599883}
-  - component: {fileID: -8774089883219981861}
+  - component: {fileID: -9154459406045725781}
   m_Layer: 0
   m_Name: Krypton Thruster.003
   m_TagString: Untagged
@@ -4173,7 +4173,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8774089883219981861
+--- !u!114 &-9154459406045725781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4197,7 +4197,7 @@ GameObject:
   - component: {fileID: 6920323474579818601}
   - component: {fileID: 2953110661716042923}
   - component: {fileID: -8919947646250758632}
-  - component: {fileID: -7653937971477754462}
+  - component: {fileID: -8976424486938266840}
   m_Layer: 0
   m_Name: PanelHinge.010
   m_TagString: Untagged
@@ -4271,7 +4271,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-7653937971477754462
+--- !u!114 &-8976424486938266840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4295,7 +4295,7 @@ GameObject:
   - component: {fileID: -7913209568781480005}
   - component: {fileID: 8058845094207909618}
   - component: {fileID: -5627134340510756202}
-  - component: {fileID: 1431146502040216517}
+  - component: {fileID: 5097082286243423030}
   m_Layer: 0
   m_Name: Guide.001
   m_TagString: Untagged
@@ -4368,7 +4368,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1431146502040216517
+--- !u!114 &5097082286243423030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4390,7 +4390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3164982295968437048}
-  - component: {fileID: -141618607891032943}
+  - component: {fileID: 6077300540518280143}
   m_Layer: 0
   m_Name: Bone
   m_TagString: Untagged
@@ -4415,7 +4415,7 @@ Transform:
   - {fileID: -3791695392858611712}
   m_Father: {fileID: -4128383740851021839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-141618607891032943
+--- !u!114 &6077300540518280143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4439,7 +4439,7 @@ GameObject:
   - component: {fileID: -8929485517576345839}
   - component: {fileID: 6489049935408013742}
   - component: {fileID: -8100876164129981125}
-  - component: {fileID: 2393018566363090918}
+  - component: {fileID: 1554641791688368323}
   m_Layer: 0
   m_Name: Reaction Wheel
   m_TagString: Untagged
@@ -4512,7 +4512,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2393018566363090918
+--- !u!114 &1554641791688368323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4536,7 +4536,7 @@ GameObject:
   - component: {fileID: -4863501097446238460}
   - component: {fileID: 8662092206684552493}
   - component: {fileID: 3815611271814633992}
-  - component: {fileID: -8746621051531491456}
+  - component: {fileID: 6917725798982568174}
   m_Layer: 0
   m_Name: Reaction Wheel.001
   m_TagString: Untagged
@@ -4609,7 +4609,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8746621051531491456
+--- !u!114 &6917725798982568174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4633,7 +4633,7 @@ GameObject:
   - component: {fileID: -3811656383677521517}
   - component: {fileID: 4187903830675261307}
   - component: {fileID: 5740451059155159951}
-  - component: {fileID: -2899037009702346725}
+  - component: {fileID: -3504419800949854400}
   m_Layer: 0
   m_Name: PanelHinge.007
   m_TagString: Untagged
@@ -4707,7 +4707,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-2899037009702346725
+--- !u!114 &-3504419800949854400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4731,7 +4731,7 @@ GameObject:
   - component: {fileID: -7368538251469002637}
   - component: {fileID: -4999720786681488297}
   - component: {fileID: -4930890913660018392}
-  - component: {fileID: -5994985448548711213}
+  - component: {fileID: 8324555617457692892}
   m_Layer: 0
   m_Name: PanelHinge.011
   m_TagString: Untagged
@@ -4805,7 +4805,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-5994985448548711213
+--- !u!114 &8324555617457692892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4829,7 +4829,7 @@ GameObject:
   - component: {fileID: -1998745178009521233}
   - component: {fileID: 7046412328817649682}
   - component: {fileID: -1674639370138146377}
-  - component: {fileID: 7299477881593561047}
+  - component: {fileID: -7345395074514052921}
   m_Layer: 0
   m_Name: PanelHinge.004
   m_TagString: Untagged
@@ -4903,7 +4903,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7299477881593561047
+--- !u!114 &-7345395074514052921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4927,7 +4927,7 @@ GameObject:
   - component: {fileID: -5314575833520258432}
   - component: {fileID: -690969153479809676}
   - component: {fileID: -5199803320023274261}
-  - component: {fileID: 8840115945362641251}
+  - component: {fileID: 6976054939488117405}
   m_Layer: 0
   m_Name: SolarPanel.006
   m_TagString: Untagged
@@ -4943,7 +4943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8975178087239093198}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5000065, y: -0.4999935, z: 0.49999753, w: 0.5000025}
+  m_LocalRotation: {x: 0.4994681, y: -0.5005393, z: 0.49945602, w: 0.5005354}
   m_LocalPosition: {x: -39.436092, y: -0.00735569, z: -3.2637355}
   m_LocalScale: {x: 6.1777444, y: 38.610893, z: 0.5515844}
   m_ConstrainProportionsScale: 0
@@ -5001,7 +5001,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8840115945362641251
+--- !u!114 &6976054939488117405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5025,7 +5025,7 @@ GameObject:
   - component: {fileID: -8515945544511989106}
   - component: {fileID: -6279987279140863494}
   - component: {fileID: -8357719453940431554}
-  - component: {fileID: -5533356416709067316}
+  - component: {fileID: -2468724372591553311}
   m_Layer: 0
   m_Name: SolarPanel.005
   m_TagString: Untagged
@@ -5041,7 +5041,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9114073700030396090}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5000072, y: -0.49999276, z: 0.49999738, w: 0.5000026}
+  m_LocalRotation: {x: 0.49957076, y: -0.50043756, z: 0.4995573, w: 0.5004337}
   m_LocalPosition: {x: -39.436077, y: -0.0073262453, z: -3.2637346}
   m_LocalScale: {x: 6.1777444, y: 38.610897, z: 0.5515844}
   m_ConstrainProportionsScale: 0
@@ -5099,7 +5099,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-5533356416709067316
+--- !u!114 &-2468724372591553311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5123,7 +5123,7 @@ GameObject:
   - component: {fileID: -2481831239807105342}
   - component: {fileID: -8295590029462112978}
   - component: {fileID: -7269496313411109104}
-  - component: {fileID: -9215379214312863874}
+  - component: {fileID: 7842495750998607489}
   m_Layer: 0
   m_Name: X.001
   m_TagString: Untagged
@@ -5196,7 +5196,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-9215379214312863874
+--- !u!114 &7842495750998607489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5220,7 +5220,7 @@ GameObject:
   - component: {fileID: 6331776519827715113}
   - component: {fileID: 2967934449835088945}
   - component: {fileID: 7950273582936429620}
-  - component: {fileID: 2057745144524881930}
+  - component: {fileID: -1916114713529008169}
   m_Layer: 0
   m_Name: PanelHinge.006
   m_TagString: Untagged
@@ -5294,7 +5294,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2057745144524881930
+--- !u!114 &-1916114713529008169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

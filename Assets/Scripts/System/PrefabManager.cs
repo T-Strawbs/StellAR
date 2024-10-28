@@ -219,11 +219,18 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
         prefabData.prefabIndex = spawnRequest.prefabIndex;
         prefabData.prefabName = prefabs[spawnRequest.prefabIndex].name;
 
+        //rename the instance to match the prefab data
+        instance.name = prefabData.prefabName;
+
         //prepare the messagge based interactable
         InteractableFactory.Instance.initialiseInteractable(InteractableType.MessageBased,instance);
 
         //add instance to the MessageBasedInteractable Instance Manager list
         MessageBasedInstanceManager.Instance.registerNetworkInteractable(instance.GetComponent<MessageBasedInteractable>());
+
+        //tell all PrefabInstantiationListeners that we instantiated a prefab
+        OnPrefabInstantiation.Invoke(instance);
+
         //attempt to register the prefab as already spawned
         try 
         {

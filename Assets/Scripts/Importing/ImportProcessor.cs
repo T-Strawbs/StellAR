@@ -81,7 +81,7 @@ public class ModelPrefabGenerator : AssetPostprocessor
             {
                 //Create the prefab and save it to the prefab path
                 PrefabUtility.SaveAsPrefabAsset(model, prefabPath);
-                Debug.Log($"Prefab created for {modelName} at {prefabPath}");
+                //Debug.Log($"Prefab created for {modelName} at {prefabPath}");
             }
             catch (Exception e)
             {

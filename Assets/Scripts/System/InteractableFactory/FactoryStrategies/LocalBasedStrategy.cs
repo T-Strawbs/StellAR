@@ -7,7 +7,7 @@ public class LocalBasedStrategy : FactoryStrategy
     public void initialiseInteractable(GameObject interactableObject)
     {
         initialiseInteractables(interactableObject.transform, null);
-        DebugConsole.Instance.LogDebug($"Initialising __ {interactableObject.name} __");
+        //DebugConsole.Instance.LogDebug($"Initialising __ {interactableObject.name} __");
     }
 
     private void initialiseInteractables(Transform current, Transform parent)
