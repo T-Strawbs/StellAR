@@ -20,6 +20,22 @@ public class TextInput : MonoBehaviour, IAnnotationInput
 
     public void postAnnotation ()
     {
+        if (ApplicationManager.Instance.isOnline())
+        {
+            postOnline();
+        }
+        else
+        {
+            postLocally();
+        }
+    }
+
+    private void postOnline()
+    {
+
+    }
+    private void postLocally()
+    {
         DebugConsole.Instance.LogDebug($"POSTING ANNOTATION!");
         //check if theres a currently selected object
         if (!SelectionManager.Instance.currentSelection)
@@ -27,11 +43,11 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             DebugConsole.Instance.LogError("We cant post when we have no currently selected object");
             return;
         }
-        if(string.IsNullOrEmpty(inputText.text))
+        if (string.IsNullOrEmpty(inputText.text))
         {
             DebugConsole.Instance.LogError("Cannot post as input field is empty or null");
             return;
-        } 
+        }
         //quickly assert that the current selection has an annotation component
         AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
         if (!annotationComponent)
@@ -40,11 +56,11 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //get the current date and time
-        string currentDateTime = DateTime.Now.ToString(GlobalConstants.timeFormat);
+        string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
         //tell Annotation manager to create annotation Json
         AnnotationManager.Instance.createAnnotationJson(
             SelectionManager.Instance.currentSelection.name,
-            "Text",
+            GlobalConstants.TEXT_ANNOTATION,
             "Default Author",// we need to replace this once we have multiple active users
             currentDateTime,
             inputText.text
@@ -55,6 +71,5 @@ public class TextInput : MonoBehaviour, IAnnotationInput
         //reset text input field
         inputText.text = "";
     }
-
 
 }

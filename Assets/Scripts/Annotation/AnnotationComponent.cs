@@ -42,7 +42,7 @@ public class AnnotationComponent : MonoBehaviour
             Renderer renderer = this.GetComponent<Renderer>();
             if (renderer != null)
             {
-                this.originalColourString = "#" + ColorUtility.ToHtmlStringRGBA(renderer.sharedMaterial.color);
+                this.originalColourString = "#" + ColorUtility.ToHtmlStringRGBA(renderer.material.color);
             }
         }
         return originalColourString;
@@ -114,4 +114,5 @@ public class AnnotationComponent : MonoBehaviour
             }
         }
     }
+
 }

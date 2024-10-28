@@ -29,36 +29,42 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
         DebugConsole.Instance.LogDebug($"ABOUT TO LOAD METADATA");
 
         // Loop over all models
-        foreach (GameObject model in loadedPrefabs)
+        foreach (GameObject prefab in loadedPrefabs)
         {
-            model.gameObject.AddComponent<MetadataComponent>();
+            //check if the prefab already has a metadata component
+            MetadataComponent metadataComponent = prefab.GetComponent<MetadataComponent>();
+            if(metadataComponent == null)
+            {
+                //it doesnt so create one
+                prefab.gameObject.AddComponent<MetadataComponent>();
+            }
 
-            // Create a Component object for the model
-            MetadataJson parentModel = new MetadataJson(model.name);
+            // Create a Component object for the prefab
+            MetadataJson parentModel = new MetadataJson(prefab.name);
 
             /* 
              * Check if JSON representation already exists, if not create a blank template
-             * NOTE: If the model architecture changes, the existing JSON will need to be deleted to create
+             * NOTE: If the prefab architecture changes, the existing JSON will need to be deleted to create
              *          an accurate representation of the new architecture.
              */
 
-            DebugConsole.Instance.LogDebug($"ATTEMPTING TO LOAD METADATA FOR {model.name}");
+            DebugConsole.Instance.LogDebug($"ATTEMPTING TO LOAD METADATA FOR {prefab.name}");
 
-            string jsonFilePath = GlobalConstants.METADATA_DIR + model.name + "_Metadata.json";
+            string jsonFilePath = GlobalConstants.METADATA_DIR + prefab.name + "_Metadata.json";
             if(File.Exists(jsonFilePath))
             {
-                // if JSON already exists add data from JSON, which also updated the JSON to any changed in the model if there are any
+                // if JSON already exists add data from JSON, which also updated the JSON to any changed in the prefab if there are any
                 string modelJson = File.ReadAllText(jsonFilePath);
                 parentModel = JsonConvert.DeserializeObject<MetadataJson>(modelJson);
-                addMetadataFromJson(model.transform, parentModel);
+                addMetadataFromJson(prefab.transform, parentModel);
                 writeJSON(parentModel);
-                DebugConsole.Instance.LogDebug($"Found METADATA FOR {model.name}");
+                DebugConsole.Instance.LogDebug($"Found METADATA FOR {prefab.name}");
             }
             else
             {
-                DebugConsole.Instance.LogDebug($"Couldnt find METADATA for {model.name}, should be creating some");
+                DebugConsole.Instance.LogDebug($"Couldnt find METADATA for {prefab.name}, should be creating some");
                 // if JSON doesn't exist create fresh JSON template
-                createModelJson(model.transform, parentModel);
+                createModelJson(prefab.transform, parentModel);
                 allModels.Add(parentModel);
                 writeJSON(parentModel);
             }
@@ -74,13 +80,18 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
 
     }
 
-    // Use recursion to create a correctly nested representation of an input model using Component objects
+    // Use recursion to create a correctly nested representation of an input prefab using Component objects
     void createModelJson(Transform parentTransform, MetadataJson parentComponent)
     {
         // For each subcomponent in the input parent, create a new Component object and add it as a child of the parent
         foreach (Transform subcomponentTransform in parentTransform)
         {
-            subcomponentTransform.gameObject.AddComponent<MetadataComponent>();
+            //check if the subcomponent already has a metadata component
+            MetadataComponent metadataComponent = subcomponentTransform.GetComponent<MetadataComponent>();
+            if(metadataComponent == null)
+                //create the metadata component
+                subcomponentTransform.gameObject.AddComponent<MetadataComponent>();
+
             MetadataJson subcomponent = new MetadataJson(subcomponentTransform.name);
             parentComponent.subcomponents.Add(subcomponent);
 
@@ -108,7 +119,7 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
         {
             GameObject foundChild = parentTransform.gameObject.GetNamedChild(subcomponent.name);
 
-            // if component in JSON is no longer in the model remove it from the JSON
+            // if component in JSON is no longer in the prefab remove it from the JSON
             if(foundChild is null)
             {
                 parentComponent.subcomponents.Remove(subcomponent);
@@ -117,7 +128,10 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
             // else populate the subcomponent with the metadata from the JSON
             else
             {
-                MetadataComponent subcomponentMetadata = foundChild.AddComponent<MetadataComponent>();
+                MetadataComponent subcomponentMetadata = foundChild.GetComponent<MetadataComponent>();
+                if (subcomponentMetadata == null)
+                    subcomponentMetadata = foundChild.AddComponent<MetadataComponent>();
+
                 subcomponentMetadata.metadata = subcomponent.metadata;
 
                 // remove JSON linked subcomponent from list
@@ -132,7 +146,9 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
         foreach (Transform leftoverSubcomponent in subcomponentTransforms)
         {
             // initialise components with metadata and by adding as child to parent Component
-            leftoverSubcomponent.gameObject.AddComponent<MetadataComponent>();
+            MetadataComponent metadataComponent = leftoverSubcomponent.gameObject.GetComponent<MetadataComponent>();
+            if(metadataComponent == null)
+                metadataComponent = leftoverSubcomponent.gameObject.AddComponent<MetadataComponent>();
             MetadataJson subcomponent = new MetadataJson(leftoverSubcomponent.name);
             parentComponent.subcomponents.Add(subcomponent);
             

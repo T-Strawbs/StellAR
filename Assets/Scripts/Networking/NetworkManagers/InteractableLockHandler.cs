@@ -9,7 +9,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class InteractableLockHandler : Singleton<InteractableLockHandler>, CustomMessageHandler
+public class InteractableLockHandler : Singleton<InteractableLockHandler>, StartupProcess
 {
     #region InteractableLock Definiton
     private class InteractableLock
@@ -113,10 +113,10 @@ public class InteractableLockHandler : Singleton<InteractableLockHandler>, Custo
 
     private void Awake()
     {
-        ApplicationManager.Instance.onProcessCustomMessengers.AddListener(registerNetworkEventListeners);
+        ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
     }
 
-    public void registerNetworkEventListeners()
+    public void onStartupProcess()
     {
         NetworkManager.Singleton.OnServerStarted += () =>
         {

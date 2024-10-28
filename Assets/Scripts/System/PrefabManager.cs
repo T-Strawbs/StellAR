@@ -1,21 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
+public class PrefabManager : Singleton<PrefabManager>, StartupProcess
 {
     [SerializeField] private List<GameObject> prefabs;
     [SerializeField] private HashSet<int> spawnedPrefabs = new HashSet<int>();
 
     [NonSerialized] public UnityEvent<List<GameObject>> OnPrefabsLoaded = new UnityEvent<List<GameObject>>();
 
+    [NonSerialized] public UnityEvent<GameObject> OnPrefabInstantiation = new UnityEvent<GameObject>();
+
     private void Awake()
     {
-        ApplicationManager.Instance.onProcessCustomMessengers.AddListener(registerNetworkEventListeners);
+        ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
     }
 
     private void Start()
@@ -26,9 +29,8 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
         LoadPrefabs();
     }
 
-    public void registerNetworkEventListeners()
+    public void onStartupProcess()
     {
-        
         NetworkManager.Singleton.OnServerStarted += () =>
         {
             if (NetworkManager.Singleton.IsServer)
@@ -88,6 +90,15 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
         if (prefabIndex < 0 || prefabIndex >= prefabs.Count)
             return;
 
+        if (spawnedPrefabs.Contains(prefabIndex))
+        {
+            DebugConsole.Instance.LogWarning
+                (
+                    $"Tried to request the spawning of {prefabs[prefabIndex].name} but we already have a copy"
+                );
+            return;
+        }
+
         //check if we are in offline mode or in Online Mode
         if(ApplicationManager.Instance.isOnline())
         {
@@ -97,10 +108,10 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
         }
 
         //spawn locally
-        localRequestInteractableSpawn(ref prefabIndex);
+        localRequestInteractableSpawn(prefabIndex);
     }
 
-    private void localRequestInteractableSpawn(ref int prefabIndex)
+    private void localRequestInteractableSpawn(int prefabIndex)
     {
         //instantiate object -- need camera view transform or vuforia target
         GameObject instance = Instantiate
@@ -109,6 +120,15 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
                 ApplicationManager.Instance.calculateIntantiationTransform(), 
                 Quaternion.identity
             );
+
+        //create a PrefabData Object and attach it to the instance
+        PrefabData prefabData = instance.AddComponent<PrefabData>();
+        //set the prefab data
+        prefabData.prefabIndex = prefabIndex;
+        prefabData.prefabName = prefabs[prefabIndex].name;
+
+        //rename the instance to match the prefab data
+        instance.name = prefabData.prefabName;
         
         if(!instance)
         {
@@ -118,6 +138,12 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
         }
         //prepare the local interactable
         InteractableFactory.Instance.initialiseInteractable(InteractableType.LocalBased,instance);
+
+        //add the prefab index to the spawned prefabs list
+        spawnedPrefabs.Add(prefabIndex);
+
+        //tell all PrefabInstantiationListeners that we instantiated a prefab
+        OnPrefabInstantiation.Invoke(instance);
     }
 
 
@@ -186,6 +212,12 @@ public class PrefabManager : Singleton<PrefabManager>, CustomMessageHandler
 
         //instantiate object -- nededs to be using vufoira target
         GameObject instance = Instantiate(prefabs[spawnRequest.prefabIndex], Vector3.zero, Quaternion.identity);
+
+        //create a PrefabData Object and attach it to the instance
+        PrefabData prefabData = instance.AddComponent<PrefabData>();
+        //set the prefab data
+        prefabData.prefabIndex = spawnRequest.prefabIndex;
+        prefabData.prefabName = prefabs[spawnRequest.prefabIndex].name;
 
         //prepare the messagge based interactable
         InteractableFactory.Instance.initialiseInteractable(InteractableType.MessageBased,instance);

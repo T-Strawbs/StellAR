@@ -5,14 +5,14 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHandler>, CustomMessageHandler
+public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHandler>, StartupProcess
 {
     private void Awake()
     {
-        ApplicationManager.Instance.onProcessCustomMessengers.AddListener(registerNetworkEventListeners);
+        ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
     }
 
-    public void registerNetworkEventListeners()
+    public void onStartupProcess()
     {
         NetworkManager.Singleton.OnServerStarted += () =>
         {

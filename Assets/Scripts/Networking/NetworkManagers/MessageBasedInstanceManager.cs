@@ -9,7 +9,7 @@ using UnityEngine;
 /// <summary>
 /// this class manages all active instances of INetworkInteractable
 /// </summary>
-public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager>, CustomMessageHandler
+public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager>, StartupProcess
 {
     public Dictionary<int, List<MessageBasedInteractable>> registeredInteractbleLookUp { get; private set; } = new Dictionary<int, List<MessageBasedInteractable>>();
 
@@ -23,11 +23,11 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
 
     private void Awake()
     {
-        ApplicationManager.Instance.onProcessCustomMessengers.AddListener(registerNetworkEventListeners);
+        ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
 
     }
 
-    public void registerNetworkEventListeners()
+    public void onStartupProcess()
     {
         NetworkManager.Singleton.OnServerStarted += () =>
         {

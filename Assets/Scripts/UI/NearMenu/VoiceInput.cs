@@ -11,7 +11,7 @@ public enum ButtonState
     STOP,
     DELETE
 }
-/*
+
 public class VoiceInput : MonoBehaviour, IAnnotationInput
 {
     /// <summary>
@@ -71,10 +71,10 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
 
     private void recordAudio()
     {
-        string defaultDeviceName = Config.micName;
+        string defaultDeviceName = Microphone.devices[0];
         DebugConsole.Instance.LogDebug($"Recording from mic {defaultDeviceName}");
 
-        if (defaultDeviceName == "")
+        if (string.IsNullOrEmpty(defaultDeviceName))
         {
             DebugConsole.Instance.LogError($"we cant start or stop recording because we couldnt find a mic");
             return;
@@ -83,7 +83,10 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         {
             isRecording = true;
             //start recording using the the default microphone
-            currentRecording = Microphone.Start(defaultDeviceName, false, 120, 44100);
+            currentRecording = Microphone.Start
+                (
+                    defaultDeviceName, false, GlobalConstants.RECORDING_MAX_DURATION, 44100
+                );
             //capture recording start time so we can trim the track once we end recording
             recordingStartTime = Time.time;
             //set the button state to Stop so the next tap will stop the recording
@@ -117,10 +120,12 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             DebugConsole.Instance.LogError("current recording is null so we cant trim it");
         }
 
+
         //create a float array to hold the samples
         float[] currentSamples = new float[currentRecording.samples];
         //populate the array with samples from the current recording
         currentRecording.GetData(currentSamples, 0);
+        //set the 
         //create an array to store the trimmed samples with a length of the current samples over the recording 
         //duration multiplied by the audio frequency and the number of channels. TLDR its black magic.
         float[] trimmedSamples = new float[
@@ -140,6 +145,24 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
 
     public void postAnnotation()
     {
+        if(ApplicationManager.Instance.isOnline())
+        {
+            postOnline();
+        }
+        else
+        {
+            postLocally();
+        }
+
+    }
+
+    private void postOnline()
+    {
+       
+    }
+
+    private void postLocally()
+    {
         //check if theres a currently selected object
         if (!SelectionManager.Instance.currentSelection)
         {
@@ -148,7 +171,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         }
         //quickly assert that the current selection has an annotation component
         AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
-        if(!annotationComponent)
+        if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");
             return;
@@ -166,17 +189,17 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //get the current date and time to store in the annotation data
-        string currentDateTime = DateTime.Now.ToString(GlobalConstants.timeFormat);
+        string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
         //format the current datetime so that we can save a file without IO pointing a gun at us
-        string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ','-').Replace('/','-');
+        string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ', '-').Replace('/', '-');
         //create filename from the componet name + datetime
         string fileName = $"{SelectionManager.Instance.currentSelection.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
         //save audio to file
-        SavWav.Save(fileName,currentRecording);
+        SavWav.Save(fileName, currentRecording);
         //tell Annotation manager to create annotation Json
-        AnnotationManager.Instance.createAnnotationJsonObject(
+        AnnotationManager.Instance.createAnnotationJson(
             SelectionManager.Instance.currentSelection.name,
-            "Voice",
+            GlobalConstants.VOICE_ANNOTATION,
             "Default Author",// we need to replace this once we have multiple active users
             currentDateTime,
             $"{GlobalConstants.ANNOTATION_DIR}/{fileName}.wav"
@@ -198,4 +221,4 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         recordBtnIcon.CurrentIconName = "Icon 128";
     }
 }
-*/
+

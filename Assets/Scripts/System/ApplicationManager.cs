@@ -12,7 +12,7 @@ using UnityEngine.Events;
 public class ApplicationManager : Singleton<ApplicationManager>
 {
 
-    [NonSerialized] public UnityEvent onProcessCustomMessengers = new UnityEvent();
+    [NonSerialized] public UnityEvent onStartupProcess = new UnityEvent();
 
     [NonSerialized] public UnityEvent onPostStartProcess = new UnityEvent();
 
@@ -30,7 +30,7 @@ public class ApplicationManager : Singleton<ApplicationManager>
     private void startupProcess()
     {
         //setup custom message handlers
-        onProcessCustomMessengers.Invoke();
+        onStartupProcess.Invoke();
     }
 
     public void setNetworkStatus(NetworkStatus networkStatus)
@@ -56,5 +56,6 @@ public class ApplicationManager : Singleton<ApplicationManager>
         Vector3 targetPosition = Camera.main.transform.position + Camera.main.transform.forward * distanceFromCamera;
         return targetPosition;
     }
+
 }
 public enum NetworkStatus { ONLINE,OFFLINE}
