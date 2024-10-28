@@ -7,7 +7,6 @@ using System.IO;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
-using static Unity.VisualScripting.AnnotationUtility;
 
 public class AnnotationManager : Singleton<AnnotationManager>, PrefabLoadListener
 {
