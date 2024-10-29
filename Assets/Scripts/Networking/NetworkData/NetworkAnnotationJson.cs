@@ -12,6 +12,7 @@ public class NetworkAnnotationJson : INetworkSerializable
     public string Author;
     public string Timestamp;
     public string MessageType;
+    public string Content;
 
     // empty constructor to prevent null instantiations
 
@@ -27,6 +28,7 @@ public class NetworkAnnotationJson : INetworkSerializable
         Author = annotation.Author;
         Timestamp = annotation.Timestamp;
         MessageType = annotation.MessageType;
+        Content = annotation.Content;
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -35,5 +37,6 @@ public class NetworkAnnotationJson : INetworkSerializable
         serializer.SerializeValue(ref Author);
         serializer.SerializeValue(ref Timestamp);
         serializer.SerializeValue(ref MessageType);
+        serializer.SerializeValue(ref Content);
     }
 }

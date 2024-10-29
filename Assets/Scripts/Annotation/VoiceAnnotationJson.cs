@@ -8,16 +8,22 @@ using UnityEngine;
 [Serializable]
 public class VoiceAnnotationJson : AnnotationJson
 {
-    public string AudioPath{ get; set; }
     public override string MessageType => GlobalConstants.VOICE_ANNOTATION;
 
+    /// <summary>
+    /// Create a VoiceAnnotationJson, content is the file path to the audio file
+    /// </summary>
+    /// <param name="componentName"></param>
+    /// <param name="author"></param>
+    /// <param name="timestamp"></param>
+    /// <param name="content"></param>
     [JsonConstructorAttribute]
     public VoiceAnnotationJson(string componentName, string author, string timestamp, string content)
     {
         ComponentName = componentName;
         Author = author;
         Timestamp = timestamp;
-        AudioPath = content;
+        base.Content = content;
     }
 
     /// <summary>
@@ -29,5 +35,6 @@ public class VoiceAnnotationJson : AnnotationJson
         ComponentName = networkAnnotation.ComponentName;
         Author = networkAnnotation.Author;
         Timestamp = networkAnnotation.Timestamp;
+        base.Content = networkAnnotation.Content;
     }
 }

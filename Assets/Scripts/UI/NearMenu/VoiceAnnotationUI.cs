@@ -16,7 +16,7 @@ public class VoiceAnnotationUI : AnnotationUI
         if (annotationData is VoiceAnnotationJson voiceMessage)
         {
             //attempt to load audio via our load audio delegate
-            AudioLoader.Instance.loadAudio(onAudioLoaded, voiceMessage.AudioPath);
+            AudioLoader.Instance.loadAudio(onAudioLoaded, voiceMessage.Content);
         }
         //rebuild the ui
         LayoutRebuilder.ForceRebuildLayoutImmediate(voiceUIRect);

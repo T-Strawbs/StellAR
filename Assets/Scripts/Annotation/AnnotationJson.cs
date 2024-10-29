@@ -15,6 +15,7 @@ public abstract class AnnotationJson
     public string Author { get; set; }
     public string Timestamp { get; set; }
     public abstract string MessageType { get; }
+    public string Content { get; set; }
 
     public override bool Equals(object obj)
     {
