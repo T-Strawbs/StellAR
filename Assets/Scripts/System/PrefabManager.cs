@@ -121,14 +121,8 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
                 Quaternion.identity
             );
 
-        //create a PrefabData Object and attach it to the instance
-        PrefabData prefabData = instance.AddComponent<PrefabData>();
-        //set the prefab data
-        prefabData.prefabIndex = prefabIndex;
-        prefabData.prefabName = prefabs[prefabIndex].name;
-
         //rename the instance to match the prefab data
-        instance.name = prefabData.prefabName;
+        instance.name = prefabs[prefabIndex].name;
         
         if(!instance)
         {
@@ -213,14 +207,8 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
         //instantiate object -- nededs to be using vufoira target
         GameObject instance = Instantiate(prefabs[spawnRequest.prefabIndex], Vector3.zero, Quaternion.identity);
 
-        //create a PrefabData Object and attach it to the instance
-        PrefabData prefabData = instance.AddComponent<PrefabData>();
-        //set the prefab data
-        prefabData.prefabIndex = spawnRequest.prefabIndex;
-        prefabData.prefabName = prefabs[spawnRequest.prefabIndex].name;
-
         //rename the instance to match the prefab data
-        instance.name = prefabData.prefabName;
+        instance.name = prefabs[spawnRequest.prefabIndex].name;
 
         //prepare the messagge based interactable
         InteractableFactory.Instance.initialiseInteractable(InteractableType.MessageBased,instance);
