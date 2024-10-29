@@ -51,21 +51,27 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");
             return;
         }
-        //get the current date and time
-        string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
-        //tell Annotation manager to create annotation Json
-        AnnotationManager.Instance.createAnnotationJson(
-            SelectionManager.Instance.currentSelection.name,
-            GlobalConstants.TEXT_ANNOTATION,
-            "Default Author",// we need to replace this once we have multiple active users
-            currentDateTime,
-            inputText.text
-            );
-        //tell the UI manager to update its annotations 
-        DataPanelManager.Instance.updateAnnotations(annotationComponent);
-        DebugConsole.Instance.LogDebug("we wouldve \"created\" a text annotation");
+
+        AnnotationManager.Instance.postAnnotationServerRpc(inputText.text, GlobalConstants.TEXT_ANNOTATION);
+
         //reset text input field
         inputText.text = "";
+
+        ////get the current date and time
+        //string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
+        ////tell Annotation manager to create annotation Json
+        //AnnotationManager.Instance.createAnnotationJson(
+        //    SelectionManager.Instance.currentSelection.name,
+        //    GlobalConstants.TEXT_ANNOTATION,
+        //    "Default Author",// we need to replace this once we have multiple active users
+        //    currentDateTime,
+        //    inputText.text
+        //    );
+        ////tell the UI manager to update its annotations 
+        //DataPanelManager.Instance.updateAnnotations(annotationComponent);
+        //DebugConsole.Instance.LogDebug("we wouldve \"created\" a text annotation");
+        ////reset text input field
+        //inputText.text = "";
     }
     private void postLocally()
     {
