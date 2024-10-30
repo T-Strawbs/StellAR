@@ -23,6 +23,22 @@ public abstract class AnnotationUI : MonoBehaviour
 
     private void deleteAnnotaton()
     {
-        AnnotationManager.Instance.deleteAnnotation(annotationData);
+        if (ApplicationManager.Instance.isOnline())
+        {
+            MessageBasedInteractable currentSelection = SelectionManager.Instance.currentSelection.GetComponent<MessageBasedInteractable>();
+            if (currentSelection == null)
+            {
+                DebugConsole.Instance.LogError("Attempted to delete annotation while online from non-networked object (not a MessageBasedInteractable)");
+            }
+            else
+            {
+                NetworkAnnotationJson annotationToDelete = new NetworkAnnotationJson(annotationData);
+                AnnotationManager.Instance.deleteAnnotationServerRpc(currentSelection.lookupData, annotationToDelete);
+            }
+        }
+        else
+        {
+            AnnotationManager.Instance.deleteAnnotationFromDisk(annotationData, SelectionManager.Instance.currentSelection.transform);
+        }
     }
 }

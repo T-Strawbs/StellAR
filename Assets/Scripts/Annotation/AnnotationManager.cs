@@ -402,22 +402,21 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         DebugConsole.Instance.LogError($"couldnt find found {targetName} when updating the parent modelannotation json ");
     }
 
-    public void deleteAnnotation(AnnotationJson annotationData)
+    /// <summary>
+    /// Deletes input annotation data from input component on the JSON that is on the disk, then calls deleteAnnotationFromRuntime() to remove it from the Game Object
+    /// </summary>
+    /// <param name="annotationToDelete"></param>
+    /// <param name="deleteAnnotationFromThis"></param>
+    public void deleteAnnotationFromDisk(AnnotationJson annotationToDelete, Transform deleteAnnotationFromThis)
     {
-        //check if we have a currentSelection
-        if (!SelectionManager.Instance.currentSelection)
-        {
-            DebugConsole.Instance.LogError($"Cannot Delete Annotation ({annotationData.Author}:{annotationData.Timestamp}) " +
-                $"as theres no current selection");
-            return;
-        }
-        //find the name of the components root predecessor
-        string rootName = SelectionManager.Instance.getModelRoot(SelectionManager.Instance.currentSelection.transform).name;
+        //find the name of the component's root predecessor
+        string rootName = SelectionManager.Instance.getModelRoot(deleteAnnotationFromThis.transform).name;
         if (rootName == "")
         {
-            DebugConsole.Instance.LogError($"Cannot find root predecessor of {SelectionManager.Instance.currentSelection.name}");
+            DebugConsole.Instance.LogError($"Cannot find root predecessor of {deleteAnnotationFromThis.name}");
             return;
         }
+
         //load in the model json
         string jsonPath = $"{GlobalConstants.ANNOTATION_DIR}/{rootName}/{rootName}_Annotation.json";
         if (!File.Exists(jsonPath))
@@ -425,57 +424,71 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             DebugConsole.Instance.LogError($"couldnt find file:{jsonPath}");
             return;
         }
+
         //deserialise the json into the ModelAnnotation object
         ModelAnnotationJson rootJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(File.ReadAllText(jsonPath), settings);
+
         //search the root json for the currently selected component
         ModelAnnotationJson targetJson = findComponent(rootJson, SelectionManager.Instance.currentSelection.name);
         if (targetJson == null)
         {
-            DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.Instance.currentSelection.name} in {rootJson.Name}");
+            DebugConsole.Instance.LogError($"Couldnt find {deleteAnnotationFromThis.name} in {rootJson.Name}");
             return;
         }
         DebugConsole.Instance.LogDebug($"this annotation comps anno count is{targetJson.Annotations.Count}");
-        //find the target annotation in the target jsons annotations
+
+        //find the target annotation in the target json's annotations
         for (int i = 0; i < targetJson.Annotations.Count; i++)
         {
             DebugConsole.Instance.LogDebug($"checking if (" +
                 $"{targetJson.Annotations[i].ComponentName},{targetJson.Annotations[i].Author},{targetJson.Annotations[i].Timestamp})" +
                 $" is equal to " +
-                $"({annotationData.ComponentName},{annotationData.Author},{annotationData.Timestamp})");
-            if (targetJson.Annotations[i].Equals(annotationData))
+                $"({annotationToDelete.ComponentName},{annotationToDelete.Author},{annotationToDelete.Timestamp})");
+            if (targetJson.Annotations[i].Equals(annotationToDelete))
             {
                 DebugConsole.Instance.LogDebug("The annotations match in current selection");
                 targetJson.Annotations.RemoveAt(i);
                 break;
             }
         }
-        //remove the annotation from the current selections annotation component
-        AnnotationComponent currentSelection = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
+
+        //update json
+        writeJson(rootJson, jsonPath);
+
+        // delete annotation from the GameObject
+        deleteAnnotationFromRuntime(annotationToDelete, deleteAnnotationFromThis);
+    }
+
+    /// <summary>
+    /// Deletes the input annotation from the input GameObject.
+    /// </summary>
+    /// <param name="deleteAnnotationFromThis"></param>
+    /// <param name="annotationToDelete"></param>
+    private void deleteAnnotationFromRuntime(AnnotationJson annotationToDelete, Transform deleteAnnotationFromThis)
+    {
+        //remove the annotation from the component's AnnotationComponent
+        AnnotationComponent currentSelection = deleteAnnotationFromThis.GetComponent<AnnotationComponent>();
         if (!currentSelection)
         {
-            DebugConsole.Instance.LogError($"Couldnt find {SelectionManager.Instance.currentSelection.name} annotation component");
+            DebugConsole.Instance.LogError($"Couldn't find {deleteAnnotationFromThis.name} annotation component");
             return;
         }
+
         for (int i = 0; i < currentSelection.Annotations.Count; i++)
         {
-            if (currentSelection.Annotations[i].Equals(annotationData))
+            if (currentSelection.Annotations[i].Equals(annotationToDelete))
             {
                 DebugConsole.Instance.LogDebug("The annotations match in current selection");
                 currentSelection.Annotations.RemoveAt(i);
                 break;
             }
         }
-        DebugConsole.Instance.LogDebug($"printing annotation authors of current selection");
-        //debug
-        foreach (AnnotationJson annotation in currentSelection.Annotations)
+
+        //update UIManager if annotation was deleted from current selection
+        if(SelectionManager.Instance.currentSelection == deleteAnnotationFromThis.GetComponent<Interactable>())
         {
-            DebugConsole.Instance.LogDebug($"{annotation.Author}");
+            DataPanelManager.Instance.updateAnnotations(currentSelection);
         }
-        DebugConsole.Instance.LogDebug($"finished printing annotation authors of current selection");
-        //update json
-        writeJson(rootJson, jsonPath);
-        //update UIManager
-        DataPanelManager.Instance.updateAnnotations(currentSelection);
     }
 
     private ModelAnnotationJson findComponent(ModelAnnotationJson currentModelJson, string targetName)
@@ -565,7 +578,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
 
         //broadcast new annotation to clients
         NetworkAnnotationJson networkAnnotation = new NetworkAnnotationJson(annotation);
-        broadcastNewAnnotationRpc(networkAnnotation, lookupData);
+        broadcastNewAnnotationRpc(lookupData, networkAnnotation);
 
         //if annotation was for current selection update data pane
         AnnotationComponent annotationComponent = addAnnotationToThis.GetComponent<AnnotationComponent>();
@@ -581,7 +594,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// <param name="networkAnnotation"></param>
     /// <param name="lookupData"></param>
     [Rpc(SendTo.NotServer)]
-    private void broadcastNewAnnotationRpc(NetworkAnnotationJson networkAnnotation, NetworkInteractableLookupData lookupData)
+    private void broadcastNewAnnotationRpc(NetworkInteractableLookupData lookupData, NetworkAnnotationJson networkAnnotation)
     {
         //find the component the annotation needs to be added to
         Transform component = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(lookupData.parentKey, lookupData.objectIndex).transform;
@@ -622,5 +635,57 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             DataPanelManager.Instance.updateAnnotations(annotationComponent);
         }
 
+    }
+
+    /// <summary>
+    /// Called when someone on the network wants to delete an annotation.
+    /// Is run on the server to delete the annotation from disk and runtime, and broadcasts to clients make them delete the annotation from their runtimes.
+    /// </summary>
+    /// <param name="lookupData">Lookup data to find the component the annotation belongs to.</param>
+    /// <param name="networkAnnotation">Annotation to be deleted.</param>
+    [Rpc(SendTo.Server)]
+    public void deleteAnnotationServerRpc(NetworkInteractableLookupData lookupData, NetworkAnnotationJson networkAnnotation)
+    {
+        Transform deleteAnnotationFromThis = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(lookupData.parentKey, lookupData.objectIndex).transform;
+        if(networkAnnotation.MessageType == GlobalConstants.TEXT_ANNOTATION)
+        {
+            TextAnnotationJson annotation = new TextAnnotationJson(networkAnnotation);
+            deleteAnnotationFromDisk(annotation, deleteAnnotationFromThis);
+        }
+        else if(networkAnnotation.MessageType == GlobalConstants.VOICE_ANNOTATION)
+        {
+            VoiceAnnotationJson annotation = new VoiceAnnotationJson(networkAnnotation);
+            deleteAnnotationFromDisk(annotation, deleteAnnotationFromThis);
+        }
+        else
+        {
+            DebugConsole.Instance.LogError("Received request to delete annotation but Message Type was not valid.");
+        }
+        deleteAnnotationClientRpc(lookupData, networkAnnotation);
+    }
+
+    /// <summary>
+    /// Called on clients by server/host when an annotation has been deleted. Removes the annotation from the GameObject.
+    /// </summary>
+    /// <param name="lookupData">Lookup data to find the component the annotation belongs to.</param>
+    /// <param name="networkAnnotation">Annotation to be deleted.</param>
+    [Rpc(SendTo.NotServer)]
+    private void deleteAnnotationClientRpc(NetworkInteractableLookupData lookupData, NetworkAnnotationJson networkAnnotation)
+    {
+        Transform deleteAnnotationFromThis = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(lookupData.parentKey, lookupData.objectIndex).transform;
+        if (networkAnnotation.MessageType == GlobalConstants.TEXT_ANNOTATION)
+        {
+            TextAnnotationJson annotation = new TextAnnotationJson(networkAnnotation);
+            deleteAnnotationFromRuntime(annotation, deleteAnnotationFromThis);
+        }
+        else if (networkAnnotation.MessageType == GlobalConstants.VOICE_ANNOTATION)
+        {
+            VoiceAnnotationJson annotation = new VoiceAnnotationJson(networkAnnotation);
+            deleteAnnotationFromRuntime(annotation, deleteAnnotationFromThis);
+        }
+        else
+        {
+            DebugConsole.Instance.LogError("Received request to delete annotation but Message Type was not valid.");
+        }
     }
 }
