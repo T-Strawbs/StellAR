@@ -291,12 +291,12 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     }
 
     // call whenever a component's highlight colour is updated. Updates the Json file accordingly
-    public void updateAnnotationHighlightJson(string highlightColour)
+    public void updateAnnotationHighlightJson(Transform objectToUpdate, string highlightColour)
     {
         // highlighted object will be currently selected
-        string rootName = SelectionManager.Instance.getModelRoot(SelectionManager.Instance.currentSelection.transform).name;
+        string rootName = SelectionManager.Instance.getModelRoot(objectToUpdate).name;
         string parentJsonFileName = $"{GlobalConstants.ANNOTATION_DIR}/{rootName}/{rootName}_Annotation.json";
-        string targetName = SelectionManager.Instance.currentSelection.name;
+        string targetName = objectToUpdate.name;
         string parentJsonFile = File.ReadAllText(parentJsonFileName);
 
         // recreate Json object structure in memory

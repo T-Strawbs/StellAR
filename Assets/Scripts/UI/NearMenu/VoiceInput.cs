@@ -253,10 +253,19 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //convert AudioClip into float array, from Unity scripting docs for AudioClip.GetData
         var numSamples = currentRecording.samples * currentRecording.channels;
         float[] samples = new float[numSamples];
-        currentRecording.GetData(samples, 0);        
+        currentRecording.GetData(samples, 0);
 
         MessageBasedInteractable addAnnotationToThis = SelectionManager.Instance.currentSelection.GetComponent<MessageBasedInteractable>();
-        AnnotationManager.Instance.postAudioAnnotationServerRpc(addAnnotationToThis.lookupData, samples, numSamples, currentRecording.channels, currentRecording.frequency);
+        if(addAnnotationToThis != null)
+        {
+            //THIS BREAKS, NEED TO TRY CUSTOM MESSAGING WITH NetworkDelivery.ReliableFragmentedSequenced
+            AnnotationManager.Instance.postAudioAnnotationServerRpc(addAnnotationToThis.lookupData, samples, numSamples, currentRecording.channels, currentRecording.frequency);
+        }
+        else
+        {
+            DebugConsole.Instance.LogError("Tried to post audio annotation while online but currently selected object is not networked (MessageBasedInteractable)");
+        }
+
 
         //reset content
         resetVoiceInput();

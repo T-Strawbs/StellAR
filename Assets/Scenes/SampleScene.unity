@@ -5498,7 +5498,7 @@ GameObject:
   - component: {fileID: 416204852}
   - component: {fileID: 416204855}
   m_Layer: 5
-  m_Name: HighlightRedBtn (1)
+  m_Name: HighlightRedBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10886,7 +10886,7 @@ GameObject:
   - component: {fileID: 687634096}
   - component: {fileID: 687634099}
   m_Layer: 5
-  m_Name: HighlightGreenBtn (1)
+  m_Name: HighlightGreenBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10984,6 +10984,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
+--- !u!1 &690229627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 690229628}
+  - component: {fileID: 690229629}
+  - component: {fileID: 690229630}
+  m_Layer: 0
+  m_Name: _HighlightManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &690229628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690229627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1347627917}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &690229629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690229627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ad91a5027014747a7360ecf6137c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noneButton: {fileID: 1906513963}
+  redButton: {fileID: 790523939}
+  greenButton: {fileID: 1772190183}
+  blueButton: {fileID: 2010899376}
+  yellowButton: {fileID: 683211847}
+--- !u!114 &690229630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690229627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4177042700
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 0
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &693968364
 GameObject:
   m_ObjectHideFlags: 0
@@ -10998,7 +11069,7 @@ GameObject:
   - component: {fileID: 693968366}
   - component: {fileID: 693968369}
   m_Layer: 5
-  m_Name: HighlightNoneBtn (1)
+  m_Name: HighlightNoneBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12829,6 +12900,17 @@ MonoBehaviour:
   pooledVoiceUI: []
   textAnnotationUIPrefab: {fileID: 6498593347259040538, guid: 30648e08cb305904b96373d1de3cfd13, type: 3}
   voiceAnnotationUIPrefab: {fileID: 4206777966449292136, guid: cde62692e0c1c6f4881bfdedca5d2ef7, type: 3}
+--- !u!114 &814429957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8376646494505211226, guid: c6b351a67ceb69140b199996bbbea156, type: 3}
+  m_PrefabInstance: {fileID: 69492655}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32e8a7644144f8419bb881ad588ed0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &816501478
 GameObject:
   m_ObjectHideFlags: 0
@@ -14470,6 +14552,17 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1086815460 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9181497754641485382, guid: 48035bc27cb2d904dad4f23beaf98954, type: 3}
+  m_PrefabInstance: {fileID: 540060650}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13faa04948a44548b309258b16671f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1101911123
 GameObject:
   m_ObjectHideFlags: 0
@@ -16907,6 +17000,7 @@ Transform:
   - {fileID: 1118975792}
   - {fileID: 1608832079}
   - {fileID: 1333168666}
+  - {fileID: 690229628}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1362848520
@@ -18351,6 +18445,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466716161}
   m_CullTransparentMesh: 1
+--- !u!114 &1479954104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7245587814888172855, guid: c6b351a67ceb69140b199996bbbea156, type: 3}
+  m_PrefabInstance: {fileID: 1610942076}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 258623d14a250c648b5b9f7b96354ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1490236093
 GameObject:
   m_ObjectHideFlags: 0
@@ -20573,6 +20678,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8376646494505211229, guid: c6b351a67ceb69140b199996bbbea156, type: 3}
   m_PrefabInstance: {fileID: 1610942076}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1610942078 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8376646494505211226, guid: c6b351a67ceb69140b199996bbbea156, type: 3}
+  m_PrefabInstance: {fileID: 1610942076}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32e8a7644144f8419bb881ad588ed0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1646415468
 GameObject:
   m_ObjectHideFlags: 0
@@ -26239,7 +26355,7 @@ GameObject:
   - component: {fileID: 1948431285}
   - component: {fileID: 1948431288}
   m_Layer: 5
-  m_Name: HighlightBlueBtn (1)
+  m_Name: HighlightBlueBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27312,11 +27428,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307d3c7fb8970ab4b8ac8aa896f93087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recordBtn: {fileID: 0}
-  recordBtnIcon: {fileID: 0}
+  recordBtn: {fileID: 1610942078}
+  recordBtnIcon: {fileID: 1479954104}
   recordBtnState: 0
-  postBtn: {fileID: 0}
-  audioPlayerUI: {fileID: 0}
+  postBtn: {fileID: 814429957}
+  audioPlayerUI: {fileID: 1086815460}
   isRecording: 0
   currentRecording: {fileID: 0}
   recordingStartTime: 0
@@ -27442,7 +27558,7 @@ GameObject:
   - component: {fileID: 2019667347}
   - component: {fileID: 2019667350}
   m_Layer: 5
-  m_Name: HighlightYellowBtn (1)
+  m_Name: HighlightYellowBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

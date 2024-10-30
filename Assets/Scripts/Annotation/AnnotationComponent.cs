@@ -98,15 +98,6 @@ public class AnnotationComponent : MonoBehaviour
         {
             renderer.gameObject.GetComponent<AnnotationComponent>().setHighlight(newHighlightColour);
         }
-
-        // update the Json
-        AnnotationManager.Instance.updateAnnotationHighlightJson(newHighlightColour);
-    }
-
-    [Rpc(SendTo.Server)]
-    public void changeHighlightColourServerRpc(string newHighlightColour)
-    {
-
     }
 
     public void deleteAnnotation(AnnotationJson annotationData)
