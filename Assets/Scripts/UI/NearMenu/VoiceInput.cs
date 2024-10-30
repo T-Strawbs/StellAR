@@ -256,35 +256,10 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         currentRecording.GetData(samples, 0);        
 
         MessageBasedInteractable addAnnotationToThis = SelectionManager.Instance.currentSelection.GetComponent<MessageBasedInteractable>();
-        postAudioAnnotationServerRpc(addAnnotationToThis.lookupData, samples, numSamples, currentRecording.channels, currentRecording.frequency);
+        AnnotationManager.Instance.postAudioAnnotationServerRpc(addAnnotationToThis.lookupData, samples, numSamples, currentRecording.channels, currentRecording.frequency);
 
         //reset content
         resetVoiceInput();
-    }
-
-    [Rpc(SendTo.Server)]
-    private void postAudioAnnotationServerRpc(NetworkInteractableLookupData lookupData, float[] networkAudioClip, int numSamples, int channels, int frequency)
-    {
-        //get the current date and time to store in the annotation data
-        string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
-        //format the current datetime so that we can save a file without IO pointing a gun at us
-        string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ', '-').Replace('/', '-');
-
-        //create filename from the componet name + datetime
-        Interactable addAnnotationToThis = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(lookupData.parentKey, lookupData.objectIndex);
-        string fileName = $"{addAnnotationToThis.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
-
-        //create blank audio clip and load audio data from network into it
-        AudioClip audioClip = AudioClip.Create(fileName, numSamples, channels, frequency, false, false);
-        audioClip.SetData(networkAudioClip, 0);
-
-        //save audio to file
-        SavWav.Save(fileName, currentRecording);
-
-        //post filename on server and broadcast to clients
-        AnnotationManager.Instance.postAnnotationServerRpc(lookupData, $"{GlobalConstants.ANNOTATION_DIR}/{fileName}.wav", GlobalConstants.VOICE_ANNOTATION);
-
-        DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
     }
 }
 

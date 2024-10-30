@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class AudioLoader : Singleton<AudioLoader>
+public class AudioLoader : NetworkSingleton<AudioLoader>
 {
     public void loadAudio(System.Action<AudioClip,string> onloadComplete, string audioPath)
     {

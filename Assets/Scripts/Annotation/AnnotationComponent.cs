@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
@@ -100,6 +101,12 @@ public class AnnotationComponent : MonoBehaviour
 
         // update the Json
         AnnotationManager.Instance.updateAnnotationHighlightJson(newHighlightColour);
+    }
+
+    [Rpc(SendTo.Server)]
+    public void changeHighlightColourServerRpc(string newHighlightColour)
+    {
+
     }
 
     public void deleteAnnotation(AnnotationJson annotationData)

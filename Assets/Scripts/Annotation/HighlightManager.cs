@@ -33,7 +33,18 @@ public class HighlightManager : MonoBehaviour
             DebugConsole.Instance.LogError("Cannot set highlight as there is no current selection");
             return;
         }
-        DebugConsole.Instance.LogDebug($"setting highlight {SelectionManager.Instance.currentSelection.name} to {colour}");
-        SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>().changeHighlightColour(colour);
+
+        //if user is offline
+        if(!ApplicationManager.Instance.isOnline())
+        {
+            DebugConsole.Instance.LogDebug($"setting highlight {SelectionManager.Instance.currentSelection.name} to {colour}");
+            SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>().changeHighlightColour(colour);
+        }
+        //if user is online
+        else
+        {
+            DebugConsole.Instance.LogDebug($"setting highlight {SelectionManager.Instance.currentSelection.name} to {colour}");
+            SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>().changeHighlightColour(colour);
+        }
     }
 }
