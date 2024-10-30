@@ -198,7 +198,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         SavWav.Save(fileName, currentRecording);
         //tell Annotation manager to create annotation Json
         AnnotationManager.Instance.createAnnotationJson(
-            SelectionManager.Instance.currentSelection.name,
+            SelectionManager.Instance.currentSelection.transform,
             GlobalConstants.VOICE_ANNOTATION,
             "Default Author",// we need to replace this once we have multiple active users
             currentDateTime,

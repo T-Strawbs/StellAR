@@ -67,12 +67,12 @@ public class SelectionManager : Singleton<SelectionManager>
             currentSelection.collapseInteractable(isSingleCollapse);
     }
 
-    public Transform getSelectionRootTransform() 
+    public Transform getModelRoot(Transform component) 
     {
-        Interactable currentInteractable = currentSelection;
+        Interactable currentInteractable = component.GetComponent<Interactable>();
         if(!currentInteractable)
         {
-            DebugConsole.Instance.LogError($"SM_getSelectionRootTransform: we dont have a current selection to get the root transform");
+            DebugConsole.Instance.LogError($"SM_getModelRoot: tried to get root of a component that is not an Interactable");
             return null;
         }
             

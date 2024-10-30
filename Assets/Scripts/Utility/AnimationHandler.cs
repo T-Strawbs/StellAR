@@ -54,7 +54,8 @@ public class AnimationHandler : MonoBehaviour, NewSelectionListener
 
     public void onNewSelectionListener(Transform selection)
     {
-        string parentName = SelectionManager.Instance.getSelectionRootTransform().name;
+        string parentName = SelectionManager.Instance.getModelRoot(SelectionManager.Instance.currentSelection.transform).name;
+
         if (string.IsNullOrEmpty(parentName))
         {
             DebugConsole.Instance.LogWarning($"couldnt find parent name for component:{selection.name}");

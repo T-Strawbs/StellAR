@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class AnnotationComponent : MonoBehaviour
 {
-    public int annotationCount = 0;
     private List<AnnotationJson> annotations = new List<AnnotationJson>();
 
     public string highlightColour = "None";
