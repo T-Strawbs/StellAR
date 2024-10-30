@@ -1,6 +1,7 @@
 using MixedReality.Toolkit.UX;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,18 @@ public class VoiceAnnotationUI : AnnotationUI
         base.initialise(annotationData);
         if (annotationData is VoiceAnnotationJson voiceMessage)
         {
-            //attempt to load audio via our load audio delegate
-            AudioLoader.Instance.loadAudio(onAudioLoaded, voiceMessage.Content);
+            //if offline
+            if(!ApplicationManager.Instance.isOnline())
+            {
+                //attempt to load audio via our load audio delegate
+                AudioLoader.Instance.loadAudio(onAudioLoaded, voiceMessage.Content);
+            }
+            //is online
+            else
+            {
+                //send Rpc to server to load the audio
+                AudioLoader.Instance.loadAudioOnlineServerRpc(voiceMessage.Content, NetworkManager.Singleton.LocalClientId);
+            }
         }
         //rebuild the ui
         LayoutRebuilder.ForceRebuildLayoutImmediate(voiceUIRect);

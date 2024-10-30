@@ -457,6 +457,12 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
 
         // delete annotation from the GameObject
         deleteAnnotationFromRuntime(annotationToDelete, deleteAnnotationFromThis);
+
+        // if annotation was voice annotation, delete the audio file from system
+        if(annotationToDelete.MessageType == GlobalConstants.VOICE_ANNOTATION)
+        {
+            File.Delete(annotationToDelete.Content);
+        }
     }
 
     /// <summary>
@@ -554,7 +560,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     }
 
     /// <summary>
-    /// Post an annotation to the server.
+    /// Post an annotation to the server. Creates an AnnotationJson based on input content and adds it to the AnnotationComponent of the associated GameObject.
     /// </summary>
     /// <param name="lookupData">The lookup data for the object the annotation is being placed on.</param>
     /// <param name="content">The annotation content.</param>

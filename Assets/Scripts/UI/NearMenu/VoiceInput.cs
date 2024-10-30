@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 public enum ButtonState
@@ -156,11 +158,6 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
 
     }
 
-    private void postOnline()
-    {
-       
-    }
-
     private void postLocally()
     {
         //check if theres a currently selected object
@@ -210,6 +207,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //reset content
         resetVoiceInput();
     }
+
     public void resetVoiceInput()
     {
         //remove the current recording
@@ -219,6 +217,74 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //set the button state to Delete so the next tap will delete the curent recording
         recordBtnState = ButtonState.START;
         recordBtnIcon.CurrentIconName = "Icon 128";
+    }
+
+    private void postOnline()
+    {
+        //check if there's a currently selected object
+        if (!SelectionManager.Instance.currentSelection)
+        {
+            DebugConsole.Instance.LogError("We can't post when we have no currently selected object");
+            return;
+        }
+
+        //quickly assert that the current selection has an annotation component
+        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
+        if (!annotationComponent)
+        {
+            DebugConsole.Instance.LogError("We can't post as the currently selected object has no annotation component");
+            return;
+        }
+
+        //check if we're recording
+        if (isRecording)
+        {
+            DebugConsole.Instance.LogError("We can't post while we are recording");
+            return;
+        }
+
+        //check if we have a clip to post
+        if (currentRecording == null)
+        {
+            DebugConsole.Instance.LogError("We can't post as there is no current recording");
+            return;
+        }
+
+        //convert AudioClip into float array, from Unity scripting docs for AudioClip.GetData
+        var numSamples = currentRecording.samples * currentRecording.channels;
+        float[] samples = new float[numSamples];
+        currentRecording.GetData(samples, 0);        
+
+        MessageBasedInteractable addAnnotationToThis = SelectionManager.Instance.currentSelection.GetComponent<MessageBasedInteractable>();
+        postAudioAnnotationServerRpc(addAnnotationToThis.lookupData, samples, numSamples, currentRecording.channels, currentRecording.frequency);
+
+        //reset content
+        resetVoiceInput();
+    }
+
+    [Rpc(SendTo.Server)]
+    private void postAudioAnnotationServerRpc(NetworkInteractableLookupData lookupData, float[] networkAudioClip, int numSamples, int channels, int frequency)
+    {
+        //get the current date and time to store in the annotation data
+        string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
+        //format the current datetime so that we can save a file without IO pointing a gun at us
+        string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ', '-').Replace('/', '-');
+
+        //create filename from the componet name + datetime
+        Interactable addAnnotationToThis = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(lookupData.parentKey, lookupData.objectIndex);
+        string fileName = $"{addAnnotationToThis.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
+
+        //create blank audio clip and load audio data from network into it
+        AudioClip audioClip = AudioClip.Create(fileName, numSamples, channels, frequency, false, false);
+        audioClip.SetData(networkAudioClip, 0);
+
+        //save audio to file
+        SavWav.Save(fileName, currentRecording);
+
+        //post filename on server and broadcast to clients
+        AnnotationManager.Instance.postAnnotationServerRpc(lookupData, $"{GlobalConstants.ANNOTATION_DIR}/{fileName}.wav", GlobalConstants.VOICE_ANNOTATION);
+
+        DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
     }
 }
 
