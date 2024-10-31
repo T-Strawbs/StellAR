@@ -5,13 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInstantationListener
+public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInstantationListener, StartupProcess
 {
     //this allows us to ensure that the annotation json subtypes are accepted
     private JsonSerializerSettings settings;
@@ -31,6 +32,28 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
 
         //create main directory if it doesn exist
         createAnnotationMainDirectory();
+        ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
+    }
+
+    public void onStartupProcess()
+    {
+        NetworkManager.Singleton.OnServerStarted += () =>
+        {
+            if (NetworkManager.Singleton.IsServer)
+                registerMessages();
+        };
+        //Register lambda event that executes when the a client connects to the server.
+        NetworkManager.Singleton.OnClientConnectedCallback += (ulong clientID) =>
+        {
+            if (NetworkManager.Singleton.IsClient && NetworkManager.Singleton.LocalClientId == clientID)
+                registerMessages();
+        };
+    }
+
+    public void registerMessages()
+    {
+        //custom messaging function for sending audio data from client to server
+        NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("postAudioAnnotationRpc", postAudioAnnotationRpc);
     }
 
     /// <summary>
@@ -429,7 +452,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         ModelAnnotationJson rootJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(File.ReadAllText(jsonPath), settings);
 
         //search the root json for the currently selected component
-        ModelAnnotationJson targetJson = findComponent(rootJson, SelectionManager.Instance.currentSelection.name);
+        ModelAnnotationJson targetJson = findComponent(rootJson, deleteAnnotationFromThis.name);
         if (targetJson == null)
         {
             DebugConsole.Instance.LogError($"Couldnt find {deleteAnnotationFromThis.name} in {rootJson.Name}");
@@ -600,7 +623,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// <param name="networkAnnotation"></param>
     /// <param name="lookupData"></param>
     [Rpc(SendTo.NotServer)]
-    private void broadcastNewAnnotationRpc(NetworkInteractableLookupData lookupData, NetworkAnnotationJson networkAnnotation)
+    public void broadcastNewAnnotationRpc(NetworkInteractableLookupData lookupData, NetworkAnnotationJson networkAnnotation)
     {
         //find the component the annotation needs to be added to
         Transform component = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(lookupData.parentKey, lookupData.objectIndex).transform;
@@ -696,6 +719,36 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     }
 
     /// <summary>
+    /// Called on client to package audio annotation and send to server.
+    /// </summary>
+    /// <param name="lookupData">Lookup data for associated component.</param>
+    /// <param name="networkAudioClip">Audio data of the audio annotation.</param>
+    /// <param name="channels">Number of channels in the audio clip.</param>
+    public void postAudioAnnotationServer(NetworkInteractableLookupData lookupData, float[] networkAudioClip,  int channels)
+    {
+        AudioAnnotationPostRequest postRequest = new AudioAnnotationPostRequest(lookupData, networkAudioClip, channels);
+
+        // get size of data to be sent over network
+        var writeSize = FastBufferWriter.GetWriteSize(postRequest.lookupData) +
+            FastBufferWriter.GetWriteSize(postRequest.audioData) +
+            FastBufferWriter.GetWriteSize(postRequest.numChannels);
+
+        // send audio data to server
+        var writer = new FastBufferWriter(writeSize, Allocator.Temp);
+        using (writer)
+        {
+            DebugConsole.Instance.LogDebug("Sending audio data to server.");
+            //write the audio request response to the writer
+            writer.WriteValueSafe(postRequest);
+            //send request to the server
+            NetworkManager.Singleton.CustomMessagingManager.SendNamedMessage
+                (
+                    "postAudioAnnotationRpc", NetworkManager.ServerClientId, writer, NetworkDelivery.ReliableFragmentedSequenced
+                );
+        }
+    }
+
+    /// <summary>
     /// Called from client to server to save an audio annotation to server disk, create an Annotation for it and broadcast the annotation to clients.
     /// </summary>
     /// <param name="lookupData">Lookup data for object associated with new voice Annotation.</param>
@@ -703,29 +756,64 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// <param name="numSamples">Length of audio clip in number of samples.</param>
     /// <param name="channels">Number of channels of audio clip.</param>
     /// <param name="frequency">Frequency of audio clip.</param>
-    [Rpc(SendTo.Server)]
-    public void postAudioAnnotationServerRpc(NetworkInteractableLookupData lookupData, float[] networkAudioClip, int numSamples, int channels, int frequency)
+    public void postAudioAnnotationRpc(ulong senderId, FastBufferReader messagePayload)
     {
-        //get the current date and time to store in the annotation data
-        string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
-        //format the current datetime so that we can save a file without IO pointing a gun at us
-        string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ', '-').Replace('/', '-');
+        // get network data 
+        AudioAnnotationPostRequest networkResponse;
+        messagePayload.ReadValueSafe(out networkResponse);
 
-        //create filename from the componet name + datetime
-        Interactable addAnnotationToThis = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(lookupData.parentKey, lookupData.objectIndex);
-        string fileName = $"{addAnnotationToThis.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
+        // convert raw audio data into AudioClip
+        float[] audioData = networkResponse.audioData;
+        int numSamples = audioData.Length / networkResponse.numChannels;
 
-        //create blank audio clip and load audio data from network into it
-        AudioClip audioClip = AudioClip.Create(fileName, numSamples, channels, frequency, false, false);
-        audioClip.SetData(networkAudioClip, 0);
+        //convert network data to AudioClip
+        AudioClip clip = null;
 
-        //save audio to file
-        SavWav.Save(fileName, audioClip);
+        try
+        {
+            clip = AudioClip.Create("", numSamples, networkResponse.numChannels, GlobalConstants.SAMPLE_RATE, false);
+            clip.SetData(audioData, 0);
 
-        //post filename on server and broadcast to clients
-        AnnotationManager.Instance.postAnnotationServerRpc(lookupData, $"{GlobalConstants.ANNOTATION_DIR}/{fileName}.wav", GlobalConstants.VOICE_ANNOTATION);
+            //get the current date and time to store in the annotation data
+            string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
+            //format the current datetime so that we can save a file without IO pointing a gun at us
+            string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ', '-').Replace('/', '-');
 
-        DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
+            //create filename from the componet name + datetime
+            Interactable addAnnotationToThis = MessageBasedInstanceManager.Instance.lookupNetworkInteractable(networkResponse.lookupData.parentKey, networkResponse.lookupData.objectIndex);
+            string fileName = $"{GlobalConstants.ANNOTATION_DIR}/{addAnnotationToThis.name}/{addAnnotationToThis.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
+
+            //save audio to file
+            SavWav.Save(fileName, clip);
+
+            //post filename on server and broadcast to clients
+            AnnotationManager.Instance.postAnnotationServerRpc(networkResponse.lookupData, $"{fileName}.wav", GlobalConstants.VOICE_ANNOTATION);
+
+            DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
+        }
+        catch (System.Exception e)
+        {
+            DebugConsole.Instance.LogError($"Unable to create audio clip using data retrieved from client.\n{e.ToString()}");
+        }
+    }
+}
+
+public struct AudioAnnotationPostRequest : INetworkSerializable
+{
+    public NetworkInteractableLookupData lookupData;
+    public float[] audioData;
+    public int numChannels;
+    public AudioAnnotationPostRequest(NetworkInteractableLookupData lookupData, float[] audioData, int numChannels)
+    {
+        this.lookupData = lookupData;
+        this.audioData = audioData;
+        this.numChannels = numChannels;
     }
 
+    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+    {
+        serializer.SerializeValue(ref lookupData);
+        serializer.SerializeValue(ref audioData);
+        serializer.SerializeValue(ref numChannels);
+    }
 }

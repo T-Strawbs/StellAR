@@ -61,7 +61,7 @@ public class DebugConsole : Singleton<DebugConsole>
             logs.Add(logUI);
         }
         //run a unity debug call
-        //Debug.LogError($"DebugConsole:{log}");
+        Debug.LogError($"DebugConsole:{log}");
             
     }
 
@@ -79,7 +79,7 @@ public class DebugConsole : Singleton<DebugConsole>
             logs.Add(logUI);
         }
         //run a unity debug call
-        //Debug.LogWarning($"DebugConsole:{log}");
+        Debug.LogWarning($"DebugConsole:{log}");
     }
 
 

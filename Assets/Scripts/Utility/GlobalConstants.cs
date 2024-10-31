@@ -40,7 +40,7 @@ public static class GlobalConstants
     /// <summary>
     /// The maximum amound of time (in seconds) that explodable manager should wait for a lock to be engaged.
     /// </summary>
-    public static readonly float MAX_WAIT_TIME = 5f;
+    public static readonly float MAX_WAIT_TIME = 15f;
 
     #endregion LockConsts
 
@@ -53,6 +53,9 @@ public static class GlobalConstants
     public static readonly string TEXT_ANNOTATION = "Text";
     #endregion Annotation Consts
 
+    #region AudioClip Consts
+    public static readonly int SAMPLE_RATE = 44100;
+    #endregion
     #region Utility Consts
     public static readonly string TIME_FORMAT = "HH:mm:ss dd/MM/yyyy";
 

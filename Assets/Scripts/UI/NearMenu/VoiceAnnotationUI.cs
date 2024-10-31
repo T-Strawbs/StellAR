@@ -16,21 +16,22 @@ public class VoiceAnnotationUI : AnnotationUI
         base.initialise(annotationData);
         if (annotationData is VoiceAnnotationJson voiceMessage)
         {
-            //if offline
-            if(!ApplicationManager.Instance.isOnline())
+            // give the file path to audio clip to the audioPlayerUI
+            audioPlayerUI.audioPath = voiceMessage.Content;
+            audioPlayerUI.setAudioSource(null);
+            
+            //if offline or online as host
+            if(!ApplicationManager.Instance.isOnline() || (ApplicationManager.Instance.isOnline() && NetworkManager.Singleton.IsHost))
             {
                 //attempt to load audio via our load audio delegate
                 AudioLoader.Instance.loadAudio(onAudioLoaded, voiceMessage.Content);
+                
             }
-            //is online
-            else
-            {
-                //send Rpc to server to load the audio
-                AudioLoader.Instance.loadAudioOnlineServerRpc(voiceMessage.Content, NetworkManager.Singleton.LocalClientId);
-            }
+            //if online we don't need to load audio until button is preseed
+
+            //rebuild the ui
+            LayoutRebuilder.ForceRebuildLayoutImmediate(voiceUIRect);
         }
-        //rebuild the ui
-        LayoutRebuilder.ForceRebuildLayoutImmediate(voiceUIRect);
     }
 
     private void onAudioLoaded(AudioClip clip,string audioPath)
