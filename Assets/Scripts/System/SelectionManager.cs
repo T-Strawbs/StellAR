@@ -1,3 +1,4 @@
+using Microsoft.MixedReality.GraphicsTools;
 using System;
 using System.Collections;   
 using System.Collections.Generic;
@@ -34,7 +35,10 @@ public class SelectionManager : Singleton<SelectionManager>
             return;
         DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) is about to request an explosion of {currentSelection.name}");
 
-        if(currentSelection is MessageBasedInteractable)
+        // if current selection has a mesh outline remove it before exploding
+        ClientManager.Instance.removeOutline(currentSelection.transform);
+
+        if (currentSelection is MessageBasedInteractable)
             MessageBasedExplodableHandler.Instance.requestInteractableExplostion((MessageBasedInteractable)currentSelection);
         else if(currentSelection is LocalBasedInteractble)
             currentSelection.explodeInteractable();

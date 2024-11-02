@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Networking/NetworkData/NetworkAnnotationJson.cs.meta
 guid: 465fe5676f85b144baf81388d3972905
+========
+guid: ffad31d8fd3330f4290ec94b6911f44b
+>>>>>>>> AvatarOutline:Assets/Scripts/Networking/NetworkManagers/ClientManager.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
