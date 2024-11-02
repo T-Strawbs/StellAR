@@ -435,9 +435,9 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
             //assign the object index from the network interactables lookup data
             objectIndex = networkInteractable.lookupData.objectIndex,
             //assign the target position
-            targetPosition = targetPosition,
+            targetPosition = networkInteractable.transform.localPosition,
             //assign the target rotation
-            targetRotation = targetRotation,
+            targetRotation = networkInteractable.transform.localRotation,
             //assing the target scale
             targetScale = targetScale
         };
@@ -511,7 +511,7 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         }
 
         //apply the tranform 
-        targetInteractable.updateTransformLocalClient
+        targetInteractable.updateTransformLocalClientLocalPosition
             (
                 transformRequest.targetPosition,transformRequest.targetRotation,transformRequest.targetScale
             );

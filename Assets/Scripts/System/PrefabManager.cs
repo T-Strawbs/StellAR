@@ -204,8 +204,13 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
 
         DebugConsole.Instance.LogDebug($"client:{senderId} requested that an object should be spawned on client:{NetworkManager.Singleton.LocalClientId}'s device");
 
+        Transform networkOriginTransform = VuforiaManager.networkOriginObject.transform;
+
         //instantiate object -- nededs to be using vufoira target
-        GameObject instance = Instantiate(prefabs[spawnRequest.prefabIndex], Vector3.zero, Quaternion.identity);
+        GameObject instance = Instantiate(prefabs[spawnRequest.prefabIndex]);
+
+        instance.transform.SetParent(networkOriginTransform, false);
+        instance.transform.SetPositionAndRotation(networkOriginTransform.position, networkOriginTransform.rotation);
 
         //rename the instance to match the prefab data
         instance.name = prefabs[spawnRequest.prefabIndex].name;

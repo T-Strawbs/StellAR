@@ -17,6 +17,7 @@ public class ClientManager : NetworkSingleton<ClientManager>
         SelectionManager.Instance.onLocalSelectionChanged.AddListener(applyOutlineToNewSelection);
     }
 
+
     /// <summary>
     /// Remove outline, called from within ClientManager.
     /// </summary>

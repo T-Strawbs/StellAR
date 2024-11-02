@@ -261,6 +261,13 @@ public class MessageBasedInteractable : Interactable
         transform.localScale = Vector3.Lerp(transform.localScale, newScale, GlobalConstants.TRANSLATION_SPEED / Time.deltaTime);
     }
 
+    public void updateTransformLocalClientLocalPosition(Vector3 newPosition, Quaternion newRotation, Vector3 newScale)
+    {
+        transform.localPosition = Vector3.Lerp(transform.position, newPosition, GlobalConstants.TRANSLATION_SPEED / Time.deltaTime);
+        transform.localRotation = Quaternion.Lerp(transform.rotation, newRotation, GlobalConstants.TRANSLATION_SPEED / Time.deltaTime);
+        transform.localScale = Vector3.Lerp(transform.localScale, newScale, GlobalConstants.TRANSLATION_SPEED / Time.deltaTime);
+    }
+
 
     public void initialiseLookupData
         (
