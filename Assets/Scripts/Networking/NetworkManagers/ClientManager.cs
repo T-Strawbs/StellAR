@@ -139,7 +139,7 @@ public class ClientManager : NetworkSingleton<ClientManager>
 
                     // set colour and width
                     outline.OutlineMaterial = outlineMaterials[colourToUse % outlineMaterials.Count];
-                    outline.OutlineWidth = 0.1f;
+                    outline.OutlineWidth = 0.02f;
                 }
                 else
                 {
@@ -158,7 +158,7 @@ public class ClientManager : NetworkSingleton<ClientManager>
 
                 // set colour and width
                 outline.OutlineMaterial = outlineMaterials[colourToUse % outlineMaterials.Count];
-                outline.OutlineWidth = 0.1f;
+                outline.OutlineWidth = 0.02f;
                 outline.ApplyOutlineMaterial();
             }
         }
