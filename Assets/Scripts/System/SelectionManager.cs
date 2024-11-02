@@ -35,12 +35,8 @@ public class SelectionManager : Singleton<SelectionManager>
             return;
         DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) is about to request an explosion of {currentSelection.name}");
 
-        MeshOutlineHierarchy outline = currentSelection.GetComponent<MeshOutlineHierarchy>();
         // if current selection has a mesh outline remove it before exploding
-        if (outline != null)
-        {
-            Destroy(outline);
-        }
+        ClientManager.Instance.removeOutline(currentSelection.transform);
 
         if (currentSelection is MessageBasedInteractable)
             MessageBasedExplodableHandler.Instance.requestInteractableExplostion((MessageBasedInteractable)currentSelection);

@@ -82,9 +82,6 @@ public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListene
             //set the applications NetworkStatus to online
             ApplicationManager.Instance.setNetworkStatus(NetworkStatus.ONLINE);
 
-            // when hosting set the client id
-            ClientManager.Instance.setClientId((int)NetworkManager.Singleton.LocalClientId);
-
             return true;
         }
         catch (Exception e) 
@@ -121,8 +118,6 @@ public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListene
             //set the applications NetworkStatus to online
             ApplicationManager.Instance.setNetworkStatus(NetworkStatus.ONLINE);
 
-            // when joining set the client id
-            ClientManager.Instance.setClientId((int)NetworkManager.Singleton.LocalClientId);
             return true;
         }
         catch (Exception e)
