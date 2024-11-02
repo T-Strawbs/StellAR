@@ -40,7 +40,7 @@ public class DebugConsole : Singleton<DebugConsole>
 
     public void LogDebug(string log)
     {
-        if(debugConsole.gameObject.activeInHierarchy && enableConsole)
+        if(enableConsole)
         {
             //instanitate the log prefab
             LogUI logUI = Instantiate<LogUI>(prefab);
@@ -57,7 +57,7 @@ public class DebugConsole : Singleton<DebugConsole>
 
     public void LogError(string log)
     {
-        if (debugConsole.gameObject.activeInHierarchy && enableConsole)
+        if (enableConsole)
         {
             //instanitate the log prefab
             LogUI logUI = Instantiate<LogUI>(prefab);
@@ -75,7 +75,7 @@ public class DebugConsole : Singleton<DebugConsole>
 
     public void LogWarning(string log)
     {
-        if (debugConsole.gameObject.activeInHierarchy && enableConsole)
+        if (enableConsole)
         {
             //instanitate the log prefab
             LogUI logUI = Instantiate<LogUI>(prefab);

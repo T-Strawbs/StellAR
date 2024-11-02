@@ -5,8 +5,56 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using System.Net;
-public class ConnectionManager : Singleton<ConnectionManager>
+using System.Security.Policy;
+public class ConnectionManager : Singleton<ConnectionManager>,PostStartupListener
 {
+    private void Awake()
+    {
+        ApplicationManager.Instance.onPostStartProcess.AddListener(onPostStartup);   
+    }
+
+    private void Start()
+    {
+        setupNetworkManagerEvents();
+    }
+
+    public void onPostStartup()
+    {
+        //setupNetworkManagerEvents();
+    }
+
+    private void setupNetworkManagerEvents()
+    {
+        //Register lambda event that executes when the server starts 
+        NetworkManager.Singleton.OnServerStarted += () =>
+        {
+            DebugConsole.Instance.LogDebug("Success!: Server Started");
+            //if(IsServer)
+            //PrefabManager.Instance.registerMessages();
+        };
+        //Register lambda event that executes when the a client connects to the server.
+        NetworkManager.Singleton.OnClientConnectedCallback += (ulong clientID) =>
+        {
+            DebugConsole.Instance.LogDebug($"SUCCESS!: Client: client({clientID}) has joined the server");
+            //if(IsClient && NetworkManager.Singleton.LocalClientId == clientID)
+            //PrefabManager.Instance.registerMessages();
+        };
+        //Register lambda event that executes when the a client disconnects from the server.
+        NetworkManager.Singleton.OnClientDisconnectCallback += (ulong clientID) =>
+        {
+            DebugConsole.Instance.LogDebug($"SUCCESS!: Client: client({clientID}) has left the server");
+            // Log more details about the disconnection
+            if (NetworkManager.Singleton.DisconnectReason != null)
+            {
+                DebugConsole.Instance.LogDebug($"Disconnection Reason: {NetworkManager.Singleton.DisconnectReason}");
+            }
+            else
+            {
+                DebugConsole.Instance.LogDebug("No specific reason provided for disconnection.");
+            }
+        };
+    }
+
     public bool startHost()
     {
         //check if we can successfuly config the transport
