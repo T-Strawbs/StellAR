@@ -307,7 +307,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         //deserialised json into memory
         ModelAnnotationJson parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson);
         //update the json object in memory to now include the new annotation
-        updateAnnotationJson(componentParent, parentAnnotationJson, componentParent.name, annotation);
+        updateAnnotationJson(componentParent, parentAnnotationJson, component.name, annotation);
         DebugConsole.Instance.LogDebug($"Attempting to write to json to {fileName} for component {annotation.ComponentName} under model {componentParent} ");
         //write json object from memory to the json file on disk
         writeJson(parentAnnotationJson, fileName);
