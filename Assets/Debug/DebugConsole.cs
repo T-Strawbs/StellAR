@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class DebugConsole : Singleton<DebugConsole>
 {
+    [SerializeField] public bool enableConsole;
     [SerializeField] private TMP_Text currentSelectionText;
     [SerializeField] private TMP_Text previousSelectionText;
     [SerializeField] private string currentSelectionName;
@@ -19,20 +20,27 @@ public class DebugConsole : Singleton<DebugConsole>
 
     private void Start()
     {
-        logs = new List<LogUI>();
-        //set the default prev selection text
-        previousSelectionName = "None";
-        previousSelectionText.text = $"Previous Selection:{previousSelectionName}";
-        //set the default current selection text
-        currentSelectionName = "None";
-        currentSelectionText.text = $"Current Selection:{currentSelectionName}";
-        //make sure that we can post native unity logs into the debug console
-        Application.logMessageReceived += handleUnityLog;
+        if (enableConsole)
+        {
+            logs = new List<LogUI>();
+            //set the default prev selection text
+            previousSelectionName = "None";
+            previousSelectionText.text = $"Previous Selection:{previousSelectionName}";
+            //set the default current selection text
+            currentSelectionName = "None";
+            currentSelectionText.text = $"Current Selection:{currentSelectionName}";
+            //make sure that we can post native unity logs into the debug console
+            Application.logMessageReceived += handleUnityLog;
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     public void LogDebug(string log)
     {
-        if(debugConsole.gameObject.activeInHierarchy)
+        if(debugConsole.gameObject.activeInHierarchy && enableConsole)
         {
             //instanitate the log prefab
             LogUI logUI = Instantiate<LogUI>(prefab);
@@ -49,7 +57,7 @@ public class DebugConsole : Singleton<DebugConsole>
 
     public void LogError(string log)
     {
-        if (debugConsole.gameObject.activeInHierarchy)
+        if (debugConsole.gameObject.activeInHierarchy && enableConsole)
         {
             //instanitate the log prefab
             LogUI logUI = Instantiate<LogUI>(prefab);
@@ -67,7 +75,7 @@ public class DebugConsole : Singleton<DebugConsole>
 
     public void LogWarning(string log)
     {
-        if (debugConsole.gameObject.activeInHierarchy)
+        if (debugConsole.gameObject.activeInHierarchy && enableConsole)
         {
             //instanitate the log prefab
             LogUI logUI = Instantiate<LogUI>(prefab);

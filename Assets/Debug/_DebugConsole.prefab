@@ -3005,6 +3005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2f7bfc2326e8d48b7a00d01823dbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableConsole: 0
   currentSelectionText: {fileID: 1813948816018864372}
   previousSelectionText: {fileID: 3302427041558044478}
   currentSelectionName: 
