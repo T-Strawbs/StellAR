@@ -1,0 +1,339 @@
+{
+  "name": "Starlink_v1",
+  "metadata": "",
+  "subcomponents": [
+    {
+      "name": "AntennaHinge",
+      "metadata": "",
+      "subcomponents": [
+        {
+          "name": "Communication Antenna.001",
+          "metadata": "",
+          "subcomponents": []
+        },
+        {
+          "name": "Cube.012",
+          "metadata": "",
+          "subcomponents": []
+        }
+      ]
+    },
+    {
+      "name": "AntennaHinge.001",
+      "metadata": "",
+      "subcomponents": [
+        {
+          "name": "Communication Antenna",
+          "metadata": "",
+          "subcomponents": []
+        },
+        {
+          "name": "Cube",
+          "metadata": "",
+          "subcomponents": []
+        }
+      ]
+    },
+    {
+      "name": "Armature.001",
+      "metadata": "",
+      "subcomponents": [
+        {
+          "name": "Bone",
+          "metadata": "",
+          "subcomponents": [
+            {
+              "name": "Bone.001",
+              "metadata": "",
+              "subcomponents": [
+                {
+                  "name": "Bone.002",
+                  "metadata": "",
+                  "subcomponents": [
+                    {
+                      "name": "Bone.003",
+                      "metadata": "",
+                      "subcomponents": [
+                        {
+                          "name": "Bone.004",
+                          "metadata": "",
+                          "subcomponents": [
+                            {
+                              "name": "Bone.005",
+                              "metadata": "",
+                              "subcomponents": [
+                                {
+                                  "name": "Bone.006",
+                                  "metadata": "",
+                                  "subcomponents": [
+                                    {
+                                      "name": "Bone.007",
+                                      "metadata": "",
+                                      "subcomponents": [
+                                        {
+                                          "name": "Bone.008",
+                                          "metadata": "",
+                                          "subcomponents": [
+                                            {
+                                              "name": "Bone.009",
+                                              "metadata": "",
+                                              "subcomponents": [
+                                                {
+                                                  "name": "Bone.010",
+                                                  "metadata": "",
+                                                  "subcomponents": [
+                                                    {
+                                                      "name": "Bone.011",
+                                                      "metadata": "",
+                                                      "subcomponents": [
+                                                        {
+                                                          "name": "Bone.011_end",
+                                                          "metadata": "",
+                                                          "subcomponents": []
+                                                        },
+                                                        {
+                                                          "name": "PanelHinge.011",
+                                                          "metadata": "",
+                                                          "subcomponents": [
+                                                            {
+                                                              "name": "SolarPanel.011",
+                                                              "metadata": "",
+                                                              "subcomponents": []
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "name": "PanelHinge.010",
+                                                      "metadata": "",
+                                                      "subcomponents": [
+                                                        {
+                                                          "name": "SolarPanel.010",
+                                                          "metadata": "",
+                                                          "subcomponents": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "PanelHinge.009",
+                                                  "metadata": "",
+                                                  "subcomponents": [
+                                                    {
+                                                      "name": "SolarPanel.009",
+                                                      "metadata": "",
+                                                      "subcomponents": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "PanelHinge.008",
+                                              "metadata": "",
+                                              "subcomponents": [
+                                                {
+                                                  "name": "SolarPanel.008",
+                                                  "metadata": "",
+                                                  "subcomponents": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "PanelHinge.007",
+                                          "metadata": "",
+                                          "subcomponents": [
+                                            {
+                                              "name": "SolarPanel.007",
+                                              "metadata": "",
+                                              "subcomponents": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "PanelHinge.006",
+                                      "metadata": "",
+                                      "subcomponents": [
+                                        {
+                                          "name": "SolarPanel.006",
+                                          "metadata": "",
+                                          "subcomponents": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "PanelHinge.005",
+                                  "metadata": "",
+                                  "subcomponents": [
+                                    {
+                                      "name": "SolarPanel.005",
+                                      "metadata": "",
+                                      "subcomponents": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "name": "PanelHinge.004",
+                              "metadata": "",
+                              "subcomponents": [
+                                {
+                                  "name": "SolarPanel.004",
+                                  "metadata": "",
+                                  "subcomponents": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "PanelHinge.003",
+                          "metadata": "",
+                          "subcomponents": [
+                            {
+                              "name": "SolarPanel.003",
+                              "metadata": "",
+                              "subcomponents": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "PanelHinge.002",
+                      "metadata": "",
+                      "subcomponents": [
+                        {
+                          "name": "SolarPanel.002",
+                          "metadata": "",
+                          "subcomponents": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "PanelHinge.001",
+                  "metadata": "",
+                  "subcomponents": [
+                    {
+                      "name": "SolarPanel.001",
+                      "metadata": "",
+                      "subcomponents": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "PanelHinge",
+              "metadata": "",
+              "subcomponents": [
+                {
+                  "name": "SolarPanel",
+                  "metadata": "",
+                  "subcomponents": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bus",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Guide",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Guide.001",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Guide.002",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Krypton tank",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Krypton Thruster",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Krypton Thruster.001",
+      "metadata": "",
+      "subcomponents": [
+        {
+          "name": "Krypton Thruster.003",
+          "metadata": "",
+          "subcomponents": []
+        }
+      ]
+    },
+    {
+      "name": "Krypton Thruster.002",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Reaction Wheel",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Reaction Wheel.001",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Reaction Wheel.003",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Reaction Wheel.005",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Startracker",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "Startracker.002",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "X.001",
+      "metadata": "",
+      "subcomponents": []
+    },
+    {
+      "name": "X.002",
+      "metadata": "",
+      "subcomponents": []
+    }
+  ]
+}

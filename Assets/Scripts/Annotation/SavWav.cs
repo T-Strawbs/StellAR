@@ -42,7 +42,7 @@ public static class SavWav
             filename += ".wav";
         }
         //Travis --: I edited this so that it saves in our config resource path
-        var filepath = Path.Combine(Config.resourcePath, filename);
+        var filepath = Path.Combine(GlobalConstants.ANNOTATION_DIR, filename);
 
         Debug.Log(filepath);
 

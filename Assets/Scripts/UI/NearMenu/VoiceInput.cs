@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 public enum ButtonState
@@ -11,6 +13,7 @@ public enum ButtonState
     STOP,
     DELETE
 }
+
 public class VoiceInput : MonoBehaviour, IAnnotationInput
 {
     /// <summary>
@@ -70,10 +73,10 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
 
     private void recordAudio()
     {
-        string defaultDeviceName = Config.micName;
+        string defaultDeviceName = Microphone.devices[0];
         DebugConsole.Instance.LogDebug($"Recording from mic {defaultDeviceName}");
 
-        if (defaultDeviceName == "")
+        if (string.IsNullOrEmpty(defaultDeviceName))
         {
             DebugConsole.Instance.LogError($"we cant start or stop recording because we couldnt find a mic");
             return;
@@ -82,7 +85,10 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         {
             isRecording = true;
             //start recording using the the default microphone
-            currentRecording = Microphone.Start(defaultDeviceName, false, 120, 44100);
+            currentRecording = Microphone.Start
+                (
+                    defaultDeviceName, false, GlobalConstants.RECORDING_MAX_DURATION, GlobalConstants.SAMPLE_RATE
+                );
             //capture recording start time so we can trim the track once we end recording
             recordingStartTime = Time.time;
             //set the button state to Stop so the next tap will stop the recording
@@ -116,10 +122,12 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             DebugConsole.Instance.LogError("current recording is null so we cant trim it");
         }
 
+
         //create a float array to hold the samples
         float[] currentSamples = new float[currentRecording.samples];
         //populate the array with samples from the current recording
         currentRecording.GetData(currentSamples, 0);
+        //set the 
         //create an array to store the trimmed samples with a length of the current samples over the recording 
         //duration multiplied by the audio frequency and the number of channels. TLDR its black magic.
         float[] trimmedSamples = new float[
@@ -139,53 +147,69 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
 
     public void postAnnotation()
     {
+        if(ApplicationManager.Instance.isOnline())
+        {
+            postOnline();
+        }
+        else
+        {
+            postLocally();
+        }
+
+    }
+
+    private AnnotationJson postLocally()
+    {
         //check if theres a currently selected object
-        if (!SelectionManager.currentSelection)
+        if (!SelectionManager.Instance.currentSelection)
         {
             DebugConsole.Instance.LogError("We cant post when we have no currently selected object");
-            return;
+            return null;
         }
         //quickly assert that the current selection has an annotation component
-        AnnotationComponent annotationComponent = SelectionManager.currentSelection.GetComponent<AnnotationComponent>();
-        if(!annotationComponent)
+        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
+        if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");
-            return;
+            return null;
         }
         //check if we're recording
         if (isRecording)
         {
             DebugConsole.Instance.LogError("We cant post while we are recording");
-            return;
+            return null;
         }
         //check if we have a clip to post
         if (currentRecording == null)
         {
             DebugConsole.Instance.LogError("We cant post as there is no current recording");
-            return;
+            return null;
         }
+
         //get the current date and time to store in the annotation data
-        string currentDateTime = DateTime.Now.ToString(Config.timeFormat);
+        string currentDateTime = DateTime.Now.ToString(GlobalConstants.TIME_FORMAT);
         //format the current datetime so that we can save a file without IO pointing a gun at us
-        string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ','-').Replace('/','-');
+        string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ', '-').Replace('/', '-');
         //create filename from the componet name + datetime
-        string fileName = $"{SelectionManager.currentSelection.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
+        string fileName = $"{GlobalConstants.ANNOTATION_DIR}/{SelectionManager.Instance.currentSelection.name}/{SelectionManager.Instance.currentSelection.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
         //save audio to file
-        SavWav.Save(fileName,currentRecording);
+        SavWav.Save(fileName, currentRecording);
         //tell Annotation manager to create annotation Json
-        AnnotationManager.Instance.createAnnotationJson(
-            SelectionManager.currentSelection.name,
-            "Voice",
+        AnnotationJson audioAnnotation = AnnotationManager.Instance.createAnnotationJson(
+            SelectionManager.Instance.currentSelection.transform,
+            GlobalConstants.VOICE_ANNOTATION,
             "Default Author",// we need to replace this once we have multiple active users
             currentDateTime,
-            $"{Config.resourcePath}/{fileName}.wav"
+            $"{fileName}.wav"
             );
         //tell the UI manager to update its annotations 
-        UIManager.Instance.updateAnnotations(annotationComponent);
+        DataPanelManager.Instance.updateAnnotations(annotationComponent);
         DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
         //reset content
         resetVoiceInput();
+        return audioAnnotation;
     }
+
     public void resetVoiceInput()
     {
         //remove the current recording
@@ -196,4 +220,74 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         recordBtnState = ButtonState.START;
         recordBtnIcon.CurrentIconName = "Icon 128";
     }
+
+    private void postOnline()
+    {
+        //check if there's a currently selected object
+        if (!SelectionManager.Instance.currentSelection)
+        {
+            DebugConsole.Instance.LogError("We can't post when we have no currently selected object");
+            return;
+        }
+
+        //quickly assert that the current selection has an annotation component
+        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
+        if (!annotationComponent)
+        {
+            DebugConsole.Instance.LogError("We can't post as the currently selected object has no annotation component");
+            return;
+        }
+
+        //check if we're recording
+        if (isRecording)
+        {
+            DebugConsole.Instance.LogError("We can't post while we are recording");
+            return;
+        }
+
+        //check if we have a clip to post
+        if (currentRecording == null)
+        {
+            DebugConsole.Instance.LogError("We can't post as there is no current recording");
+            return;
+        }
+
+        if(!NetworkManager.Singleton.IsHost)
+        {
+            //convert AudioClip into float array, from Unity scripting docs for AudioClip.GetData
+            var numSamples = currentRecording.samples * currentRecording.channels;
+            float[] samples = new float[numSamples];
+            currentRecording.GetData(samples, 0);
+
+            MessageBasedInteractable addAnnotationToThis = SelectionManager.Instance.currentSelection.GetComponent<MessageBasedInteractable>();
+            if (addAnnotationToThis != null)
+            {
+                AnnotationManager.Instance.postAudioAnnotationServer(addAnnotationToThis.lookupData, samples, currentRecording.channels);
+            }
+            else
+            {
+                DebugConsole.Instance.LogError("Tried to post audio annotation while online but currently selected object is not networked (MessageBasedInteractable)");
+            }
+        }
+        // if you are hosting, just post locally and broadcast the annotation created.
+        else
+        {
+            AnnotationJson createdAnnotation = postLocally();
+            MessageBasedInteractable addAnnotationToThis = SelectionManager.Instance.currentSelection.GetComponent<MessageBasedInteractable>();
+
+            //broadcast new annotation to clients
+            NetworkAnnotationJson networkAnnotation = new NetworkAnnotationJson(createdAnnotation);
+            AnnotationManager.Instance.broadcastNewAnnotationRpc(addAnnotationToThis.lookupData, networkAnnotation);
+
+            //if annotation was for current selection update data pane
+            if (SelectionManager.Instance.currentSelection == addAnnotationToThis.GetComponent<Interactable>())
+            {
+                DataPanelManager.Instance.updateAnnotations(annotationComponent);
+            }
+        }
+
+        //reset content
+        resetVoiceInput();
+    }
 }
+

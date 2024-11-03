@@ -3,25 +3,31 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HandMenuManager : MonoBehaviour
+public class HandMenuManager : Singleton<HandMenuManager>, PrefabLoadListener
 {
     [SerializeField] private RectTransform homePane;
     [SerializeField] private ModelPane modelPane;
     [SerializeField] private AnimationPane animPane;
+    [SerializeField] private ControlPane controlPane;
 
-    private void Start()
-    {
-        initialisePanes();
-    }
+    [SerializeField] private NetworkOptionsTab networkOptionsTab;
 
-    private void initialisePanes()
+    private void Awake()
     {
-        //populate model pane
-        modelPane.populateScrollPane();
-        //deactivate it
+        PrefabManager.Instance.OnPrefabsLoaded.AddListener(onPrefabsLoaded);
+
+        //deactivate the model pane
         modelPane.enabled = false;
-        //deactivate it
+        //deactivate animations pane
         animPane.enabled = false;
+        //deactivate the network options pane
+        networkOptionsTab.enabled = false;
+
+        //initalise the control pane
+        controlPane.initialise();
+
+        //intitalise the network opt tab
+        networkOptionsTab.intialise();
     }
 
     public void activateModelPane()
@@ -60,5 +66,8 @@ public class HandMenuManager : MonoBehaviour
         animPane.gameObject.SetActive(false);
     }
 
-
+    public void onPrefabsLoaded(List<GameObject> loadedPrefabs)
+    {
+        modelPane.populateScrollPane(loadedPrefabs);
+    }
 }

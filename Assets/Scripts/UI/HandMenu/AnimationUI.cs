@@ -1,7 +1,6 @@
 using MixedReality.Toolkit.UX;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +10,6 @@ enum AnimBtnState
     STOP,
     RESET
 }
-
 
 public class AnimationUI : MonoBehaviour
 {

@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Orignial Author: https://github.com/dilmerv
+ * Link: https://github.com/dilmerv/UnityMultiplayerPlayground/blob/master/Assets/Scripts/Core/NetworkSingleton.cs
+ */
+
 public class Singleton<T> : MonoBehaviour
         where T : Component
 {

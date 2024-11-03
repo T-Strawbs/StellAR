@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
 
 public class AnnotationComponent : MonoBehaviour
 {
-    public int annotationCount = 0;
     private List<AnnotationJson> annotations = new List<AnnotationJson>();
 
     public string highlightColour = "None";
@@ -98,9 +98,6 @@ public class AnnotationComponent : MonoBehaviour
         {
             renderer.gameObject.GetComponent<AnnotationComponent>().setHighlight(newHighlightColour);
         }
-
-        // update the Json
-        AnnotationManager.Instance.updateAnnotationHighlightJson(newHighlightColour);
     }
 
     public void deleteAnnotation(AnnotationJson annotationData)
@@ -114,4 +111,5 @@ public class AnnotationComponent : MonoBehaviour
             }
         }
     }
+
 }
