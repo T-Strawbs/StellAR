@@ -15,7 +15,6 @@ public class VuforiaManager : Singleton<VuforiaManager>
         networkOriginObject = new GameObject("NetworkOriginObject");
         networkOriginObject.transform.position = VuforiaTarget.transform.position;
         networkOriginObject.transform.rotation = VuforiaTarget.transform.rotation;
-        networkOriginObject.transform.SetParent(VuforiaTarget.transform);
     }
 
     // Update is called once per frame

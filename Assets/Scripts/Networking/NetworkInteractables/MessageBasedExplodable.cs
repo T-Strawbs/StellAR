@@ -43,7 +43,7 @@ public class MessageBasedExplodable : Explodable
         foreach (Interactable child in current.children)
         {
             //deparent child
-            child.transform.SetParent(null);
+            child.transform.SetParent(VuforiaManager.networkOriginObject.transform);
 
             //turn on child object manipulator
             //child.selectable.toggleObjectManipulatorRpc(true);
