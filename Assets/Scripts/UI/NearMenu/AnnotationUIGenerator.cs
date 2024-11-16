@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - UNisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
 /// <summary>
 /// This class is responisble for instaniating and managing Annotation UI
 /// prefabs.
@@ -17,8 +25,13 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
     /// Object pool for VoiceAnnotationUI elements
     /// </summary>
     [SerializeField] private List<VoiceAnnotationUI> pooledVoiceUI;
-
+    /// <summary>
+    /// The prefab to generate TextAnnotationUI Element instances from
+    /// </summary>
     [SerializeField] TextAnnotationUI textAnnotationUIPrefab;
+    /// <summary>
+    /// The prefab to generate VoiceAnnotationUI Element instances from
+    /// </summary>
     [SerializeField] VoiceAnnotationUI voiceAnnotationUIPrefab;
 
     private void Start()
@@ -27,27 +40,47 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
         pooledVoiceUI = new List<VoiceAnnotationUI>();
     }
 
+    /// <summary>
+    /// method for reclaiming the used annotation UI elements and deactivating them.
+    /// </summary>
+    /// <param name="annotationUI"></param>
     public void returnAnnotationUI(AnnotationUI annotationUI)
     {
+        //check if the element is null and return if it is.
         if(!annotationUI)
         {
             DebugConsole.Instance.LogError("the annotation was null so we couldnt return it");
             return;
         }
+        //check if the annotation element is either a text or voice annotation
         if(annotationUI is TextAnnotationUI textUI)
         {
+            //reparent the element to this generator so that its out of the annotation pane's
+            //content holder
             textUI.transform.SetParent(transform);
+            //add the element to the pool of text ui elements
             pooledTextUI.Add(textUI);
+            //deactivate the element
             textUI.gameObject.SetActive(false);
         }
         else if(annotationUI is VoiceAnnotationUI voiceUI)
         {
+            //reparent the element to this generator so that its out of the annotation pane's
+            //content holder
             voiceUI.transform.SetParent(transform);
+            //add the element to the pool of text ui elements
             pooledVoiceUI.Add(voiceUI);
+            //deactivate the element
             voiceUI.gameObject.SetActive(false);
         }
     }
 
+    /// <summary>
+    /// method for retrieving an instance of an annotation UI element based on the annotation data.
+    /// </summary>
+    /// <param name="annotationData"></param>
+    /// <returns>AnnotationUI: the annotation element that would display the annotation data, 
+    /// Null if theres an issue.</returns>
     public AnnotationUI GetAnnotationUI(AnnotationJson annotationData)
     {
         //check the type of the annotationData
@@ -98,6 +131,11 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
         return null;// **** we should be returning a default object to correctly error handle potentially.
     }
 
+    /// <summary>
+    /// Method for creating an instance of an AnnotationUI element based on the annotation type.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
     private AnnotationUI generateAnnotationUI(string type)
     {
         if (type == "Text")

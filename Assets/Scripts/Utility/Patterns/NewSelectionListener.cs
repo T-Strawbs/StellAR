@@ -17,5 +17,5 @@ public interface NewSelectionListener
     /// Invokes behaviour when the onLocalSelectionChanged event is called
     /// </summary>
     /// <param name="selection"></param>
-    public void onNewSelectionListener(Transform selection);
+    public void onNewSelection(Transform selection);
 }

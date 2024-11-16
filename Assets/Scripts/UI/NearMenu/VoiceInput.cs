@@ -7,37 +7,50 @@ using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public enum ButtonState
-{
-    START,
-    STOP,
-    DELETE
-}
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - UNisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
 
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class that facilitates and handles the recording of voice annotations.
+/// </summary>
 public class VoiceInput : MonoBehaviour, IAnnotationInput
 {
     /// <summary>
     /// The record btn
     /// </summary>
     [SerializeField] private PressableButton recordBtn;
+    /// <summary>
+    /// The icon that is displayed on the record btn ui element
+    /// </summary>
     [SerializeField] private FontIconSelector recordBtnIcon;
     /// <summary>
     /// The current state of the record button (START,STOP,DELETE)
     /// </summary>
     [SerializeField] private ButtonState recordBtnState;
-
     /// <summary>
-    /// The button that posts the recording
+    /// The button that begins the posting process of the voice annotation
     /// </summary>
     [SerializeField] private PressableButton postBtn;
     /// <summary>
     /// The audio player UI component
     /// </summary>
     [SerializeField] private AudioPlayerUI audioPlayerUI;
-
+    /// <summary>
+    /// Boolean for determining whether we are recording or not
+    /// </summary>
     [SerializeField] private bool isRecording;
+    /// <summary>
+    /// the audioclip that we will record to
+    /// </summary>
     [SerializeField] private AudioClip currentRecording;
-
+    /// <summary>
+    /// the start time of the recording
+    /// </summary>
     [SerializeField] private float recordingStartTime = 0f;
 
     private void Start()
@@ -50,19 +63,25 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         postBtn.OnClicked.AddListener(postAnnotation);
     }
 
+    /// <summary>
+    /// callback for cycling through the record button states when
+    /// clicked.
+    /// </summary>
     private void OnRecordButtonClicked()
     {
         if(recordBtnState == ButtonState.START)
         {
             recordAudio();
+            //icon 135 = audio stop buttpn
             recordBtnIcon.CurrentIconName = "Icon 135";
-            //icon 135 = audio stop buttno
+            
         }
         else if(recordBtnState == ButtonState.STOP)
         {
             recordAudio();
-            recordBtnIcon.CurrentIconName = "Icon 80";
             //icon 80 is remove icon
+            recordBtnIcon.CurrentIconName = "Icon 80";
+            
         }
         else
         {
@@ -70,19 +89,25 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             resetVoiceInput();
         }
     }
-
+    /// <summary>
+    /// callback method for recording audio
+    /// </summary>
     private void recordAudio()
     {
+        //get the name of the first microphone detected -- At some point it would be better for
+        //the user to choose the device but at the moment we're just a proof of concept.
         string defaultDeviceName = Microphone.devices[0];
         DebugConsole.Instance.LogDebug($"Recording from mic {defaultDeviceName}");
-
+        //check if the device exists, if not return
         if (string.IsNullOrEmpty(defaultDeviceName))
         {
             DebugConsole.Instance.LogError($"we cant start or stop recording because we couldnt find a mic");
             return;
         }
+        //check if we are currently recording
         if (!isRecording)
         {
+            //we aren't so we begin the recording process.
             isRecording = true;
             //start recording using the the default microphone
             currentRecording = Microphone.Start
@@ -114,15 +139,19 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         audioPlayerUI.setAudioSource(currentRecording);
         
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="recordingDuration"></param>
     private void trimAudioClip(float recordingDuration)
     {
+        //check if we have a current recording
         if (!currentRecording)
         {
+            //we don't so return
             DebugConsole.Instance.LogError("current recording is null so we cant trim it");
+            return;
         }
-
-
         //create a float array to hold the samples
         float[] currentSamples = new float[currentRecording.samples];
         //populate the array with samples from the current recording
@@ -144,9 +173,10 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         trimmedClip.SetData(trimmedSamples, 0);
         currentRecording = trimmedClip;
     }
-
+    
     public void postAnnotation()
     {
+        //check if the application is currently online
         if(ApplicationManager.Instance.isOnline())
         {
             postOnline();
@@ -157,7 +187,10 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         }
 
     }
-
+    /// <summary>
+    /// Method for posting a voice annotation locally
+    /// </summary>
+    /// <returns>AnnotationJson: The created annotation data</returns>
     private AnnotationJson postLocally()
     {
         //check if theres a currently selected object
@@ -210,6 +243,9 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         return audioAnnotation;
     }
 
+    /// <summary>
+    /// callback for reseting the voice input
+    /// </summary>
     public void resetVoiceInput()
     {
         //remove the current recording
@@ -220,7 +256,9 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         recordBtnState = ButtonState.START;
         recordBtnIcon.CurrentIconName = "Icon 128";
     }
-
+    /// <summary>
+    /// method for posting the voice annoation over the network to the host.
+    /// </summary>
     private void postOnline()
     {
         //check if there's a currently selected object
@@ -290,4 +328,9 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         resetVoiceInput();
     }
 }
-
+public enum ButtonState
+{
+    START,
+    STOP,
+    DELETE
+}

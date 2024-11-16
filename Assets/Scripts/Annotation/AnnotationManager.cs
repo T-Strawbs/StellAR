@@ -12,17 +12,37 @@ using Unity.VisualScripting.FullSerializer;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+
+/// <summary>
+/// Class that manages the CRUD processes of Annotation Json data and Components both locally and over the Network.
+/// </summary>
 public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInstantationListener, StartupProcess
 {
-    //this allows us to ensure that the annotation json subtypes are accepted
+    /// <summary>
+    /// This is the settings object that enables us to use JSON subtypes
+    /// </summary>
     private JsonSerializerSettings settings;
+    /// <summary>
+    /// A dictionary of Model Annotation Json data (Annotation data of the whole object tree)
+    /// </summary>
     private Dictionary<int, ModelAnnotationJson> modelAnnotationJsons = new Dictionary<int, ModelAnnotationJson>();
 
     private void Awake()
     {
+        //register our onPrefabInstantiation method as a listener of the PrefabMangers event of the same name.
         PrefabManager.Instance.OnPrefabInstantiation.AddListener(onPrefabInstantiation);
+        //register our onPrefabInstantiation method as a listener of the PrefabMangers event of the same name.
+        ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
 
-        //ensure that the annotation json concretions are accepted
+        //ensure that the annotation json subtype concretions are accepted
         settings = new JsonSerializerSettings
         {
             //TypeNameHandling = TypeNameHandling.All,
@@ -32,9 +52,9 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
 
         //create main directory if it doesn exist
         createAnnotationMainDirectory();
-        ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
+        
     }
-
+  
     public void onStartupProcess()
     {
         NetworkManager.Singleton.OnServerStarted += () =>
@@ -50,6 +70,9 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         };
     }
 
+    /// <summary>
+    /// callback for registering the postAudioAnnotationRpc custom message
+    /// </summary>
     public void registerMessages()
     {
         //custom messaging function for sending audio data from client to server
@@ -81,7 +104,9 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             }
         }
     }
-
+    /// <summary>
+    /// method for creating the annotation main directory
+    /// </summary>
     private void createAnnotationMainDirectory()
     {
         //check if the main annotation dir exists and if not create it
@@ -90,7 +115,10 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             Directory.CreateDirectory(GlobalConstants.ANNOTATION_DIR);
         }
     }
-
+    /// <summary>
+    /// method for creating the annoation subdirectory for a root model using its name
+    /// </summary>
+    /// <param name="rootModelName">The Name of the Model</param>
     private void createAnnotationSubDirectorDirectory(string rootModelName)
     {
         //check if the directory exists an if not create it
@@ -99,7 +127,10 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             Directory.CreateDirectory($"{GlobalConstants.ANNOTATION_DIR}/{rootModelName}/");
         }
     }
-
+    /// <summary>
+    /// method that initialises the annoations for a specific model prefab
+    /// </summary>
+    /// <param name="prefabInstance"></param>
     private void initialiseAnnotations(GameObject prefabInstance)
     {
 
@@ -137,9 +168,14 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             modelAnnotationJsons.Add(messageBasedInteractable.lookupData.parentKey, parentAnnotationJson);
         }
     }
-
+    /// <summary>
+    /// recursive method for populating the annotation components for a given model and its children
+    /// </summary>
+    /// <param name="parentTransform">the parent transform of this model object's transform.</param>
+    /// <param name="parentComponent">the json data of the parent to populate the annotation components with.</param>
     private void populateAnnotationDataFromJson(Transform parentTransform, ModelAnnotationJson parentComponent)
     {
+        //try to grab the annotation component of the parent transform
         AnnotationComponent annotationComponent = parentTransform.GetComponent<AnnotationComponent>();
         //check if the object already has an annotation component and add it if it doesnt
         if (annotationComponent == null)
@@ -147,8 +183,9 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             //create a new annotation component for the parent
             annotationComponent = parentTransform.AddComponent<AnnotationComponent>();
         }
-        
+        //set the original colour code of the parent object to that of the annotation component's 
         parentComponent.OriginalColourCode = annotationComponent.getOriginalolourString();
+        //set the annotation component's highlight colour to that of the parent's json data component.
         annotationComponent.highlightColour = parentComponent.HighlightColour;
         //add the annotation data to the annotation component
         annotationComponent.Annotations = parentComponent.Annotations;
@@ -195,7 +232,11 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         }
 
     }
-
+    /// <summary>
+    /// Method for creating an annotation and adding it to the object's json data.
+    /// </summary>
+    /// <param name="parentTransform"></param>
+    /// <param name="parentComponent"></param>
     private void createAnnotationJson(Transform parentTransform, ModelAnnotationJson parentComponent)
     {
 
@@ -215,6 +256,11 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         }
     }
 
+    /// <summary>
+    /// method for writing the annotation data into the model's json data.
+    /// </summary>
+    /// <param name="serialisedAnnotation"></param>
+    /// <param name="jsonPath"></param>
     private void writeJson(ModelAnnotationJson serialisedAnnotation, string jsonPath)
     {
         try
@@ -313,7 +359,11 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         writeJson(parentAnnotationJson, fileName);
     }
 
-    // call whenever a component's highlight colour is updated. Updates the Json file accordingly
+    /// <summary>
+    /// method for updating a component's highlight colour. Updates the Json file accordingly
+    /// </summary>
+    /// <param name="objectToUpdate"></param>
+    /// <param name="highlightColour"></param>
     public void updateAnnotationHighlightJson(Transform objectToUpdate, string highlightColour)
     {
         // highlighted object will be currently selected
@@ -334,7 +384,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         else
         {
             // else find the corresponding subcomponent in the Json structure
-            targetJson = findSubcomponentInJson(parentAnnotationJson, targetName);
+            targetJson = findComponent(parentAnnotationJson, targetName);
 
         }
 
@@ -351,7 +401,11 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         }
     }
 
-    // used to update the highlight colour value of all subcomponents of a component
+    /// <summary>
+    /// used to update the highlight colour value of all subcomponents of a component
+    /// </summary>
+    /// <param name="parentAnnotationJson"></param>
+    /// <param name="highlightColour"></param>
     private void updateHighlightOfChildren(ModelAnnotationJson parentAnnotationJson, string highlightColour)
     {
         // update the highlight colour of current component
@@ -362,28 +416,6 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         {
             updateHighlightOfChildren(childAnnotationJson, highlightColour);
         }
-    }
-
-    private ModelAnnotationJson findSubcomponentInJson(ModelAnnotationJson parentAnnotationJson, string targetName)
-    {
-        ModelAnnotationJson returnValue = null;
-
-        if (parentAnnotationJson.Name == targetName)
-        {
-            return parentAnnotationJson;
-        }
-        else
-        {
-            foreach (ModelAnnotationJson subcomponent in parentAnnotationJson.Subcomponents)
-            {
-                returnValue = findSubcomponentInJson(subcomponent, targetName);
-                if (returnValue != null)
-                {
-                    return returnValue;
-                }
-            }
-        }
-        return returnValue;
     }
 
     /// <summary>
@@ -519,7 +551,13 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             DataPanelManager.Instance.updateAnnotations(currentSelection);
         }
     }
-
+    /// <summary>
+    /// Depth first Search for finding a target model json component of a given model using a target name
+    /// to retrieve the value.
+    /// </summary>
+    /// <param name="currentModelJson"></param>
+    /// <param name="targetName"></param>
+    /// <returns></returns>
     private ModelAnnotationJson findComponent(ModelAnnotationJson currentModelJson, string targetName)
     {
         if (currentModelJson.Name == targetName)
@@ -535,26 +573,12 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         return null;
     }
 
-    private void findComponent(Transform currentComponent, string targetName, Transform target)
-    {
-        //check the current components name
-        if (currentComponent.name == targetName)
-        {
-            target = currentComponent;
-            return;
-        }
-        //for each sub component
-        for (int i = 0; i < currentComponent.childCount; i++)
-        {
-            Transform subcomponent = currentComponent.GetChild(i);
-            if (!subcomponent)
-                continue;
-            findComponent(subcomponent, targetName, target);
-        }
 
-    }
-
-    // executes on the server to return annotation data associated with the key
+    /// <summary>
+    /// requests the server to provide the annotations of a specific model using the models lookupdata parent key
+    /// </summary>
+    /// <param name="clientId"></param>
+    /// <param name="modelParentKey">The parent key of the model we want to get annotations for.</param>
     [Rpc(SendTo.Server)]
     private void requestAnnotationDataFromServerRpc(ulong clientId, int modelParentKey)
     {

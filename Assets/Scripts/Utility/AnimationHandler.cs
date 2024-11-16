@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AnimationHandler : MonoBehaviour, NewSelectionListener
+
+
+public class AnimationHandler : Singleton<AnimationHandler>, NewSelectionListener
 {
     /*
     public List<AnimationClip> animations;
@@ -19,7 +21,7 @@ public class AnimationHandler : MonoBehaviour, NewSelectionListener
 
     private void Awake()
     {
-        SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelectionListener);
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelection);
     }
 
     // Start is called before the first frame update
@@ -52,7 +54,7 @@ public class AnimationHandler : MonoBehaviour, NewSelectionListener
         */
     }
 
-    public void onNewSelectionListener(Transform selection)
+    public void onNewSelection(Transform selection)
     {
         string parentName = SelectionManager.Instance.getModelRoot(SelectionManager.Instance.currentSelection.transform).name;
 

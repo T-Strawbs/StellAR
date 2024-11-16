@@ -7,19 +7,37 @@ using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - UNisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class for facilitating the creation of text annotations via UI.
+/// </summary>
 public class TextInput : MonoBehaviour, IAnnotationInput
 {
-    [SerializeField] private PressableButton inputFieldBtn;
+    /// <summary>
+    /// the button that begins the annotation creation process
+    /// </summary>
     [SerializeField] private PressableButton postBtn;
+    /// <summary>
+    /// the text field that we use as the annotation content
+    /// </summary>
     [SerializeField] private TMP_Text inputText;
    
     private void Start()
     {
+        //regisiter the post annoation callback to be invoked when the post button is activated
         postBtn.OnClicked.AddListener(postAnnotation);
     }
 
     public void postAnnotation ()
     {
+        //check if the application is online
         if (ApplicationManager.Instance.isOnline())
         {
             postOnline();
@@ -30,6 +48,9 @@ public class TextInput : MonoBehaviour, IAnnotationInput
         }
     }
 
+    /// <summary>
+    /// method for posting a new text annotation online
+    /// </summary>
     private void postOnline()
     {
         DebugConsole.Instance.LogDebug($"POSTING ANNOTATION ONLINE!");
@@ -60,6 +81,9 @@ public class TextInput : MonoBehaviour, IAnnotationInput
         //reset text input field
         inputText.text = "";
     }
+    /// <summary>
+    /// method for posting a new text annotation locally
+    /// </summary>
     private void postLocally()
     {
         DebugConsole.Instance.LogDebug($"POSTING ANNOTATION!");

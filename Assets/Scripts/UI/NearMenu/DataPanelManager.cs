@@ -3,17 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - UNisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class for managing the Data Panel's content.
+/// </summary>
 public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListener
 {
+    /// <summary>
+    /// The Object representing the Metadata pane
+    /// </summary>
     [SerializeField] private MetadataPane metadataPane;
+    /// <summary>
+    /// The Object representing the Annotation pane
+    /// </summary>
     [SerializeField] private AnnotationPane annotationPane;
 
-    public void Awake()
+    private void Awake()
     {
-        SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelectionListener);
+        //subscribe the selection manager's onLocalSelectionChanged event
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelection);
     }
 
-    public void onNewSelectionListener(Transform selection)
+    public void onNewSelection(Transform selection)
     {
         //grab the metadata component
         MetadataComponent metadata = selection.GetComponent<MetadataComponent>();
@@ -34,6 +52,11 @@ public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListene
         updateAnnotations(annotationData);
     }
 
+    /// <summary>
+    /// method for updating the metadata pane with content from the MetadataComponent of the
+    /// currently selected interactable
+    /// </summary>
+    /// <param name="metadata"></param>
     private void updateMetadata(MetadataComponent metadata)
     {
         if(string.IsNullOrEmpty(metadata.metadata))
@@ -43,18 +66,24 @@ public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListene
         }
         metadataPane.updateMetadataContent(metadata.metadata);
     }
-
+    /// <summary>
+    /// method for updating the metadata pane with content from the AnnotationComponent of the
+    /// currently selected interactable
+    /// </summary>
+    /// <param name="annotationData"></param>
     public void updateAnnotations(AnnotationComponent annotationData)
     {
         Debug.Log("We are updating annotations");
         //for each active UI element in the annotation pane
         for (int i = 0; i < annotationPane.ActiveAnnotationUI.Count; i++)
         {
+            //grab a reference to the annotation UI object from the active annotation UI pool.
             AnnotationUI activeUI = annotationPane.ActiveAnnotationUI[i];
             Debug.Log($"Returning {activeUI.transform.name}");
-            //return element to the generator
+            //return element to the generator for cleansing
             AnnotationUIGenerator.Instance.returnAnnotationUI(activeUI);
         }
+
         Debug.Log("Clearing the annotation panes active content");
         //clear the annotation pane's active UI list
         annotationPane.ActiveAnnotationUI.Clear();
@@ -65,7 +94,7 @@ public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListene
             DebugConsole.Instance.LogDebug("the annotations of this component is null");
             return;
         }
-
+        //for each annotation data from the current interactble's annotations
         foreach (AnnotationJson annotationjsonData in annotationData.Annotations)
         {
             //get a Annotation UI element from the AnnotationGenerator

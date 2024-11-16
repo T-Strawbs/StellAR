@@ -147,7 +147,7 @@ public class AudioLoader : Singleton<AudioLoader>, StartupProcess
             //if the annotation was added to the current selection on the server make sure to attach the audio clip to the UI
             if (SelectionManager.Instance.currentSelection.transform == MessageBasedInstanceManager.Instance.lookupNetworkInteractable(audioRequest.lookupData.parentKey, audioRequest.lookupData.objectIndex).transform)
             {
-                DataPanelManager.Instance.onNewSelectionListener(SelectionManager.Instance.currentSelection.transform);
+                DataPanelManager.Instance.onNewSelection(SelectionManager.Instance.currentSelection.transform);
             }
 
         }

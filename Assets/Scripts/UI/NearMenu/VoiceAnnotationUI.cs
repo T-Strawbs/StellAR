@@ -5,10 +5,26 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - UNisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+///
+
+/// <summary>
+/// concrete class for Voice Annotation UI elements.
+/// </summary>
 public class VoiceAnnotationUI : AnnotationUI
 {
+    /// <summary>
+    /// The Audioplayer object for playing back the voice annotation Audio.
+    /// </summary>
     [SerializeField] private AudioPlayerUI audioPlayerUI;
-
+    /// <summary>
+    /// The transform of this voice annotation ui element
+    /// </summary>
     [SerializeField] private RectTransform voiceUIRect;
     
     public override void initialise(AnnotationJson annotationData)

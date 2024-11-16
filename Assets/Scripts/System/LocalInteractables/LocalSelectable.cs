@@ -15,8 +15,8 @@ public class LocalSelectable : Selectable
 
     protected override void onDeselection(SelectExitEventArgs args)
     {
-        //kinda bad pattern use because this method is useless on a local selectable
-        //at least for now
+        //this is kind of a bad implementation of an abstract class as this method
+        //currently has no need to be deselected when its a local only selection
     }
 
 }

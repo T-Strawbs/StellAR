@@ -4,11 +4,25 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - UNisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// concrete class for displayi
+/// </summary>
 public class TextAnnotationUI : AnnotationUI
 {
     [SerializeField] private TMP_Text content;
+
     [SerializeField] private RectTransform textAnnotationRect;
+
     [SerializeField] private RectTransform centreLayer;
+
     [SerializeField] private RectTransform contentLayer;
 
     public override void initialise(AnnotationJson annotationData)
