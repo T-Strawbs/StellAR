@@ -73,15 +73,15 @@ public static class GlobalConstants
     /// <summary>
     /// The dir for storing Metadata. This needs to be on persistant data path as the we create the metadata files
     /// at runtime and all build files and directories are read-only. 
-    /// Persistant data path eg C:\Users\USERNAME\AppData\LocalLow\DutchPizza\HLSP\Metadata
+    /// Persistant data path eg C:\Users\USERNAME\AppData\LocalLow\MorenaBridge\StallAR\Metadata
     /// </summary>
-    public static string METADATA_DIR = $"{Application.persistentDataPath}/Metadata";//"Assets/Resources/Metadata";
+    public static string METADATA_DIR = $"{Application.persistentDataPath}/ProjectFiles/Metadata";//"Assets/ProjectFiles/Metadata";
     /// <summary>
     /// The Dir for storing Annotation data. This needs to be on persistant data path as annotations are
     /// read/writable and directories in the build dir are read only. 
-    /// Persistant data path eg C:\Users\USERNAME\AppData\LocalLow\DutchPizza\HLSP\Metadata
+    /// Persistant data path eg C:\Users\USERNAME\AppData\LocalLow\MorenaBridge\StellAR\Metadata
     /// </summary>
-    public static string ANNOTATION_DIR = $"{Application.persistentDataPath}/AnnotationData";
+    public static string ANNOTATION_DIR = $"{Application.persistentDataPath}/ProjectFiles/AnnotationData";
     #endregion
 
 } 
