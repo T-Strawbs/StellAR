@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles client colour, currently only used for outlines but could be used for hand visualisation colours.
+/// </summary>
 public class ClientManager : NetworkSingleton<ClientManager>
 {
     public List<Material> outlineMaterials = new List<Material>();
