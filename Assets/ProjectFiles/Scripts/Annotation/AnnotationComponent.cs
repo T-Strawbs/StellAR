@@ -4,9 +4,23 @@ using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
 
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Game Component for fast access of annotation messages. Holds annotation data for the attached model component
+/// to be modified by the user and to be read and writen to by the AnnotationManager.
+/// </summary>
 public class AnnotationComponent : MonoBehaviour
 {
+    /// <summary>
+    /// The list of annotation messages from json data
+    /// </summary>
     private List<AnnotationJson> annotations = new List<AnnotationJson>();
 
     public string highlightColour = "None";
@@ -19,9 +33,14 @@ public class AnnotationComponent : MonoBehaviour
         None
     */
 
-    // set when created by script
+    /// <summary>
+    /// The colour code string for keeping reference of the original colour code of this model component
+    /// </summary>
     public string originalColourString { get; private set; }
 
+    /// <summary>
+    /// Property for the annotation data list.
+    /// </summary>
     public List<AnnotationJson> Annotations
     {
         get { return annotations; }
@@ -33,7 +52,10 @@ public class AnnotationComponent : MonoBehaviour
         setHighlight(highlightColour);
     }
 
-    // called when new AnnotationComponent is added to object, sets originalColourString and renderer material colour
+    /// <summary>
+    /// called when new AnnotationComponent is added to object, sets originalColourString and renderer material colour
+    /// </summary>
+    /// <returns></returns>
     public string getOriginalolourString()
     {
         // if original colour code has already been set don't set it
@@ -49,7 +71,10 @@ public class AnnotationComponent : MonoBehaviour
     }
 
 
-    // modify renderer material colour and the private highlightColour identifier string
+    /// <summary>
+    /// modify renderer material colour and the private highlightColour identifier string
+    /// </summary>
+    /// <param name="newHighlight"></param>
     public void setHighlight(string newHighlight)
     {
         if (this.GetComponent<Renderer>() != null)
@@ -84,7 +109,10 @@ public class AnnotationComponent : MonoBehaviour
         }
     }
 
-    // public facing function for updating the highlight colour of this object and its children
+    /// <summary>
+    /// public facing function for updating the highlight colour of this object and its children
+    /// </summary>
+    /// <param name="newHighlightColour"></param>
     public void changeHighlightColour(string newHighlightColour)
     {
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
@@ -99,7 +127,10 @@ public class AnnotationComponent : MonoBehaviour
             renderer.gameObject.GetComponent<AnnotationComponent>().setHighlight(newHighlightColour);
         }
     }
-
+    /// <summary>
+    /// method for deleting a given annotation from the annotations list.
+    /// </summary>
+    /// <param name="annotationData"></param>
     public void deleteAnnotation(AnnotationJson annotationData)
     {
         for(int i = 0; i < annotations.Count; i++)

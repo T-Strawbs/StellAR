@@ -5,6 +5,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Serialised Class for Representing the Model's structure in Json in order to store annotation data as
+/// Json objects for each component of the model.
+/// </summary>
 [Serializable]
 public class ModelAnnotationJson
 {

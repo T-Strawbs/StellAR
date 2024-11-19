@@ -5,9 +5,23 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Serialised concrete class to hold Json Objects in the form of Voice Annotations.
+/// </summary>
 [Serializable]
 public class VoiceAnnotationJson : AnnotationJson
 {
+    /// <summary>
+    /// The format type of this annotation object which in this case should always be "Voice"
+    /// </summary>
     public override string MessageType => GlobalConstants.VOICE_ANNOTATION;
 
     /// <summary>

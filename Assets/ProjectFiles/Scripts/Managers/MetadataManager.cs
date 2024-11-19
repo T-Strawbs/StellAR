@@ -23,6 +23,11 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
         initialseMetadata(loadedPrefabs);
     }
 
+    /// <summary>
+    /// initialiser method for reading metadata Json and creating metadata components to attach to each model's
+    /// subcomponents.
+    /// </summary>
+    /// <param name="loadedPrefabs"></param>
     private void initialseMetadata(List<GameObject> loadedPrefabs)
     {
         List<MetadataJson> allModels = new List<MetadataJson>();
@@ -66,14 +71,21 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
 
     }
 
-    void writeJSON(MetadataJson model)
+    /// <summary>
+    /// method for writing out to json files.
+    /// </summary>
+    /// <param name="model"></param>
+    private void writeJSON(MetadataJson model)
     {
         string jsonFilePath = GlobalConstants.METADATA_DIR + model.name + "_Metadata.json";
         File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(model, Formatting.Indented));
-
     }
 
-    // Use recursion to create a correctly nested representation of an input prefab using Component objects
+    /// <summary>
+    /// Uses recursion to create a correctly nested representation of an input prefab using Component objects
+    /// </summary>
+    /// <param name="parentTransform"></param>
+    /// <param name="parentComponent"></param>
     void createModelJson(Transform parentTransform, MetadataJson parentComponent)
     {
         // For each subcomponent in the input parent, create a new Component object and add it as a child of the parent
@@ -93,6 +105,12 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
         }
     }
 
+    /// <summary>
+    /// recursive method for adding metadata conent to each subcomponent of a given model from coresponding 
+    /// metadata json.
+    /// </summary>
+    /// <param name="parentTransform"></param>
+    /// <param name="parentComponent"></param>
     void addMetadataFromJson(Transform parentTransform, MetadataJson parentComponent)
     {
         // add metadata to parent first
