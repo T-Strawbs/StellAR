@@ -1,6 +1,14 @@
 using System;
 using Unity;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
 /// <summary>
 /// Interface for Derrived class that need to be subscribed to the onPostStartProcess event of the
 /// ApplicationManager

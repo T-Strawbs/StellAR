@@ -1,5 +1,13 @@
 using System;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
 /// <summary>
 /// This is an interface for Classes that need initialised in a set sequence before the system has started.  
 /// Mostly used for marking the derrived class as StartupProcess so that we can keep tabs on whats what.

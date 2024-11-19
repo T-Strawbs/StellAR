@@ -20,7 +20,6 @@ using UnityEngine;
 /// Additional Authors:
 /// 
 
-
 /// <summary>
 /// Class that manages the CRUD processes of Annotation Json data and Components both locally and over the Network.
 /// </summary>

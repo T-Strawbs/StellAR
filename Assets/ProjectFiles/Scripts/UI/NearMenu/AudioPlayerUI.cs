@@ -7,28 +7,58 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public enum AudioState { PLAYING,PAUSED,STOPPED}
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
 
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class representing the audio player UI element. 
+/// Displays a play button, seekbar and audio playback info.
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class AudioPlayerUI : MonoBehaviour
 {
+    /// <summary>
+    /// The path for the audio that this player is holding
+    /// </summary>
     public string audioPath { get; set; }
-
+    /// <summary>
+    /// the audio source for facilitating playback
+    /// </summary>
     [SerializeField] private AudioSource audioSource;
-
+    /// <summary>
+    /// UI element for playing the audio clip
+    /// </summary>
     [SerializeField] private PressableButton playButton;
+    /// <summary>
+    /// UI element for controlling the playback position
+    /// </summary>
     [SerializeField] private Slider seekSlider;
-
+    /// <summary>
+    /// the current state of the audio
+    /// </summary>
     [SerializeField] private AudioState audioState = AudioState.STOPPED;
-
+    /// <summary>
+    /// the current playback time of the audio
+    /// </summary>
     [SerializeField] private TMP_Text currentAudioTime;
+    /// <summary>
+    /// the end position of the audio
+    /// </summary>
     [SerializeField] private TMP_Text maxAudioTime;
-    [SerializeField] private FontIconSelector icon;
+    /// <summary>
+    /// the icon for the play button
+    /// </summary>
+    [SerializeField] private FontIconSelector playBtnIcon;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        icon = GetComponentInChildren<FontIconSelector>();
+        playBtnIcon = GetComponentInChildren<FontIconSelector>();
     }
     private void Start()
     {
@@ -38,10 +68,15 @@ public class AudioPlayerUI : MonoBehaviour
         //add on value changed callback
         seekSlider.OnValueUpdated.AddListener(onSeekSliderValueChanged);
     }
-
+    /// <summary>
+    /// method for setting the audio clip for our audioplayer to play
+    /// </summary>
+    /// <param name="clip"></param>
     public void setAudioSource(AudioClip clip)
     {
+        //set the audio source's clip to the new one
         audioSource.clip = clip;
+        //check if the clip exists
         if(clip != null)
         {
             initialiseAudioControls();
@@ -52,7 +87,9 @@ public class AudioPlayerUI : MonoBehaviour
             DebugConsole.Instance.LogDebug("Received null audio data from server.");
         }
     }
-
+    /// <summary>
+    /// initialiser method for setting up the audio controls 
+    /// </summary>
     private void initialiseAudioControls()
     {
         //set the max value of the seek slider to length of the audio
@@ -63,6 +100,11 @@ public class AudioPlayerUI : MonoBehaviour
         updateTimeText(audioSource.clip.length,maxAudioTime);
     }
 
+    /// <summary>
+    /// event listener method for updating the playback position based on the
+    /// slider value of the seekbar.
+    /// </summary>
+    /// <param name="seekData"></param>
     private void onSeekSliderValueChanged(SliderEventData seekData)
     {
         if(!audioSource.clip)
@@ -80,6 +122,10 @@ public class AudioPlayerUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method for ensuring that when this UI element is enabled that the audio
+    /// doesn't start playing without input from the user.
+    /// </summary>
     private void OnEnable()
     {
         if(audioSource.isPlaying)
@@ -91,18 +137,25 @@ public class AudioPlayerUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// callback method for handing the state of the audio playback.
+    /// </summary>
     private void togglePlayback()
     {
-        // if online and not hosting
+        // if we're online and we  aren't the host
         if (ApplicationManager.Instance.isOnline() && !NetworkManager.Singleton.IsHost)
         {
+            //check if the audio clip exists
             if (audioSource.clip == null)
             {
+                //Grab the current selection from the selection manager
                 MessageBasedInteractable currentSelection = SelectionManager.Instance.currentSelection.GetComponent<MessageBasedInteractable>();
+                //check that we actually have a current selection
                 if (currentSelection != null)
                 {
-                    //load audio data into audiosource.clip
+                    //Request the server to give us the audio data so we can add it into our audiosource.clip
                     AudioLoader.Instance.requestAudioFromServer(audioPath, this, currentSelection.lookupData);
+                    //wait for a response from the server
                     StartCoroutine(awaitRemoteAudioLoad());
                 }
                 else
@@ -164,42 +217,56 @@ public class AudioPlayerUI : MonoBehaviour
 
     private void Update()
     {
+        //check if our audiosource is currently playing
         if(audioState == AudioState.PLAYING)
         {
-            //move slider to track time
+            //update the slider position to match the playback time.
             seekSlider.Value = audioSource.time;
             //update the current time text element to show mm::ss
             updateTimeText(audioSource.time,currentAudioTime);
         }
-        
+        //check if the audiosource is not playing and that the current state of playback is not paused
         if(!audioSource.isPlaying && audioState != AudioState.PAUSED)
         {
+            //we want to stop the audiosource and handle the stop process of the audio player UI
             stopAudio();
         }
     }
 
+    /// <summary>
+    /// method for updating the current time text element to the current playback time.
+    /// </summary>
+    /// <param name="trackTime"></param>
+    /// <param name="textUI"></param>
     private void updateTimeText(float trackTime,TMP_Text textUI)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(trackTime);
         textUI.text = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
     }
 
+    /// <summary>
+    /// method for starting audio playback 
+    /// </summary>
     private void playAudio()
     {
         //set the  current state of the audio to playing
         audioState = AudioState.PLAYING;
         audioSource.Play();
-        icon.CurrentIconName = "Icon 46";
+        playBtnIcon.CurrentIconName = "Icon 46";
     }
-
+    /// <summary>
+    /// method for pausing the audio playback
+    /// </summary>
     private void pauseAudio()
     {
         //set the current audio state to paused
         audioState = AudioState.PAUSED;
         audioSource.Pause();
-        icon.CurrentIconName = "Icon 122";
+        playBtnIcon.CurrentIconName = "Icon 122";
     }
-
+    /// <summary>
+    /// method for stopping the audio playback
+    /// </summary>
     private void stopAudio()
     {
         audioState = AudioState.STOPPED;
@@ -207,9 +274,11 @@ public class AudioPlayerUI : MonoBehaviour
         audioSource.time = 0;
         seekSlider.Value = 0;
         updateTimeText(0f, currentAudioTime);
-        icon.CurrentIconName = "Icon 122";
+        playBtnIcon.CurrentIconName = "Icon 122";
     }
-
+    /// <summary>
+    /// method for "resetting" the audio player
+    /// </summary>
     public void clear()
     {
         //check if we're playing
@@ -228,3 +297,5 @@ public class AudioPlayerUI : MonoBehaviour
     }
 
 }
+
+public enum AudioState { PLAYING, PAUSED, STOPPED }
