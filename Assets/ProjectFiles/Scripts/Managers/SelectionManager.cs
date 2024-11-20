@@ -59,7 +59,7 @@ public class SelectionManager : Singleton<SelectionManager>
             //request the server to explode the current selection
             MessageBasedExplodableHandler.Instance.requestInteractableExplostion((MessageBasedInteractable)currentSelection);
         //check if the current selection is a LocalBasedInteractble
-        else if (currentSelection is LocalBasedInteractble)
+        else if (currentSelection is LocalBasedInteractable)
             //tell the current selection to explode
             currentSelection.explodeInteractable();
 
@@ -83,7 +83,7 @@ public class SelectionManager : Singleton<SelectionManager>
             //request the server to collapse the current selection on one level
             MessageBasedExplodableHandler.Instance.requestInteractableCollapse((MessageBasedInteractable)currentSelection, isSingleCollapse);
         //check if the current selection is a LocalBasedInteractble
-        else if (currentSelection is LocalBasedInteractble)
+        else if (currentSelection is LocalBasedInteractable)
             //tell the current selection to collapse on one level
             currentSelection.collapseInteractable(isSingleCollapse);
     }
@@ -106,7 +106,7 @@ public class SelectionManager : Singleton<SelectionManager>
             //request the server to collapse the current selection completely
             MessageBasedExplodableHandler.Instance.requestInteractableCollapse((MessageBasedInteractable)currentSelection, isSingleCollapse);
         //check if the current selection is a LocalBasedInteractble
-        else if (currentSelection is LocalBasedInteractble)
+        else if (currentSelection is LocalBasedInteractable)
             //tell the current selection to collapse completely
             currentSelection.collapseInteractable(isSingleCollapse);
     }

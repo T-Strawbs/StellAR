@@ -6,6 +6,18 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+///
+
+/// <summary>
+/// Concretion of the Selectable class for Interactbles that are handled over the network
+/// using custom messaging systems.
+/// </summary>
 public class MessageBasedSelectable : Selectable
 {
     /// <summary>

@@ -2,6 +2,17 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// FactoryStrategy concretion for initialising Gameobjects as MessageBasedInteractables
+/// </summary>
 public class MessagedBasedStrategy : FactoryStrategy
 {
     public void initialiseInteractable(GameObject interactableObject)
@@ -9,6 +20,12 @@ public class MessagedBasedStrategy : FactoryStrategy
         initialiseInteractables(interactableObject.transform, null);
     }
 
+    /// <summary>
+    /// Recursive method for initialising each object within the given model's object tree to
+    /// be a messagebased interactable.
+    /// </summary>
+    /// <param name="current">the current object of the model tree</param>
+    /// <param name="parent">the parent object of the current object</param>
     private void initialiseInteractables(Transform current, Transform parent)
     {
         //add an interactable component to the current object

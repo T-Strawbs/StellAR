@@ -6,6 +6,18 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+///
+
+/// <summary>
+/// Explodable concretion for Explodables that are managed and processed by custom messaging systems
+/// for use over the network.
+/// </summary>
 public class MessageBasedExplodable : Explodable
 {
     private void Start()
@@ -83,6 +95,11 @@ public class MessageBasedExplodable : Explodable
     }
 
 
+    /// <summary>
+    /// method for checking if all the interactables involved in the single level collapse
+    /// of this Interactable are owned by a client.
+    /// </summary>
+    /// <returns>bool</returns>
     public bool areCollapsablesOwnedSingle()
     {
         //get the imediate parent of this object
@@ -101,6 +118,11 @@ public class MessageBasedExplodable : Explodable
         return canCollapseCheckOwnership(parent);
     }
 
+    /// <summary>
+    /// method for checking if all the interactables involved in the all level collapse
+    /// of this Interactable are owned by a client.
+    /// </summary>
+    /// <returns>bool</returns>
     public bool areCollapsablesOwnedAll()
     {
         //intialise a var for referencing the root MessageBasedInteractable
@@ -123,6 +145,12 @@ public class MessageBasedExplodable : Explodable
         return canCollapseCheckOwnership(rootInteractable);
     }
 
+    /// <summary>
+    /// recursive method for checking each interactable involved in a collapse process
+    /// for if they are owned by a client.
+    /// </summary>
+    /// <param name="currentInteractable"></param>
+    /// <returns></returns>
     private bool canCollapseCheckOwnership(MessageBasedInteractable currentInteractable)
     {
         //for each child of the current interactable
@@ -151,6 +179,11 @@ public class MessageBasedExplodable : Explodable
         return true;
     }
 
+    /// <summary>
+    /// method for checking if all the interactables involved in the single level collapse
+    /// of this Interactable are locked.
+    /// </summary>
+    /// <returns>bool</returns>
     public bool areCollapsablesLockedSingle()
     {
         //get the imediate parent of this object
@@ -172,8 +205,12 @@ public class MessageBasedExplodable : Explodable
         //recursively check decendants if any of them are owned by a client
         return areCollapsablesLocked(parent);
     }
-
-    public bool areCollapsablesLockedALL()
+    /// <summary>
+    /// method for checking if all the interactables involved in an all level collapse
+    /// of this Interactable are locked.
+    /// </summary>
+    /// <returns>bool</returns>
+    public bool areCollapsablesLockedAll()
     {
         //intialise a var for referencing the root MessageBasedInteractable
         MessageBasedInteractable rootInteractable = (MessageBasedInteractable)interactable;
@@ -194,7 +231,12 @@ public class MessageBasedExplodable : Explodable
         //recursively check decendants if any of them are owned by a client
         return areCollapsablesLocked(rootInteractable);
     }
-
+    /// <summary>
+    /// recursive method for checking each interactable involved in a collapse process
+    /// for if they are locked.
+    /// </summary>
+    /// <param name="currentInteractable"></param>
+    /// <returns></returns>
     private bool areCollapsablesLocked(MessageBasedInteractable currentInteractable)
     {
         //for each child of the current interactable

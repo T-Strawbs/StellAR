@@ -6,25 +6,46 @@ using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
 /// <summary>
-/// this class manages all active instances of INetworkInteractable
+/// this class manages the state of all active instances of MessageBased Interactables over the network and ensures
+/// that they remain synchronised across all clients. This manager handles the ownership and translations of 
+/// MessageBased interactables
 /// </summary>
 public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager>, StartupProcess
 {
-    public Dictionary<int, List<MessageBasedInteractable>> registeredInteractbleLookUp { get; private set; } = new Dictionary<int, List<MessageBasedInteractable>>();
+    /// <summary>
+    /// Dictionary for holding a reference for each instantiated model prefab. 
+    /// It contains a key used as an identifier for each model and is paired with a List
+    /// of every gameobject within that model's object tree. Essentially we have a list
+    /// where we have flattened the model's tree structure so we can use a parent key
+    /// to find the target model and an object index to find a given object from that 
+    /// target model to apply mutations to it all at a time complexity of O(1). 
+    /// </summary>
+    private Dictionary<int, List<MessageBasedInteractable>> registeredInteractbleLookUp { get; set; } = new Dictionary<int, List<MessageBasedInteractable>>();
 
+    /// <summary>
+    /// the current value of the registeredInteractbleLookUp's key. We increment this
+    /// each time a model prefab has been instantiated and registered with the MessageBasedInstanceManager.
+    /// </summary>
     private int nextKeyValue = 0;
 
     /// <summary>
-    /// Dictionary that pairs a set of network interactables a client owns with the key of the client ID.
-    /// Used to keep track of which client currently owns what obkect
+    /// Dictionary that pairs a set of network interactables that each client owns with the key of the client ID.
+    /// Used to keep track of which client currently owns what object
     /// </summary>
-    public Dictionary<ulong, HashSet<MessageBasedInteractable>> currentlyOwnedInteractablesLookUp { get; private set; } = new Dictionary<ulong, HashSet<MessageBasedInteractable>>();
+    private Dictionary<ulong, HashSet<MessageBasedInteractable>> currentlyOwnedInteractablesLookUp { get; set; } = new Dictionary<ulong, HashSet<MessageBasedInteractable>>();
 
     private void Awake()
     {
         ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
-
     }
 
     public void onStartupProcess()
@@ -58,7 +79,10 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         NetworkManager.Singleton.OnClientDisconnectCallback += handleClientDisconnect;
     }
 
-    public void registerMessages()
+    /// <summary>
+    /// Method for registering this class' custom messages with the NGO NetworkManager.
+    /// </summary>
+    private void registerMessages()
     {
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("networkInteractableOwnershipServerRequest", networkInteractableOwnershipServerRequest);
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("networkInteractableOwnershipClientBroadcast", networkInteractableOwnershipClientBroadcast);
@@ -69,6 +93,10 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
 
 
     #region General Methods
+    /// <summary>
+    /// Method for registering a prefab instance of a messagebased interactable (networked model)
+    /// </summary>
+    /// <param name="networkInteractable"></param>
     public void registerNetworkInteractable(MessageBasedInteractable networkInteractable)
     {
         //create a new list
@@ -85,10 +113,16 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
 
     }
 
+    /// <summary>
+    /// search method for finding a target interactable via its parent key and object index.
+    /// </summary>
+    /// <param name="parentKey"></param>
+    /// <param name="objectIndex"></param>
+    /// <returns></returns>
     public MessageBasedInteractable lookupNetworkInteractable(int parentKey, int objectIndex)
     {
         MessageBasedInteractable networkInteractable = null;
-
+        
         try
         {
             networkInteractable = registeredInteractbleLookUp[parentKey][objectIndex];
@@ -101,6 +135,12 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         return networkInteractable;
     }
 
+    /// <summary>
+    /// method for handling the ownership of an interactable when a client disconnects.
+    /// Used to prevent the persistant ownership of multiple interactables which are 
+    /// owned by a disconnected client
+    /// </summary>
+    /// <param name="clientID"></param>
     private void handleClientDisconnect(ulong clientID)
     {
         //if we're not the server then we dont want to execute the following code
@@ -138,7 +178,11 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
     #endregion General Methods
 
     #region Messaging    
-
+    /// <summary>
+    /// Invoker method that begins the requesting process for a client to gain ownership of an object
+    /// over the network.
+    /// </summary>
+    /// <param name="networkInteractable"></param>
     public void requestOwnershipOfNetworkInteractable(MessageBasedInteractable networkInteractable)
     {
         //check if the interactable is locked
@@ -212,6 +256,11 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
 
     }
 
+    /// <summary>
+    /// method for requesting the server to revoke the ownership of a target interactable that is
+    /// owned by this client.
+    /// </summary>
+    /// <param name="networkInteractable"></param>
     public void revokeOwnershipOfNetworkInteractable(MessageBasedInteractable networkInteractable)
     {
         //check if the local client owns the network interactable
@@ -261,6 +310,12 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         }
     }
 
+    /// <summary>
+    /// message for requesting the server to handle the ownership state of a given interactable. 
+    /// Either to grant or revoke ownership of the interactable.
+    /// </summary>
+    /// <param name="senderID"></param>
+    /// <param name="messagePayload"></param>
     private void networkInteractableOwnershipServerRequest(ulong senderID, FastBufferReader messagePayload)
     {
         //we have to initialise a lookup data struct again so we can repack it into a new payload to send out
@@ -326,6 +381,11 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
 
     }
 
+    /// <summary>
+    /// Serverside method that broadcasts to all clients to revoke the ownership of an interactable that
+    /// was owned by a disconnected client.
+    /// </summary>
+    /// <param name="targetInteractable"></param>
     private void expressNetworkInteractableOwnershipRevokationRequest(MessageBasedInteractable targetInteractable)
     {
 
@@ -375,6 +435,12 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         }
     }
 
+    /// <summary>
+    /// message for broadcasting to all clients to change a given interactable's ownership status locally on
+    /// their end.
+    /// </summary>
+    /// <param name="senderID"></param>
+    /// <param name="messagePayload"></param>
     private void networkInteractableOwnershipClientBroadcast(ulong senderID, FastBufferReader messagePayload)
     {
         //initialise a var to hold the lookup data we've just received
@@ -400,7 +466,14 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         DebugConsole.Instance.LogDebug($"Client({senderID}) changed the ownershipID from client({previousID}) to client({targetInteractable.getOwnerID()})");
     }
 
-
+    /// <summary>
+    /// Method for starting the requesting process for updating the transform of a given interactable over
+    /// the network.
+    /// </summary>
+    /// <param name="networkInteractable"></param>
+    /// <param name="targetPosition"></param>
+    /// <param name="targetRotation"></param>
+    /// <param name="targetScale"></param>
     public void requestUpdateNetworkInteractableTransform(
         MessageBasedInteractable networkInteractable, 
         Vector3 targetPosition,
@@ -460,6 +533,12 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         }
     }
 
+    /// <summary>
+    /// message for requesting the server to make a client broadcast for them to update the transform
+    /// of a given interactable on their end.
+    /// </summary>
+    /// <param name="senderID"></param>
+    /// <param name="messagePayload"></param>
     private void updateNetworkInteractableTransformServerRequest(ulong senderID, FastBufferReader messagePayload)
     {
         //initialise the tranform request var for us to send it to all clients later
@@ -492,6 +571,12 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         }
     }
 
+    /// <summary>
+    /// message that is broadcasted to all clients to update the transform of a given interactable locally 
+    /// on their end.
+    /// </summary>
+    /// <param name="senderID"></param>
+    /// <param name="messagePayload"></param>
     private void updateNetworkInteractableTransformClientBroadcast(ulong senderID, FastBufferReader messagePayload)
     {
         //initialise the tranform request var
@@ -520,6 +605,9 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
 
 }
 
+/// <summary>
+/// Data struct used a message payload for requesting the ownership of an interactable to be changed.
+/// </summary>
 public struct NetworkInteractableOwnershipRequest : INetworkSerializable
 {
     /// <summary>
@@ -548,14 +636,31 @@ public struct NetworkInteractableOwnershipRequest : INetworkSerializable
         serializer.SerializeValue(ref newOwnerID);
     }
 }
-
+/// <summary>
+/// Data struct used a message payload for requesting that the tranform for a target interactable is 
+/// updated.
+/// </summary>
 public struct NetworkInteractableUpdateTransformRequest : INetworkSerializable
 {
+    /// <summary>
+    /// The name of the root object for this interactable
+    /// </summary>
     public int parentKey;
+    /// <summary>
+    /// The name of this interactable
+    /// </summary>
     public int objectIndex; 
-
+    /// <summary>
+    /// the target position we want the transform to be updated too.
+    /// </summary>
     public Vector3 targetPosition;
+    /// <summary>
+    /// the target rotation we want the transform to be updated too.
+    /// </summary>
     public Quaternion targetRotation;
+    /// <summary>
+    /// the target scale we want the transform to be updated too.
+    /// </summary>
     public Vector3 targetScale;
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter

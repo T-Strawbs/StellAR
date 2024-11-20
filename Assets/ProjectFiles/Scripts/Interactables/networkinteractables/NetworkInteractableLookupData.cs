@@ -2,6 +2,18 @@
 using UnityEngine;
 using Unity.Netcode;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Serialised Struct for holding data that the system use for looking up MessageBasedInteractables
+/// using the MessageBasedInstanceManager's lookup table.
+/// </summary>
 public struct NetworkInteractableLookupData : INetworkSerializable
 {
     /// <summary>

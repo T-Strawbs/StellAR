@@ -6,16 +6,36 @@ using UnityEditor;
 using System.IO;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class for generating prefabs of models when the user places a model into the MODEL_DIR.
+/// It's a type of AssetPostprocessor meaning that anytime a new asset is added into the Assets/
+/// directory while in editor, Unity will call this scripts behaviour. Also occurs when
+/// the editor finishes loading.
+/// </summary>
 [InitializeOnLoad]
 public class ModelPrefabGenerator : AssetPostprocessor
 {
-
+    /// <summary>
+    /// global constructor. Used when the editor is loading.
+    /// </summary>
     static ModelPrefabGenerator()
     {
         setupAssetPaths();
         generatePrefabs(getModelPaths());
     }
 
+    /// <summary>
+    /// method for setting up the model and prefab directories incase 
+    /// they are deleted.
+    /// </summary>
     private static void setupAssetPaths()
     {
         //check if the model directory exists
@@ -31,7 +51,10 @@ public class ModelPrefabGenerator : AssetPostprocessor
             Directory.CreateDirectory(GlobalConstants.PREFAB_DIR);
         }
     }
-
+    /// <summary>
+    /// method for returning a list of file paths for models of acceptable format.
+    /// </summary>
+    /// <returns></returns>
     private static List<string> getModelPaths()
     {
         List<string> modelPaths = new List<string>();
@@ -91,7 +114,8 @@ public class ModelPrefabGenerator : AssetPostprocessor
     }
 
     /// <summary>
-    /// Method that generates a prefab when a model is imported into the MODEL_DIR and saves it in
+    /// Method that generates a prefab when a model is imported into the MODEL_DIR and saves it in PREFAB_DIR.
+    /// Invoked when a new asset is imported into the project.
     /// </summary>
     /// <param name="importedAssets"></param>
     /// <param name="deletedAssets"></param>
@@ -125,6 +149,11 @@ public class ModelPrefabGenerator : AssetPostprocessor
         AssetDatabase.Refresh();
     }
 
+    /// <summary>
+    /// method for checking if an asset's file format is accepted and therefore valid.
+    /// </summary>
+    /// <param name="assetPath"></param>
+    /// <returns></returns>
     private static bool isValidFormat(string assetPath)
     {
         return GlobalConstants.MODEL_FORMATS.Contains(Path.GetExtension(assetPath).ToLower());

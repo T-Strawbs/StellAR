@@ -7,18 +7,42 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class that handles the spawning of interactables both local and across the network.
+/// </summary>
 public class PrefabManager : Singleton<PrefabManager>, StartupProcess
 {
+    /// <summary>
+    /// The list of prefabs that can be spawned in the scene.
+    /// </summary>
     [SerializeField] private List<GameObject> prefabs;
+    /// <summary>
+    /// a list of prefabs that have already been spawned. Uses the prefab's index position from the prefab list as a hash value.
+    /// </summary>
     [SerializeField] private HashSet<int> spawnedPrefabs = new HashSet<int>();
-
+    /// <summary>
+    /// Unity event for invoking behaviour when the system's prefabs have finished loading in.
+    /// </summary>
     [NonSerialized] public UnityEvent<List<GameObject>> OnPrefabsLoaded = new UnityEvent<List<GameObject>>();
-
+    /// <summary>
+    /// Unity Event that triggers when a prefab has been instantiated.
+    /// </summary>
     [NonSerialized] public UnityEvent<GameObject> OnPrefabInstantiation = new UnityEvent<GameObject>();
+
 
     private void Awake()
     {
         ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
+
+
     }
 
     private void Start()
@@ -26,7 +50,7 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
         if (prefabs == null || prefabs.Count < 1)
             prefabs = new List<GameObject>();
 
-        LoadPrefabs();
+        loadPrefabs();
     }
 
     public void onStartupProcess()
@@ -44,14 +68,20 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
         };
     }
 
-    public void registerMessages()
+    /// <summary>
+    /// method for registering the prefab manager's custom network messages 
+    /// </summary>
+    private void registerMessages()
     {
         //intial request to spawn an interactable 
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("requestServerInteractableSpawn", requestServerInteractableSpawn);
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("broadcastClientInteractbleSpawn", broadcastClientInteractbleSpawn);
     }
 
-    private void LoadPrefabs()
+    /// <summary>
+    /// Method for loading the user's prefabs from the build's PREFAB_DIR
+    /// </summary>
+    private void loadPrefabs()
     {
         //get all the prefab paths from the prefab dir
         GameObject[] loadedPrefabs = Resources.LoadAll<GameObject>("Prefabs");
@@ -111,6 +141,10 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
         localRequestInteractableSpawn(prefabIndex);
     }
 
+    /// <summary>
+    /// method for spawning in a given prefab via prefab index as a local interactable.
+    /// </summary>
+    /// <param name="prefabIndex"></param>
     private void localRequestInteractableSpawn(int prefabIndex)
     {
         //instantiate object -- need camera view transform or vuforia target
@@ -140,7 +174,10 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
         OnPrefabInstantiation.Invoke(instance);
     }
 
-
+    /// <summary>
+    /// Method for spawning in a given prefab via prefab index as a messagebased interactable over the network.
+    /// </summary>
+    /// <param name="prefabIndex"></param>
     private void networkRequestInteractableSpawn(ref int prefabIndex)
     {
         //create a new spawn request object
@@ -162,7 +199,11 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
                 );
         }
     }
-    
+    /// <summary>
+    /// Message for requesting the server to spawn a given prefab across the network.
+    /// </summary>
+    /// <param name="senderId"></param>
+    /// <param name="messagePayload"></param>
     private void requestServerInteractableSpawn(ulong senderId, FastBufferReader messagePayload)
     {
         DebugConsole.Instance.LogDebug($"client({senderId}) told client/server({NetworkManager.Singleton.LocalClientId}) to spawn an object");
@@ -179,7 +220,8 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
             //the object was already spawned
             return;
         }
-
+        
+        //create a new writer object for us to pack our message payload
         var writer = new FastBufferWriter(FastBufferWriter.GetWriteSize(spawnRequest), Allocator.Temp);
         
         using (writer)
@@ -195,6 +237,11 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
         }
     }
 
+    /// <summary>
+    /// message for broadcasting to clients to spawn a given prefab as a messagebased interactable locally on their end.
+    /// </summary>
+    /// <param name="senderId"></param>
+    /// <param name="messagePayload"></param>
     private void broadcastClientInteractbleSpawn(ulong senderId, FastBufferReader messagePayload)
     {
         SpawnRequest spawnRequest;
@@ -235,7 +282,6 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
         }
     }
 }
-
 
 public struct SpawnRequest : INetworkSerializable
 {

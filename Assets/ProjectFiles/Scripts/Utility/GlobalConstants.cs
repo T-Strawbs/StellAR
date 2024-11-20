@@ -116,7 +116,7 @@ public static class GlobalConstants
     /// <summary>
     /// The dir for storing Metadata. This needs to be on persistant data path as the we create the metadata files
     /// at runtime and all build files and directories are read-only. 
-    /// Persistant data path eg C:\Users\USERNAME\AppData\LocalLow\MorenaBridge\StallAR\Metadata
+    /// Persistant data path eg C:\Users\USERNAME\AppData\LocalLow\MorenaBridge\StellAR\Metadata
     /// </summary>
     public static string METADATA_DIR = $"{Application.persistentDataPath}/ProjectFiles/Metadata";//"Assets/ProjectFiles/Metadata";
     /// <summary>

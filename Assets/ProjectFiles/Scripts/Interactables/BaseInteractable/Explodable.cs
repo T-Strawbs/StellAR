@@ -3,19 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Abstract class for facilitating the exploding and collasping of interactables into individual/clusters
+/// of interactable objects.
+/// </summary>
 public abstract class Explodable : MonoBehaviour
 {
+    /// <summary>
+    /// reference to the interactable that this expldable belongs to.
+    /// </summary>
     public Interactable interactable;
-
+    /// <summary>
+    /// the intial local transform of this interactable before it explodes
+    /// </summary>
     public ExplodableTransform initialTransform;
-
+    /// <summary>
+    /// the explosion status of this explodable
+    /// </summary>
     public ExplosionStatus explosionStatus;
-
+    /// <summary>
+    /// method for starting the explosion process of this interactable
+    /// </summary>
     public abstract void explode();
-
+    /// <summary>
+    /// recursive method for exploding an interactable's children
+    /// </summary>
+    /// <param name="current"></param>
     protected abstract void explode(Interactable current);
-    
-
+    /// <summary>
+    /// method for calculating the trajectory of this interactable for when it explodes.
+    /// </summary>
+    /// <param name="child"></param>
+    /// <returns></returns>
     protected virtual Vector3 calculateTrajectory(Explodable child)
     {
         //get the default positions if we dont have renderers
@@ -27,7 +54,11 @@ public abstract class Explodable : MonoBehaviour
 
         return trajectory;
     }
-
+    /// <summary>
+    /// method for getting the center of this interactables mesh bounds so we can
+    /// get the absolute center of this object.
+    /// </summary>
+    /// <returns></returns>
     protected virtual Vector3 getObjectCentre()
     {
         //the bounds of the renderer
@@ -48,12 +79,21 @@ public abstract class Explodable : MonoBehaviour
         //return the position of the current object
         return transform.position;
     }
-
+    /// <summary>
+    /// method for starting the corountine for this interactable to move out from the explosion 
+    /// center until they reach their destination.
+    /// </summary>
+    /// <param name="explosionTrajectory"></param>
     protected virtual void invokeExplosionTranslation(Vector3 explosionTrajectory)
     {
         StartCoroutine(translateExplosion(explosionTrajectory));
     }
-
+    /// <summary>
+    /// Coroutine for translating this interactable's transfrom from the position of the explosion 
+    /// out until the interactable reaches its destination.
+    /// </summary>
+    /// <param name="explosionTrajectory"></param>
+    /// <returns></returns>
     protected virtual IEnumerator translateExplosion(Vector3 explosionTrajectory)
     {
         //turn off the object manipualtors of the current explodable and descendants
@@ -82,7 +122,9 @@ public abstract class Explodable : MonoBehaviour
         //translation should be done so we can enable manipulations of this exploble and descendants again
         toggleDescendantManipulation(interactable, true);
     }
-
+    /// <summary>
+    /// method for collapsing this interactable one level.
+    /// </summary>
     public virtual void collapseSingle()
     {
         //grab the this interactables parent 
@@ -111,7 +153,9 @@ public abstract class Explodable : MonoBehaviour
             predecessorParent.selectable.Manipulator.enabled = true;
         }
     }
-
+    /// <summary>
+    /// method for collapsing this interactable completey so the root model is reintact.
+    /// </summary>
     public virtual void collapseAll()
     {
         //Find the root explodable
@@ -131,7 +175,10 @@ public abstract class Explodable : MonoBehaviour
             //turn its object manipulator back on
             rootExplodable.selectable.Manipulator.enabled = true;
     }
-
+    /// <summary>
+    /// Depth first recursive method for collapsing the children of the given interactable.
+    /// </summary>
+    /// <param name="parent"></param>
     protected virtual void collapseChildren(Interactable parent)
     {
         //for each child of the current parent
@@ -157,12 +204,19 @@ public abstract class Explodable : MonoBehaviour
             child.explodable.invokeCollapse();
         }
     }
-
+    /// <summary>
+    /// method for starting the coroutine thats moving this interactable back to its
+    /// intial position prior to the explosion.
+    /// </summary>
     protected virtual void invokeCollapse()
     {
         StartCoroutine(translateCollapse());
     }
-
+    /// <summary>
+    /// Coroutine for translating the transform of this interactable back to its initial transform
+    /// prior to explosion.
+    /// </summary>
+    /// <returns></returns>
     protected virtual IEnumerator translateCollapse()
     {
         //turn off the object manipualtors of the current explodable and descendants
@@ -201,7 +255,12 @@ public abstract class Explodable : MonoBehaviour
         //translation should be done so we can enable manipulations of this exploble and descendants again
         toggleDescendantManipulation(interactable, true);
     }
-
+    /// <summary>
+    /// method for togging the manipulation of the interactable so that we can deactivate it
+    /// when translating and reactivating when we're done.
+    /// </summary>
+    /// <param name="current"></param>
+    /// <param name="isAllowed"></param>
     protected virtual void toggleDescendantManipulation(Interactable current, bool isAllowed)
     {
         current.selectable.toggleAllowedManipulations(isAllowed);
@@ -210,15 +269,21 @@ public abstract class Explodable : MonoBehaviour
             toggleDescendantManipulation(child, isAllowed);
         }
     }
+    /// <summary>
+    /// method for checking if this interactable can explode
+    /// </summary>
+    /// <returns></returns>
     public bool canExplode()
     {
         if (explosionStatus == ExplosionStatus.EXPLODABLE)
             return true;
         return false;
     }
-
-
 }
+/// <summary>
+/// Data struct for holding a reference of an Explodable's initial transform 
+/// prior to explosion.
+/// </summary>
 public struct ExplodableTransform
 {
     public Vector3 initialPosition;
@@ -226,4 +291,7 @@ public struct ExplodableTransform
     public Vector3 initialScale;
     public Vector3 objectCentre;
 }
+/// <summary>
+/// Enum for marking the status of whether an Explodable can explode or not.
+/// </summary>
 public enum ExplosionStatus { EXPLODABLE, EXPLODED, INACTIVE, LEAF }

@@ -5,6 +5,17 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Manager class for handling the explosion process of interactables across the network.
+/// </summary>
 public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHandler>, StartupProcess
 {
     private void Awake()
@@ -27,7 +38,10 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
         };
     }
 
-    public void registerMessages()
+    /// <summary>
+    /// Method for registering this class' custom messages with the NGO NetworkManager.
+    /// </summary>
+    private void registerMessages()
     {
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler
             ("interactableExplosionServerRequest", interactableExplosionServerRequest);
@@ -44,6 +58,11 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
             ("interactableCollaseClientBroadcast", interactableCollaseClientBroadcast);
     }
 
+    /// <summary>
+    /// method for beginning the process of exploding by requesting the server to 
+    /// explode the given interactable.
+    /// </summary>
+    /// <param name="interactable"></param>
     public void requestInteractableExplostion(MessageBasedInteractable interactable)
     {
         DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) is preparing an explosion request to the server.");
@@ -77,9 +96,17 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
             return;
         }
 
+        //start our request interactble explosion coroutine
         StartCoroutine(requestInteractableExplostionCoroutine(interactable));
     }
 
+    /// <summary>
+    /// Coroutine for sending an explosion request to the server. Works by first sending a request to the 
+    /// server to lock the interactable then awaits for the lock to occur locally then if sucessful,
+    /// send the explosion request to the server.
+    /// </summary>
+    /// <param name="interactable"></param>
+    /// <returns></returns>
     private IEnumerator requestInteractableExplostionCoroutine(MessageBasedInteractable interactable)
     {
         //request the MessageBasedInteractable Instance Manager to lockout this interactable across the network
@@ -89,11 +116,15 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
             yield break;
         }
 
+        //float for tracking the current time that we use to check if we have timedout
         float timeoutDuration = 0f; ;
 
+        //while our interactable is not locked and we havent timedout
         while(!interactable.isLocked() && timeoutDuration < GlobalConstants.MAX_WAIT_TIME)
         {
+            //wait for the next frame to check again
             yield return new WaitForEndOfFrame();
+            //increment the time we've taken to wait for the lock to occur
             timeoutDuration += Time.deltaTime;
         }
 
@@ -102,10 +133,11 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
         {
             DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) requested to explode {interactable.name} but the lock was unsuccessful." +
                 $"\n{interactable.name} is owned by client({interactable.getOwnerID()})");
+            //it wasn't successful so break out of the corountine
             yield break;
         }
 
-        //we should be good to request the server to initialise the explosion of the interactable
+        //At this stage we should be good to request the server to initialise the explosion of the interactable
 
         //create the explosion request
         InteractableExplodeRequest explodeRequest = new InteractableExplodeRequest()
@@ -134,17 +166,25 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
         
     }
 
+    /// <summary>
+    /// message for requesting the server to broadcast the explosion request to all clients.
+    /// </summary>
+    /// <param name="senderID"></param>
+    /// <param name="messagePayload"></param>
     private void interactableExplosionServerRequest(ulong senderID, FastBufferReader messagePayload)
     {
         DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId})/server received message");
+        
         InteractableExplodeRequest explodeRequest;
-
+        //unpack the payload to get our request data
         messagePayload.ReadValueSafe(out explodeRequest);
 
+        //create the writer that will pack our payload into the message
         var writer = new FastBufferWriter(FastBufferWriter.GetWriteSize(explodeRequest), Allocator.Temp);
 
         using (writer)
         {
+            //pack our new payload with the explosion request
             writer.WriteValueSafe(explodeRequest);
 
             DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) sending message to all clients");
@@ -156,19 +196,25 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
         }
     }
 
+    /// <summary>
+    /// message for broadcasting to all clients to explode the target interactable locally on their end.
+    /// </summary>
+    /// <param name="senderID"></param>
+    /// <param name="messagePayload"></param>
     private void interactableExplosionClientBroadcast(ulong senderID, FastBufferReader messagePayload)
     {
         DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) receiveed the message");
         InteractableExplodeRequest explodeRequest;
 
+        //unpack our request data
         messagePayload.ReadValueSafe(out explodeRequest);
 
+        //try to grab our target interactable from the Instance Manager's lookup table
         MessageBasedInteractable targetInteractable = (MessageBasedInteractable) MessageBasedInstanceManager.Instance.lookupNetworkInteractable
             (
                 explodeRequest.parentKey, explodeRequest.objectIndex
             );
-
-
+        //check if we found our target interactable
         if (!targetInteractable)
         {
             DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) couldnt find the target");
@@ -181,11 +227,15 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
         targetInteractable.explodeInteractable();
 
         if(NetworkManager.Singleton.IsServer)
-            //unlock the target interactable
+            //tell the server to unlock the interactable as we have finished exploding
             InteractableLockHandler.Instance.requestInteractableLock(targetInteractable, false);
     }
 
-
+    /// <summary>
+    /// method for beginning the collapsing process of the given across the network.
+    /// </summary>
+    /// <param name="interactable"></param>
+    /// <param name="isSingleCollapse"></param>
     public void requestInteractableCollapse(MessageBasedInteractable interactable, bool isSingleCollapse)
     {
         DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) is preparing a collapse request to the server.");
@@ -235,15 +285,29 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
             }
         }
 
+        //start our request interactble collapse coroutine
         StartCoroutine(interactableCollaseServerRequest(interactable,isSingleCollapse));
     }
 
+    /// <summary>
+    /// Coroutine for sending a collapse request for the target interactable to the server.
+    /// Works by initially sending a lock request to the server to lock the interactable across 
+    /// the network and then waiting for the lock to occur. Then if the lock is successfully applied,
+    /// then we send the collapse request to the server.
+    /// </summary>
+    /// <param name="interactable"></param>
+    /// <param name="isSingleCollapse"></param>
+    /// <returns></returns>
     private IEnumerator interactableCollaseServerRequest(MessageBasedInteractable interactable, bool isSingleCollapse)
     {
-        //request that each iteractable which needs to be collapsed be locked
+        //request that each iteractable that is involved in collapsing is locked.
+        //this is to ensure that when the collapsing process is occuring that no
+        //client can gain or have ownership of any of the involved interactables
+        //otherwise we risk a desync.
         List<MessageBasedInteractable> lockedInteractables = InteractableLockHandler.Instance.
             requestCollapsingInteractableLockEngage(interactable, isSingleCollapse);
 
+        //if the list of locked interactables doesnt exist we break out of the corountine
         if(lockedInteractables == null)
         {
             DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) requested that {interactable.name}" +
@@ -321,18 +385,27 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
 
     }
 
+    /// <summary>
+    /// message for requesting the server to broadcast a collapse request to all clients
+    /// </summary>
+    /// <param name="senderID"></param>
+    /// <param name="messagePayload"></param>
     private void interactableCollaseServerRequest(ulong senderID, FastBufferReader messagePayload)
     {
         InteractableCollapseRequest collapseRequest;
 
+        //unpack the collapse request
         messagePayload.ReadValueSafe(out collapseRequest);
 
+        //create a new write to pack our message payload
         var writer = new FastBufferWriter(FastBufferWriter.GetWriteSize(collapseRequest), Allocator.Temp);
 
         using (writer)
         {
+            //pack our collapse request into the new payload
             writer.WriteValueSafe(collapseRequest);
 
+            //send the request
             NetworkManager.Singleton.CustomMessagingManager.SendNamedMessageToAll
                 (
                     "interactableCollaseClientBroadcast",writer,NetworkDelivery.Reliable
@@ -340,17 +413,24 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
         }
     }
 
+    /// <summary>
+    /// message for broadcasting to all clients to handle the collapse process locally on their end.
+    /// </summary>
+    /// <param name="senderID"></param>
+    /// <param name="messagePayload"></param>
     private void interactableCollaseClientBroadcast(ulong senderID, FastBufferReader messagePayload)
     {
         InteractableCollapseRequest collapseRequest;
 
+        //unpack the request data
         messagePayload.ReadValueSafe(out collapseRequest);
 
+        //attempt to find the target interactable using the Instance Manager's lookup table
         MessageBasedInteractable targetInteractable = (MessageBasedInteractable)MessageBasedInstanceManager.Instance.lookupNetworkInteractable
             (
                 collapseRequest.parentKey, collapseRequest.objectIndex
             );
-
+        //check if we found the target interactable
         if (!targetInteractable)
         {
             DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) couldnt find the target");
@@ -362,17 +442,23 @@ public class MessageBasedExplodableHandler : Singleton<MessageBasedExplodableHan
 
         DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) should be collapsing {targetInteractable.name}");
 
+        //init the lockout flag as false as we want to unlock all interactables that were locked in the process
         bool isLockoutRequest = false;
 
-        //unlock the target interactable
+        //unlock the target interactable by sending a request to the server.
         InteractableLockHandler.Instance.requestInteractableLockCollapseDisengage(targetInteractable, isLockoutRequest);
             
     }
 }
 
+/// <summary>
+/// serialisable struct for explosion request data
+/// </summary>
 public struct InteractableExplodeRequest : INetworkSerializable
 {
+    //the parent key of the interactable
     public int parentKey;
+    //the object index of the interactable
     public int objectIndex;
     
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -381,11 +467,16 @@ public struct InteractableExplodeRequest : INetworkSerializable
         serializer.SerializeValue(ref objectIndex);
     }
 }
-
+/// <summary>
+/// serialisable struct for collapse request data
+/// </summary>
 public struct InteractableCollapseRequest : INetworkSerializable
 {
+    //the parent key of the interactable
     public int parentKey;
+    //the object index of the interactable
     public int objectIndex;
+    //flag for determining if this is a request for a single or complete collapse.
     public bool isSingleCollapse;
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter

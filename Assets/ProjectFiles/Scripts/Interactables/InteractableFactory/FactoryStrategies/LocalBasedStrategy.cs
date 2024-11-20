@@ -2,6 +2,17 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// FactoryStrategy concretion for initialising Gameobjects as LocalBasedInteractable
+/// </summary>
 public class LocalBasedStrategy : FactoryStrategy
 {
     public void initialiseInteractable(GameObject interactableObject)
@@ -10,10 +21,16 @@ public class LocalBasedStrategy : FactoryStrategy
         //DebugConsole.Instance.LogDebug($"Initialising __ {interactableObject.name} __");
     }
 
+    /// <summary>
+    /// Recursive method for initialising each object within the given model's object tree to
+    /// be a localbased interactable.
+    /// </summary>
+    /// <param name="current">the current object of the model tree</param>
+    /// <param name="parent">the parent object of the current object</param>
     private void initialiseInteractables(Transform current, Transform parent)
     {
         //add an interactable component to the current object
-        LocalBasedInteractble currentInteractable = current.AddComponent<LocalBasedInteractble>();
+        LocalBasedInteractable currentInteractable = current.AddComponent<LocalBasedInteractable>();
         //add an explodable component to the current object
         LocalExplodable currentExplodable = current.AddComponent<LocalExplodable>();
         //set the currentInteractables explodable
@@ -30,7 +47,7 @@ public class LocalBasedStrategy : FactoryStrategy
         else
         {
             //the parent exists so grab a ref of the parent's interactable component
-            LocalBasedInteractble parentInteractable = parent.GetComponent<LocalBasedInteractble>();
+            LocalBasedInteractable parentInteractable = parent.GetComponent<LocalBasedInteractable>();
             //set the current interactables parent
             currentInteractable.parent = parentInteractable;
             //add the current interactable as a child of parent

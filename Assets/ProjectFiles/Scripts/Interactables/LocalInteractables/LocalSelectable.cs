@@ -5,6 +5,17 @@ using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+///
+
+/// <summary>
+/// concrete class for Selectables that are handled offline.
+/// </summary>
 public class LocalSelectable : Selectable
 {
     protected override void onSelection(SelectEnterEventArgs args)
