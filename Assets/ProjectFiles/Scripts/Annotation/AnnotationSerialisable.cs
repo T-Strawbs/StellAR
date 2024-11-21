@@ -14,11 +14,11 @@ using UnityEngine.UIElements;
 /// 
 
 /// <summary>
-/// Serialised Class for Representing the Model's structure in Json in order to store annotation data as
-/// Json objects for each component of the model.
+/// Serialised version of AnnotationList that also tracks a model's structure by storing an item's 
+/// direct children (Subcomponents). Used for reading and writing annotations to disk.
 /// </summary>
 [Serializable]
-public class ModelAnnotationJson
+public class AnnotationSerialisable
 {
     /// <summary>
     /// Component name
@@ -43,22 +43,22 @@ public class ModelAnnotationJson
     /// <summary>
     /// list of direct subcomponents
     /// </summary>
-    public List<ModelAnnotationJson> Subcomponents { get; set; }
+    public List<AnnotationSerialisable> Subcomponents { get; set; }
 
     [JsonConstructorAttribute]
-    public ModelAnnotationJson(String name)
+    public AnnotationSerialisable(String name)
     {
         Name = name;
         HighlightColour = "None";
         Annotations = new List<AnnotationJson>();
-        Subcomponents = new List<ModelAnnotationJson>();
+        Subcomponents = new List<AnnotationSerialisable>();
     }
 
     /// <summary>
     /// Convert Network Model Annotation into Model Annotation
     /// </summary>
     /// <param name="networkModelAnnotation">Network Model Annotation sent over network via Rpc</param>
-    public ModelAnnotationJson(NetworkModelAnnotationJson networkModelAnnotation)
+    public AnnotationSerialisable(NetworkModelAnnotationJson networkModelAnnotation)
     {
         Name = networkModelAnnotation.Name;
         HighlightColour = networkModelAnnotation.HighlightColour;
@@ -99,10 +99,10 @@ public class ModelAnnotationJson
         }
 
         // Convert network subcomponents array
-        Subcomponents = new List<ModelAnnotationJson>();
+        Subcomponents = new List<AnnotationSerialisable>();
         foreach(NetworkModelAnnotationJson networkSubcomponent in networkModelAnnotation.Subcomponents)
         {
-            ModelAnnotationJson subcomponent = new ModelAnnotationJson(networkSubcomponent);
+            AnnotationSerialisable subcomponent = new AnnotationSerialisable(networkSubcomponent);
             Subcomponents.Add(subcomponent);
         }
     }

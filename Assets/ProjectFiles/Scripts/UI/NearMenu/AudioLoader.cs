@@ -6,9 +6,24 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class for loading audio files from disk into audio clips when requested at runtime.
+/// Also handles server requests sent by clients to receive audio data over the network.
+/// </summary>
 public class AudioLoader : Singleton<AudioLoader>, StartupProcess
 {
-    // used when the server returns audio data to a client so the client knows which UI element to add the audio to
+    /// <summary>
+    /// Clientside dictionary for holding a reference to the audioplayer that requests audio for a given
+    /// voice annotation. Uses the audioplayer's instanceID as the key paired with the audioplayer UI object.
+    /// </summary>
     private Dictionary<int, AudioPlayerUI> audioSources = new Dictionary<int, AudioPlayerUI>();
 
     public void Awake()
@@ -31,7 +46,10 @@ public class AudioLoader : Singleton<AudioLoader>, StartupProcess
         };
     }
 
-    public void registerMessages()
+    /// <summary>
+    /// callback for registering the postAudioAnnotationRpc custom message
+    /// </summary>
+    private void registerMessages()
     {
         //custom messages for transferring audio data across the network
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("audioFileServerRequest", audioFileServerRequest);
@@ -51,9 +69,11 @@ public class AudioLoader : Singleton<AudioLoader>, StartupProcess
             audioFilePath = audioFileName,
             lookupData = lookupData
         };
-        
+
+        //add the associatedAudioPlayer to the audioSources dict using its monobehaviours instanceID
         audioSources[associatedAudioPlayer.GetInstanceID()] = associatedAudioPlayer;
 
+        //calculate the write size of the payload we want to send using the data we went to pack.
         var writeSize = FastBufferWriter.GetWriteSize(audioRequest.audioFilePath) +
             FastBufferWriter.GetWriteSize(audioRequest.audioPlayerID) +
             FastBufferWriter.GetWriteSize(audioRequest.lookupData);
@@ -100,6 +120,14 @@ public class AudioLoader : Singleton<AudioLoader>, StartupProcess
 
     }
 
+    /// <summary>
+    /// Coroutine for  loading audio stored on the server's disk then converting the audio into a streamable
+    /// array of bytes then sending that data back to the client that requested the audio.
+    /// </summary>
+    /// <param name="audioFilePath"></param>
+    /// <param name="audioRequest"></param>
+    /// <param name="senderId"></param>
+    /// <returns></returns>
     private IEnumerator loadAudioCoroutine(string audioFilePath, NetworkAudioRequest audioRequest, ulong senderId)
     {
         using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(audioFilePath, AudioType.UNKNOWN))
@@ -184,11 +212,30 @@ public class AudioLoader : Singleton<AudioLoader>, StartupProcess
         }
     }
 
+    /// <summary>
+    /// Invoker method for starting the load audio coroutine that loads audio for the local user.
+    /// </summary>
+    /// <param name="onloadComplete"></param>
+    /// <param name="audioPath"></param>
     public void loadAudio(System.Action<AudioClip,string> onloadComplete, string audioPath)
     {
         StartCoroutine(loadAudioCoroutine(onloadComplete, audioPath));
     }
 
+    /// <summary>
+    /// Coroutine for loading audio locally offline as a general user or online as the server/host.
+    /// 
+    /// We pass in an action delegate so we can execute it which is usually the
+    /// VoiceAnnotationUI.onAudioLoaded(AudioClip,string) method. By doing this
+    /// we can ensure that the VoiceAnnotationUI object can set it's AudioSource's by itself
+    /// as coroutines cannot return a value. 
+    /// 
+    /// Sorcery...
+    ///
+    /// </summary>
+    /// <param name="onloadComplete"></param>
+    /// <param name="audioPath"></param>
+    /// <returns></returns>
     private IEnumerator loadAudioCoroutine(System.Action<AudioClip,string> onloadComplete, string audioPath)
     {
         string audioFilePath = $"file://{audioPath}";

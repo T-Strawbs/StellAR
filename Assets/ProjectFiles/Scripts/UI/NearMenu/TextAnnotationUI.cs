@@ -41,9 +41,9 @@ public class TextAnnotationUI : AnnotationUI
 
     private void resizeContentLayer()
     {
-        //force the content text to resize based on the content length
+        //force the animationName text to resize based on the animationName length
         LayoutRebuilder.ForceRebuildLayoutImmediate(content.rectTransform);
-        //create a vector to store the same dimentions as the content text
+        //create a vector to store the same dimentions as the animationName text
         Vector2 contentSize = new Vector2(content.rectTransform.rect.width, content.rectTransform.rect.height);
         //resize contentlayer
         contentLayer.sizeDelta = contentSize;
@@ -59,7 +59,7 @@ public class TextAnnotationUI : AnnotationUI
             Vector2 centreSize = new Vector2(btnRect.rect.width + contentSize.x, contentSize.y);
             //change the height of centrelayer (contentSizes parent)
             centreLayer.sizeDelta = centreSize;
-            //force the content text to resize based on the content length
+            //force the animationName text to resize based on the animationName length
             LayoutRebuilder.ForceRebuildLayoutImmediate(textAnnotationRect);
         }
         

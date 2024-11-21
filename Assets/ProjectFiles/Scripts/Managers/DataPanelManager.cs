@@ -12,7 +12,7 @@ using TMPro;
 /// 
 
 /// <summary>
-/// Class for managing the Data Panel's content.
+/// Class for managing the Data Panel's animationName.
 /// </summary>
 public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListener
 {
@@ -40,7 +40,7 @@ public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListene
             Debug.Log($"Cant grab metadata from {selection.name}");
             return;
         }
-        AnnotationComponent annotationData = selection.GetComponent<AnnotationComponent>();
+        AnnotationList annotationData = selection.GetComponent<AnnotationList>();
         if (!annotationData)
         {
             Debug.Log($"Cant grab annotation data from {selection.name}");
@@ -53,7 +53,7 @@ public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListene
     }
 
     /// <summary>
-    /// method for updating the metadata pane with content from the MetadataComponent of the
+    /// method for updating the metadata pane with animationName from the MetadataComponent of the
     /// currently selected interactable
     /// </summary>
     /// <param name="metadata"></param>
@@ -67,11 +67,11 @@ public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListene
         metadataPane.updateMetadataContent(metadata.metadata);
     }
     /// <summary>
-    /// method for updating the metadata pane with content from the AnnotationComponent of the
+    /// method for updating the metadata pane with animationName from the AnnotationList of the
     /// currently selected interactable
     /// </summary>
     /// <param name="annotationData"></param>
-    public void updateAnnotations(AnnotationComponent annotationData)
+    public void updateAnnotations(AnnotationList annotationData)
     {
         Debug.Log("We are updating annotations");
         //for each active UI element in the annotation pane
@@ -104,7 +104,7 @@ public class DataPanelManager : Singleton<DataPanelManager>, NewSelectionListene
                 Debug.LogError($"annotation UI couldnt be genenerated");
                 continue;
             }
-            //set the parent to the annotation pane's content holder
+            //set the parent to the annotation pane's animationName holder
             annotationUI.transform.SetParent(annotationPane.ContentHolder);
             //reset the annotation UI's local transforoms
             annotationUI.transform.localPosition = Vector3.zero;

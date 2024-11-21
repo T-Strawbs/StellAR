@@ -32,7 +32,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// <summary>
     /// A dictionary of Model Annotation Json data (Annotation data of the whole object tree)
     /// </summary>
-    private Dictionary<int, ModelAnnotationJson> modelAnnotationJsons = new Dictionary<int, ModelAnnotationJson>();
+    private Dictionary<int, AnnotationSerialisable> modelAnnotationJsons = new Dictionary<int, AnnotationSerialisable>();
 
     private void Awake()
     {
@@ -72,7 +72,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// <summary>
     /// callback for registering the postAudioAnnotationRpc custom message
     /// </summary>
-    public void registerMessages()
+    private void registerMessages()
     {
         //custom messaging function for sending audio data from client to server
         NetworkManager.Singleton.CustomMessagingManager.RegisterNamedMessageHandler("postAudioAnnotationRpc", postAudioAnnotationRpc);
@@ -137,7 +137,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         createAnnotationSubDirectorDirectory(prefabInstance.name);
 
         //Create the Serialised Annotation
-        ModelAnnotationJson parentAnnotationJson = new ModelAnnotationJson(prefabInstance.name);
+        AnnotationSerialisable parentAnnotationJson = new AnnotationSerialisable(prefabInstance.name);
 
         //check if the modelname_Annotation.json exists
         string jsonPath = $"{GlobalConstants.ANNOTATION_DIR}/{prefabInstance.name}/{prefabInstance.name}_Annotation.json";
@@ -146,10 +146,10 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             //json exists so we load annotation data from the json file
             string annotationJson = File.ReadAllText(jsonPath);
             //deserialise the data from json into usable objects
-            parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson, settings);
+            parentAnnotationJson = JsonConvert.DeserializeObject<AnnotationSerialisable>(annotationJson, settings);
             //Populate The model's GO with the Json Data
             populateAnnotationDataFromJson(prefabInstance.transform, parentAnnotationJson);
-            //write to json to update the content incase the model has changed
+            //write to json to update the animationName incase the model has changed
             writeJson(parentAnnotationJson, jsonPath);
         }
         else
@@ -160,7 +160,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
             writeJson(parentAnnotationJson, jsonPath);
         }
 
-        // if prefab is a network prefab add the created ModelAnnotationJson to dictionary for lookup when requested by clients via Rcp
+        // if prefab is a network prefab add the created AnnotationSerialisable to dictionary for lookup when requested by clients via Rcp
         MessageBasedInteractable messageBasedInteractable = prefabInstance.GetComponent<MessageBasedInteractable>();
         if(messageBasedInteractable != null)
         {
@@ -172,15 +172,15 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// </summary>
     /// <param name="parentTransform">the parent transform of this model object's transform.</param>
     /// <param name="parentComponent">the json data of the parent to populate the annotation components with.</param>
-    private void populateAnnotationDataFromJson(Transform parentTransform, ModelAnnotationJson parentComponent)
+    private void populateAnnotationDataFromJson(Transform parentTransform, AnnotationSerialisable parentComponent)
     {
         //try to grab the annotation component of the parent transform
-        AnnotationComponent annotationComponent = parentTransform.GetComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = parentTransform.GetComponent<AnnotationList>();
         //check if the object already has an annotation component and add it if it doesnt
         if (annotationComponent == null)
         {
             //create a new annotation component for the parent
-            annotationComponent = parentTransform.AddComponent<AnnotationComponent>();
+            annotationComponent = parentTransform.AddComponent<AnnotationList>();
         }
         //set the original colour code of the parent object to that of the annotation component's 
         parentComponent.OriginalColourCode = annotationComponent.getOriginalolourString();
@@ -198,7 +198,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
 
         //-- removing dead json links
         //for each subcompnent in the parents subcomponents
-        foreach (ModelAnnotationJson subcomponent in parentComponent.Subcomponents)
+        foreach (AnnotationSerialisable subcomponent in parentComponent.Subcomponents)
         {
             //find the child of the parent transofrm matching the subcomponent name
             GameObject foundChild = parentTransform.gameObject.GetNamedChild(subcomponent.Name);
@@ -222,8 +222,8 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         foreach (Transform leftoverSubcomponent in subcomponentTransforms)
         {
             // initialise components with metadata and by adding as child to parent Component
-            leftoverSubcomponent.AddComponent<AnnotationComponent>();
-            ModelAnnotationJson subcomponent = new ModelAnnotationJson(leftoverSubcomponent.name);
+            leftoverSubcomponent.AddComponent<AnnotationList>();
+            AnnotationSerialisable subcomponent = new AnnotationSerialisable(leftoverSubcomponent.name);
             parentComponent.Subcomponents.Add(subcomponent);
 
             // check and add children of this component
@@ -236,18 +236,18 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// </summary>
     /// <param name="parentTransform"></param>
     /// <param name="parentComponent"></param>
-    private void createAnnotationJson(Transform parentTransform, ModelAnnotationJson parentComponent)
+    private void createAnnotationJson(Transform parentTransform, AnnotationSerialisable parentComponent)
     {
 
         //add a Annotation component to the parent
-        AnnotationComponent annotationComponent = parentTransform.AddComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = parentTransform.AddComponent<AnnotationList>();
         parentComponent.OriginalColourCode = annotationComponent.getOriginalolourString();
 
         //for each child of the parent
         foreach (Transform childTransform in parentTransform)
         {
             //create an empty Serialised Annotation object
-            ModelAnnotationJson childAnnotationJson = new ModelAnnotationJson(childTransform.name);
+            AnnotationSerialisable childAnnotationJson = new AnnotationSerialisable(childTransform.name);
             //add the Serialised annotation as a subcomponent of the parent
             parentComponent.Subcomponents.Add(childAnnotationJson);
             //recursively call for this childs decendants 
@@ -260,7 +260,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// </summary>
     /// <param name="serialisedAnnotation"></param>
     /// <param name="jsonPath"></param>
-    private void writeJson(ModelAnnotationJson serialisedAnnotation, string jsonPath)
+    private void writeJson(AnnotationSerialisable serialisedAnnotation, string jsonPath)
     {
         try
         {
@@ -308,7 +308,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
                 $"as the message type {messageType} is invalid");
             return null;
         }
-        //write to json and add annotation to the AnnotationComponent
+        //write to json and add annotation to the AnnotationList
         addAnnotationToJson(annotationJson, component);
         return annotationJson;
     }
@@ -322,7 +322,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         DebugConsole.Instance.LogDebug($"Adding annoation to json for {annotation.ComponentName}");
 
         //add the annotation to the current selections annotation component's list
-        AnnotationComponent annotationComponent = component.GetComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = component.GetComponent<AnnotationList>();
         if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("cannot add annotation to json as there is no annotation " +
@@ -350,7 +350,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         string annotationJson = File.ReadAllText(fileName);
         DebugConsole.Instance.LogDebug($"loading file content:{fileName}");
         //deserialised json into memory
-        ModelAnnotationJson parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(annotationJson);
+        AnnotationSerialisable parentAnnotationJson = JsonConvert.DeserializeObject<AnnotationSerialisable>(annotationJson);
         //update the json object in memory to now include the new annotation
         updateAnnotationJson(componentParent, parentAnnotationJson, component.name, annotation);
         DebugConsole.Instance.LogDebug($"Attempting to write to json to {fileName} for component {annotation.ComponentName} under model {componentParent} ");
@@ -372,8 +372,8 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         string parentJsonFile = File.ReadAllText(parentJsonFileName);
 
         // recreate Json object structure in memory
-        ModelAnnotationJson parentAnnotationJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(parentJsonFile, settings);
-        ModelAnnotationJson targetJson;
+        AnnotationSerialisable parentAnnotationJson = JsonConvert.DeserializeObject<AnnotationSerialisable>(parentJsonFile, settings);
+        AnnotationSerialisable targetJson;
 
         //check if the parent is the highlighted component
         if (parentAnnotationJson.Name == targetName)
@@ -405,27 +405,27 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// </summary>
     /// <param name="parentAnnotationJson"></param>
     /// <param name="highlightColour"></param>
-    private void updateHighlightOfChildren(ModelAnnotationJson parentAnnotationJson, string highlightColour)
+    private void updateHighlightOfChildren(AnnotationSerialisable parentAnnotationJson, string highlightColour)
     {
         // update the highlight colour of current component
         parentAnnotationJson.HighlightColour = highlightColour;
 
         // do the same to all subcomponents recursively
-        foreach (ModelAnnotationJson childAnnotationJson in parentAnnotationJson.Subcomponents)
+        foreach (AnnotationSerialisable childAnnotationJson in parentAnnotationJson.Subcomponents)
         {
             updateHighlightOfChildren(childAnnotationJson, highlightColour);
         }
     }
 
     /// <summary>
-    /// Depth-first search of a model's JSON tree in memory (ModelAnnotationJson) to find the target component and add an annotation to it.
-    /// Used to keep the annotations on disk (ModelAnnotationJson) in sync with annotation changes made to during runtime (AnnotationComponent).
+    /// Depth-first search of a model's JSON tree in memory (AnnotationSerialisable) to find the target component and add an annotation to it.
+    /// Used to keep the annotations on disk (AnnotationSerialisable) in sync with annotation changes made to during runtime (AnnotationList).
     /// </summary>
     /// <param name="current"></param>
     /// <param name="currentJson"></param>
     /// <param name="targetName"></param>
     /// <param name="annotation"></param>
-    private void updateAnnotationJson(Transform current, ModelAnnotationJson currentJson, string targetName, AnnotationJson annotation)
+    private void updateAnnotationJson(Transform current, AnnotationSerialisable currentJson, string targetName, AnnotationJson annotation)
     {
         DebugConsole.Instance.LogDebug($"updating json attempting to find the targetname:{targetName}" +
             $" inside {current.name}");
@@ -440,7 +440,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         }
 
         // run the search for the target in all levels of the model 
-        foreach (ModelAnnotationJson subcomponent in currentJson.Subcomponents)
+        foreach (AnnotationSerialisable subcomponent in currentJson.Subcomponents)
         {
             // get the children of the current component and run the search for the target on them
             Interactable currentInteractable = current.GetComponent<Interactable>();
@@ -480,10 +480,10 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         }
 
         //deserialise the json into the ModelAnnotation object
-        ModelAnnotationJson rootJson = JsonConvert.DeserializeObject<ModelAnnotationJson>(File.ReadAllText(jsonPath), settings);
+        AnnotationSerialisable rootJson = JsonConvert.DeserializeObject<AnnotationSerialisable>(File.ReadAllText(jsonPath), settings);
 
         //search the root json for the currently selected component
-        ModelAnnotationJson targetJson = findComponent(rootJson, deleteAnnotationFromThis.name);
+        AnnotationSerialisable targetJson = findComponent(rootJson, deleteAnnotationFromThis.name);
         if (targetJson == null)
         {
             DebugConsole.Instance.LogError($"Couldnt find {deleteAnnotationFromThis.name} in {rootJson.Name}");
@@ -526,8 +526,8 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// <param name="annotationToDelete"></param>
     private void deleteAnnotationFromRuntime(AnnotationJson annotationToDelete, Transform deleteAnnotationFromThis)
     {
-        //remove the annotation from the component's AnnotationComponent
-        AnnotationComponent currentSelection = deleteAnnotationFromThis.GetComponent<AnnotationComponent>();
+        //remove the annotation from the component's AnnotationList
+        AnnotationList currentSelection = deleteAnnotationFromThis.GetComponent<AnnotationList>();
         if (!currentSelection)
         {
             DebugConsole.Instance.LogError($"Couldn't find {deleteAnnotationFromThis.name} annotation component");
@@ -557,15 +557,15 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
     /// <param name="currentModelJson"></param>
     /// <param name="targetName"></param>
     /// <returns></returns>
-    private ModelAnnotationJson findComponent(ModelAnnotationJson currentModelJson, string targetName)
+    private AnnotationSerialisable findComponent(AnnotationSerialisable currentModelJson, string targetName)
     {
         if (currentModelJson.Name == targetName)
         {
             return currentModelJson;
         }
-        foreach (ModelAnnotationJson subcomponent in currentModelJson.Subcomponents)
+        foreach (AnnotationSerialisable subcomponent in currentModelJson.Subcomponents)
         {
-            ModelAnnotationJson result = findComponent(subcomponent, targetName);
+            AnnotationSerialisable result = findComponent(subcomponent, targetName);
             if (result != null)
                 return result;
         }
@@ -601,15 +601,15 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         DebugConsole.Instance.LogDebug($"Found model with network lookup: {modelToPopulate.name}");
 
         // convert network annotation data to model annotation data and populate model with data
-        ModelAnnotationJson modelAnnotation = new ModelAnnotationJson(networkAnnotationData);
+        AnnotationSerialisable modelAnnotation = new AnnotationSerialisable(networkAnnotationData);
         populateAnnotationDataFromJson(modelToPopulate.transform, modelAnnotation);
     }
 
     /// <summary>
-    /// Post an annotation to the server. Creates an AnnotationJson based on input content and adds it to the AnnotationComponent of the associated GameObject.
+    /// Post an annotation to the server. Creates an AnnotationJson based on input animationName and adds it to the AnnotationList of the associated GameObject.
     /// </summary>
     /// <param name="lookupData">The lookup data for the object the annotation is being placed on.</param>
-    /// <param name="content">The annotation content.</param>
+    /// <param name="content">The annotation animationName.</param>
     /// <param name="annotationType">The type of annotation, from GlobalConstants.</param>
     [Rpc(SendTo.Server)]
     public void postAnnotationServerRpc(NetworkInteractableLookupData lookupData, string content, string annotationType)
@@ -633,7 +633,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         broadcastNewAnnotationRpc(lookupData, networkAnnotation);
 
         //if annotation was for current selection update data pane
-        AnnotationComponent annotationComponent = addAnnotationToThis.GetComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = addAnnotationToThis.GetComponent<AnnotationList>();
         if (SelectionManager.Instance.currentSelection == addAnnotationToThis.GetComponent<Interactable>())
         {
             DataPanelManager.Instance.updateAnnotations(annotationComponent);
@@ -657,7 +657,7 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         }
 
         //add the annotation to the component
-        AnnotationComponent annotationComponent = component.GetComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = component.GetComponent<AnnotationList>();
         if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("cannot add annotation to json as there is no annotation " +

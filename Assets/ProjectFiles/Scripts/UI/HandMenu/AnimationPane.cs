@@ -1,20 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
+using MixedReality.Toolkit.UX;
 using UnityEngine;
 
-public class AnimationPane : MonoBehaviour
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class repesenting the Animation menu UI pane used to display an play animations of the 
+/// currently selected model.
+/// </summary>
+public class AnimationPane : MonoBehaviour, ScrollablePane
 {
-    [SerializeField] protected RectTransform contentHolder;
 
-    [SerializeField] protected AnimationUI contentPrefab;
-    [SerializeField] private bool isActive = false;
+    /// <summary>
+    /// the button UI element for returning back to the home pane
+    /// </summary>
+    [SerializeField] private PressableButton backBtn;
+    /// <summary>
+    /// The tranform that will parent (hold) the UI elements
+    /// </summary>
+    [SerializeField] private RectTransform contentHolder;
+    /// <summary>
+    /// The prefab we instantiate to display and select the model
+    /// we want to spawn
+    /// </summary>
+    [SerializeField] private AnimationUI contentPrefab;
+    /// <summary>
+    /// reference of the current model animation that is playing
+    /// </summary>
     [SerializeField] private Animation currentModelAnimation;
-
+    /// <summary>
+    ///  A list of all pooled AnimationUI elements that arent currently being used
+    /// </summary>
     [SerializeField] private List<AnimationUI> pooledlUI = new List<AnimationUI>();
+    /// <summary>
+    /// A list of all current active AnimationUI elements
+    /// </summary>
     [SerializeField] private List<AnimationUI> activelUI = new List<AnimationUI>();
-    
+    /// <summary>
+    /// the prefab of the default element we use if theres no animations for 
+    /// the current model
+    /// </summary>
     [SerializeField] private RectTransform defaultElement;
 
+    /// <summary>
+    /// the Animation Component that holds all the animation clips of the currently
+    /// selected interactable.
+    /// </summary>
     public Animation CurrentAnimation
     {
         get 
@@ -29,10 +67,18 @@ public class AnimationPane : MonoBehaviour
 
     private void Awake()
     {
-        SelectionManager.Instance.onLocalSelectionChanged.AddListener(updateSelection);
+        backBtn.OnClicked.AddListener(back);
     }
 
-    public  void populateScrollPane()
+    /// <summary>
+    /// method for closing the model pane and reopening the Home pane
+    /// </summary>
+    private void back()
+    {
+        HandMenuManager.Instance.activateHomePane();
+    }
+
+    public void populateScrollablePane(List<GameObject> loadedPrefabs)
     {
         DebugConsole.Instance.LogDebug("clearing anim pane");
         //clear our scroll pane
@@ -83,14 +129,17 @@ public class AnimationPane : MonoBehaviour
             DebugConsole.Instance.LogDebug("activatign anim UI");
             //activate the animationUI
             animationUI.gameObject.SetActive(true);
-            //populate its content
+            //populate its animationName
             animationUI.populateContent(currentModelAnimation, clip, clip.name);
             //add it to the active UI list
             activelUI.Add(animationUI);
             DebugConsole.Instance.LogDebug("we shouldve been successful");
         }
     }
-
+    /// <summary>
+    /// method for clearing the active animationUI elements and placing them back
+    /// into the pool.
+    /// </summary>
     private void clear()
     {
         //for each activeUI in our active UI list
@@ -103,25 +152,5 @@ public class AnimationPane : MonoBehaviour
         }
         //clear the active ui list
         activelUI.Clear();
-    }
-
-    public void updateSelection(Transform selection)
-    {
-
-        //**right now we are populating when the animation handler gets updated. which we'll need to change next semester.
-        //populateScrollPane();
-    }
-
-    private void toggleButtonState()
-    {
-        isActive = !isActive;
-        if (isActive)
-        {
-            //enable the button to be pressed
-
-            return;
-        }
-        //disable the button from being pressed
-
     }
 }

@@ -5,6 +5,17 @@ using System.IO;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class for loading in metadata for models and adding the metadata animationName to a model's subcomponents.
+/// </summary>
 public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
 {
     private void Awake()

@@ -16,7 +16,7 @@ using UnityEngine;
 /// Game Component for fast access of annotation messages. Holds annotation data for the attached model component
 /// to be modified by the user and to be read and writen to by the AnnotationManager.
 /// </summary>
-public class AnnotationComponent : MonoBehaviour
+public class AnnotationList : MonoBehaviour
 {
     /// <summary>
     /// The list of annotation messages from json data
@@ -53,7 +53,7 @@ public class AnnotationComponent : MonoBehaviour
     }
 
     /// <summary>
-    /// called when new AnnotationComponent is added to object, sets originalColourString and renderer material colour
+    /// called when new AnnotationList is added to object, sets originalColourString and renderer material colour
     /// </summary>
     /// <returns></returns>
     public string getOriginalolourString()
@@ -124,7 +124,7 @@ public class AnnotationComponent : MonoBehaviour
         // loop through
         foreach (Renderer renderer in renderers)
         {
-            renderer.gameObject.GetComponent<AnnotationComponent>().setHighlight(newHighlightColour);
+            renderer.gameObject.GetComponent<AnnotationList>().setHighlight(newHighlightColour);
         }
     }
     /// <summary>

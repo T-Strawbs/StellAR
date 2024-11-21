@@ -3,9 +3,20 @@ using System;
 using Unity;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
+/// <summary>
+/// Class representing the Join tab UI element that allows user to input the ip address via an
+/// input field and join it via a button press.
+/// </summary>
 public class JoinTab : NetworkTab
 {
-    private NetworkOptionsTab networkTab;
     /// <summary>
     /// The back button of the join tab
     /// </summary>

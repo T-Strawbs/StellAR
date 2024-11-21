@@ -22,7 +22,7 @@ using System;
 public interface StartupProcess
 {
     /// <summary>
-    /// Register event listners for NetworkManager events
+    /// Register event listners for behaviour that needs to occur at the very start of the application
     /// </summary>
     public void onStartupProcess();
 }

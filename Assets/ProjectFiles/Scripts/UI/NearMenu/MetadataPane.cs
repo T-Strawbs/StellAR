@@ -17,12 +17,12 @@ using TMPro;
 public class MetadataPane : MonoBehaviour
 {
     /// <summary>
-    /// The text object for displaying the metadata content
+    /// The text object for displaying the metadata animationName
     /// </summary>
     [SerializeField] private TMP_Text metadataContent;
 
     /// <summary>
-    /// method for updating the content of the metadata pane's text object
+    /// method for updating the animationName of the metadata pane's text object
     /// </summary>
     /// <param name="metadata"></param>
     public void updateMetadataContent(string metadata)

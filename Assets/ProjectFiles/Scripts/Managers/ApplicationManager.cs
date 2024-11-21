@@ -15,16 +15,20 @@ using UnityEngine.Events;
 
 /// <summary>
 /// class that Manages the application's systems, ensuring that they are initialised in specific 
-/// sequences and behaviour of the network status of the app
+/// sequences and also manages the behaviour of these systems based on network status of the app.
 /// </summary>
 public class ApplicationManager : Singleton<ApplicationManager>
 {
     /// <summary>
-    /// Subscribable event for processes that need to occur on the startup phase of the application
+    /// Subscribable event for processes that need to occur on the startup phase of the application.
+    /// 
+    /// Classes that subscribe to this event should derrive the StartUpProcess interface.
     /// </summary>
     [NonSerialized] public UnityEvent onStartupProcess = new UnityEvent();
     /// <summary>
-    /// Subscribable event for processes that need to occur after the startup phase of the application
+    /// Subscribable event for processes that need to occur after the startup phase of the application.
+    /// 
+    /// Classes that subscribe to this even should derrive the PostStartUpProcess interface.
     /// </summary>
     [NonSerialized] public UnityEvent onPostStartupProcess = new UnityEvent();
     /// <summary>
@@ -92,4 +96,5 @@ public class ApplicationManager : Singleton<ApplicationManager>
     }
 
 }
+
 public enum NetworkStatus { ONLINE,OFFLINE}

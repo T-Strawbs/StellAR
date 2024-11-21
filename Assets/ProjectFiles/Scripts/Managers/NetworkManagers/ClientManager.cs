@@ -6,20 +6,39 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
+
+/// Additional Authors:
+/// 
+
 /// <summary>
 /// Handles client colour, currently only used for outlines but could be used for hand visualisation colours.
 /// </summary>
-public class ClientManager : NetworkSingleton<ClientManager>
+public class ClientManager : NetworkSingleton<ClientManager>, NewSelectionListener
 {
+    /// <summary>
+    /// The list of all outline materials of various colours
+    /// </summary>
     public List<Material> outlineMaterials = new List<Material>();
+    /// <summary>
+    /// Reference to the outline that was used before so we dont have to create a new one each time
+    /// a selection is made.
+    /// </summary>
     private BaseMeshOutline previousSelection;
 
     // add listener for when new object is selected
     private void Start()
     {
-        SelectionManager.Instance.onLocalSelectionChanged.AddListener(applyOutlineToNewSelection);
+        SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelection);
     }
 
+    public void onNewSelection(Transform selection)
+    {
+        applyOutlineToNewSelection(selection);
+    }
 
     /// <summary>
     /// Remove outline, called from within ClientManager.
@@ -171,6 +190,12 @@ public class ClientManager : NetworkSingleton<ClientManager>
         }
     }
 
+    /// <summary>
+    /// Rpc Method for updating the outline of the target interactable 
+    /// </summary>
+    /// <param name="parentKey"></param>
+    /// <param name="objectIndex"></param>
+    /// <param name="senderId"></param>
     [Rpc(SendTo.NotMe)]
     private void addNewOutlineRpc(int parentKey, int objectIndex, int senderId)
     {

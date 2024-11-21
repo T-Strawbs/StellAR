@@ -25,7 +25,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
     /// </summary>
     [SerializeField] private PressableButton postBtn;
     /// <summary>
-    /// the text field that we use as the annotation content
+    /// the text field that we use as the annotation animationName
     /// </summary>
     [SerializeField] private TMP_Text inputText;
    
@@ -68,7 +68,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //quickly assert that the current selection has an annotation component
-        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationList>();
         if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");
@@ -99,7 +99,7 @@ public class TextInput : MonoBehaviour, IAnnotationInput
             return;
         }
         //quickly assert that the current selection has an annotation component
-        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationList>();
         if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");

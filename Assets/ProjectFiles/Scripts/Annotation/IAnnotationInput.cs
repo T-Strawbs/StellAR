@@ -10,6 +10,9 @@ using UnityEngine;
 /// Additional Authors:
 /// 
 
+/// <summary>
+/// Interface for classes that create annotations using their own input methods.
+/// </summary>
 public interface IAnnotationInput 
 {
     /// <summary>

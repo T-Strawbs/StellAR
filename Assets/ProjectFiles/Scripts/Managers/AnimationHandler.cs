@@ -1,57 +1,32 @@
 using MixedReality.Toolkit.UX;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// Please do not Remove
+/// Orignal Authors:
+///     • Marcello Morena - UniSa - morma016@mymail.unisa.edu.au - https://github.com/Morma016
+///     • Travis Strawbridge - Unisa - strtk001@mymail.unisa.edu.au - https://github.com/STRTK001
 
+/// Additional Authors:
+/// 
 
+/// <summary>
+/// Class for managing the Animation components of the currently selected interactable and populating 
+/// the AnimationPane UI element.
+/// </summary>
 public class AnimationHandler : Singleton<AnimationHandler>, NewSelectionListener
 {
-    /*
-    public List<AnimationClip> animations;
-    private Animation anim;
-    public GameObject buttonGrid;
-    public GameObject button;
-    */
-
-    [SerializeField] private AnimationClip starlinkAnim;
-
-
+    /// <summary>
+    /// The AnimationPane UI element that displays all the animations for the currently
+    /// selected model
+    /// </summary>
     [SerializeField] private AnimationPane animationPane;
 
     private void Awake()
     {
         SelectionManager.Instance.onLocalSelectionChanged.AddListener(onNewSelection);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        initialise();
-
-        /*
-        // instantiate and add Animation component to this object in order to store and play animation clips
-        anim = this.AddComponent<Animation>();
-
-        // loop through all clips in the animations list and add them to anim, each clip's name will be based on the incrementing int
-        int i = 0;
-        foreach(AnimationClip clip in animations)
-        {
-            string clipName = i.ToString();
-
-            // set clip to work with legacy Animation component
-            clip.legacy = true;
-            anim.AddClip(clip, clipName);
-
-            // for each animation in the model, add a new button to the hand menu button grid
-            GameObject newButton = Instantiate(button, buttonGrid.GetComponent<RectTransform>());
-
-            // make the button play the clip when pressed
-            newButton.GetComponent<PressableButton>().OnClicked.AddListener(() => { anim.Play(clipName); });
-            i++;
-        }
-        */
     }
 
     public void onNewSelection(Transform selection)
@@ -64,7 +39,7 @@ public class AnimationHandler : Singleton<AnimationHandler>, NewSelectionListene
             //set the animation pane's current animations as an empty list
             animationPane.CurrentAnimation = null;
             //populate the animation pane
-            animationPane.populateScrollPane();
+            animationPane.populateScrollablePane(null);
             return;
         }
         //grab the current selections animation component
@@ -75,48 +50,20 @@ public class AnimationHandler : Singleton<AnimationHandler>, NewSelectionListene
             //set the animation pane's current animations as an empty list
             animationPane.CurrentAnimation = null;
             //populate the animation pane
-            animationPane.populateScrollPane();
+            animationPane.populateScrollablePane(null);
             return;
         }
         //set the animation panes current animations as animations list
         animationPane.CurrentAnimation = animationComponent;
         //populate the animation pane
-        animationPane.populateScrollPane();
+        animationPane.populateScrollablePane(null);
     }
 
-    private void initialise()
-    {
-        /*
-        //for each model in all models
-        for(int i = 0; i < Config.Instance.AllModels.childCount; i++)
-        {
-            //get ref of model
-            Transform model = Config.Instance.AllModels.GetChild(i);
-
-            //get the animation component of the model or create one
-            Animation modelAnimationComponent = model.gameObject.GetComponent<Animation>();
-            if (modelAnimationComponent == null)
-            {
-                modelAnimationComponent = model.gameObject.AddComponent<Animation>();
-            }
-
-            //*** this is garbage so we'll have to replace this code later *** <<<<<<<<<<<<<<< OI!
-            if (model.name == "Starlink_v1")
-            {
-                {
-                    DebugConsole.Instance.LogDebug($"We have found {model.name}");
-                    //add the anim clip to animation component
-                    starlinkAnim.legacy = true;
-                    modelAnimationComponent.AddClip(starlinkAnim, starlinkAnim.name);
-                }
-                //get the animations from the model
-
-                //add them to the models dict entry list
-            }
-        }
-        */
-    }
-
+    /// <summary>
+    /// method for getting all animation clips of an animation component.
+    /// </summary>
+    /// <param name="animation"></param>
+    /// <returns></returns>
     public static List<AnimationClip> getAllAnimationClips(Animation animation)
     {
         List<AnimationClip> animationClips = new List<AnimationClip>();

@@ -13,7 +13,7 @@ using UnityEngine;
 /// 
 
 /// <summary>
-/// Network serialisable version of ModelAnnotationJson class able to be sent as parameters in Rpc calls
+/// Network serialisable version of AnnotationSerialisable class able to be sent as parameters in Rpc calls
 /// </summary>
 public class NetworkModelAnnotationJson : INetworkSerializable
 {
@@ -47,10 +47,10 @@ public class NetworkModelAnnotationJson : INetworkSerializable
     }
 
     /// <summary>
-    /// convert input ModelAnnotationJson into NetworkModelAnnotationJson
+    /// convert input AnnotationSerialisable into NetworkModelAnnotationJson
     /// </summary>
     /// <param name="modelAnnotationJson"></param>
-    public NetworkModelAnnotationJson(ModelAnnotationJson modelAnnotationJson)
+    public NetworkModelAnnotationJson(AnnotationSerialisable modelAnnotationJson)
     {
         Name = modelAnnotationJson.Name;
         HighlightColour = modelAnnotationJson.HighlightColour;

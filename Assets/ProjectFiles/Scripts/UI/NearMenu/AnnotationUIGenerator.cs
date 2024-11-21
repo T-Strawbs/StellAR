@@ -56,7 +56,7 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
         if(annotationUI is TextAnnotationUI textUI)
         {
             //reparent the element to this generator so that its out of the annotation pane's
-            //content holder
+            //animationName holder
             textUI.transform.SetParent(transform);
             //add the element to the pool of text ui elements
             pooledTextUI.Add(textUI);
@@ -66,7 +66,7 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
         else if(annotationUI is VoiceAnnotationUI voiceUI)
         {
             //reparent the element to this generator so that its out of the annotation pane's
-            //content holder
+            //animationName holder
             voiceUI.transform.SetParent(transform);
             //add the element to the pool of text ui elements
             pooledVoiceUI.Add(voiceUI);

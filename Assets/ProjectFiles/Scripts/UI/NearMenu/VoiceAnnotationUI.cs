@@ -32,7 +32,7 @@ public class VoiceAnnotationUI : AnnotationUI
         base.initialise(annotationData);
         if (annotationData is VoiceAnnotationJson voiceMessage)
         {
-            // give the file path to audio clip to the audioPlayerUI
+            // give the file path to audio loadedClip to the audioPlayerUI
             audioPlayerUI.audioPath = voiceMessage.Content;
             audioPlayerUI.setAudioSource(null);
             
@@ -50,15 +50,21 @@ public class VoiceAnnotationUI : AnnotationUI
         }
     }
 
-    private void onAudioLoaded(AudioClip clip,string audioPath)
+    /// <summary>
+    /// Method for setting the audio source of this VoiceAnnotationUI's audiplayer to the
+    /// loadedClip.
+    /// </summary>
+    /// <param name="loadedClip"></param>
+    /// <param name="audioPath"></param>
+    private void onAudioLoaded(AudioClip loadedClip,string audioPath)
     {
-        //if the clip is null
-        if(!clip)
+        //if the loadedClip is null
+        if(!loadedClip)
         {
             DebugConsole.Instance.LogError($"Couldnt load audio from file:{audioPath}");
             return;
         }
-        //its not null so we'll load the clip into our audio player
-        audioPlayerUI.setAudioSource(clip);
+        //its not null so we'll load the loadedClip into our audio player
+        audioPlayerUI.setAudioSource(loadedClip);
     }
 }

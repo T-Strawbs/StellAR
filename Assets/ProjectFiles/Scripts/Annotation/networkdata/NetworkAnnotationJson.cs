@@ -33,7 +33,7 @@ public class NetworkAnnotationJson : INetworkSerializable
     /// </summary>
     public string MessageType;
     /// <summary>
-    /// The content of this annotation.
+    /// The animationName of this annotation.
     /// </summary>
     public string Content;
 

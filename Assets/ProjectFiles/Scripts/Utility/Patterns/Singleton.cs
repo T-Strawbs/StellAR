@@ -7,6 +7,10 @@ using UnityEngine;
  * Link: https://github.com/dilmerv/UnityMultiplayerPlayground/blob/master/Assets/Scripts/Core/NetworkSingleton.cs
  */
 
+/// <summary>
+/// Base class for objects that need to be static and accessed globally.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class Singleton<T> : MonoBehaviour
         where T : Component
 {

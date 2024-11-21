@@ -5,7 +5,10 @@ using UnityEngine;
  * Orignial Author: https://github.com/dilmerv
  * Link: https://github.com/dilmerv/UnityMultiplayerPlayground/blob/master/Assets/Scripts/Core/NetworkSingleton.cs
  */
-
+/// <summary>
+/// Base class for objects that need to be static and accessed globally while needing to be a NetworkBehaviour.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class NetworkSingleton<T> : NetworkBehaviour
         where T : Component
 {

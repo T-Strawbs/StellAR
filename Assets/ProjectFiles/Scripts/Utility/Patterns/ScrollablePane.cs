@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +10,13 @@ using UnityEngine;
 /// 
 
 /// <summary>
-/// Game component for holding metadata when attached to a model gameobject
+/// Interface for objects that contain UI elements in a scrollable element like the Unity ScrollView component.
 /// </summary>
-public class MetadataComponent : MonoBehaviour
+public interface ScrollablePane
 {
     /// <summary>
-    /// the metadata animationName
+    /// Method for populating the scrollable container with UI elements using the 
     /// </summary>
-    public string metadata;
+    /// <param name="loadedPrefabs"></param>
+    public void populateScrollablePane(List<GameObject> loadedPrefabs);
 }

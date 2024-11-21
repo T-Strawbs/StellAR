@@ -12,7 +12,7 @@ public class LogUI : MonoBehaviour
     {
         //set the log number text
         this.logNumber.text = logNumber.ToString();
-        //set the content text
+        //set the animationName text
         this.logContent.text = content;
         //set the text colours
         this.logContent.color = color;

@@ -200,7 +200,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             return null;
         }
         //quickly assert that the current selection has an annotation component
-        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationList>();
         if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("We cant post as the currently selected object has no annotation component");
@@ -238,7 +238,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //tell the UI manager to update its annotations 
         DataPanelManager.Instance.updateAnnotations(annotationComponent);
         DebugConsole.Instance.LogDebug("we wouldve \"created\" a voice annotation");
-        //reset content
+        //reset animationName
         resetVoiceInput();
         return audioAnnotation;
     }
@@ -269,7 +269,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         }
 
         //quickly assert that the current selection has an annotation component
-        AnnotationComponent annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationComponent>();
+        AnnotationList annotationComponent = SelectionManager.Instance.currentSelection.GetComponent<AnnotationList>();
         if (!annotationComponent)
         {
             DebugConsole.Instance.LogError("We can't post as the currently selected object has no annotation component");
@@ -324,7 +324,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
             }
         }
 
-        //reset content
+        //reset animationName
         resetVoiceInput();
     }
 }

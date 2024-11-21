@@ -39,7 +39,7 @@ public abstract class AnnotationJson
     /// </summary>
     public abstract string MessageType { get; }
     /// <summary>
-    /// The content of this annotation.
+    /// The animationName of this annotation.
     /// </summary>
     public string Content { get; set; }
 

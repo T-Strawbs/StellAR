@@ -93,7 +93,7 @@ public class DebugConsole : Singleton<DebugConsole>
 
     private void setParent(LogUI logUI)
     {
-        //set the log as a child of the content holder
+        //set the log as a child of the animationName holder
         logUI.transform.SetParent(contentHolder);
         //set the local transforms of log ui
         logUI.transform.localPosition = Vector3.zero;

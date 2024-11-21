@@ -25,7 +25,7 @@ public class VoiceAnnotationJson : AnnotationJson
     public override string MessageType => GlobalConstants.VOICE_ANNOTATION;
 
     /// <summary>
-    /// Create a VoiceAnnotationJson, content is the file path to the audio file
+    /// Create a VoiceAnnotationJson, animationName is the file path to the audio file
     /// </summary>
     /// <param name="componentName"></param>
     /// <param name="author"></param>
