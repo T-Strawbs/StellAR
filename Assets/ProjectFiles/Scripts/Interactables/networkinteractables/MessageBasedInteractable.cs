@@ -58,7 +58,7 @@ public class MessageBasedInteractable : Interactable
     ///     - True: the local client owns the object
     ///     - False: the local client does not own the object
     /// </returns>
-    public bool isOwnedByLocalCLient()
+    public bool isOwnedByLocalClient()
     {
         if (ownerID == NetworkManager.Singleton.LocalClientId)
             return true;

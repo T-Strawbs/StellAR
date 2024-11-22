@@ -380,7 +380,7 @@ public class InteractableLockHandler : Singleton<InteractableLockHandler>, Start
     /// </summary>
     /// <param name="interactableLock"></param>
     /// <param name="isLocked"></param>
-    private void updateClientInteractableLocks(InteractableLock interactableLock,bool isLocked)
+    private void updateClientInteractableLocks(InteractableLock interactableLock, bool isLocked)
     {
         //check if the interactable lock exists 
         if(!activeLocks[interactableLock.lockID.parentKey].Contains(interactableLock))

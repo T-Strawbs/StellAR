@@ -41,8 +41,6 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
     private void Awake()
     {
         ApplicationManager.Instance.onStartupProcess.AddListener(onStartupProcess);
-
-
     }
 
     private void Start()

@@ -197,7 +197,7 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         }
 
         //check if the local client already owns the network interactable
-        if (networkInteractable.isOwnedByLocalCLient())
+        if (networkInteractable.isOwnedByLocalClient())
         {
             DebugConsole.Instance.LogDebug(
                 $"Client({NetworkManager.Singleton.LocalClientId}) tried to request ownership of {networkInteractable.name}" +
@@ -264,7 +264,7 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
     public void revokeOwnershipOfNetworkInteractable(MessageBasedInteractable networkInteractable)
     {
         //check if the local client owns the network interactable
-        if (!networkInteractable.isOwnedByLocalCLient())
+        if (!networkInteractable.isOwnedByLocalClient())
         {
             DebugConsole.Instance.LogDebug(
                 $"Client({NetworkManager.Singleton.LocalClientId}) tried to revoke ownership of {networkInteractable.name}" +
@@ -489,7 +489,7 @@ public class MessageBasedInstanceManager : Singleton<MessageBasedInstanceManager
         }
 
         //check if the local client has ownership of the network interactable
-        if(!networkInteractable.isOwnedByLocalCLient())
+        if(!networkInteractable.isOwnedByLocalClient())
         {
             DebugConsole.Instance.LogDebug($"client({NetworkManager.Singleton.LocalClientId}) attempted to request" +
                 $" the server to update the {networkInteractable.name}'s transform but " +
