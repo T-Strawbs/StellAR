@@ -148,8 +148,4 @@ public class AnnotationUIGenerator : Singleton<AnnotationUIGenerator>
         }
         else return null;
     }
-
-    
-
-    
 }

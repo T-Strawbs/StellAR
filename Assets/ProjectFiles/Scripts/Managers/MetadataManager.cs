@@ -62,7 +62,7 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
              * NOTE: If the prefab architecture changes, the existing JSON will need to be deleted to create
              *          an accurate representation of the new architecture.
              */
-            string jsonFilePath = GlobalConstants.METADATA_DIR + prefab.name + "_Metadata.json";
+            string jsonFilePath = $"{GlobalConstants.METADATA_DIR}/" + prefab.name + "_Metadata.json";
             if(File.Exists(jsonFilePath))
             {
                 // if JSON already exists add data from JSON, which also updated the JSON to any changed in the prefab if there are any
@@ -88,7 +88,7 @@ public class MetadataManager : Singleton<MetadataManager>, PrefabLoadListener
     /// <param name="model"></param>
     private void writeJSON(MetadataJson model)
     {
-        string jsonFilePath = GlobalConstants.METADATA_DIR + model.name + "_Metadata.json";
+        string jsonFilePath = $"{GlobalConstants.METADATA_DIR}/" + model.name + "_Metadata.json";
         File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(model, Formatting.Indented));
     }
 

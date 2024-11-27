@@ -51,7 +51,7 @@ public class VoiceAnnotationUI : AnnotationUI
     }
 
     /// <summary>
-    /// Method for setting the audio source of this VoiceAnnotationUI's audiplayer to the
+    /// Method for setting the audio source of this VoiceAnnotationUI's audioplayer to the
     /// loadedClip.
     /// </summary>
     /// <param name="loadedClip"></param>

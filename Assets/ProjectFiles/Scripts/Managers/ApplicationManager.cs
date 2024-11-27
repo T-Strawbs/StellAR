@@ -28,7 +28,7 @@ public class ApplicationManager : Singleton<ApplicationManager>
     /// <summary>
     /// Subscribable event for processes that need to occur after the startup phase of the application.
     /// 
-    /// Classes that subscribe to this even should derrive the PostStartUpProcess interface.
+    /// Classes that subscribe to this event should derrive the PostStartUpProcess interface.
     /// </summary>
     [NonSerialized] public UnityEvent onPostStartupProcess = new UnityEvent();
     /// <summary>

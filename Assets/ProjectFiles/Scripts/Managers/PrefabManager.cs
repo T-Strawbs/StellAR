@@ -30,10 +30,14 @@ public class PrefabManager : Singleton<PrefabManager>, StartupProcess
     [SerializeField] private HashSet<int> spawnedPrefabs = new HashSet<int>();
     /// <summary>
     /// Unity event for invoking behaviour when the system's prefabs have finished loading in.
+    /// 
+    /// Subscribers should derrive from the PrefabLoadListener interface.
     /// </summary>
     [NonSerialized] public UnityEvent<List<GameObject>> OnPrefabsLoaded = new UnityEvent<List<GameObject>>();
     /// <summary>
     /// Unity Event that triggers when a prefab has been instantiated.
+    /// 
+    /// Subscribers should derrive from the PrefabInstantationListener interface.
     /// </summary>
     [NonSerialized] public UnityEvent<GameObject> OnPrefabInstantiation = new UnityEvent<GameObject>();
 

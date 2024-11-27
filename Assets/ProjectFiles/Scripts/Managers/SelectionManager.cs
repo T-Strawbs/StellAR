@@ -25,9 +25,10 @@ public class SelectionManager : Singleton<SelectionManager>
     /// The current selection for local actions like updating the near menu and such
     /// </summary>
     public Interactable currentSelection {  get; private set; }
-   /// <summary>
-   /// The subscribable event thats invoked when the current local selection is changed
-   /// </summary>
+    /// <summary>
+    /// The subscribable event thats invoked when the current local selection is changed.
+    /// Subscribers should derrive from the NewSelectionListener interface.
+    /// </summary>
     [NonSerialized] public UnityEvent<Transform> onLocalSelectionChanged = new UnityEvent<Transform>();
     /// <summary>
     /// sets the current local selection to the newly selected interactable

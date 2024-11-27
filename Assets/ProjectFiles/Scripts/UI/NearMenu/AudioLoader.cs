@@ -223,7 +223,7 @@ public class AudioLoader : Singleton<AudioLoader>, StartupProcess
     }
 
     /// <summary>
-    /// Coroutine for loading audio locally offline as a general user or online as the server/host.
+    /// Coroutine for loading audio locally while offline as a general user or online as the server/host.
     /// 
     /// We pass in an action delegate so we can execute it which is usually the
     /// VoiceAnnotationUI.onAudioLoaded(AudioClip,string) method. By doing this

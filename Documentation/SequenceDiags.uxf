@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>4</zoom_level>
+  <zoom_level>3</zoom_level>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>348</x>
-      <y>264</y>
-      <w>8</w>
-      <h>28</h>
+      <x>1545</x>
+      <y>750</y>
+      <w>6</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>332</x>
-      <y>228</y>
-      <w>40</w>
-      <h>12</h>
+      <x>1533</x>
+      <y>723</y>
+      <w>30</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>ModelUI
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>348</x>
-      <y>236</y>
-      <w>12</w>
-      <h>36</h>
+      <x>1545</x>
+      <y>729</y>
+      <w>9</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=.
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>192</x>
-      <y>248</y>
-      <w>80</w>
-      <h>56</h>
+      <x>1428</x>
+      <y>738</y>
+      <w>60</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>User pulls up the
 hand menu and has openned
 the model pane menu
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>40</x>
-      <y>520</y>
-      <w>88</w>
-      <h>16</h>
+      <x>300</x>
+      <y>147</y>
+      <w>66</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>Prefab Instantiation Sequence
 </panel_attributes>
@@ -66,46 +66,46 @@ group=group-0</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>480</x>
-      <y>272</y>
-      <w>8</w>
-      <h>232</h>
+      <x>1644</x>
+      <y>756</y>
+      <w>6</w>
+      <h>174</h>
     </coordinates>
     <panel_attributes>
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>464</x>
-      <y>228</y>
-      <w>44</w>
-      <h>12</h>
+      <x>1632</x>
+      <y>723</y>
+      <w>33</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>PrefabManager
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>236</y>
-      <w>12</w>
-      <h>44</h>
+      <x>1644</x>
+      <y>729</y>
+      <w>9</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=.
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>264</x>
-      <y>264</y>
-      <w>92</w>
-      <h>44</h>
+      <x>1482</x>
+      <y>750</y>
+      <w>69</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>User selects the model UI
 element to spawn their
@@ -114,31 +114,31 @@ lt=-&gt;
 
 
 
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>352</x>
-      <y>272</y>
-      <w>136</w>
-      <h>24</h>
+      <x>1548</x>
+      <y>756</y>
+      <w>102</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 calls requestInteractbleSpawn(prefabIndex)
 passing in the index of the desired
 model
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;20.0;320.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>920</x>
-      <y>152</y>
-      <w>48</w>
-      <h>12</h>
+      <x>354</x>
+      <y>537</y>
+      <w>36</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 group=group-2</panel_attributes>
@@ -147,330 +147,318 @@ group=group-2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>280</y>
-      <w>100</w>
-      <h>24</h>
+      <x>1647</x>
+      <y>762</y>
+      <w>75</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 call isOnline()
 to check if our app is
 currently online or not
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>576</x>
-      <y>276</y>
-      <w>8</w>
-      <h>44</h>
+      <x>1716</x>
+      <y>759</y>
+      <w>6</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>552</x>
-      <y>228</y>
-      <w>56</w>
-      <h>12</h>
+      <x>1698</x>
+      <y>723</y>
+      <w>42</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>ApplicationManager
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>576</x>
-      <y>236</y>
-      <w>12</w>
-      <h>48</h>
+      <x>1716</x>
+      <y>729</y>
+      <w>9</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=.
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>304</y>
-      <w>100</w>
-      <h>16</h>
+      <x>1647</x>
+      <y>780</y>
+      <w>75</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 returns a bool 
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>230.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>488</y>
-      <w>212</w>
-      <h>24</h>
+      <x>1647</x>
+      <y>918</y>
+      <w>159</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-fg=blue
 initialiseInteractable(prefabInstance)
 initialise the prefab instance as a 
 LocalBasedInteractable.
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;20.0;510.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>960</x>
-      <y>148</y>
-      <w>8</w>
-      <h>48</h>
+      <x>384</x>
+      <y>534</y>
+      <w>6</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>
 group=group-2</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLGeneric</id>
-    <coordinates>
-      <x>92</x>
-      <y>280</y>
-      <w>40</w>
-      <h>12</h>
-    </coordinates>
-    <panel_attributes>ModelUI</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>320</y>
-      <w>164</w>
-      <h>28</h>
+      <x>1647</x>
+      <y>792</y>
+      <w>123</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-fg=green
+fg=blue
 if we're online then we call
 networkRequestInteractableSpawn(prefabIndex)
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0;90.0;50.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>340</y>
-      <w>192</w>
-      <h>28</h>
+      <x>1647</x>
+      <y>807</y>
+      <w>144</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-fg=green
+fg=blue
 requestServerInteractableSpawn(clientID,requestMessage)
 request the server to tell all clients
 to spawn the network prefab locally
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0;90.0;50.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>364</y>
-      <w>192</w>
-      <h>32</h>
+      <x>1647</x>
+      <y>825</y>
+      <w>144</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-fg=green
+fg=blue
 broadcastClientInteractbleSpawn(clientID,requestMessage)
 the server sends a broadcast to all clients and
 the clients spawn and register the 
 MessageBasedInteracable locally.
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;10.0;90.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>768</x>
-      <y>428</y>
-      <w>8</w>
-      <h>20</h>
+      <x>1860</x>
+      <y>873</y>
+      <w>6</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>264</y>
-      <w>12</w>
-      <h>172</h>
+      <x>1860</x>
+      <y>750</y>
+      <w>9</w>
+      <h>129</h>
     </coordinates>
     <panel_attributes>lt=.
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;410.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>728</x>
-      <y>256</y>
-      <w>88</w>
-      <h>12</h>
+      <x>1830</x>
+      <y>744</y>
+      <w>66</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>MessageBasedInstanceManager
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>432</y>
-      <w>292</w>
-      <h>20</h>
+      <x>1647</x>
+      <y>876</y>
+      <w>219</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-fg=green
+fg=blue
 registerNetworkInteractable(mbInteractable)
 Regisiter our new MessageBasedInteracable 
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;20.0;710.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>648</x>
-      <y>228</y>
-      <w>88</w>
-      <h>12</h>
+      <x>1770</x>
+      <y>723</y>
+      <w>66</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>InteractableFactory
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
-      <y>236</y>
-      <w>12</w>
-      <h>168</h>
+      <x>1800</x>
+      <y>729</y>
+      <w>9</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=.
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;400.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>688</x>
-      <y>396</y>
-      <w>8</w>
-      <h>20</h>
+      <x>1800</x>
+      <y>849</y>
+      <w>6</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>400</y>
-      <w>212</w>
-      <h>32</h>
+      <x>1647</x>
+      <y>852</y>
+      <w>159</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-fg=green
+fg=blue
 initialiseInteractable(prefabInstance)
 initialise the prefab instance as a
 MessageBasedInteractable
 
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;20.0;510.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>484</x>
-      <y>456</y>
-      <w>152</w>
-      <h>32</h>
+      <x>1647</x>
+      <y>894</y>
+      <w>114</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-fg=blue
 if we're offline then we call
 localRequestInteractableSpawn(prefabIndex)
 
 
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;10.0;80.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>688</x>
-      <y>488</y>
-      <w>8</w>
-      <h>20</h>
+      <x>1800</x>
+      <y>918</y>
+      <w>6</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
-      <y>412</y>
-      <w>12</w>
-      <h>84</h>
+      <x>1800</x>
+      <y>861</y>
+      <w>9</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=.
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>188</x>
-      <y>224</y>
-      <w>632</w>
-      <h>292</h>
+      <x>1425</x>
+      <y>720</y>
+      <w>474</w>
+      <h>219</h>
     </coordinates>
     <panel_attributes>Prefab Instantiation Sequence
 
-group=group-0</panel_attributes>
+group=group-15</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>8</x>
-      <y>396</y>
-      <w>28</w>
-      <h>44</h>
+      <x>294</x>
+      <y>1551</y>
+      <w>51</w>
+      <h>33</h>
     </coordinates>
-    <panel_attributes>User </panel_attributes>
+    <panel_attributes>User pulls up hand Menu 
+group=group-14</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>928</x>
-      <y>240</y>
-      <w>76</w>
-      <h>12</h>
+      <x>360</x>
+      <y>597</y>
+      <w>57</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>MessageBasedManipulator
 group=group-1</panel_attributes>
@@ -479,10 +467,10 @@ group=group-1</panel_attributes>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>856</x>
-      <y>136</y>
-      <w>68</w>
-      <h>44</h>
+      <x>306</x>
+      <y>525</y>
+      <w>51</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>User moves Interactable
 group=group-2</panel_attributes>
@@ -491,10 +479,10 @@ group=group-2</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>840</x>
-      <y>228</y>
-      <w>820</w>
-      <h>296</h>
+      <x>294</x>
+      <y>588</y>
+      <w>615</w>
+      <h>222</h>
     </coordinates>
     <panel_attributes>MessageBasedInteractable Manipulation
 group=group-1</panel_attributes>
@@ -503,10 +491,10 @@ group=group-1</panel_attributes>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>848</x>
-      <y>252</y>
-      <w>68</w>
-      <h>44</h>
+      <x>300</x>
+      <y>606</y>
+      <w>51</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>User moves Interactable
 group=group-1</panel_attributes>
@@ -515,10 +503,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>912</x>
-      <y>268</y>
-      <w>56</w>
-      <h>12</h>
+      <x>348</x>
+      <y>618</y>
+      <w>42</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 group=group-1</panel_attributes>
@@ -527,21 +515,22 @@ group=group-1</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>44</x>
-      <y>544</y>
-      <w>40</w>
-      <h>12</h>
+      <x>1626</x>
+      <y>594</y>
+      <w>33</w>
+      <h>9</h>
     </coordinates>
-    <panel_attributes>ModelUI</panel_attributes>
+    <panel_attributes>StartupProcess
+group=group-4</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>960</x>
-      <y>268</y>
-      <w>8</w>
-      <h>64</h>
+      <x>384</x>
+      <y>618</y>
+      <w>6</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>
 group=group-1</panel_attributes>
@@ -550,10 +539,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>964</x>
-      <y>276</y>
-      <w>112</w>
-      <h>32</h>
+      <x>387</x>
+      <y>624</y>
+      <w>84</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 ApplyTargetTransform()
@@ -566,10 +555,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>964</x>
-      <y>308</y>
-      <w>180</w>
-      <h>24</h>
+      <x>387</x>
+      <y>648</y>
+      <w>135</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 requestUpdateTransform(newPosition,newRotation,newScale)
@@ -581,10 +570,10 @@ group=group-1</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1100</x>
-      <y>272</y>
-      <w>76</w>
-      <h>12</h>
+      <x>489</x>
+      <y>621</y>
+      <w>57</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>MessageBasedInteractable
 group=group-1</panel_attributes>
@@ -593,10 +582,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>248</y>
-      <w>12</w>
-      <h>28</h>
+      <x>384</x>
+      <y>603</y>
+      <w>9</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=.
 group=group-1</panel_attributes>
@@ -605,10 +594,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1136</x>
-      <y>280</y>
-      <w>12</w>
-      <h>36</h>
+      <x>516</x>
+      <y>627</y>
+      <w>9</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=.
 group=group-1</panel_attributes>
@@ -617,10 +606,10 @@ group=group-1</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1136</x>
-      <y>308</y>
-      <w>8</w>
-      <h>204</h>
+      <x>516</x>
+      <y>648</y>
+      <w>6</w>
+      <h>153</h>
     </coordinates>
     <panel_attributes>
 group=group-1</panel_attributes>
@@ -629,10 +618,10 @@ group=group-1</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1416</x>
-      <y>312</y>
-      <w>8</w>
-      <h>208</h>
+      <x>726</x>
+      <y>651</y>
+      <w>6</w>
+      <h>156</h>
     </coordinates>
     <panel_attributes>
 group=group-1</panel_attributes>
@@ -641,10 +630,10 @@ group=group-1</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1380</x>
-      <y>268</y>
-      <w>92</w>
-      <h>16</h>
+      <x>699</x>
+      <y>618</y>
+      <w>69</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>MessageBasedInstanceManager
 group=group-1</panel_attributes>
@@ -653,10 +642,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1416</x>
-      <y>280</y>
-      <w>12</w>
-      <h>40</h>
+      <x>726</x>
+      <y>627</y>
+      <w>9</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.
 group=group-1</panel_attributes>
@@ -665,10 +654,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>316</y>
-      <w>284</w>
-      <h>24</h>
+      <x>519</x>
+      <y>654</y>
+      <w>213</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 requestUpdateNetworkInteractableTransform(interactable,newPosition,newRotation,newScale)
@@ -680,10 +669,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1420</x>
-      <y>444</y>
-      <w>232</w>
-      <h>32</h>
+      <x>729</x>
+      <y>750</y>
+      <w>174</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 updateNetworkInteractableTransformServerRequest(senderID,messagePayload)
@@ -696,10 +685,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1420</x>
-      <y>472</y>
-      <w>236</w>
-      <h>28</h>
+      <x>729</x>
+      <y>771</y>
+      <w>177</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 updateNetworkInteractableTransformClientBroadcast(senderID,messagePayload)
@@ -711,10 +700,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>432</y>
-      <w>284</w>
-      <h>24</h>
+      <x>519</x>
+      <y>741</y>
+      <w>213</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 updateTransformLocalClient(newPosition,newRotation,newScale)
@@ -726,10 +715,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>496</y>
-      <w>284</w>
-      <h>24</h>
+      <x>519</x>
+      <y>789</y>
+      <w>213</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 updateTransformLocalClientLocalPosition(newPosition,newRotation,newScale)
@@ -741,10 +730,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>336</y>
-      <w>284</w>
-      <h>24</h>
+      <x>519</x>
+      <y>669</y>
+      <w>213</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 isLocked()
@@ -756,10 +745,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>376</y>
-      <w>284</w>
-      <h>32</h>
+      <x>519</x>
+      <y>699</y>
+      <w>213</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 isOwnedByLocalClient()
@@ -772,10 +761,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>348</y>
-      <w>284</w>
-      <h>20</h>
+      <x>519</x>
+      <y>678</y>
+      <w>213</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 bool return false if its not locked
@@ -786,10 +775,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>396</y>
-      <w>284</w>
-      <h>20</h>
+      <x>519</x>
+      <y>714</y>
+      <w>213</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 bool return true if owned
@@ -800,10 +789,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>360</y>
-      <w>284</w>
-      <h>24</h>
+      <x>519</x>
+      <y>687</y>
+      <w>213</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 fg=red
@@ -816,10 +805,10 @@ group=group-1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>408</y>
-      <w>284</w>
-      <h>24</h>
+      <x>519</x>
+      <y>723</y>
+      <w>213</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 fg=red
@@ -832,10 +821,10 @@ group=group-1</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>840</x>
-      <y>112</y>
-      <w>280</w>
-      <h>104</h>
+      <x>294</x>
+      <y>507</y>
+      <w>210</w>
+      <h>78</h>
     </coordinates>
     <panel_attributes>LocalBasedInteractable Manipulation
 
@@ -845,10 +834,10 @@ group=group-2</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>928</x>
-      <y>124</y>
-      <w>80</w>
-      <h>12</h>
+      <x>360</x>
+      <y>516</y>
+      <w>60</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>ExtendableObjectManipulator
 group=group-2</panel_attributes>
@@ -857,22 +846,10 @@ group=group-2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>0</x>
-      <y>600</y>
-      <w>12</w>
-      <h>52</h>
-    </coordinates>
-    <panel_attributes>lt=.
-</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>132</y>
-      <w>12</w>
-      <h>24</h>
+      <x>384</x>
+      <y>522</y>
+      <w>9</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.
 group=group-2</panel_attributes>
@@ -881,10 +858,10 @@ group=group-2</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>964</x>
-      <y>156</y>
-      <w>160</w>
-      <h>40</h>
+      <x>387</x>
+      <y>540</y>
+      <w>120</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 ApplyTargetTransform()
@@ -898,292 +875,298 @@ group=group-2</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>984</x>
-      <y>540</y>
-      <w>40</w>
-      <h>12</h>
+      <x>402</x>
+      <y>822</y>
+      <w>30</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>ControlPane
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>840</x>
-      <y>552</y>
-      <w>80</w>
-      <h>44</h>
+      <x>294</x>
+      <y>831</y>
+      <w>60</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>User pulls up the hand menu
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>840</x>
-      <y>532</y>
-      <w>760</w>
-      <h>172</h>
+      <x>294</x>
+      <y>816</y>
+      <w>570</w>
+      <h>129</h>
     </coordinates>
     <panel_attributes>LocalBasedInteractable Explosion Sequence
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1136</x>
-      <y>564</y>
-      <w>8</w>
-      <h>20</h>
+      <x>516</x>
+      <y>840</y>
+      <w>6</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1116</x>
-      <y>540</y>
-      <w>56</w>
-      <h>12</h>
+      <x>501</x>
+      <y>822</y>
+      <w>42</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>SelectionManager
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1188</x>
-      <y>540</y>
-      <w>68</w>
-      <h>12</h>
+      <x>555</x>
+      <y>822</y>
+      <w>51</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>LocalBasedInteractable
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1296</x>
-      <y>540</y>
-      <w>68</w>
-      <h>12</h>
+      <x>636</x>
+      <y>822</y>
+      <w>51</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>LocalBasedExplodable
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>16</x>
-      <y>572</y>
-      <w>56</w>
-      <h>12</h>
+      <x>969</x>
+      <y>615</y>
+      <w>111</w>
+      <h>27</h>
     </coordinates>
-    <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+    <panel_attributes>lt=-&gt;
+togglePlayback()
+toggle the playing state of the audio source.
+In this case the audio was not playing and
+we are playing it for the first time.
+
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;20.0;350.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>24</x>
-      <y>588</y>
-      <w>56</w>
-      <h>12</h>
+      <x>321</x>
+      <y>204</y>
+      <w>30</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>lt=.&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1000</x>
-      <y>564</y>
-      <w>8</w>
-      <h>16</h>
+      <x>414</x>
+      <y>840</y>
+      <w>6</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>896</x>
-      <y>560</y>
-      <w>112</w>
-      <h>16</h>
+      <x>336</x>
+      <y>837</y>
+      <w>84</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 user presses the explode button
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;20.0;260.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1000</x>
-      <y>548</y>
-      <w>12</w>
-      <h>24</h>
+      <x>414</x>
+      <y>828</y>
+      <w>9</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1004</x>
-      <y>564</y>
-      <w>140</w>
-      <h>24</h>
+      <x>417</x>
+      <y>840</y>
+      <w>105</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 explodeCurrentInteractable()
 tell the SelectionManager to encourage the
 currently selected interactable to explode.
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1136</x>
-      <y>548</y>
-      <w>12</w>
-      <h>24</h>
+      <x>516</x>
+      <y>828</y>
+      <w>9</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>572</y>
-      <w>88</w>
-      <h>32</h>
+      <x>519</x>
+      <y>846</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 explodeInteractable()
 tell the interactable
 to explode
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>852</x>
-      <y>752</y>
-      <w>8</w>
-      <h>404</h>
+      <x>645</x>
+      <y>978</y>
+      <w>6</w>
+      <h>369</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1220</x>
-      <y>576</y>
-      <w>8</w>
-      <h>12</h>
+      <x>579</x>
+      <y>849</y>
+      <w>6</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1220</x>
-      <y>548</y>
-      <w>12</w>
-      <h>36</h>
+      <x>579</x>
+      <y>828</y>
+      <w>9</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1224</x>
-      <y>576</y>
-      <w>108</w>
-      <h>24</h>
+      <x>582</x>
+      <y>849</y>
+      <w>81</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 explode()
 tell the explodable to start the
 explosion process
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1324</x>
-      <y>580</y>
-      <w>8</w>
-      <h>120</h>
+      <x>657</x>
+      <y>852</y>
+      <w>6</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1324</x>
-      <y>548</y>
-      <w>12</w>
-      <h>40</h>
+      <x>657</x>
+      <y>828</y>
+      <w>9</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1328</x>
-      <y>584</y>
-      <w>276</w>
-      <h>116</h>
+      <x>660</x>
+      <y>855</y>
+      <w>207</w>
+      <h>87</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 explode(childExplodable)
 The explodable recursively invokes
 its own explode method until all
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;10.0;450.0;10.0;450.0;270.0;10.0;270.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1328</x>
-      <y>592</y>
-      <w>136</w>
-      <h>36</h>
+      <x>660</x>
+      <y>861</y>
+      <w>102</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 calculateTrajectory(explodable)
@@ -1191,31 +1174,31 @@ calculate the trajectory of the where
 the interactable will move when it
 explodes.
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;20.0;100.0;20.0;100.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1328</x>
-      <y>632</y>
-      <w>168</w>
-      <h>28</h>
+      <x>660</x>
+      <y>891</y>
+      <w>126</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 invokeExplosionTranslation(explosionTrajectory)
 
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;10.0;100.0;10.0;100.0;50.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1328</x>
-      <y>656</y>
-      <w>148</w>
-      <h>44</h>
+      <x>660</x>
+      <y>909</y>
+      <w>111</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 translateExplosion(explosionTrajectory)
@@ -1224,219 +1207,219 @@ the explosionTrajectory until its reached
 the stopping point.
 
 
-group=group-3</panel_attributes>
+group=group-11</panel_attributes>
     <additional_attributes>10.0;30.0;100.0;30.0;100.0;70.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>536</x>
-      <y>720</y>
-      <w>40</w>
-      <h>12</h>
+      <x>408</x>
+      <y>954</y>
+      <w>30</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>ControlPane
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>384</x>
-      <y>732</y>
-      <w>80</w>
-      <h>44</h>
+      <x>294</x>
+      <y>963</y>
+      <w>60</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>User pulls up the hand menu
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>688</x>
-      <y>744</y>
-      <w>8</w>
-      <h>20</h>
+      <x>522</x>
+      <y>972</y>
+      <w>6</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>668</x>
-      <y>720</y>
-      <w>56</w>
-      <h>12</h>
+      <x>507</x>
+      <y>954</y>
+      <w>42</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>SelectionManager
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1112</x>
-      <y>720</y>
-      <w>84</w>
-      <h>12</h>
+      <x>840</x>
+      <y>954</y>
+      <w>63</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>MessageBasedInteractable
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1316</x>
-      <y>1112</y>
-      <w>68</w>
-      <h>12</h>
+      <x>993</x>
+      <y>1314</y>
+      <w>51</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>MessageBasedExplodable
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>552</x>
-      <y>744</y>
-      <w>8</w>
-      <h>16</h>
+      <x>420</x>
+      <y>972</y>
+      <w>6</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>740</y>
-      <w>112</w>
-      <h>16</h>
+      <x>342</x>
+      <y>969</y>
+      <w>84</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 user presses the explode button
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;260.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>552</x>
-      <y>728</y>
-      <w>12</w>
-      <h>24</h>
+      <x>420</x>
+      <y>960</y>
+      <w>9</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>556</x>
-      <y>744</y>
-      <w>140</w>
-      <h>24</h>
+      <x>423</x>
+      <y>972</y>
+      <w>105</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 explodeCurrentInteractable()
 tell the SelectionManager to encourage the
 currently selected interactable to explode.
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
-      <y>728</y>
-      <w>12</w>
-      <h>24</h>
+      <x>522</x>
+      <y>960</y>
+      <w>9</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1148</x>
-      <y>760</y>
-      <w>8</w>
-      <h>128</h>
+      <x>867</x>
+      <y>984</y>
+      <w>6</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1148</x>
-      <y>728</y>
-      <w>12</w>
-      <h>40</h>
+      <x>867</x>
+      <y>960</y>
+      <w>9</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1152</x>
-      <y>1148</y>
-      <w>200</w>
-      <h>24</h>
+      <x>870</x>
+      <y>1341</y>
+      <w>150</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 explode()
 tell the explodable to start the
 explosion process
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;480.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1344</x>
-      <y>1152</y>
-      <w>8</w>
-      <h>120</h>
+      <x>1014</x>
+      <y>1344</y>
+      <w>6</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1344</x>
-      <y>1120</y>
-      <w>12</w>
-      <h>40</h>
+      <x>1014</x>
+      <y>1320</y>
+      <w>9</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1348</x>
-      <y>1156</y>
-      <w>292</w>
-      <h>116</h>
+      <x>1017</x>
+      <y>1347</y>
+      <w>219</w>
+      <h>87</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 explode(childExplodable)
@@ -1445,16 +1428,16 @@ its own explode method until all
 interactbles that should explode 
 have exploded.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;10.0;490.0;10.0;490.0;270.0;10.0;270.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1348</x>
-      <y>1164</y>
-      <w>136</w>
-      <h>36</h>
+      <x>1017</x>
+      <y>1353</y>
+      <w>102</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 calculateTrajectory(explodable)
@@ -1462,31 +1445,31 @@ calculate the trajectory of the where
 the interactable will move when it
 explodes.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;100.0;20.0;100.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1348</x>
-      <y>1200</y>
-      <w>168</w>
-      <h>28</h>
+      <x>1017</x>
+      <y>1380</y>
+      <w>126</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 invokeExplosionTranslation(explosionTrajectory)
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;10.0;100.0;10.0;100.0;50.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1348</x>
-      <y>1228</y>
-      <w>148</w>
-      <h>44</h>
+      <x>1017</x>
+      <y>1401</y>
+      <w>111</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 translateExplosion(explosionTrajectory)
@@ -1495,86 +1478,86 @@ the explosionTrajectory until its reached
 the stopping point.
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;30.0;100.0;30.0;100.0;70.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>804</x>
-      <y>720</y>
-      <w>100</w>
-      <h>12</h>
+      <x>609</x>
+      <y>954</y>
+      <w>75</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>MessageBasedExplodableHandler
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>692</x>
-      <y>748</y>
-      <w>168</w>
-      <h>24</h>
+      <x>525</x>
+      <y>975</y>
+      <w>126</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 requestInteractableExplostion(messageBasedInteractable)
 start the requesting process for the server to explode
 the interactable across all clients.
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;400.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>852</x>
-      <y>728</y>
-      <w>12</w>
-      <h>32</h>
+      <x>645</x>
+      <y>960</y>
+      <w>9</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>756</y>
-      <w>300</w>
-      <h>24</h>
+      <x>648</x>
+      <y>981</y>
+      <w>225</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 isLocked()
 check if the interactable is locked
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;730.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>772</y>
-      <w>300</w>
-      <h>24</h>
+      <x>648</x>
+      <y>993</y>
+      <w>225</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 bool return false if unlocked
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>784</y>
-      <w>300</w>
-      <h>32</h>
+      <x>648</x>
+      <y>1002</y>
+      <w>225</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 fg=red
@@ -1582,46 +1565,46 @@ bool return true if locked
 and the process ends here
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>816</y>
-      <w>300</w>
-      <h>24</h>
+      <x>648</x>
+      <y>1026</y>
+      <w>225</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 bool return false if unowned
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>800</y>
-      <w>300</w>
-      <h>24</h>
+      <x>648</x>
+      <y>1014</y>
+      <w>225</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 isOwned()
 check if the interactable is owned at all
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;730.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>828</y>
-      <w>300</w>
-      <h>32</h>
+      <x>648</x>
+      <y>1035</y>
+      <w>225</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 fg=red
@@ -1629,31 +1612,31 @@ bool return true if owned
 and the process ends here
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>844</y>
-      <w>300</w>
-      <h>24</h>
+      <x>648</x>
+      <y>1047</y>
+      <w>225</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 canExplode()
 check if the interactable is able to explode
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;730.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>872</y>
-      <w>300</w>
-      <h>32</h>
+      <x>648</x>
+      <y>1068</y>
+      <w>225</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 fg=red
@@ -1661,33 +1644,33 @@ bool return false if it can't
 explode and the process ends here
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>860</y>
-      <w>300</w>
-      <h>24</h>
+      <x>648</x>
+      <y>1059</y>
+      <w>225</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 bool return true if it can explode
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>908</y>
-      <w>200</w>
-      <h>52</h>
+      <x>648</x>
+      <y>1077</y>
+      <w>159</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>lt=-&gt;
+    <panel_attributes>lt=-
 requestInteractableExplostionCoroutine(messageBasedInteractable)
 
 Coroutine process to ensure we 
@@ -1695,16 +1678,16 @@ can request that the interactable is
 locked before can send the explosion request
 to the server
 
-group=group-7</panel_attributes>
-    <additional_attributes>10.0;20.0;60.0;20.0;60.0;90.0;10.0;90.0</additional_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0;90.0;180.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>952</y>
-      <w>92</w>
-      <h>32</h>
+      <x>648</x>
+      <y>1209</y>
+      <w>84</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 fg=red
@@ -1712,94 +1695,94 @@ if we dont receive a lock
 for the interactable then
 the process ends here.
 
-group=group-7</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0;60.0;50.0;10.0;50.0</additional_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>892</y>
-      <w>448</w>
-      <h>32</h>
+      <x>648</x>
+      <y>1119</y>
+      <w>336</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 requestInteractableLock(messageBasedInteractable,isLockoutRequest)
 request the lockhandler to lock the interactable
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;1100.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1296</x>
-      <y>892</y>
-      <w>8</w>
-      <h>108</h>
+      <x>978</x>
+      <y>1122</y>
+      <w>6</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1296</x>
-      <y>728</y>
-      <w>12</w>
-      <h>172</h>
+      <x>978</x>
+      <y>960</y>
+      <w>9</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
-    <additional_attributes>10.0;410.0;10.0;10.0</additional_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes>10.0;540.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1268</x>
-      <y>720</y>
-      <w>64</w>
-      <h>12</h>
+      <x>957</x>
+      <y>954</y>
+      <w>48</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>InteractableLockHandler
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1148</x>
-      <y>884</y>
-      <w>12</w>
-      <h>104</h>
+      <x>867</x>
+      <y>1077</y>
+      <w>9</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
-    <additional_attributes>10.0;240.0;10.0;10.0</additional_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes>10.0;400.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1148</x>
-      <y>980</y>
-      <w>8</w>
-      <h>20</h>
+      <x>867</x>
+      <y>1197</y>
+      <w>6</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>896</y>
-      <w>184</w>
-      <h>36</h>
+      <x>981</x>
+      <y>1125</y>
+      <w>138</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 interactableLockServerRequest(senderID,messagePayload)
@@ -1807,53 +1790,53 @@ request the server to create a lock object to time
 how long the interactable is locked for.
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;70.0;20.0;70.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1488</x>
-      <y>720</y>
-      <w>56</w>
-      <h>12</h>
+      <x>1122</x>
+      <y>954</y>
+      <w>42</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>InteractableLock
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1512</x>
-      <y>728</y>
-      <w>12</w>
-      <h>184</h>
+      <x>1140</x>
+      <y>960</y>
+      <w>9</w>
+      <h>177</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
-    <additional_attributes>10.0;440.0;10.0;10.0</additional_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes>10.0;570.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1512</x>
-      <y>904</y>
-      <w>8</w>
-      <h>64</h>
+      <x>1140</x>
+      <y>1131</y>
+      <w>6</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>948</y>
-      <w>220</w>
-      <h>36</h>
+      <x>981</x>
+      <y>1164</y>
+      <w>165</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 updateClientInteractableLocks(interactableLock,isLocked)
@@ -1861,185 +1844,185 @@ tell the InteractableLockHandler to broadcast to
 all clients to update their interactable's lock status
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>530.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>968</y>
-      <w>208</w>
-      <h>32</h>
+      <x>981</x>
+      <y>1179</y>
+      <w>156</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 updateClientInteractableLocksClientBroadcast(senderID,messagePayload)
 tell all the clients to update the lock status
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;40.0;20.0;40.0;50.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1152</x>
-      <y>984</y>
-      <w>152</w>
-      <h>24</h>
+      <x>870</x>
+      <y>1194</y>
+      <w>114</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 toggleOwnershipLockout(lockRequestData)
 set the interactble's lock status to locked
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>988</y>
-      <w>300</w>
-      <h>32</h>
+      <x>648</x>
+      <y>1197</y>
+      <w>225</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;
 the explodable handler is waiting for the
 interactble to be locked and now the lock is
 engaged.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>1012</y>
-      <w>192</w>
-      <h>40</h>
+      <x>648</x>
+      <y>1239</y>
+      <w>144</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 interactableExplosionServerRequest(senderID,messagePayload)
 send the server a request to send a broadcast to
 all clients to explode their instance of the interactable.
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0;60.0;80.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>1056</y>
-      <w>196</w>
-      <h>40</h>
+      <x>648</x>
+      <y>1272</y>
+      <w>147</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 interactableExplosionClientBroadcast(senderID,messagePayload)
 broadcast to all clients to explode their instance of the interactable.
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0;60.0;80.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1156</x>
-      <y>1064</y>
-      <w>100</w>
-      <h>12</h>
+      <x>873</x>
+      <y>1278</y>
+      <w>75</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>MessageBasedInstancehandler
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1200</x>
-      <y>1072</y>
-      <w>12</w>
-      <h>28</h>
+      <x>906</x>
+      <y>1284</y>
+      <w>9</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1200</x>
-      <y>1092</y>
-      <w>8</w>
-      <h>48</h>
+      <x>906</x>
+      <y>1299</y>
+      <w>6</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>1092</y>
-      <w>352</w>
-      <h>24</h>
+      <x>648</x>
+      <y>1299</y>
+      <w>264</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 lookupNetworkInteractable(parentKey,objectIndex)
 look for the target interactable in the lookup table via the target's parentKey and object index
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;860.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1148</x>
-      <y>1140</y>
-      <w>8</w>
-      <h>24</h>
+      <x>867</x>
+      <y>1335</y>
+      <w>6</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1148</x>
-      <y>996</y>
-      <w>12</w>
-      <h>152</h>
+      <x>867</x>
+      <y>1203</y>
+      <w>9</w>
+      <h>138</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
-    <additional_attributes>10.0;360.0;10.0;10.0</additional_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes>10.0;440.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>1112</y>
-      <w>352</w>
-      <h>32</h>
+      <x>648</x>
+      <y>1314</y>
+      <w>264</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 MessageBasedInteractable returns the target interactable
 
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>860.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>1124</y>
-      <w>352</w>
-      <h>32</h>
+      <x>648</x>
+      <y>1323</y>
+      <w>264</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 fg=red
@@ -2047,198 +2030,198 @@ if the target wasn't found in the lookup table the process ends here.
 
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>860.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>1140</y>
-      <w>300</w>
-      <h>24</h>
+      <x>648</x>
+      <y>1335</y>
+      <w>225</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 explodeInteractable()
 tell the interactable to explode
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;730.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1296</x>
-      <y>996</y>
-      <w>12</w>
-      <h>288</h>
+      <x>978</x>
+      <y>1200</y>
+      <w>9</w>
+      <h>243</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
-    <additional_attributes>10.0;700.0;10.0;10.0</additional_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes>10.0;790.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>852</x>
-      <y>1152</y>
-      <w>12</w>
-      <h>132</h>
+      <x>645</x>
+      <y>1344</y>
+      <w>9</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;310.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>852</x>
-      <y>1276</y>
-      <w>8</w>
-      <h>16</h>
+      <x>645</x>
+      <y>1437</y>
+      <w>6</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1296</x>
-      <y>1276</y>
-      <w>8</w>
-      <h>124</h>
+      <x>978</x>
+      <y>1437</y>
+      <w>6</w>
+      <h>93</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>856</x>
-      <y>1276</y>
-      <w>448</w>
-      <h>24</h>
+      <x>648</x>
+      <y>1437</y>
+      <w>336</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 requestInteractableLock(messageBasedInteractable,isLockoutRequest)
 request the lock handler to unlock the interactable
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;1100.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1512</x>
-      <y>964</y>
-      <w>12</w>
-      <h>328</h>
+      <x>1140</x>
+      <y>1176</y>
+      <w>9</w>
+      <h>273</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
-    <additional_attributes>10.0;800.0;10.0;10.0</additional_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes>10.0;890.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1512</x>
-      <y>1284</y>
-      <w>8</w>
-      <h>68</h>
+      <x>1140</x>
+      <y>1443</y>
+      <w>6</w>
+      <h>51</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>1288</y>
-      <w>184</w>
-      <h>32</h>
+      <x>981</x>
+      <y>1446</y>
+      <w>138</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 interactableLockServerRequest(senderID,messagePayload)
 request the server to unlock the lock object
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0;70.0;50.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>924</y>
-      <w>220</w>
-      <h>32</h>
+      <x>981</x>
+      <y>1146</y>
+      <w>165</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 engageLock()
 create a lock object to time how long the interactable is locked for.
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;530.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>1312</y>
-      <w>220</w>
-      <h>32</h>
+      <x>981</x>
+      <y>1464</y>
+      <w>165</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 disengageLock()
 unlock the lock object for our locked intereactable.
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;20.0;530.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1148</x>
-      <y>1160</y>
-      <w>12</w>
-      <h>232</h>
+      <x>867</x>
+      <y>1350</y>
+      <w>9</w>
+      <h>174</h>
     </coordinates>
     <panel_attributes>lt=.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;560.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>1364</y>
-      <w>216</w>
-      <h>32</h>
+      <x>981</x>
+      <y>1503</y>
+      <w>162</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 updateClientInteractableLocksClientBroadcast(senderID,messagePayload)
 tell each client to unlock their interactable instance
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0;60.0;60.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1300</x>
-      <y>1340</y>
-      <w>220</w>
-      <h>44</h>
+      <x>981</x>
+      <y>1485</y>
+      <w>165</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 updateClientInteractableLocks(interactableLock,isLockRequest)
@@ -2247,47 +2230,3078 @@ to tell them to unlock their interactable instance.
 
 
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>530.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1148</x>
-      <y>1384</y>
-      <w>8</w>
-      <h>20</h>
+      <x>867</x>
+      <y>1518</y>
+      <w>6</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1152</x>
-      <y>1388</y>
-      <w>152</w>
-      <h>24</h>
+      <x>870</x>
+      <y>1521</y>
+      <w>114</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 toggleOwnershipLockout(lockRequestData)
 set the interactble's lock status to unlocked.
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
     <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>384</x>
-      <y>716</y>
-      <w>1256</w>
-      <h>692</h>
+      <x>294</x>
+      <y>951</y>
+      <w>942</w>
+      <h>585</h>
     </coordinates>
     <panel_attributes>MessageBasedInteractable Explosion Sequence
 
-group=group-7</panel_attributes>
+group=group-12</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>915</x>
+      <y>597</y>
+      <w>57</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>User presses the play button 
+of a voice annotation's
+audioplayer UI element.
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>1560</y>
+      <w>99</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+user presses the collapse Single button
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>429</x>
+      <y>1563</y>
+      <w>6</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>417</x>
+      <y>1545</y>
+      <w>30</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>ControlPane
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>429</x>
+      <y>1551</y>
+      <w>9</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>1566</y>
+      <w>105</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+collapseCurrentInteractableSingle()
+tell the SelectionManager to encourage the
+currently selected interactable to collapse
+by one level.
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>531</x>
+      <y>1566</y>
+      <w>6</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>513</x>
+      <y>1545</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>SelectionManager
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>531</x>
+      <y>1551</y>
+      <w>9</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>642</x>
+      <y>1569</y>
+      <w>6</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>642</x>
+      <y>1551</y>
+      <w>9</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>621</x>
+      <y>1545</y>
+      <w>48</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>LocalBasedInteractable
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>534</x>
+      <y>1569</y>
+      <w>114</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+collapseInteractable(isSingleCollapse)
+tell the interactable to start the collapse process
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;20.0;360.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>729</x>
+      <y>1575</y>
+      <w>6</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>708</x>
+      <y>1545</y>
+      <w>48</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>LocalBasedExplodable
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>1551</y>
+      <w>9</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>645</x>
+      <y>1572</y>
+      <w>90</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+collapseSingle()
+make the explodable collapse one
+level
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;20.0;280.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>1578</y>
+      <w>234</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+collapseChildren(interactableParent)
+recursively collapse the interactble
+until all exploded interactable's on a single
+level are collasped.
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;10.0;500.0;10.0;500.0;320.0;10.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>1584</y>
+      <w>75</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+invokeCollapse()
+start the transform collapsing
+coroutine.
+
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>1620</y>
+      <w>78</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+translateCollapse()
+Coroutine process to translate
+the collapsing interactable back
+to its initial position prior
+to exploding.
+
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;30.0;50.0;30.0;50.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>1605</y>
+      <w>147</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+toggleDescendantManipulation(collapsingInteractable,isAllowed)
+disable manipulations for the decendants of the current interactable
+so no user can grab them during the collapsing process.
+
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>732</x>
+      <y>1650</y>
+      <w>141</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+toggleDescendantManipulation(collapsingInteractable,isAllowed)
+enable manipulations for the decendants again so users 
+are able grab the interactable again.
+
+group=group-14</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>294</x>
+      <y>1542</y>
+      <w>672</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>LocalBasedExplodable Collapse Single Sequence
+
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>333</x>
+      <y>1704</y>
+      <w>99</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+user presses the collapse Single button
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>426</x>
+      <y>1707</y>
+      <w>6</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>414</x>
+      <y>1689</y>
+      <w>30</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>ControlPane
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>426</x>
+      <y>1695</y>
+      <w>9</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>429</x>
+      <y>1710</y>
+      <w>105</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+collapseCurrentInteractableSingle()
+tell the SelectionManager to encourage the
+currently selected interactable to collapse
+by one level.
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>528</x>
+      <y>1710</y>
+      <w>6</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>510</x>
+      <y>1689</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>SelectionManager
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>528</x>
+      <y>1695</y>
+      <w>9</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1044</x>
+      <y>2073</y>
+      <w>6</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1020</x>
+      <y>2043</y>
+      <w>54</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>MessageBasedExplodable
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1044</x>
+      <y>2049</y>
+      <w>9</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>2070</y>
+      <w>141</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+collapseSingle()
+make the explodable collapse one
+level
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;450.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1047</x>
+      <y>2076</y>
+      <w>234</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+collapseChildren(interactableParent)
+recursively collapse the interactble
+until all exploded interactable's on a single
+level are collasped.
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;500.0;10.0;500.0;320.0;10.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1047</x>
+      <y>2082</y>
+      <w>75</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+invokeCollapse()
+start the transform collapsing
+coroutine.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1047</x>
+      <y>2118</y>
+      <w>78</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+translateCollapse()
+Coroutine process to translate
+the collapsing interactable back
+to its initial position prior
+to exploding.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;30.0;50.0;30.0;50.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1047</x>
+      <y>2103</y>
+      <w>147</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+toggleDescendantManipulation(collapsingInteractable,isAllowed)
+disable manipulations for the decendants of the current interactable
+so no user can grab them during the collapsing process.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1047</x>
+      <y>2148</y>
+      <w>141</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+toggleDescendantManipulation(collapsingInteractable,isAllowed)
+enable manipulations for the decendants again so users 
+are able grab the interactable again.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>297</x>
+      <y>1695</y>
+      <w>54</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>User pulls up hand Menu 
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>1695</y>
+      <w>9</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>684</x>
+      <y>1716</y>
+      <w>6</w>
+      <h>363</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>657</x>
+      <y>1689</y>
+      <w>69</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>MessageBasedExplodableHandler
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>531</x>
+      <y>1713</y>
+      <w>159</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+requestInteractableCollapse(messageBasedInteractable,isSingleCollapse)
+request the MessageBased Explosion Handler to colapse 
+the interactable over the network.
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;510.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>906</x>
+      <y>1719</y>
+      <w>6</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>906</x>
+      <y>1695</y>
+      <w>9</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>879</x>
+      <y>1689</y>
+      <w>57</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>MessageBasedInteractable
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1716</y>
+      <w>225</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+isLocked()
+check if the Interactable is locked
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;730.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1728</y>
+      <w>225</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+bool return false if unlocked
+group=group-16</panel_attributes>
+    <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1737</y>
+      <w>225</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=red
+bool return true if locked
+process ends here
+group=group-16</panel_attributes>
+    <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1749</y>
+      <w>225</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+isOwned()
+check if the Interactable is currently owned by
+a client
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;730.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1764</y>
+      <w>225</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+bool return false if unowned
+group=group-16</panel_attributes>
+    <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1773</y>
+      <w>225</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=red
+bool return true if owned
+process ends here
+group=group-16</panel_attributes>
+    <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1785</y>
+      <w>225</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+areCollapsablesOwnedSingle()
+check if the all interactables involved in a 
+single level collapse are currently owned by anyone
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;730.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1803</y>
+      <w>225</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+bool return false if unowned
+group=group-16</panel_attributes>
+    <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1812</y>
+      <w>225</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=red
+bool return true if owned
+process ends here
+group=group-16</panel_attributes>
+    <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1875</y>
+      <w>195</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=-
+fg=red
+If all the collapsable interactabls arent locked by the timeout duration then
+then process ends here.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;180.0;10.0;180.0;250.0;30.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1848</y>
+      <w>336</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+requestCollapsingInteractableLockEngage(messageBasedInteractable,isSingleCollapse)
+tell the lock handler to send a request to the server to lock all the collapsing interactables.
+Then return a list of all the interactables that need to be locked so we can validate that each are locked 
+before we send a server request to start collapsing.
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;1100.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1017</x>
+      <y>1851</y>
+      <w>6</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1017</x>
+      <y>1695</y>
+      <w>9</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;520.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>996</x>
+      <y>1689</y>
+      <w>48</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>InteractableLockHandler
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>906</x>
+      <y>1821</y>
+      <w>9</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;440.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>906</x>
+      <y>1953</y>
+      <w>6</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>1854</y>
+      <w>138</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+interactableLockServerRequest(senderID,messagePayload)
+request the server to create a lock object to time 
+how long the interactable is locked for.
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0;70.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1170</x>
+      <y>1686</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>InteractableLock
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1188</x>
+      <y>1692</y>
+      <w>9</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;620.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1188</x>
+      <y>1878</y>
+      <w>6</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>1887</y>
+      <w>174</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+updateClientInteractableLocks(interactableLock,isLocked)
+tell the InteractableLockHandler to broadcast to 
+all clients to update their interactable's lock status
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>560.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>1908</y>
+      <w>156</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+updateClientInteractableLocksClientBroadcast(senderID,messagePayload)
+tell all the clients to update the lock status
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>1950</y>
+      <w>114</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+toggleOwnershipLockout(lockRequestData)
+set the interactble's lock status to locked
+
+group=group-16</panel_attributes>
+    <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1953</y>
+      <w>225</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+the explodable handler is waiting for the
+interactble to be locked and now the lock is
+engaged.
+
+group=group-16</panel_attributes>
+    <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1971</y>
+      <w>141</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+interactableCollaseServerRequest(senderID,messagePayload)
+send the server a request to send a broadcast to all clients 
+to collapse the target interactables on their end.
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;80.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>2004</y>
+      <w>141</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+interactableCollaseClientBroadcast(senderID,messagePayload)
+broadcast to all clients to collapse their instances of the 
+target interactables.
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;80.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>912</x>
+      <y>2010</y>
+      <w>75</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>MessageBasedInstancehandler
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>945</x>
+      <y>2016</y>
+      <w>9</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>945</x>
+      <y>2031</y>
+      <w>6</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>2031</y>
+      <w>264</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+lookupNetworkInteractable(parentKey,objectIndex)
+look for the target interactable in the lookup table via the target's parentKey and object index
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;860.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>906</x>
+      <y>2067</y>
+      <w>6</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>906</x>
+      <y>1959</y>
+      <w>9</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;360.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>2046</y>
+      <w>264</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+MessageBasedInteractable returns the target interactable
+
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>860.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>2055</y>
+      <w>264</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=red
+if the target wasn't found in the lookup table the process ends here.
+
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>860.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>2067</y>
+      <w>225</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+explodeInteractable()
+tell the interactable to explode
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;730.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1017</x>
+      <y>1956</y>
+      <w>9</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;750.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>2076</y>
+      <w>9</w>
+      <h>111</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;350.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>684</x>
+      <y>2181</y>
+      <w>6</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1017</x>
+      <y>2181</y>
+      <w>6</w>
+      <h>93</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>2181</y>
+      <w>336</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+requestInteractableLock(messageBasedInteractable,isLockoutRequest)
+request the lock handler to unlock the interactable
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;1100.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1188</x>
+      <y>1893</y>
+      <w>9</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;980.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1188</x>
+      <y>2187</y>
+      <w>6</w>
+      <h>51</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>2190</y>
+      <w>138</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+interactableLockServerRequest(senderID,messagePayload)
+request the server to unlock the lock object
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>1875</y>
+      <w>174</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+engageLock()
+create a lock object to time how long the interactable is locked for.
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;560.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>2208</y>
+      <w>174</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+disengageLock()
+unlock the lock object for our locked intereactable.
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;560.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>906</x>
+      <y>2082</y>
+      <w>9</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;600.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>2247</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+updateClientInteractableLocksClientBroadcast(senderID,messagePayload)
+tell each client to unlock their interactable instance
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1020</x>
+      <y>2229</y>
+      <w>174</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+updateClientInteractableLocks(interactableLock,isLockRequest)
+Request the server to send the broadcast too all clients
+to tell them to unlock their interactable instance.
+
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>560.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>906</x>
+      <y>2262</y>
+      <w>6</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>2265</y>
+      <w>114</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+toggleOwnershipLockout(lockRequestData)
+set the interactble's lock status to unlocked.
+
+group=group-16</panel_attributes>
+    <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1875</y>
+      <w>336</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+List&lt;Interactable&gt; return a list of all interactables that need to be locked.
+group=group-16</panel_attributes>
+    <additional_attributes>1100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1884</y>
+      <w>336</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=red
+List&lt;Interactable&gt; return null if theres an issue finding the collapsing interactables
+the process ends here.
+group=group-16</panel_attributes>
+    <additional_attributes>1100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1827</y>
+      <w>192</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=-
+interactableCollaseServerRequest(messageBasedInteractable,isSingleCollapse)
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0;120.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>1128</y>
+      <w>33</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+
+group=group-12</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;360.0;10.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1884</y>
+      <w>42</w>
+      <h>87</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>120.0;10.0;120.0;270.0;10.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>687</x>
+      <y>1944</y>
+      <w>60</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=red
+
+
+group=group-16</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>294</x>
+      <y>1686</y>
+      <w>987</w>
+      <h>594</h>
+    </coordinates>
+    <panel_attributes>MessageBasedInteractable Collapse Single Level Sequence
+
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>300</x>
+      <y>1731</y>
+      <w>102</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Wheres the diagram for collapsing all levels?
+--
+The process for collapsing all levels is exactly the
+same but the message based interactable calls its 
+"collapseAll()" method instead.
+
+bg=yellow
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>297</x>
+      <y>1593</y>
+      <w>102</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Wheres the diagram for collapsing all levels?
+--
+The process for collapsing all levels is exactly the
+same but the local based interactable calls its 
+"collapseAll()" method instead.
+
+bg=yellow
+group=group-14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1425</x>
+      <y>588</y>
+      <w>285</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Application Initialisation Sequence
+
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>1716</x>
+      <y>606</y>
+      <w>21</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>User 
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1497</x>
+      <y>591</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>ApplicationManager
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1515</x>
+      <y>597</y>
+      <w>9</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1515</x>
+      <y>615</y>
+      <w>6</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>273</x>
+      <y>186</y>
+      <w>12</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>type=initial</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>1446</x>
+      <y>612</y>
+      <w>12</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>type=initial
+
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1455</x>
+      <y>612</y>
+      <w>66</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+Application Starts
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1518</x>
+      <y>615</y>
+      <w>75</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+Start()
+Unity fires the application 
+manager's start method
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1638</x>
+      <y>660</y>
+      <w>6</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1638</x>
+      <y>600</y>
+      <w>9</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1518</x>
+      <y>633</y>
+      <w>93</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+startupProcess()
+invoke all onStartupProcess event 
+subscribers.
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1518</x>
+      <y>657</y>
+      <w>126</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+onStartupProcess()
+invoke the behaviour of the startup process
+
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;20.0;400.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1518</x>
+      <y>696</y>
+      <w>171</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+onPostStartupProcess()
+invoke the behaviour of the post startup process
+
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;20.0;550.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1518</x>
+      <y>669</y>
+      <w>93</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+postStartupProcess()
+invoke all onStartupProcess event 
+subscribers.
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1683</x>
+      <y>699</y>
+      <w>6</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1683</x>
+      <y>600</y>
+      <w>9</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-4</panel_attributes>
+    <additional_attributes>10.0;330.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1665</x>
+      <y>594</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>PostStartupProcess
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1431</x>
+      <y>630</y>
+      <w>78</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+What classes are Startup Processes?
+--
+- InteractableLock
+- MessageBasedInstanceManager
+- MessageBasedExplosionHandler
+- PrefabManager
+- AnnotationManager
+- AudioLoader
+
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1734</x>
+      <y>618</y>
+      <w>87</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+grabs Interactable with their hands.
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1788</x>
+      <y>594</y>
+      <w>60</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>ExtendableObjectManipulator
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1431</x>
+      <y>672</y>
+      <w>78</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+What classes are PostStartup Processes?
+--
+Well currently none, but the Connection
+Manager used to need to be intialised
+after all the startup processes for
+networking reasons but we changed that
+so it initialises itself.
+
+group=group-4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1815</x>
+      <y>621</y>
+      <w>6</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1815</x>
+      <y>600</y>
+      <w>9</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1818</x>
+      <y>624</y>
+      <w>66</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+OnSelectEntered()
+grabbing the interactable
+triggers this event.
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1818</x>
+      <y>645</y>
+      <w>105</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+onSelection()
+notify the Selectable component
+to update the selection managers
+current selection.
+
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1917</x>
+      <y>648</y>
+      <w>6</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1917</x>
+      <y>600</y>
+      <w>9</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1908</x>
+      <y>594</y>
+      <w>24</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>Selectable
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1920</x>
+      <y>648</y>
+      <w>105</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+setCurrentSelection()
+update the Selection managers
+current selection to the
+current interactable.
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2019</x>
+      <y>651</y>
+      <w>6</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2019</x>
+      <y>600</y>
+      <w>9</w>
+      <h>57</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2001</x>
+      <y>594</y>
+      <w>39</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>SelectionManager
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2130</x>
+      <y>654</y>
+      <w>6</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2022</x>
+      <y>651</y>
+      <w>114</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+onNewSelection(interactableTransform)
+invoke the behaviour for NewSelectionListeners 
+and provide them with the transform of the
+interactable to grab the resources that they
+need.
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;20.0;360.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2130</x>
+      <y>600</y>
+      <w>9</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-5</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2109</x>
+      <y>594</y>
+      <w>45</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>NewSelectionListener
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1722</x>
+      <y>642</y>
+      <w>84</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+What classes are NewSelectionListeners?
+--
+- DataPanelManager
+- AnimationHandler
+- ClientManager
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1716</x>
+      <y>588</y>
+      <w>444</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Interactable Selection Sequence
+
+group=group-5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1074</x>
+      <y>618</y>
+      <w>6</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>1428</x>
+      <y>969</y>
+      <w>57</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>User selects an interactable
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1074</x>
+      <y>597</y>
+      <w>9</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1056</x>
+      <y>591</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>AudioplayerUI
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>912</x>
+      <y>588</y>
+      <w>501</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>Playing Audioclips as a Client Sequence (Requesting AudioClips Online)
+
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1191</x>
+      <y>597</y>
+      <w>9</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1191</x>
+      <y>621</y>
+      <w>6</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1173</x>
+      <y>591</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>ApplicationManager
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>321</x>
+      <y>192</y>
+      <w>30</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+</panel_attributes>
+    <additional_attributes>10.0;20.0;80.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1077</x>
+      <y>618</y>
+      <w>120</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+isOnline()
+Check if the application is online
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>327</x>
+      <y>219</y>
+      <w>24</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=red</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1077</x>
+      <y>636</y>
+      <w>120</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+bool returns true if the apps online.
+group=group-0</panel_attributes>
+    <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1077</x>
+      <y>648</y>
+      <w>120</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=blue
+returns false if offline but then the
+process is handled locally instead.
+_(Out of Scope for this Diagram)_
+group=group-0</panel_attributes>
+    <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>162</y>
+      <w>33</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1626</x>
+      <y>978</y>
+      <w>6</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1608</x>
+      <y>951</y>
+      <w>45</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>SelectionManager
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1260</x>
+      <y>591</y>
+      <w>33</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>AudioLoader
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1275</x>
+      <y>597</y>
+      <w>9</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;230.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1275</x>
+      <y>666</y>
+      <w>6</w>
+      <h>93</h>
+    </coordinates>
+    <panel_attributes>
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1077</x>
+      <y>666</y>
+      <w>204</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+requestAudioFromServer(audioPath,thisAudioPlayer,interactableLookupdata)
+Tell the AudioLoader to send a request to server to send the requesting client 
+the audio data so we can play the audio locally on th eclient's side.
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;20.0;660.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1278</x>
+      <y>672</y>
+      <w>123</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+audioFileServerRequest(senderID,messagePayload)
+
+Send a server request to load the audio clip that
+the client requested.
+
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0;60.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1278</x>
+      <y>693</y>
+      <w>135</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+loadAudioCoroutine(audioFilePath, audioRequest, senderId)
+
+Load the audio clip from storage then convert it into 
+a byte array to send the audio data to the client.
+
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0;60.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1278</x>
+      <y>717</y>
+      <w>135</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+audioFileClientMessage(senderId, messagePayload)
+
+Client receives this message and converts the audio data
+byte array back into an audio clip and sets the audio player's
+audiosource.clip to the new clip.
+
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0;60.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1077</x>
+      <y>684</y>
+      <w>147</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+awaitRemoteAudioLoad()
+we run this coroutine to wait until we have received audio
+from the server or we timeout due to waiting beyond the max 
+response time.
+
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0;100.0;280.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1077</x>
+      <y>780</y>
+      <w>120</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+playAudio()
+if we were sucessful in retrieving the audio 
+then we play the audio locally.
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0;120.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1077</x>
+      <y>744</y>
+      <w>204</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+setAudioSource(audioClip)
+set the audioplayer's clip to the new clip, clientside.
+
+group=group-0</panel_attributes>
+    <additional_attributes>660.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>324</x>
+      <y>213</y>
+      <w>27</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=red</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1077</x>
+      <y>756</y>
+      <w>135</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=red
+if we timeout while waiting for a response then 
+the process ends here and we dont play the audio.
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0;120.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>279</x>
+      <y>153</y>
+      <w>21</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>User </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1479</x>
+      <y>975</y>
+      <w>153</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+setCurrentSelection(newSelection)
+The interacble tells the Selection Manager that the user 
+has made a new selection. 
+The onLocalSelectionChanged event is triggered and 
+NewSelectionListeners have their onNewSelection() 
+methods invoked.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;490.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1626</x>
+      <y>957</y>
+      <w>9</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>321</x>
+      <y>171</y>
+      <w>45</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>ApplicationManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1629</x>
+      <y>978</y>
+      <w>99</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+onNewSelection(interactableTransform)
+get the DataPanelManager to update its 
+metadata and annotation panes.
+
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>303</x>
+      <y>174</y>
+      <w>6</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1722</x>
+      <y>981</y>
+      <w>6</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1722</x>
+      <y>957</y>
+      <w>9</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1704</x>
+      <y>951</y>
+      <w>45</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>DataPanelManager
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1725</x>
+      <y>984</y>
+      <w>138</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=-
+updateAnnotations(annotationDataList)
+prepare the annotation pane with annotation UI elements 
+provided by the AnnotationUIGenerator and display them 
+to the user. Iterates over each annotation for the 
+current inteactable and populates the pane with an 
+AnnotationUI element for that annotation.
+
+
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0;90.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1884</x>
+      <y>1026</y>
+      <w>6</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1863</x>
+      <y>951</y>
+      <w>45</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>AnnotationUIGenerator
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1884</x>
+      <y>957</y>
+      <w>9</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;230.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1725</x>
+      <y>1023</y>
+      <w>165</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+GetAnnotationUI(annotationData)
+get the DataPanelManager to update its 
+metadata and annotation panes.
+
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;530.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1725</x>
+      <y>1050</y>
+      <w>33</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+group=group-3</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1887</x>
+      <y>1029</y>
+      <w>132</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+initialise(annotationdata)
+populate the UI components
+of the Annotation UI using the 
+annotationData
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;420.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1725</x>
+      <y>1041</y>
+      <w>165</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+AnnotationUI returns an AnnotationUI element
+populated with the annotation data
+
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>530.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2013</x>
+      <y>1032</y>
+      <w>6</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2013</x>
+      <y>957</y>
+      <w>9</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1998</x>
+      <y>951</y>
+      <w>36</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>AnnotationUI
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2013</x>
+      <y>999</y>
+      <w>60</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=.
+Text annotations
+dont do anything more 
+than populate its 
+text elements during
+initialisation
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2064</x>
+      <y>957</y>
+      <w>9</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2049</x>
+      <y>951</y>
+      <w>36</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>TextAnnotationUI
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2016</x>
+      <y>1029</y>
+      <w>99</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=.
+Voice annotations have to load
+in and handle its own audiosource
+object as they require audio
+playback of voice annotation
+clips.
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2094</x>
+      <y>951</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>VoiceAnnotationUI
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2109</x>
+      <y>1032</y>
+      <w>6</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2109</x>
+      <y>957</y>
+      <w>9</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2226</x>
+      <y>1035</y>
+      <w>6</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2112</x>
+      <y>1032</y>
+      <w>120</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+isOnline()
+we check if our application is online
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2226</x>
+      <y>957</y>
+      <w>9</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2211</x>
+      <y>951</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>ApplicationManager
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2112</x>
+      <y>1047</y>
+      <w>120</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+bool returns true if the apps online or false if offline
+group=group-3</panel_attributes>
+    <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2112</x>
+      <y>1062</y>
+      <w>180</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+loadAudio(onAudioLoadedDelegate, voiceMessageContent)
+if we are offline or we are online and we are the host/server,
+we want to locally load audio using the AudioLoader load coroutine.
+
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;580.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2286</x>
+      <y>1065</y>
+      <w>6</w>
+      <h>51</h>
+    </coordinates>
+    <panel_attributes>
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2286</x>
+      <y>957</y>
+      <w>9</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2268</x>
+      <y>951</y>
+      <w>42</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>AudioLoader
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2289</x>
+      <y>1068</y>
+      <w>168</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+loadAudioCoroutine(onAudioLoadedDelegate, voiceMessageContent)
+
+loads the required audioclip from file and invokes the 
+onAudioLoadedDelegate so that the VoiceAnnotationUI object 
+can give the clip to it's AudioPlayerUI component.
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;110.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2112</x>
+      <y>1104</y>
+      <w>180</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+onAudioLoaded(AudioClip loadedClip,string audioPath)
+tell this VoiceAnnotationUI to set it's AudioPlayerUI's 
+clip to the new clip.
+
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>580.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2286</x>
+      <y>1137</y>
+      <w>6</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2286</x>
+      <y>1125</y>
+      <w>9</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2274</x>
+      <y>1119</y>
+      <w>33</w>
+      <h>9</h>
+    </coordinates>
+    <panel_attributes>AudioPlayerUI
+group=group-3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2112</x>
+      <y>1134</y>
+      <w>180</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+setAudioSource(audioClip)
+set the AudioPlayerUI's AudioSource.clip to the new clip 
+
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;20.0;580.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2289</x>
+      <y>1137</y>
+      <w>108</w>
+      <h>39</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+initialiseAudioControls()
+
+Initialise the AudioPlayerUI's UI components
+with information from the audioclip.
+
+
+
+group=group-3</panel_attributes>
+    <additional_attributes>10.0;30.0;70.0;30.0;70.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1425</x>
+      <y>945</y>
+      <w>1035</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>AnnotationUI Initialisation Sequence
+
+group=group-3</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
