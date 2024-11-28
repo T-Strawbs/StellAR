@@ -17,12 +17,25 @@ using UnityEngine.UI;
 /// </summary>
 public class TextAnnotationUI : AnnotationUI
 {
+    /// <summary>
+    /// Text UI element that holds the annotation content
+    /// </summary>
     [SerializeField] private TMP_Text content;
-
+    /// <summary>
+    /// The transform of this this AnnotationUI
+    /// </summary>
     [SerializeField] private RectTransform textAnnotationRect;
-
+    /// <summary>
+    /// The transform of this annotation's center layer, we only have this here so
+    /// we can drag a reference from editor to this object to handle dynamic resizing
+    /// of this UI element.
+    /// </summary>
     [SerializeField] private RectTransform centreLayer;
-
+    /// <summary>
+    /// The transform of this annotation's content layer, we only have this here so
+    /// we can drag a reference from editor to this object to handle dynamic resizing
+    /// of this UI element.
+    /// </summary>
     [SerializeField] private RectTransform contentLayer;
 
     public override void initialise(AnnotationJson annotationData)
@@ -39,6 +52,9 @@ public class TextAnnotationUI : AnnotationUI
         resizeContentLayer();
     }
 
+    /// <summary>
+    /// Method for resizing this Annotation UI element after we initialise it.
+    /// </summary>
     private void resizeContentLayer()
     {
         //force the animationName text to resize based on the animationName length

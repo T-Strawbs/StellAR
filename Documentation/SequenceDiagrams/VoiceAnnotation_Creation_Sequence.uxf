@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>20</x>
+      <y>70</y>
+      <w>200</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>User has the annotation
+pane open on the data panel
+and has recorded a voice
+annotation.
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>90</y>
+      <w>330</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+postAnnotation()
+user presses the TextAnnotation UI
+element's post button after populating 
+the input field.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>480</x>
+      <y>100</y>
+      <w>20</w>
+      <h>1300</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>420</x>
+      <y>30</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>VoiceInput
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>100</y>
+      <w>330</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+isOnline()
+Check if the application is online
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>800</x>
+      <y>110</y>
+      <w>20</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>60</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>740</x>
+      <y>30</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ApplicationManager
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>150</y>
+      <w>330</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=blue
+bool return true if we're online
+group=group-23</panel_attributes>
+    <additional_attributes>310.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>180</y>
+      <w>330</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+return false if we're offline
+group=group-23</panel_attributes>
+    <additional_attributes>310.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1190</x>
+      <y>410</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>400</y>
+      <w>720</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+grab a reference the selection manager's current selection
+
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;700.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1190</x>
+      <y>60</y>
+      <w>30</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1140</x>
+      <y>40</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SelectionManager
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1360</x>
+      <y>460</y>
+      <w>20</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1360</x>
+      <y>60</y>
+      <w>30</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;400.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1450</x>
+      <y>40</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>AnnotationManager
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1190</x>
+      <y>430</y>
+      <w>30</w>
+      <h>500</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;480.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1190</x>
+      <y>910</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>260</y>
+      <w>690</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=-
+postLocally()
+
+As the app's offline or we are the host, we handle the creation of VoiceAnnotations
+locally.
+As we recorded an audioclip with the microphone, we want to then write it
+to file as a .wav with our desired file name and path.
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0;160.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>500</y>
+      <w>180</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+group=group-23</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;160.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>530</y>
+      <w>1040</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+createAnnotationJson(annotationComponent,messageType,author,dateTime,content)
+Create a new AnnotationJson object using the new annotation data.
+We then add the new annotation object to the annotationComponent.
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;1020.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1630</x>
+      <y>40</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>DataPanelManager
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1690</x>
+      <y>60</y>
+      <w>30</w>
+      <h>580</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;560.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1690</x>
+      <y>620</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>610</y>
+      <w>1220</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+updateAnnotations(annotationComponent)
+if the target interactable is the client's current selection then we need to update the annotation pane to 
+include the new annotation so we essentially refresh it.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;1200.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1330</x>
+      <y>40</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SavWav
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1510</x>
+      <y>60</y>
+      <w>30</w>
+      <h>500</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;480.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1510</x>
+      <y>540</y>
+      <w>20</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>450</y>
+      <w>890</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+Save(filename,audioClip)
+Save the recorded audioclip as a .wav.
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;870.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>760</y>
+      <w>650</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>lt=-
+fg=blue
+postOnline()
+
+As the app's Online we need to be able to create a new VoiceAnnotation and 
+synchronise it across the network.
+
+We handle this differently depending if you're the host/server or a client.
+
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0;160.0;300.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>1050</y>
+      <w>180</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=blue
+
+
+group=group-23</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;220.0;10.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>950</y>
+      <w>1040</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=orange
+Clients: postAudioAnnotationServer(interactableLookupData,networkAudioSamples, channelsArray)
+If we're the client then we tell the annotation manager to send our voice annotation
+recording to the server via server request. We send our audio data in an array of audio samples.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;1020.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1510</x>
+      <y>570</y>
+      <w>30</w>
+      <h>410</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>900</y>
+      <w>720</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+grab a reference the selection manager's current selection
+
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;700.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1510</x>
+      <y>960</y>
+      <w>20</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1520</x>
+      <y>970</y>
+      <w>480</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=orange
+postAudioAnnotationRpc(senderID,messagePayload)
+
+Custom message for the server to create an audioclip from the
+audio data we received from the client. After we created the clip
+we then save it on storage as a .wav file.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;80.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1520</x>
+      <y>1070</y>
+      <w>560</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=orange
+postAnnotationServerRpc(interactableLookupData, content, annotationType)
+
+after saving the audio to storage, we then send a server 
+request to make the server create and save the annotation
+then broadcast to all clients to add the new annotation 
+to the target interactable's annotation component.
+
+
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0;70.0;130.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>1040</y>
+      <w>730</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=magenta
+host/server:  postLocally()
+if we're the host/server then we just create and handle the voice annotation 
+locally the we tell the AnnotationManager to broadcast the new annotation 
+to all clients.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0;250.0;110.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>1230</y>
+      <w>1040</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=magenta
+host/server: broadcastNewAnnotationRpc(interactableLookupData, networkAnnotation)
+broadcast to all clients to add the new annotation to the
+target interactable's annotation component, locally.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;1020.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2340</x>
+      <y>60</y>
+      <w>30</w>
+      <h>1220</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1200.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2240</x>
+      <y>40</y>
+      <w>220</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>MessageBasedInstanceManager
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2340</x>
+      <y>1260</y>
+      <w>20</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1520</x>
+      <y>1290</y>
+      <w>840</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=magenta
+MessageBasedInteractable return the target interactable if found.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;820.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1520</x>
+      <y>1250</y>
+      <w>840</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+lookupNetworkInteractable(lookupDataParentKey, lookupDataObjectIndex)
+fg=magenta
+find the target interactable using the lookup data parentKey and objectIndex
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;820.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2550</x>
+      <y>1370</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2550</x>
+      <y>60</y>
+      <w>30</w>
+      <h>1330</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1310.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2490</x>
+      <y>40</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>DataPanelManager
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>1360</y>
+      <w>2080</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=blue
+updateAnnotations(annotationComponent)
+if the target interactable is the client's current selection then we need to update the annotation pane to 
+include the new annotation so we essentially refresh it.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;20.0;2060.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>60</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-23</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>2660</w>
+      <h>1430</h>
+    </coordinates>
+    <panel_attributes>VoiceAnnotation Creation Sequence
+
+group=group-23</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

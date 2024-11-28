@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>230</y>
+      <w>370</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+togglePlayback()
+toggle the playing state of the audio source.
+In this case the audio was not playing and
+we are playing it for the first time.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;350.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>330</x>
+      <y>170</y>
+      <w>200</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>User presses the play button 
+of a voice annotation's
+audioplayer UI element.
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>870</x>
+      <y>240</y>
+      <w>20</w>
+      <h>650</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>170</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>810</x>
+      <y>150</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>AudioplayerUI
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1260</x>
+      <y>170</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1260</x>
+      <y>250</y>
+      <w>20</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1200</x>
+      <y>150</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ApplicationManager
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>240</y>
+      <w>400</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+isOnline()
+Check if the application is online
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>300</y>
+      <w>400</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+bool returns true if the apps online.
+group=group-16</panel_attributes>
+    <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>340</y>
+      <w>400</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=blue
+returns false if offline but then the
+process is handled locally instead.
+_(Out of Scope for this Diagram)_
+group=group-16</panel_attributes>
+    <additional_attributes>380.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1490</x>
+      <y>150</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>AudioLoader
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1540</x>
+      <y>170</y>
+      <w>30</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;230.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1540</x>
+      <y>400</y>
+      <w>20</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>400</y>
+      <w>680</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+requestAudioFromServer(audioPath,thisAudioPlayer,interactableLookupdata)
+Tell the AudioLoader to send a request to server to send the requesting client 
+the audio data so we can play the audio locally on th eclient's side.
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;660.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1550</x>
+      <y>420</y>
+      <w>410</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+audioFileServerRequest(senderID,messagePayload)
+
+Send a server request to load the audio clip that
+the client requested.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0;60.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1550</x>
+      <y>490</y>
+      <w>450</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+loadAudioCoroutine(audioFilePath, audioRequest, senderId)
+
+Load the audio clip from storage then convert it into 
+a byte array to send the audio data to the client.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0;60.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1550</x>
+      <y>570</y>
+      <w>450</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+audioFileClientMessage(senderId, messagePayload)
+
+Client receives this message and converts the audio data
+byte array back into an audio clip and sets the audio player's
+audiosource.clip to the new clip.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;20.0;60.0;20.0;60.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>460</y>
+      <w>490</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+awaitRemoteAudioLoad()
+we run this coroutine to wait until we have received audio
+from the server or we timeout due to waiting beyond the max 
+response time.
+
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0;100.0;280.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>780</y>
+      <w>400</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+playAudio()
+if we were sucessful in retrieving the audio 
+then we play the audio locally.
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0;120.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>660</y>
+      <w>680</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+setAudioSource(audioClip)
+set the audioplayer's clip to the new clip, clientside.
+
+group=group-16</panel_attributes>
+    <additional_attributes>660.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>700</y>
+      <w>450</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=red
+if we timeout while waiting for a response then 
+the process ends here and we dont play the audio.
+group=group-16</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0;120.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>330</x>
+      <y>140</y>
+      <w>1670</w>
+      <h>760</h>
+    </coordinates>
+    <panel_attributes>Playing Audioclips as a Client Sequence (Requesting AudioClips Online)
+
+group=group-16</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
