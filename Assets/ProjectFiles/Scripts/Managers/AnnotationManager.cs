@@ -443,8 +443,8 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
         foreach (AnnotationSerialisable subcomponent in currentJson.Subcomponents)
         {
             // get the children of the current component and run the search for the target on them
-            Interactable currentInteractable = current.GetComponent<Interactable>();
-            GameObject foundChild = currentInteractable.findNamedChildDirect(subcomponent.Name);
+            GameObject foundChild = current.GetComponent<Interactable>().findNamedChildDirect(subcomponent.Name);
+            DebugConsole.Instance.LogDebug($"Trying to update annotations for {targetName} where current is {current.name} and child is {subcomponent.Name}");
             if (foundChild)
             {
                 DebugConsole.Instance.LogDebug($"found the next child to search from parent:" +
@@ -453,8 +453,8 @@ public class AnnotationManager : NetworkSingleton<AnnotationManager>, PrefabInst
                 updateAnnotationJson(foundChild.transform, subcomponent, targetName, annotation);
             }
         }
-        DebugConsole.Instance.LogError($"couldnt find found {targetName} when updating the parent modelannotation json ");
     }
+
 
     /// <summary>
     /// Deletes input annotation data from input component on the JSON that is on the disk, then calls deleteAnnotationFromRuntime() to remove it from the Game Object

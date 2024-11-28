@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// Please do not Remove
@@ -224,7 +225,7 @@ public class VoiceInput : MonoBehaviour, IAnnotationInput
         //format the current datetime so that we can save a file without IO pointing a gun at us
         string dateTimeFormatted = currentDateTime.Replace(':', '-').Replace(' ', '-').Replace('/', '-');
         //create filename from the componet name + datetime
-        string fileName = $"{GlobalConstants.ANNOTATION_DIR}/{SelectionManager.Instance.currentSelection.name}/{SelectionManager.Instance.currentSelection.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
+        string fileName = $"{GlobalConstants.ANNOTATION_DIR}/{SelectionManager.Instance.getModelRoot(annotationComponent.transform).name}/{SelectionManager.Instance.currentSelection.name}_{"DefaultAuthor"}_{dateTimeFormatted}";
         //save audio to file
         SavWav.Save(fileName, currentRecording);
         //tell Annotation manager to create annotation Json
