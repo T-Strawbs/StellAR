@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>20</x>
+      <y>80</y>
+      <w>200</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>User has the annotation
+pane open on the data panel
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>90</y>
+      <w>330</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+postAnnotation()
+user presses the TextAnnotation UI
+element's post button after populating 
+the input field.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>490</x>
+      <y>100</y>
+      <w>20</w>
+      <h>880</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>50</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>430</x>
+      <y>30</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>TextInput
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>100</y>
+      <w>330</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+isOnline()
+Check if the application is online
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>810</x>
+      <y>110</y>
+      <w>20</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>810</x>
+      <y>50</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;20.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>750</x>
+      <y>30</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ApplicationManager
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>150</y>
+      <w>330</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+fg=blue
+bool return true if we're online
+group=group-22</panel_attributes>
+    <additional_attributes>310.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>180</y>
+      <w>330</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+return false if we're offline
+group=group-22</panel_attributes>
+    <additional_attributes>310.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>240</y>
+      <w>350</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=-
+postOnline()
+
+fg=blue
+As the application's online, we need 
+to prepare our new annotation data 
+to send across the network.
+
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>430</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=blue
+
+group=group-22</panel_attributes>
+    <additional_attributes>110.0;10.0;110.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>990</x>
+      <y>350</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>340</y>
+      <w>510</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+grab a reference the selection manager's current selection
+
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;490.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>990</x>
+      <y>50</y>
+      <w>30</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;300.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>940</x>
+      <y>30</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SelectionManager
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>400</y>
+      <w>710</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+postAnnotationServerRpc(interactbleLookupData,content,annotationType)
+fg=blue
+tell the annotation manager to send the new  annotation data to the server.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;690.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1190</x>
+      <y>410</y>
+      <w>20</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1190</x>
+      <y>50</y>
+      <w>30</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1130</x>
+      <y>30</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>AnnotationManager
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>420</y>
+      <w>620</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+createAnnotationJson(annotationComponent,messageType,author,dateTime,content)
+fg=blue
+
+Create a new AnnotationJson object using the new annotation data.
+We then add the new annotation object to the annotationComponent.
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>510</y>
+      <w>830</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-
+broadcastNewAnnotationRpc(NetworkInteractableLookupData lookupData, NetworkAnnotationJson networkAnnotation)
+fg=blue
+
+broadcast to all clients to add the new annotation to the
+target interactable's annotation component, locally.
+
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2020</x>
+      <y>50</y>
+      <w>30</w>
+      <h>580</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;560.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2020</x>
+      <y>610</y>
+      <w>20</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>660</y>
+      <w>90</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+fg=blue
+
+group=group-22</panel_attributes>
+    <additional_attributes>70.0;10.0;70.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>600</y>
+      <w>840</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+lookupNetworkInteractable(lookupDataParentKey, lookupDataObjectIndex)
+fg=blue
+find the target interactable using the lookup data parentKey and objectIndex
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;820.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1920</x>
+      <y>30</y>
+      <w>220</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>MessageBasedInstanceManager
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>640</y>
+      <w>840</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=blue
+MessageBasedInteractable return the target interactable if found.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;820.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>700</y>
+      <w>1050</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+updateAnnotations(annotationComponent)
+fg=blue
+if the target interactable is the client's current selection then we need to update the annotation pane to 
+include the new annotation so we essentially refresh it.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;1030.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2230</x>
+      <y>710</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2230</x>
+      <y>50</y>
+      <w>30</w>
+      <h>680</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;660.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2170</x>
+      <y>30</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>DataPanelManager
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>740</y>
+      <w>370</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=-
+postLocally()
+
+As the application's offline, we handle
+the creation and posting of annotations
+locally.
+
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>930</y>
+      <w>130</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+
+group=group-22</panel_attributes>
+    <additional_attributes>110.0;10.0;110.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>990</x>
+      <y>370</y>
+      <w>30</w>
+      <h>500</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;480.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>990</x>
+      <y>850</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>840</y>
+      <w>510</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+grab a reference the selection manager's current selection
+
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;490.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>900</y>
+      <w>710</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+createAnnotationJson(annotationComponent,messageType,author,dateTime,content)
+Create a new AnnotationJson object using the new annotation data.
+We then add the new annotation object to the annotationComponent.
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;690.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1190</x>
+      <y>760</y>
+      <w>30</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1190</x>
+      <y>910</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>910</y>
+      <w>1050</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+updateAnnotations(annotationComponent)
+if the target interactable is the client's current selection then we need to update the annotation pane to 
+include the new annotation so we essentially refresh it.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;20.0;1030.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>2230</x>
+      <y>920</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2230</x>
+      <y>730</y>
+      <w>30</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=.
+
+group=group-22</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>2310</w>
+      <h>970</h>
+    </coordinates>
+    <panel_attributes>TextAnnotation Creation Sequence
+
+group=group-22</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
