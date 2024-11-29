@@ -41,6 +41,8 @@ Open the StellAR project in Unity and follow the instructions below for building
 
 ## PC
 
+When downloading the build from the GitHub release, Windows Defender may report a trojan in the download as a false positive. Open Windows Defender to allow the download or build from source.
+
 If you want to build StellAR for PC, go to 'File' > 'Build Settings...' and make sure the 'Windows, Mac, Linux' platform is selected. Modify 'Target Platform', 'Architecture', etc. as required and select 'Build'. Choose your destination directory and Unity will create the application in that location.
 
 ## HoloLens
@@ -71,12 +73,24 @@ When removing a model from StellAR, just delete the prefab and model files from 
 ## Hand controls for PC
 
 Hold shift - Move left hand
+
 Hold space - Move right hand
+
 Left click - Pinch hands (for interacting)
+
 t - Toggle left hand lock
+
 y - Toggle right hand lock
+
 Alt - Rotate left hand
+
 Ctrl - Rotate right hand
+
+WASD - Move camera
+
+Q - Move down
+
+E - Move up
 
 ## Tips
 
