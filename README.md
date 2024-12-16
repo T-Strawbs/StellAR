@@ -1,6 +1,8 @@
 ### Note from the Authors
-This application was developed by Marcello Morena and Travis Strawbridge as a final year project for
-our Software Engineering degrees. The Project was delegated to us by Dr. James Walsh through the Australian Research Centre for Interactive and Virtual Enviroments. The project was to be a proof of concept for a defence client and was developed throughout the course of a year.
+
+This application was developed by Marcello Morena and Travis Strawbridge as a final year project for our Software Engineering degrees. 
+The Project was delegated to us by Dr. James Walsh through the Australian Research Centre for Interactive and Virtual Enviroments. 
+The project was to be a proof of concept for a defence client who were interested exploring the prospects of AR using the HoloLens2 and was developed throughout the course of a year.
 
 # StellAR
 
