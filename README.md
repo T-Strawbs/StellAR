@@ -8,6 +8,8 @@ The project was to be a proof of concept for a defence client who were intereste
 
 StellAR is a proof of concept for a collaborative XR 3D model inspection/annotation tool. Users can import their own models into the system, allowing them to decompose models into individual parts and post text, voice, and colour annotations. Users can also import metadata for the model and each specific component to display information such as manufacturer, purpose, etc.
 
+Additional documentation to assist developers can be found in the Documentation directory.
+
 ## Features
 
 ### Model inspection
@@ -84,9 +86,9 @@ Hold space - Move right hand
 
 Left click - Pinch hands (for interacting)
 
-t - Toggle left hand lock
+T - Toggle left hand lock
 
-y - Toggle right hand lock
+Y - Toggle right hand lock
 
 Alt - Rotate left hand
 
