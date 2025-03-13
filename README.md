@@ -25,7 +25,6 @@ StellAR is a proof of concept for a collaborative XR 3D model inspection/annotat
 <img src="./Documentation/Images/Highlight.gif" />
 
 # Video Demonstration
-https://www.youtube.com/watch?v=-
 [![StellAR Final Demo](https://img.youtube.com/vi/Q1NN2UmKO4/0.jpg)](https://www.youtube.com/watch?v=Q1NN2UmKO4)
 
 
