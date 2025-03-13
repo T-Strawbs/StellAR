@@ -24,6 +24,11 @@ StellAR is a proof of concept for a collaborative XR 3D model inspection/annotat
 ### Colour highlight
 <img src="./Documentation/Images/Highlight.gif" />
 
+# Video Demonstration
+https://www.youtube.com/watch?v=-
+[![Video Title](https://img.youtube.com/vi/Q1NN2UmKO4/0.jpg)](https://www.youtube.com/watch?v=Q1NN2UmKO4)
+
+
 # Requirements
 
 If you are using the already compiled PC application, or are deploying the already compiled .appx to HoloLens you do not need any additional software besides a web browser. If you plan to add new models to StellAR and then build/deploy a new version including the new models, you will need the following:
